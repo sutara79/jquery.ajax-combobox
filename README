@@ -1,0 +1,21 @@
+* This is still alpha version.
+
+Infomation
+==========================================================================================
+jQuery Plugin
+	Name       : jquery.ajaxComboBox
+	Version    : 5.0alpha
+	Update     : 2012-03-15
+	Author     : Yuusaku Miyazaki (宮崎 雄策) (toumin.m7@gmail.com)
+	Author-URI : http://d.hatena.ne.jp/sutara_lumpur/20090124/1232781879
+	License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
+	Based-on   : This plug-in uses code and techniques from following libraries.
+		* jquery.suggest 1.1
+			Author     : Peter Vulgaris
+			Author-URI : http://www.vulgarisoip.com/
+			
+		* jquery.caretpos.js 0.1
+			Author     : tubureteru
+			Author-URI : http://d.hatena.ne.jp/tubureteru/
+			License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
+==========================================================================================
