@@ -1,0 +1,273 @@
+/*
+Contents
+============================================================
+ComboBox
+	Container
+	Results
+	Navi
+	Sub-info
+	Select only
+	
+Simple
+============================================================
+*/
+
+/**************************************
+ Container
+**************************************/
+.ac_container{
+	margin : 0;
+	padding : 0;
+	width : auto;
+	background : white;
+	border : none;
+}
+.ac_input {
+	border : 1px solid #79b;
+	border-right : none;
+	background-color : white;
+	display : block !important;
+	font-size : 16px;
+	padding : 4px;
+	margin : 0;
+	width : 320px;
+	float : left;
+	
+	border-radius : 4px 0px 0px 4px;
+
+	box-shadow : 1px 1px 1px rgba(0,0,0,0.2) inset;
+	-webkit-box-shadow : 1px 1px 1px rgba(0,0,0,0.2) inset;
+}
+.ac_container_open .ac_input{
+	border-radius : 4px 0px 0px 0px !important;
+}
+.ac_button{
+	border : 1px solid #79b;
+	width : 32px;
+	text-align : center;
+	position : relative;
+	cursor : pointer;
+	float : left;
+	
+	border-top-right-radius : 4px;
+	-moz-border-radius-topright : 4px;
+	border-bottom-right-radius : 4px;
+	-moz-border-radius-bottomright : 4px;
+}
+.ac_container_open .ac_button{
+	border-bottom-right-radius : 0 !important;
+	-moz-border-radius-bottomright : 0 !important;
+}
+.ac_button img{
+	position : absolute;
+	height : 16px;
+	width : 16px;
+}
+.ac_btn_out{
+	background : #bde;
+	background : linear-gradient(#eff, #9ab);
+	background : -moz-linear-gradient(#eff, #9ab);
+	background : -webkit-gradient(linear, left top, left bottom, from(#eff),to(#9ab));
+	background : -o-linear-gradient(#eff, #9ab);
+	filter : progid : DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#eeffff', endColorstr='#99aabb');
+	-ms-filter : "progid : DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#eeffff', endColorstr='#99aabb')";
+}
+.ac_btn_on{
+	background : #dee;
+	background : linear-gradient(#fff, #bcc);
+	background : -moz-linear-gradient(#fff, #bcc);
+	background : -webkit-gradient(linear, left top, left bottom, from(#fff),to(#bcc));
+	background : -o-linear-gradient(#fff, #bcc);
+	filter : progid : DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#bbcccc');
+	-ms-filter : "progid : DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#bbcccc')";
+}
+/**************************************
+ Results
+**************************************/
+.ac_result_area{
+	background-color : transparent;
+	margin : 0;
+	padding : 0;
+	list-style : none;
+	position : absolute;
+	z-index : 100;
+	display : none;
+	border : 1px solid #79b;
+	border-top : 0;
+	
+	box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+	-moz-box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+	-webkit-box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+}
+.ac_results {
+	background-color : white;
+	margin : 0;
+	padding : 0;
+	list-style : none;
+}
+.ac_results li{
+	margin : 0;
+	height : auto !important;
+	padding : 3px 5px;
+	white-space : nowrap;
+	color : #000;
+	text-align : left;
+	overflow : hidden;
+	font-size : 14px;
+	line-height : 1;
+	position : relative;
+}
+.ac_over{
+	cursor : pointer;
+	background-color : #36c;
+	color : #fff !important;
+}
+.ac_match{
+	text-decoration : underline;
+}
+.ac_over .ac_match{
+	text-decoration : none;
+}
+
+/**************************************
+ Navi
+**************************************/
+.ac_navi{
+	background : #eee;
+	border-bottom : 1px solid #79b;
+	margin : 0;
+	padding : 4px;
+	text-align : right;
+	font-size : 13px;
+	font-weight : normal;
+	line-height : 1;
+}
+.ac_navi a : link,
+.ac_navi a : visited,
+.ac_navi a : hover,
+.ac_navi a : active{
+	color : blue;
+	text-decoration : underline;
+	margin : 0px 4px;
+	font-weight : normal;
+}
+.ac_navi p{
+	font-size : 15px;
+	text-align : center;
+	color : black;
+	padding-top : 4px;
+	margin : 0;
+}
+.ac_navi .current{
+	font-weight : bold;
+	font-size : 16px;
+	color : #00c;
+}
+.ac_navi .page_end{
+	color : gray;
+	margin : 0px 4px;
+	font-weight : normal;
+}
+.navi_page,
+.navi_first,
+.navi_prev,
+.navi_next,
+.navi_last{
+	margin:auto 4px !important;
+}
+
+/**************************************
+ Sub-info
+**************************************/
+.ac_attached dl{
+	display:none;
+	z-index : 200;
+	border : 1px solid #aaa;
+	border-top-right-radius : 4px;
+	-moz-border-radius-topright : 4px;
+	border-bottom-left-radius : 4px;
+	-moz-border-radius-bottomleft : 4px;
+	border-bottom-right-radius : 4px;
+	-moz-border-radius-bottomright : 4px;
+	
+	box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+	-moz-box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+	-webkit-box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+	width : 260px;
+	margin : 0;
+	position : absolute;
+	background : #eee;
+	color : #000;
+}
+.ac_attached dt{
+	width : 92px;
+	clear : both;
+	float : left;
+	margin : 0;
+	padding : 2px 4px;
+	font-size : 13px;
+	text-align : left;
+	font-weight : normal;
+	background : #CEDFF7;
+	color : #37486A;
+}
+.ac_attached dt.hide {
+	display:none !important;
+}
+.ac_attached dd{
+	width : 152px;
+	float : left;
+	margin : 0;
+	padding : 2px 4px;
+	font-size : 13px;
+}
+/**************************************
+ Select only
+**************************************/
+.ac_container .ac_select_ok{
+}
+.ac_container .ac_select_ng{
+	background : #fcc;
+}
+
+/*=====================================
+ Simple
+-------------------------------------*/
+.ac_s_input {
+	border : 1px solid #79b;
+	background-color : white;
+	display : block !important;
+	font-size : 16px;
+	padding : 4px;
+	margin : 0;
+	width : 320px;
+	float : left;
+	
+	border-radius : 4px;
+
+	box-shadow : 1px 1px 1px rgba(0,0,0,0.2) inset;
+	-webkit-box-shadow : 1px 1px 1px rgba(0,0,0,0.2) inset;
+}
+.ac_container_open .ac_s_input{
+	border-radius : 4px 4px 0px 0px !important;
+}
+.ac_s_button,
+.ac_s_btn_on,
+.ac_s_btn_out {
+	display:none;
+}
+/*-------------------------------------
+ 選択してないほうの表示を暗くする
+-------------------------------------*/
+.ac_results_off {
+	background:rgba(255, 255, 255, 0.8);
+}
+.ac_input_off, .ac_s_input_off {
+	background: #eee;
+	color:#555;
+}
+
+
+
+
+

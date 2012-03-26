@@ -1,0 +1,56 @@
+<?php
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//setting for MySQL
+//You MUST change this value.
+$mysql_server = 'localhost';
+$mysql_user   = 'root';
+$mysql_passwd = '12345678';
+$mysql_db     = 'my_test';
+$mysql_encode = 'utf8';
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+//****************************************************
+// The use of the data sent from the Javascript side is enabled.
+//****************************************************
+$data = array();
+
+$db_table    = mysql_escape_string($_GET['db_table']);
+$q_word      = mysql_escape_string($_GET['q_word']);
+$field       = mysql_escape_string($_GET['field']);
+$primary_key = mysql_escape_string($_GET['primary_key']);
+
+
+//****************************************************
+// connect data base
+//****************************************************
+$db = mysql_connect($mysql_server, $mysql_user, $mysql_passwd);
+mysql_select_db($mysql_db, $db);
+mysql_query('SET NAMES '.$mysql_encode);
+
+
+//****************************************************
+// get initialize value
+//****************************************************
+$query = "
+
+	SELECT   $field
+	FROM     $db_table
+	WHERE    $primary_key = '$q_word'
+
+";
+$rows  = mysql_query($query, $db);
+
+while ($row = mysql_fetch_array($rows, MYSQL_NUM))
+{
+	echo $row[0];
+}
+
+//****************************************************
+// End
+//****************************************************
+mysql_close($db);
+
+?>
