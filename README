@@ -19,3 +19,33 @@ jQuery Plugin
 			Author-URI : http://d.hatena.ne.jp/tubureteru/
 			License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
 ==========================================================================================
+
+
+==========================================================================================
+Note:
+
+	To start the sample page at your local computer,
+	import the SQL file "./sample/acbox_mysql.sql" to your MySQL.
+	And, change the value to connect MySQL in "./acbox/jquery.ajaxComboBox.php".
+	
+
+
+$.fn.ajaxComboBox
+individual
+	#1.Global vars
+		initOptions
+		initMessages
+		initCssClassName
+		initLocalVars
+		initElements
+	
+	#2.
+		btnAttrDefault
+		btnPositionAdjust
+		setInitVal
+	
+	#3.Event handler
+		eHandlerForButton
+		eHandlerForInput
+		eHandlerForWhole
+	
