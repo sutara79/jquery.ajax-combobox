@@ -338,9 +338,12 @@ MIT License
 			//サイズ調整
 			//----------------------------------------------
 			//ComboBoxの幅
-			$(elems.container).width(
-				$(elems.combo_input).outerWidth() + $(elems.button).outerWidth()
-			);
+			if (Opt.plugin_type == 'combobox') {
+				var w = $(elems.combo_input).outerWidth() + $(elems.button).outerWidth();
+			} else {
+				var w = $(elems.combo_input).outerWidth();
+			}
+			$(elems.container).width(w);
 			//ボタンの高さ
 			$(elems.button).height(
 				$(elems.combo_input).innerHeight()
