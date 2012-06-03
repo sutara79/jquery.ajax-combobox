@@ -1,6 +1,14 @@
 *{
 	font-family:"メイリオ", sans-serif;
 }
+nav#language {
+	padding:4px;
+	border:1px solid #aaa;
+	background:#eef;
+	position:fixed;
+	top:0px;
+	right:0px;
+}
 .ac_container{
 	margin:0.4em 0;
 }

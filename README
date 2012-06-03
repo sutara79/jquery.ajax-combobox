@@ -1,11 +1,9 @@
-* This is still alpha version.
-
 Infomation
 ==========================================================================================
 jQuery Plugin
 	Name       : jquery.ajaxComboBox
-	Version    : 5.0alpha
-	Update     : 2012-03-26
+	Version    : 5.0
+	Update     : 2012-06-04
 	Author     : Yuusaku Miyazaki (宮崎 雄策) (toumin.m7@gmail.com)
 	Author-URI : http://d.hatena.ne.jp/sutara_lumpur/20090124/1232781879
 	License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -13,39 +11,79 @@ jQuery Plugin
 		* jquery.suggest 1.1
 			Author     : Peter Vulgaris
 			Author-URI : http://www.vulgarisoip.com/
-			
-		* jquery.caretpos.js 0.1
-			Author     : tubureteru
-			Author-URI : http://d.hatena.ne.jp/tubureteru/
-			License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
 ==========================================================================================
 
-
-==========================================================================================
-Note:
-
-	To start the sample page at your local computer,
-	import the SQL file "./sample/acbox_mysql.sql" to your MySQL.
-	And, change the value to connect MySQL in "./acbox/jquery.ajaxComboBox.php".
+# Note:
+	(English)
+	To start the sample page at your local computer with MySQL,
+	import the SQL file "./sample/acbox_mysql.sql".
+	Then, rename "jquery.ajaxComboBox_mysql.php" to "./acbox/jquery.ajaxComboBox.php",
+	and change the value to connect MySQL in the file.
 	
+	(Japanese)
+	MySQLでサンプルを試したい場合は、サンプル用のデータを収めたSQLファイルの
+	"./sample/acbox_mysql.sql"をインポートして下さい。
+	そして、ファイル名の"jquery.ajaxComboBox_mysql.php" を
+	"./acbox/jquery.ajaxComboBox.php"に変更して、
+	ファイル冒頭のMySQLとの接続設定を、お使いの環境に合わせて変更して下さい。
 
 
-$.fn.ajaxComboBox
-individual
-	#1.Global vars
-		initOptions
-		initMessages
-		initCssClassName
-		initLocalVars
-		initElements
+# Structure:
+	$.fn.ajaxComboBox
+	individual
+		#1. Global vars
+			initOptions
+			initMessages
+			initCssClassName
+			initLocalVars
+			initElements
 	
-	#2.
-		btnAttrDefault
-		btnPositionAdjust
-		setInitVal
+		#2. Initial appearance
+			btnAttrDefault
+			btnPositionAdjust
+			setInitRecord
 	
-	#3.Event handler
-		eHandlerForButton
-		eHandlerForInput
-		eHandlerForWhole
+		#3. Event handler
+			eHandlerForButton
+			eHandlerForInput
+			eHandlerForWhole
+			eHandlerForResults (Whenever generate a list, this is called.)
+			eHandlerForNaviPaging (Whenever generate a list, this is called.)
+
+		#4. Functions
+			#4-1 Appearance
+				setLoadImg
+				scrollWindow
+				cssFocusInput
+				cssFocusResults
 	
+			#4-2 Input by user
+				setTimerCheckValue
+				checkValue
+				processKey
+
+			#4-3 Search
+				abortAjax
+				suggest
+				searchForDB
+				searchForJSON
+				notFoundDataBase
+	
+			#4-4 Show or hide results
+				prepareResults
+				setNavi
+				setSubInfo
+				displayResults
+				hideResults
+
+			#4-5 Paging
+				firstPage
+				prevPage
+				nextPage
+				lastPage
+
+			#4-6 Select line
+				selectCurrentLine
+				getCurrentLine
+				nextLine
+				prevLine

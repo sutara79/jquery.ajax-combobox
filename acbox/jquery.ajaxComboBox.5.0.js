@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.0alpha
+jquery.ajaxComboBox.5.0
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -12,86 +12,93 @@ MIT License
 			individual(this, _source, _options);
 		});
 	};
-	//Individual
+	//About each ComboBox 
 	function individual(_jqobj, _source, _options) {
 		//#1. Global vars
-		var Opt  = initOptions(_source, _options); //options of plugin
-		var Msg  = initMessages();                 //"title attr" for each languages
+		var Opt  = initOptions(_source, _options);
+		var Msg  = initMessages();
 		var Cls  = initCssClassName();
 		var Vars = initLocalVars();
 		var Elem = initElements(_jqobj);
 
-		//#2. Initialize HTML-elements
-		$.ajaxSetup({cache: false}); //disable the cache of Ajax
-		btnAttrDefault();            //initialize the "get all" button 
-		setInitVal();                //set initial value to ComboBox
+		//#2. Initial appearance
+		$.ajaxSetup({cache: false});
+		btnAttrDefault();
+		btnPositionAdjust();
+		setInitRecord();
 
 		//#3. Event handler
-		eHandlerForButton(); //"get all" button
-		eHandlerForInput();  //text-box
-		eHandlerForWhole();  //plugin whole
-		
-		//It is completion now.
+		eHandlerForButton();
+		eHandlerForInput();
+		eHandlerForWhole();
+
+		//That's all.
 		return true;
 
 
-		//============================================================
+		//==============================================
 		//#1.Global vars
-		//============================================================
-		//************************************************************
+		//==============================================
+		//**********************************************
 		//Initialize options of plugin
-		//************************************************************
+		//**********************************************
 		//@called individual
 		//@params obj,str _source  (the name of file for DB connect, or JSON object)
 		//@params obj     _options (options sent by user)
 		//@return obj
 		function initOptions(_source, _options) {
 			//----------------------------------------
-			// first
+			//first
 			//----------------------------------------
 			_options = $.extend({
 				//基本設定
-				source         : _source,
-				plugin_type    : 'combobox',
-				db_table       : 'tbl',                    //table for DB connect
-				field          : 'name',                   //column for display as suggest
-				img_dir        : 'acbox/',                 //path to image of button
-				and_or         : 'AND',                    //AND? OR? for search words
-				per_page       : 10,                       //候補一覧1ページに表示する件数
-				navi_num       : 5,                        //ページナビで表示するページ番号の数
-				navi_simple    : false,                    //先頭、末尾のページへのリンクを表示するか？
-				init_val       : false,                    //ComboBoxの初期値(配列形式で渡す)
-				lang           : 'ja',                     //言語を選択(デフォルトは日本語)
-				bind_to        : false,                    //候補選択後に実行されるイベントの名前
-			
+				source      : _source,
+				lang        : 'ja',       //言語を選択(デフォルトは日本語)
+				plugin_type : 'combobox',
+				init_record : false,      //ComboBoxの初期値(DBのpkeyの値で指定する)
+				db_table    : 'tbl',      //table for DB connect
+				field       : 'name',     //column for display as suggest
+				and_or      : 'AND',      //AND? OR? for search words
+				order_by    : 'ASC',      //ORDER BY(SQL) で、並ベ替えるのは昇順か降順か
+				per_page    : 10,         //候補一覧1ページに表示する件数
+				navi_num    : 5,          //ページナビで表示するページ番号の数
+				primary_key : 'id',       //候補選択後、selected_pkeyの値となるDBのカラム
+				button_img  : 'acbox/jquery.ajaxComboBox.button.png',
+				bind_to     : false,      //候補選択後に実行されるイベントの名前
+				navi_simple : false,      //先頭、末尾のページへのリンクを表示するか？
+
 				//サブ情報
-				sub_info       : false, //サブ情報を表示するかどうか？ !!! true, false, 'simple'
-				sub_as         : {},    //サブ情報での、カラム名の別名
-				show_field     : '',    //サブ情報で表示するカラム(複数指定はカンマ区切り)
-				hide_field     : '',    //サブ情報で非表示にするカラム(複数指定はカンマ区切り)
+				sub_info    : false, //サブ情報を表示するかどうか？ !!! true, false, 'simple'
+				sub_as      : {},    //サブ情報での、カラム名の別名
+				show_field  : '',    //サブ情報で表示するカラム(複数指定はカンマ区切り)
+				hide_field  : '',    //サブ情報で非表示にするカラム(複数指定はカンマ区切り)
 
 				//セレクト専用
-				select_only    : false, //セレクト専用にするかどうか？
-				primary_key    : 'id',  //セレクト専用時、hiddenの値となるカラム
+				select_only : false  //セレクト専用にするかどうか？
 			}, _options);
-		
+
 			//----------------------------------------
-			// second(他のオプションの値を引用するため)
+			//second(他のオプションの値を引用するため)
 			//----------------------------------------
 			_options = $.extend({
 				search_field : _options.field, //検索するフィールド(カンマ区切りで複数指定可能)
-				order_field  : _options.field, //ORDER BY(SQL) の基準となるカラム名(カンマ区切り複数指定)
-				order_by     : 'ASC',          //ORDER BY(SQL) で、並ベ替えるのは昇順か降順か
-
-				//画像
-				button_img   : _options.img_dir + 'jquery.ajaxComboBox.button.png'
+				order_field  : _options.field  //ORDER BY(SQL) の基準となるカラム名(カンマ区切り複数指定)
 			}, _options);
+
+			//大文字で統一
+			_options.and_or = _options.and_or.toUpperCase();
+
+			//カンマ区切りのオプションを配列に変換している。
+			var arr = ['hide_field', 'show_field', 'order_field', 'search_field'];
+			for (var i=0; i<arr.length; i++) {
+				_options[arr[i]] = _options[arr[i]].replace(/[\s　]+/g, '').split(',');
+			}
 
 			return _options;
 		}
-		//************************************************************
+		//**********************************************
 		//"title attr" for each languages
-		//************************************************************
+		//**********************************************
 		//@called individual
 		//@global obj Opt (use not only "Opt.lang", but "per_page" and others)
 		//@return obj
@@ -148,7 +155,7 @@ MIT License
 						not_found   : 'no encuentre'
 					};
 					break;
-		
+
 				//Japanese
 				default:
 					return {
@@ -175,9 +182,9 @@ MIT License
 					};
 			}
 		}
-		//************************************************************
-		// Set name of CSS class.
-		//************************************************************
+		//**********************************************
+		//Set name of CSS class.
+		//**********************************************
 		//@called individual
 		//@global obj Opt オプション
 		//@return obj         クラス名の詰め合わせ
@@ -185,52 +192,43 @@ MIT License
 			//各モード共通
 			var class_name = {
 				container      : 'ac_container', //ComboBoxを包むdivタグ
-				container_open : 'ac_container_open'
+				container_open : 'ac_container_open',
+				selected       : 'ac_selected',
+				re_area   : 'ac_result_area', //結果リストの<div>
+				navi      : 'ac_navi', //ページナビを囲む<div>
+				results   : 'ac_results', //候補一覧を囲む<ul>
+				re_off    : 'ac_results_off', //候補一覧(非選択状態)
+				select    : 'ac_over', //選択中の<li>
+				sub_info  : 'ac_subinfo', //サブ情報
+				select_ok : 'ac_select_ok',
+				select_ng : 'ac_select_ng'
 			};
 			switch (Opt.plugin_type) {
 				//コンボボックス
 				case 'combobox':
 					class_name = $.extend(class_name, {
-						input     : 'ac_input', //テキストボックス
-						input_off : 'ac_input_off', //テキストボックス(非選択状態)
 						button    : 'ac_button', //ボタンのCSSクラス
 						btn_on    : 'ac_btn_on', //ボタン(mover時)
 						btn_out   : 'ac_btn_out', //ボタン(mout時)
-						re_area   : 'ac_result_area', //結果リストの<div>
-						navi      : 'ac_navi', //ページナビを囲む<div>
-						results   : 'ac_results', //候補一覧を囲む<ul>
-						re_off    : 'ac_results_off', //候補一覧(非選択状態)
-						select    : 'ac_over', //選択中の<li>
-						sub_info  : 'ac_subinfo', //サブ情報
-						select_ok : 'ac_select_ok',
-						select_ng : 'ac_select_ng'
+						input     : 'ac_input', //テキストボックス
+						input_off : 'ac_input_off' //テキストボックス(非選択状態)
 					});
 					break;
-			
+
 				case 'simple':
 					class_name = $.extend(class_name, {
-						input     : 'ac_s_input', //テキストボックス
-						input_off : 'ac_s_input_off', //テキストボックス(非選択状態)
 						button    : 'ac_s_button', //ボタンのCSSクラス
 						btn_on    : 'ac_s_btn_on', //ボタン(mover時)
 						btn_out   : 'ac_s_btn_out', //ボタン(mout時)
-						re_area   : 'ac_result_area', //結果リストの<div>
-						navi      : 'ac_navi', //ページナビを囲む<div>
-						results   : 'ac_results', //候補一覧を囲む<ul>
-						re_off    : 'ac_results_off', //候補一覧(非選択状態)
-						select    : 'ac_over', //選択中の<li>
-						sub_info  : 'ac_subinfo', //サブ情報
-						select_ok : 'ac_select_ok',
-						select_ng : 'ac_select_ng'
+						input     : 'ac_s_input', //テキストボックス
+						input_off : 'ac_s_input_off' //テキストボックス(非選択状態)
 					});
 					break;
-				
-					
 			}
 			return class_name;
 		}
 		//**********************************************
-		// Initialize vars
+		//Initialize vars
 		//**********************************************
 		//@called individual
 		//@global obj Opt 
@@ -243,7 +241,7 @@ MIT License
 				page_suggest    : 1,     //候補表示の際の、現在のページ番号
 				max_all         : 1,     //全件表示の際の、全ページ数
 				max_suggest     : 1,     //候補表示の際の、全ページ数
-				is_paging       : false, //ページ移動か?(MoveToSameLineに影響)
+				is_paging       : false, //ページ移動か?
 				is_loading      : false, //Ajaxで問い合わせ中かどうか？
 				reserve_btn     : false, //ボタンの背景色変更の予約があるかどうか？
 				reserve_click   : false, //マウスのキーを押し続ける操作に対応するためmousedownを検知
@@ -251,7 +249,7 @@ MIT License
 				key_paging      : false, //キーでページ移動したか？
 				key_select      : false, //キーで候補移動したか？？
 				prev_value      : '',    //初期値
-	
+
 
 				//サブ情報
 				size_navi       : null,  //サブ情報表示用(ページナビの高さ)
@@ -259,10 +257,10 @@ MIT License
 				size_li         : null,  //サブ情報表示用(候補一行分の高さ)
 				size_left       : null   //サブ情報表示用(リストの横幅)
 			};
-			if(Opt.sub_info){
+			if (Opt.sub_info) {
 				//サブ情報表示の場合に取得するカラム
-				if(Opt.show_field && !Opt.hide_field){
-					localvars.select_field = Opt.field + ',' + Opt.show_field;
+				if (Opt.show_field && !Opt.hide_field) {
+					localvars.select_field = Opt.field + ',' + Opt.show_field.join(',');
 				} else {
 					localvars.select_field = '*';
 				}
@@ -270,19 +268,13 @@ MIT License
 				localvars.select_field = Opt.field;
 				Opt.hide_field = '';
 			}
-			if(Opt.select_only && localvars.select_field != '*'){
+			if (Opt.select_only && localvars.select_field != '*') {
 				localvars.select_field += ',' + Opt.primary_key;
 			}
-
-			//セレクト専用時、フォーム送信する一意の情報を格納する
-			localvars.primarykey = (Opt.select_only)
-				? Opt.primary_key
-				: '';
-
 			return localvars;
 		}
 		//**********************************************
-		// Initialize HTML-elements 
+		//Initialize HTML-elements 
 		//**********************************************
 		//@called individual
 		//@params elem _jqobj
@@ -293,7 +285,7 @@ MIT License
 			//----------------------------------------------
 			//部品を作成
 			//----------------------------------------------
-			//本体	
+			//本体
 			var elems = {};
 			elems.combo_input = $(_jqobj)
 				.attr('autocomplete', 'off')
@@ -312,16 +304,18 @@ MIT License
 			elems.navi_p      = $('<p>');
 			elems.results     = $('<ul>' ).addClass(Cls.results);
 			elems.sub_info    = $('<div>').addClass(Cls.sub_info);
-			//$(elems.container).after($(elems.result_area)); &&& 2012年2月13日 構造を変更した
 
-			//"セレクト専用"オプション用
+			//primary_keyカラムの値を送信するためのinput:hiddenを作成
+			var hidden_name = ($(elems.combo_input).attr('name') != undefined)
+				? $(elems.combo_input).attr('name')
+				: $(elems.combo_input).attr('id');
+			hidden_name += '_primary_key';
 			elems.hidden = $('<input type="hidden" />')
 				.attr({
-					'name': $(elems.combo_input).attr('name'),
-					'id'  : $(elems.combo_input).attr('name') + '_hidden'
+					'name': hidden_name,
+					'id'  : hidden_name
 				})
 				.val('');
-
 			//----------------------------------------------
 			//部品をページに配置
 			//----------------------------------------------
@@ -360,20 +354,19 @@ MIT License
 				.css({
 					'top':$(elems.container).outerHeight() + $(elems.container).offset().top
 				});
-
 			return elems;
 		}
-		//============================================================
-		//#2. 部品、処理の初期設定
-		//============================================================
+		//==============================================
+		//#2. Initial appearance
+		//==============================================
 		//**********************************************
 		//initialize "title attr" of button
 		//**********************************************
 		//@called individual
 		function btnAttrDefault() {
-			if(Opt.select_only){
-				if($(Elem.combo_input).val() != ''){
-					if($(Elem.hidden).val() != ''){
+			if (Opt.select_only) {
+				if ($(Elem.combo_input).val() != '') {
+					if ($(Elem.hidden).val() != '') {
 						//選択状態
 						$(Elem.combo_input)
 							.attr('title',Msg.select_ok)
@@ -397,22 +390,20 @@ MIT License
 			//初期状態
 			$(Elem.button).attr('title', Msg.get_all_btn);
 			$(Elem.img).attr('src', Opt.button_img);
-
-			btnPositionAdjust();
 		}
 		//**********************************************
 		//ボタンの画像の位置を調整する
 		//**********************************************
-		//@called btnAttrDefault
-		function btnPositionAdjust(){
+		//@called individual
+		function btnPositionAdjust() {
 			var width_btn  = $(Elem.button).innerWidth();
 			var height_btn = $(Elem.button).innerHeight();
 			var width_img  = $(Elem.img).width();
 			var height_img = $(Elem.img).height();
-	
+
 			var left = width_btn / 2 - (width_img / 2);
 			var top = height_btn / 2 - (height_img / 2);
-	
+
 			$(Elem.img).css({
 				'top':top,
 				'left':left
@@ -423,80 +414,69 @@ MIT License
 		//**********************************************
 		//@called individual
 		//@return str  以前の値
-		function setInitVal() {
-			if(Opt.init_val === false) return;
+		function setInitRecord() {
+			if (Opt.init_record === false) return;
+			//------------------------------------------
+			//セレクト専用への値挿入
+			//------------------------------------------
+			//hiddenへ値を挿入
+			$(Elem.hidden).val(Opt.init_record);
 
-			if(Opt.select_only){
-				//------------------------------------------
-				//セレクト専用への値挿入
-				//------------------------------------------
-				//hiddenへ値を挿入
-				var q_word = Opt.init_val;
-				$(Elem.hidden).val(q_word);
-
-				//テキストボックスへ値を挿入
-				var init_val_data = '';
-				if(typeof Opt.source == 'object'){
-					//sourceがデータセットの場合
-					for(var i=0; i<Opt.source.length; i++){
-						if(Opt.source[i][Opt.primary_key] == q_word){
-							var data = Opt.source[i][Opt.field];
-							break;
-						}
+			//テキストボックスへ値を挿入
+			if (typeof Opt.source == 'object') {
+				//sourceがデータセットの場合
+				for (var i=0; i<Opt.source.length; i++) {
+					if (Opt.source[i][Opt.primary_key] == Opt.init_record) {
+						var data = Opt.source[i];
+						break;
 					}
-					_afterInit(data);
-				}else{
-					$.get(
-						Opt.source,
-						{
-							'q_word'      : q_word,
-							'field'       : Opt.field,
-							'primary_key' : Opt.primary_key,
-							'db_table'    : Opt.db_table
-						},
-						function(data){ _afterInit(data) }
-					);
 				}
+				_afterInit(data);
 			} else {
-				//------------------------------------------
-				//通常の、テキストボックスへの値挿入
-				//------------------------------------------
-				$(Elem.combo_input).val(Opt.init_val);
-				Vars.prev_value = Opt.init_val;
+				$.getJSON(
+					Opt.source,
+					{
+						db_table  : Opt.db_table,
+						field     : Opt.field,
+						pkey_name : Opt.primary_key,
+						pkey_val  : Opt.init_record
+					},
+					_afterInit
+				);
 			}
 			//------------------------------------------
 			//初期化用Ajax後の処理
 			//------------------------------------------
-			function _afterInit(data){
-				$(Elem.combo_input).val(data);
-
-				//選択状態
-				$(Elem.combo_input)
-					.attr('title',Msg.select_ok)
-					.removeClass(Cls.select_ng)
-					.addClass(Cls.select_ok);
-			
-				Vars.prev_value = data;
+			function _afterInit(data) {
+				$(Elem.combo_input).val(data[Opt.field]);
+				$(Elem.hidden).val(data[Opt.primary_key]);
+				Vars.prev_value = data[Opt.field];
+				if (Opt.select_only) {
+					//選択状態
+					$(Elem.combo_input)
+						.attr('title',Msg.select_ok)
+						.removeClass(Cls.select_ng)
+						.addClass(Cls.select_ok);
+				}
 			}
 		}
-		//============================================================
+		//==============================================
 		//#3. Event handler
-		//============================================================
-		//************************************************************
+		//==============================================
+		//**********************************************
 		//"get all" button
-		//************************************************************
+		//**********************************************
 		//@called individual
 		function eHandlerForButton() {
 			$(Elem.button)
 				.mouseup(function(ev) {
-					if($(Elem.result_area).css('display') == 'none') {
+					if ($(Elem.result_area).is(':hidden')) {
 						clearInterval(Vars.timer_valchange);
-			
 						Vars.is_suggest = false;
 						suggest();
 						$(Elem.combo_input).focus();
 					} else {
-						hideResult();
+						hideResults();
 					}
 					ev.stopPropagation();
 				})
@@ -517,10 +497,10 @@ MIT License
 		//@called individual
 		function eHandlerForInput() {
 			//for cross browser
-			if(window.opera){
+			if (window.opera) {
 				//for Opera
 				$(Elem.combo_input).keypress(processKey);
-			}else{
+			} else {
 				//others
 				$(Elem.combo_input).keydown(processKey);
 			}
@@ -530,7 +510,6 @@ MIT License
 					cssFocusInput();
 					$(Elem.results).children('li').removeClass(Cls.select);
 				});
-	
 		}
 		//**********************************************
 		//plugin whole
@@ -541,17 +520,14 @@ MIT License
 			$(Elem.container).mousedown(function(e) { stop_hide = true });
 			$('html').mousedown(function() {
 				if (stop_hide) stop_hide = false;
-				else hideResult();
+				else           hideResults();
 			});
 		}
-		//============================================================
-		//#4. Drop-down list
-		//============================================================
 		//**********************************************
 		//list of suggests
 		//**********************************************
-		//@called displayItems
-		function EH_results() {
+		//@called displayResults
+		function eHandlerForResults() {
 			$(Elem.results)
 				.children('li')
 				.mouseover(function() {
@@ -576,14 +552,14 @@ MIT License
 					}
 					e.preventDefault();
 					e.stopPropagation();
-					selectCurrentResult(false);
+					selectCurrentLine(false);
 				});
 		}
 		//**********************************************
 		//paging of results
 		//**********************************************
 		//@called setNavi
-		function EH_navi_paging() {
+		function eHandlerForNaviPaging() {
 			//"<< 1"
 			$(Elem.navi).find('.navi_first').mouseup(function(ev) {
 				$(Elem.combo_input).focus();
@@ -603,8 +579,8 @@ MIT License
 				$(Elem.combo_input).focus();
 				ev.preventDefault();
 
-				if(!Vars.is_suggest) Vars.page_all     = parseInt($(this).text(), 10);
-				else                 Vars.page_suggest = parseInt($(this).text(), 10);
+				if (!Vars.is_suggest) Vars.page_all     = parseInt($(this).text(), 10);
+				else                  Vars.page_suggest = parseInt($(this).text(), 10);
 
 				Vars.is_paging = true;
 				suggest();
@@ -624,9 +600,10 @@ MIT License
 				lastPage();
 			});
 		}
-		//============================================================
-		//#5. Image
-		//============================================================
+		//#4 Functions
+		//==============================================
+		//#4-1 Appearance
+		//==============================================
 		//**********************************************
 		//image for loading
 		//**********************************************
@@ -639,9 +616,6 @@ MIT License
 				$(Elem.container).addClass(Cls.container_open);
 			}
 		}
-		//============================================================
-		//#6. NULL
-		//============================================================
 		//**********************************************
 		//選択候補を追いかけて画面をスクロール
 		//**********************************************
@@ -652,7 +626,7 @@ MIT License
 			//------------------------------------------
 			//使用する変数を定義
 			//------------------------------------------
-			var current_result = getCurrentResult();
+			var current_result = getCurrentLine();
 
 			var target_top = (current_result && !enforce)
 				? current_result.offset().top
@@ -660,7 +634,7 @@ MIT License
 
 			var target_size;
 
-			if(Opt.sub_info){
+			if (Opt.sub_info) {
 				var dl = $(Elem.sub_info).children('dl:visible');
 				target_size =
 					$(dl).height() +
@@ -683,7 +657,7 @@ MIT License
 			//------------------------------------------
 			var gap;
 			if ($(current_result).length) {
-				if(target_top < scroll_top || target_size > client_height) {
+				if (target_top < scroll_top || target_size > client_height) {
 					//上へスクロール
 					//※ブラウザの高さがターゲットよりも低い場合もこちらへ分岐する。
 					gap = target_top - scroll_top;
@@ -703,11 +677,32 @@ MIT License
 			window.scrollBy(0, gap);
 		}
 		//**********************************************
+		//候補リストを暗く、入力欄を明瞭に
+		//サブ情報は隠す
+		//**********************************************
+		//@called hideResults, eHandlerForInput, processKey, notFoundDataBase, prepareResults, selectCurrentLine, nextLine, prevLine
+		function cssFocusInput() {
+			$(Elem.results).addClass(Cls.re_off);
+			$(Elem.combo_input).removeClass(Cls.input_off);
+			$(Elem.sub_info).children('dl').hide();
+		}
+		//**********************************************
+		//候補リストを明瞭に、入力欄を暗く
+		//**********************************************
+		//@called eHandlerForResults, eHandlerForResults, prepareResults, nextLine, prevLine
+		function cssFocusResults() {
+			$(Elem.results).removeClass(Cls.re_off);
+			$(Elem.combo_input).addClass(Cls.input_off);
+		}
+		//==============================================
+		//4-2 Input by user
+		//==============================================
+		//**********************************************
 		//入力値変化監視をタイマーで予約
 		//**********************************************
 		//@called EH_input, checkValue
 		function setTimerCheckValue() {
-			Vars.timer_valchange = setTimeout(checkValue, 500);			
+			Vars.timer_valchange = setTimeout(checkValue, 500);
 		}
 		//**********************************************
 		//入力値変化監視を実行
@@ -715,19 +710,20 @@ MIT License
 		//@called processKey, setTimerCheckValue
 		function checkValue() {
 			var now_value = $(Elem.combo_input).val();
-			if(now_value != Vars.prev_value) {
+			if (now_value != Vars.prev_value) {
 				Vars.prev_value = now_value;
 				//sub_info属性を削除
 				$(Elem.combo_input).removeAttr('sub_info');
 
+				//hiddenの値を削除
+				$(Elem.hidden).val('');
+
 				//セレクト専用時
-				if(Opt.select_only){
-					$(Elem.hidden).val('');
-					btnAttrDefault();
-				}
+				if (Opt.select_only) btnAttrDefault();
+
 				//ページ数をリセット
 				Vars.page_suggest = 1;
-			
+
 				Vars.is_suggest = true;
 				suggest();
 			}
@@ -737,56 +733,57 @@ MIT License
 		//**********************************************
 		//キー入力への対応
 		//**********************************************
+		//@params obj e (event object)
+		//@called eHandlerForInput
 		function processKey(e) {
 			if (
 				($.inArray(e.keyCode, [27,38,40,9]) > -1 && $(Elem.result_area).is(':visible')) ||
-				($.inArray(e.keyCode, [37,39,13,9]) > -1 && getCurrentResult()) ||
+				($.inArray(e.keyCode, [37,39,13,9]) > -1 && getCurrentLine()) ||
 				e.keyCode == 40
 			) {
-				if (e.preventDefault)  e.preventDefault();
-				if (e.stopPropagation) e.stopPropagation();
-
+				e.preventDefault();
+				e.stopPropagation();
 				e.cancelBubble = true;
 				e.returnValue  = false;
 
-				switch(e.keyCode) {
-					case 37: // left
+				switch (e.keyCode) {
+					case 37: //left
 						if (e.shiftKey) firstPage();
 						else            prevPage();
 						break;
 
-					case 38: // up
+					case 38: //up
 						Vars.key_select = true;
-						prevResult();
+						prevLine();
 						break;
 
-					case 39: // right
+					case 39: //right
 						if (e.shiftKey) lastPage();
 						else            nextPage();
 						break;
 
-					case 40: // down
-						if ($(Elem.results).children('li').length){
+					case 40: //down
+						if ($(Elem.results).children('li').length) {
 							Vars.key_select = true;
-							nextResult();
+							nextLine();
 						} else {
 							Vars.is_suggest = false;
 							suggest();
 						}
 						break;
 
-					case 9:  // tab
+					case 9:  //tab
 						Vars.key_paging = true;
-						hideResult();
+						hideResults();
 						break;
 
-					case 13: // return
-						selectCurrentResult(true);
+					case 13: //return
+						selectCurrentLine(true);
 						break;
 
 					case 27: //	escape
 						Vars.key_paging = true;
-						hideResult();
+						hideResults();
 						break;
 				}
 
@@ -795,15 +792,15 @@ MIT License
 				checkValue();
 			}
 		}
-
-		//================================================================================
-		//#7.Ajax
-		//--------------------------------------------------------------------------------
+		//==============================================
+		//#4-3 Search
+		//==============================================
 		//**********************************************
 		//abort Ajax
 		//**********************************************
+		//@called suggest, hideResults
 		function abortAjax() {
-			if (Vars.xhr){
+			if (Vars.xhr) {
 				Vars.xhr.abort();
 				Vars.xhr = false;
 			}
@@ -811,250 +808,285 @@ MIT License
 		//**********************************************
 		//send request to PHP(server side)
 		//**********************************************
-		function suggest() {		
+		function suggest() {
 			var q_word = (Vars.is_suggest) ? $.trim($(Elem.combo_input).val()) : '';
 			if (q_word.length < 1 && Vars.is_suggest) {
-				hideResult();
+				hideResults();
 				return;
 			}
-
+			q_word = q_word.split(/[\s　]+/);
 
 			abortAjax(); //Ajax通信をキャンセル
 			setLoadImg(); //ローディング表示
 			$(Elem.sub_info).children('dl').hide(); //サブ情報消去
 
 			//ここで、本来は真偽値が格納される変数に数値を格納している。
-			if      (Vars.is_paging)   Vars.is_paging = getCurrentLine();
-			else if (!Vars.is_suggest) Vars.is_paging = 0;
+			if (Vars.is_paging) {
+				var obj = getCurrentLine();
+				if (obj) {
+					Vars.is_paging = $(Elem.results).children('li').index(obj);
+				} else {
+					Vars.is_paging = -1;
+				}
+			} else if (!Vars.is_suggest) {
+				Vars.is_paging = 0;
+			}
 
 			var which_page_num = (Vars.is_suggest) ? Vars.page_suggest : Vars.page_all;
+
 			//データ取得
-			if(typeof Opt.source == 'object'){
-				//sourceがデータセットの場合
-				searchInsteadOfDB(q_word, which_page_num);
-			}else{
-				//ここでAjax通信を行っている
-				Vars.xhr = $.getJSON(
-					Opt.source,
-					{
-						'q_word'       : q_word,
-						'page_num'     : which_page_num,
-						'per_page'     : Opt.per_page,
-						'field'        : Opt.field,
-						'search_field' : Opt.search_field,
-						'and_or'       : Opt.and_or,
-						'show_field'   : Opt.show_field,
-						'hide_field'   : Opt.hide_field,
-						'select_field' : Vars.select_field,
-						'order_field'  : Opt.order_field,
-						'order_by'     : Opt.order_by,
-						'primary_key'  : Vars.primarykey,
-						'db_table'     : Opt.db_table
-					},
-					function(json_data){
+			if (typeof Opt.source == 'object') searchForJSON(q_word, which_page_num);
+			else                                searchForDB(q_word, which_page_num);
+		}
+		//**********************************************
+		//DBから返されたそのままのオブジェクトを、候補リストを生成しやすいように加工する。
+		//**********************************************
+		//@called suggest
+		function searchForDB(q_word, which_page_num) {
+			//ここでAjax通信を行っている
+			Vars.xhr = $.getJSON(
+				Opt.source,
+				{
+					q_word       : q_word,
+					page_num     : which_page_num,
+					per_page     : Opt.per_page,
+					search_field : Opt.search_field,
+					and_or       : Opt.and_or,
+					select_field : Vars.select_field,
+					order_field  : Opt.order_field,
+					order_by     : Opt.order_by,
+					primary_key  : Opt.primary_key,
+					db_table     : Opt.db_table
+				},
+				function(json) {
+					json.candidate   = [];
+					json.primary_key = [];
+					json.subinfo     = [];
+					if (typeof json.result != 'object') {
+						//検索結果はゼロだった。
 						Vars.xhr = null;
-						afterAjax(json_data, q_word, which_page_num);
+						notFoundDataBase();
+						return;
 					}
-				);
-			}
+					json.cnt_page = json.result.length;
+					for (i=0; i<json.cnt_page; i++) {
+						json.subinfo[i] = [];
+						for (key in json.result[i]) {
+							if (key == Opt.primary_key) {
+								json.primary_key.push(json.result[i][key]);
+							}
+							if (key == Opt.field) {
+								json.candidate.push(json.result[i][key]);
+							} else if ($.inArray(key, Opt.hide_field) == -1) {
+								if (
+									Opt.show_field != ''                 &&
+									$.inArray('*', Opt.show_field) == -1 &&
+									$.inArray(key, Opt.show_field) == -1
+								) {
+									continue;
+								} else {
+									json.subinfo[i][key] = json.result[i][key];
+								}
+							}
+						}
+					}
+					delete(json.result);
+					Vars.xhr = null;
+					prepareResults(json, q_word, which_page_num);
+				}
+			);
 		}
 		//**********************************************
 		//データベースではなく、JSONを検索
 		//**********************************************
-		function searchInsteadOfDB(q_word, which_page_num){
-			//正規表現のメタ文字をエスケープ
-			var escaped_q = q_word.replace(/\W/g,'\\$&');
-			escaped_q = escaped_q.toString();
-	
-			//SELECT * FROM source WHERE field LIKE q_word;
+		//@called suggest
+		function searchForJSON(q_word, which_page_num) {
 			var matched = [];
-			var reg     = new RegExp(escaped_q, 'gi');
-			for (var k in Opt.source) {
-				if (Opt.source[k][Opt.field].match(reg)) {
-					matched.push(Opt.source[k]);
-				}
-			}
-			var json_data = {};
-			json_data['cnt_whole'] = matched.length;
-			if(!json_data['cnt_whole']){
-				json_data['candidate'] = false;
+			var esc_q = [];
+			var sorted = [];
+			var json = {};
 
-			}else{
+			var i = 0;
+			var arr_reg = [];
+			do { //全件表示のため、do-while文を使う。
+				//正規表現のメタ文字をエスケープ
+				esc_q[i] = q_word[i].replace(/\W/g,'\\$&').toString();
+				arr_reg[i] = new RegExp(esc_q[i], 'gi');
+				i++;
+			} while (i<q_word.length);
 
-				//ORDER BY (CASE WHEN ...), order_field ASC (or DESC)
-				var matched1 = [];
-				var matched2 = [];
-				var matched3 = [];
-				var reg1 = new RegExp('^' + escaped_q + '$', 'gi');
-				var reg2 = new RegExp('^' + escaped_q, 'gi');
-				for (var k in matched) {
-					if(matched[k][Opt.order_field].match(reg1)){
-						matched1.push(matched[k]);
-					}else if(matched[k][Opt.order_field].match(reg2)){
-						matched2.push(matched[k]);
-					}else{
-						matched3.push(matched[k]);
+
+			//SELECT * FROM source WHERE field LIKE q_word;
+			for (var i=0; i<Opt.source.length; i++) {
+				var flag = false;
+				for (var j=0; j<arr_reg.length; j++) {
+					if (Opt.source[i][Opt.field].match(arr_reg[j])) {
+						flag = true;
+						if (Opt.and_or == 'OR') break;
+					} else {
+						flag = false;
+						if (Opt.and_or == 'AND') break;
 					}
 				}
-				if(Opt.order_by == 'ASC'){
-					matched1.sort(compareASC);
-					matched2.sort(compareASC);
-					matched3.sort(compareASC);
-				}else{
-					matched1.sort(compareDESC);
-					matched2.sort(compareDESC);
-					matched3.sort(compareDESC);
+				if (flag) {
+					matched.push(Opt.source[i]);
 				}
-				var sorted = matched1.concat(matched2);
-				sorted = sorted.concat(matched3);
-			
-				//LIMIT xx OFFSET xx
-				var start = (which_page_num - 1) * Opt.per_page;
-				var end   = start + Opt.per_page;
-			
-				//----------------------------------------------
-				//最終的に返るオブジェクトを作成
-				//----------------------------------------------
-				var show_field = Opt.show_field.split(',');
-				var hide_field = Opt.hide_field.split(',');
-				for(var i = start, sub = 0; i < end; i++, sub++){
-					if(sorted[i] == undefined) break;
-			
-					for(var key in sorted[i]){
-						//セレクト専用
-						if(key == Vars.primarykey){
-							if(json_data['primary_key'] == undefined){
-								json_data['primary_key'] = [];
-							}
-							json_data['primary_key'].push(sorted[i][key]);
-						}
-				
-						if(key == Opt.field){
-							//変換候補を取得
-							if(json_data['candidate'] == undefined){
-								json_data['candidate'] = [];
-							}
-							json_data['candidate'].push(sorted[i][key]);
-						} else {
-							//サブ情報
-							if($.inArray(key, hide_field) == -1){
-								if(
-									show_field !== false
-									&& !$.inArray('*', show_field) > -1
-									&& !$.inArray(key, show_field)
-								){
-									continue;
-								}
-								if(json_data['subinfo'] == undefined){
-									json_data['subinfo'] = [];
-								}
-								if(json_data['subinfo'][sub] == undefined){
-									json_data['subinfo'][sub] = [];
-								}
-								json_data['subinfo'][sub].push([key, sorted[i][key]]);
-							}
-						}
-					}
-				}
-				json_data['cnt_page'] = json_data['candidate'].length;
 			}
-			afterAjax(json_data, q_word, which_page_num);
-		}
-		//**********************************************
-		//searchInsteadOfDB内のsort用の比較関数
-		//**********************************************
-		function compareASC(a, b){
-			return a[Opt.order_field].localeCompare(b[Opt.order_field]);
-		}
-		function compareDESC(a, b){
-			return b[Opt.order_field].localeCompare(a[Opt.order_field]);
-		}
-		//**********************************************
-		//問い合わせ後の処理
-		//**********************************************
-		//DB, JSONで分岐していた処理が、ここで合流する。
-		function afterAjax(json_data, q_word, which_page_num){
-			if(!json_data.candidate){
-				//一致するデータ見つからなかった
-				//hideResult();
-				$(Elem.navi_info).text(Msg.not_found);
-				$(Elem.navi_p).hide();
-				$(Elem.results).empty();
-				$(Elem.sub_info).empty();
-				$(Elem.result_area).show();
-				$(Elem.container).addClass(Cls.container_open);
+			//見つからなければすぐに終了
+			if (matched.length == undefined) {
+				notFoundDataBase();
+				return;
+			}
+			json.cnt_whole = matched.length;
+
+			//ORDER BY (CASE WHEN ...),order_field order_field ASC (or DESC)
+			var reg1 = new RegExp('^' + esc_q[0] + '$', 'gi');
+			var reg2 = new RegExp('^' + esc_q[0], 'gi');
+			var matched1 = [];
+			var matched2 = [];
+			var matched3 = [];
+			for (var i=0; i<matched.length; i++) {
+				if (matched[i][Opt.order_field[0]].match(reg1)) {
+					matched1.push(matched[i]);
+				} else if (matched[i][Opt.order_field[0]].match(reg2)) {
+					matched2.push(matched[i]);
+				} else {
+					matched3.push(matched[i]);
+				}
+			}
+			if (Opt.order_by == 'ASC') {
+				matched1.sort(compareASC);
+				matched2.sort(compareASC);
+				matched3.sort(compareASC);
 			} else {
-				//1ページのみでもナビを表示する
-				setNavi(json_data.cnt_whole, json_data.cnt_page, which_page_num);
-				/* 
-				//全件数が1ページ最大数を超えない場合、ページナビは非表示
-				if(json_data.cnt > json_data.cnt_page){
-					setNavi(json_data.cnt, json_data.cnt_page, which_page_num);
-				} else {
-					$(Elem.navi).hide();
-				}
-				*/
-
-				//候補リスト(arr_candidate)
-				var arr_candidate = json_data.candidate;
-			
-				//サブ情報(arr_subinfo)
-				var arr_subinfo = [];
-				if(json_data.subinfo  && Opt.sub_info){
-					$.each(json_data.subinfo,function(i,obj){
-						arr_subinfo[i] = obj;
-					});
-				} else {
-					arr_subinfo = false;
-				}
-
-				//セレクト専用(arr_primary_key)
-				var arr_primary_key = [];
-				if(json_data.primary_key){
-					$.each(json_data.primary_key,function(i,obj){
-						arr_primary_key[i] = obj;
-					});
-				} else {
-					arr_primary_key = false;
-				}
-			
-				//セレクト専用時
-				//本来なら、候補リストから選ばなければならないが、
-				//候補の数が一つで、その候補の文字列と入力文字列が一致する場合、
-				//『リストから選ばれた』と判断する。
-				if (
-					Opt.select_only &&
-					arr_candidate.length === 1 &&
-					arr_candidate[0] == q_word
-				) {
-					$(Elem.hidden).val(arr_primary_key[0]);
-					btnAttrDefault();
-				}					
-				//候補リストを表示する
-				displayItems(arr_candidate, arr_subinfo, arr_primary_key);
+				matched1.sort(compareDESC);
+				matched2.sort(compareDESC);
+				matched3.sort(compareDESC);
 			}
+			sorted = sorted.concat(matched1).concat(matched2).concat(matched3);
+
+			//----------------------------------------------
+			//searchInsteadOfDB内のsort用の比較関数
+			//----------------------------------------------
+			function compareASC(a, b) {
+				return a[Opt.order_field[0]].localeCompare(b[Opt.order_field[0]]);
+			}
+			function compareDESC(a, b) {
+				return b[Opt.order_field[0]].localeCompare(a[Opt.order_field[0]]);
+			}
+
+			//LIMIT xx OFFSET xx
+			var start = (which_page_num - 1) * Opt.per_page;
+			var end   = start + Opt.per_page;
+			//----------------------------------------------
+			//最終的に返るオブジェクトを作成
+			//----------------------------------------------
+			for (var i=start, sub=0; i<end; i++, sub++) {
+				if (sorted[i] == undefined) break;
+
+				for (var key in sorted[i]) {
+					//セレクト専用
+					if (key == Opt.primary_key) {
+						if (json.primary_key == undefined) json.primary_key = [];
+						json.primary_key.push(sorted[i][key]);
+					}
+					if (key == Opt.field) {
+						//変換候補を取得
+						if (json.candidate == undefined) json.candidate = [];
+						json.candidate.push(sorted[i][key]);
+					} else {
+						//サブ情報
+						if ($.inArray(key, Opt.hide_field) == -1) {
+							if (
+								Opt.show_field != ''                 &&
+								$.inArray('*', Opt.show_field) == -1 &&
+								$.inArray(key, Opt.show_field) == -1
+							) {
+								continue;
+							}
+							if (json.subinfo == undefined) {
+								json.subinfo = [];
+							}
+							if (json.subinfo[sub] == undefined) {
+								json.subinfo[sub] = [];
+							}
+							json.subinfo[sub][key] = sorted[i][key];
+						}
+					}
+				}
+			}
+			json.cnt_page = json.candidate.length;
+			prepareResults(json, q_word, which_page_num);
+		}
+		//**********************************************
+		//問い合わせ該当件数ゼロだった場合
+		//**********************************************
+		//@called searchForDB, searchForJSON
+		function notFoundDataBase() {
+			$(Elem.navi_info).text(Msg.not_found);
+			$(Elem.navi_p).hide();
+			$(Elem.results).empty();
+			$(Elem.sub_info).empty();
+			$(Elem.result_area).show();
+			$(Elem.container).addClass(Cls.container_open);
+			cssFocusInput();
+		}
+		//==============================================
+		//#4-4 Show or hide results
+		//==============================================
+		//**********************************************
+		//候補表示の準備
+		//**********************************************
+		//@called searchForDB, searchForJSON
+		//DB, JSONで分岐していた処理が、ここで合流する。
+		function prepareResults(json, q_word, which_page_num) {
+			//1ページのみでもナビを表示する
+			setNavi(json.cnt_whole, json.cnt_page, which_page_num);
+
+			if (!json.subinfo || !Opt.sub_info) json.subinfo = false;
+			if (!json.primary_key) json.primary_key = false;
+
+			//セレクト専用時
+			//本来なら、候補リストから選ばなければならないが、
+			//候補の数が一つで、その候補の文字列と入力文字列が一致する場合、
+			//『リストから選ばれた』と判断する。
+			if (
+				Opt.select_only &&
+				json.candidate.length === 1 &&
+				json.candidate[0] == q_word[0]
+			) {
+				$(Elem.hidden).val(json.primary_key[0]);
+				btnAttrDefault();
+			}
+			//候補リストを表示する
+			displayResults(json.candidate, json.subinfo, json.primary_key);
 			if (Vars.is_paging === false) {
 				cssFocusInput();
 			} else {
-				MoveToSameLine();
+				//全件表示とページ移動時、直前の行番号と同じ候補を選択状態にする
+				var idx = Vars.is_paging; //真偽値を収めるべき変数に、例外的に数値が入っている。
+				var limit = $(Elem.results).children('li').length - 1;
+				if (idx > limit) idx = limit;
+				var obj = $(Elem.results).children('li').eq(idx);
+				$(obj).addClass(Cls.select);
+				setSubInfo(obj);
+				Vars.is_paging = false; //次回に備えて初期化する
+
 				cssFocusResults();
 			}
 		}
-		//================================================================================
-		//#8.ページナビ
-		//--------------------------------------------------------------------------------
 		//**********************************************
 		//ナビ部分を作成
 		//**********************************************
-		// @param integer cnt_whole   All number of records.
-		// @param integer cnt_page    Cadidates of this page.
-		// @param integer page_num    全件、または予測候補の一覧のページ数
+		//@param integer cnt_whole   All number of records.
+		//@param integer cnt_page    Cadidates of this page.
+		//@param integer page_num    全件、または予測候補の一覧のページ数
 		function setNavi(cnt_whole, cnt_page, page_num) {
 
 			var num_page_top = Opt.per_page * (page_num - 1) + 1;
 			var num_page_end = num_page_top + cnt_page - 1;
 
-			var cnt_result = Msg['page_info']
+			var cnt_result = Msg.page_info
 				.replace('cnt_whole'    , cnt_whole)
 				.replace('num_page_top' , num_page_top)
 				.replace('num_page_end' , num_page_end);
@@ -1064,14 +1096,14 @@ MIT License
 			//----------------------------------------------
 			//ページング部分
 			//----------------------------------------------
-			var max = Math.ceil(cnt_whole / Opt.per_page); //全ページ数
-			if (max > 1) {
+			var last_page = Math.ceil(cnt_whole / Opt.per_page); //全ページ数
+			if (last_page > 1) {
 				$(Elem.navi_p).empty();
 				//ページ数
 				if (Vars.is_suggest) {
-					Vars.max_suggest = max;
-				}else{
-					Vars.max_all = max;
+					Vars.max_suggest = last_page;
+				} else {
+					Vars.max_all = last_page;
 				}
 
 				//表示する一連のページ番号の左右端
@@ -1079,43 +1111,43 @@ MIT License
 				var right = page_num + Math.floor((Opt.navi_num - 1) / 2);
 
 				//現ページが端近くの場合のleft,rightの調整
-				while(left < 1){ left ++;right++; }
-				while(right > max){ right--; }
-				while((right-left < Opt.navi_num - 1) && left > 1){ left--; }
+				while (left < 1) left ++;right++;
+				while (right > last_page) right--;
+				while ((right-left < Opt.navi_num - 1) && left > 1) left--;
 
 				//『<< 前へ』の表示
-				if(page_num == 1) {
-					if(!Opt.navi_simple){
+				if (page_num == 1) {
+					if (!Opt.navi_simple) {
 						$('<span></span>')
 							.text('<< 1')
 							.addClass('page_end')
 							.appendTo(Elem.navi_p);
 					}
 					$('<span></span>')
-						.text(Msg['prev'])
+						.text(Msg.prev)
 						.addClass('page_end')
 						.appendTo(Elem.navi_p);
 				} else {
-					if(!Opt.navi_simple){
+					if (!Opt.navi_simple) {
 						$('<a></a>')
 							.attr({'href':'javascript:void(0)','class':'navi_first'})
 							.text('<< 1')
-							.attr('title', Msg['first_title'])
+							.attr('title', Msg.first_title)
 							.appendTo(Elem.navi_p);
 					}
 					$('<a></a>')
 						.attr({'href':'javascript:void(0)','class':'navi_prev'})
-						.text(Msg['prev'])
-						.attr('title', Msg['prev_title'])
+						.text(Msg.prev)
+						.attr('title', Msg.prev_title)
 						.appendTo(Elem.navi_p);
 				}
 
 				//各ページへのリンクの表示
-				for (i = left; i <= right; i++)
-				{
+				for (i = left; i <= right; i++) {
 					//現在のページ番号は<span>で囲む(強調表示用)
-					var num_link = (i == page_num) ? '<span class="current">'+i+'</span>' : i;
-
+					var num_link = (i == page_num)
+						? '<span class="current">'+i+'</span>'
+						: i;
 					$('<a></a>')
 						.attr({'href':'javascript:void(0)','class':'navi_page'})
 						.html(num_link)
@@ -1123,48 +1155,182 @@ MIT License
 				}
 
 				//『次のX件 >>』の表示
-				if(page_num == max) {
+				if (page_num == last_page) {
 					$('<span></span>')
-						.text(Msg['next'])
+						.text(Msg.next)
 						.addClass('page_end')
 						.appendTo(Elem.navi_p);
-					if(!Opt.navi_simple){
+					if (!Opt.navi_simple) {
 						$('<span></span>')
-							.text(max + ' >>')
+							.text(last_page + ' >>')
 							.addClass('page_end')
 							.appendTo(Elem.navi_p);
 					}
 				} else {
 					$('<a></a>')
 						.attr({'href':'javascript:void(0)','class':'navi_next'})
-						.text(Msg['next'])
-						.attr('title', Msg['next_title'])
+						.text(Msg.next)
+						.attr('title', Msg.next_title)
 						.appendTo(Elem.navi_p);
-					if(!Opt.navi_simple){
+					if (!Opt.navi_simple) {
 						$('<a></a>')
 							.attr({'href':'javascript:void(0)','class':'navi_last'})
-							.text(max + ' >>')
-							.attr('title', Msg['last_title'])
+							.text(last_page + ' >>')
+							.attr('title', Msg.last_title)
 							.appendTo(Elem.navi_p);
 					}
 				}
 				$(Elem.navi_p).show();
-				EH_navi_paging(); //イベントハンドラ設定
+				eHandlerForNaviPaging(); //イベントハンドラ設定
 			} else {
 				$(Elem.navi_p).hide();
 			}
 		}
 		//**********************************************
+		//サブ情報を表示する
+		//**********************************************
+		//@params object  obj   サブ情報を右隣に表示させる<li>要素
+		//@called eHandlerForResults, nextLine, prevLine
+		function setSubInfo(obj) {
+			//サブ情報を表示しない設定なら、ここで終了
+			if (!Opt.sub_info) return; 
+
+			//サブ情報の座標設定用の基本情報
+			Vars.size_results = ($(Elem.results).outerHeight() - $(Elem.results).height()) / 2;
+			Vars.size_navi    = $(Elem.navi).outerHeight();
+			Vars.size_li      = $(Elem.results).children('li:first').outerHeight();
+			Vars.size_left    = $(Elem.results).outerWidth();
+
+			//現在の<li>の番号は？
+			var idx = $(Elem.results).children('li').index(obj);
+
+			//一旦、サブ情報全非表示 (<dl>単位で非表示にする)
+			$(Elem.sub_info).children('dl').hide();
+
+			//位置調整
+			var t_top = 0;
+			if ($(Elem.navi).css('display') != 'none') t_top += Vars.size_navi;
+			t_top += (Vars.size_results + Vars.size_li * idx);
+			var t_left = Vars.size_left;
+
+			t_top  += 'px';
+			t_left += 'px';
+
+			$(Elem.sub_info).children('dl').eq(idx).css({
+				'position': 'absolute',
+				'top'     : t_top,
+				'left'    : t_left,
+				'display' : 'block'
+			});
+		}
+		//**********************************************
+		//候補一覧の<ul>成形、表示
+		//**********************************************
+		//@params array arr_candidate   DBから検索・取得した値の配列
+		//@params array arr_subinfo    サブ情報の配列
+		//@params array arr_primary_key 主キーの配列
+		//@called prepareResults
+		function displayResults(arr_candidate, arr_subinfo, arr_primary_key) {
+			//候補リストを、一旦リセット
+			$(Elem.results).empty();
+			$(Elem.sub_info).empty();
+			for (var i = 0; i < arr_candidate.length; i++) {
+
+				//候補リスト
+				var list = $('<li>')
+					.text(arr_candidate[i]) //!!! against XSS !!!
+					.attr({
+						pkey  : arr_primary_key[i],
+						title : arr_candidate[i]
+					});
+
+				if (arr_primary_key[i] == $(Elem.hidden).val()) {
+					$(list).addClass(Cls.selected);
+				}
+				$(Elem.results).append(list);
+
+				//サブ情報のdlを生成
+				if (arr_subinfo) {
+					//sub_info属性にJSON文字列そのままを格納
+					var str_subinfo = [];
+					var $dl = $('<dl>');
+					//テーブルの各行を生成
+					for (key in arr_subinfo[i]) {
+						//sub_info属性の値を整える
+						var json_key = key.replace('\'', '\\\'');
+						var json_val = arr_subinfo[i][key].replace('\'', '\\\'');
+						str_subinfo.push("'" + json_key + "':" + "'" + json_val + "'");
+
+						//thの別名を検索する
+						if (Opt.sub_as[key] != null) var dt = Opt.sub_as[key];
+						else 	                      var dt = key;
+
+						dt = $('<dt>').text(dt); //!!! against XSS !!!
+						if (Opt.sub_info == 'simple') $(dt).addClass('hide');
+						$dl.append(dt);
+
+						var dd = $('<dd>').text(arr_subinfo[i][key]);	//!!! against XSS !!!
+						$dl.append(dd);
+					}
+					//sub_info属性を候補リストのliに追加
+					str_subinfo = '{' + str_subinfo.join(',') + '}';
+					$(list).attr('sub_info', str_subinfo);
+					$(Elem.sub_info).append($dl);
+				}
+			}
+
+			//サジェスト結果表示
+			//表示のたびに、結果リストの位置を調整しなおしている。
+			//このプラグイン以外でページ内の要素の位置をずらす処理がある場合に対処するため。
+			var offset = $(Elem.combo_input).offset();
+			$(Elem.result_area)
+				.css({
+					top  : offset.top + $(Elem.combo_input).outerHeight() + 'px',
+					left : offset.left + 'px'
+				})
+				.show();
+			$(Elem.container).addClass(Cls.container_open);
+
+			eHandlerForResults(); //イベントハンドラ設定
+
+			//ボタンのtitle属性変更(閉じる)
+			$(Elem.button).attr('title',Msg.close_btn);
+		}
+		//**********************************************
+		//候補エリアを消去
+		//**********************************************
+		//@called eHandlerForButton, eHandlerForWhole, processKey, suggest, selectCurrentLine
+		function hideResults() {
+			if (Vars.key_paging) {
+				//選択候補を追いかけてスクロール
+				scrollWindow(true);
+				Vars.key_paging = false;
+			}
+			cssFocusInput();
+
+			$(Elem.results).empty();
+			$(Elem.sub_info).empty();
+			$(Elem.result_area).hide();
+			$(Elem.container).removeClass(Cls.container_open);
+
+			abortAjax();      //Ajax通信をキャンセル
+			btnAttrDefault(); //ボタンのtitle属性初期化
+		}
+		//==============================================
+		//#4-5 Paging
+		//==============================================
+		//**********************************************
 		//1ページ目へ
 		//**********************************************
+		//@called processKey, eHandlerForNaviPaging
 		function firstPage() {
-			if(!Vars.is_suggest) {
+			if (!Vars.is_suggest) {
 				if (Vars.page_all > 1) {
 					Vars.page_all = 1;
 					Vars.is_paging = true;
 					suggest();
 				}
-			}else{
+			} else {
 				if (Vars.page_suggest > 1) {
 					Vars.page_suggest = 1;
 					Vars.is_paging = true;
@@ -1175,14 +1341,15 @@ MIT License
 		//**********************************************
 		//前のページへ
 		//**********************************************
+		//@called processKey, eHandlerForNaviPaging
 		function prevPage() {
-			if(!Vars.is_suggest){
+			if (!Vars.is_suggest) {
 				if (Vars.page_all > 1) {
 					Vars.page_all--;
 					Vars.is_paging = true;
 					suggest();
 				}
-			}else{
+			} else {
 				if (Vars.page_suggest > 1) {
 					Vars.page_suggest--;
 					Vars.is_paging = true;
@@ -1193,8 +1360,9 @@ MIT License
 		//**********************************************
 		//次のページへ
 		//**********************************************
+		//@called processKey, eHandlerForNaviPaging
 		function nextPage() {
-			if(Vars.is_suggest){
+			if (Vars.is_suggest) {
 				if (Vars.page_suggest < Vars.max_suggest) {
 					Vars.page_suggest++;
 					Vars.is_paging = true;
@@ -1211,14 +1379,15 @@ MIT License
 		//**********************************************
 		//最後のページへ
 		//**********************************************
+		//@called processKey, eHandlerForNaviPaging
 		function lastPage() {
-			if(!Vars.is_suggest){
+			if (!Vars.is_suggest) {
 				if (Vars.page_all < Vars.max_all) {
 					Vars.page_all = Vars.max_all;
 					Vars.is_paging = true;
 					suggest();
 				}
-			}else{
+			} else {
 				if (Vars.page_suggest < Vars.max_suggest) {
 					Vars.page_suggest = Vars.max_suggest;
 					Vars.is_paging = true;
@@ -1226,104 +1395,36 @@ MIT License
 				}
 			}
 		}
-		//08. 候補
-		//************************************************************
-		//候補一覧の<ul>成形、表示
-		//************************************************************
-		// @params array arr_candidate   DBから検索・取得した値の配列
-		// @params array arr_subinfo    サブ情報の配列
-		// @params array arr_primary_key 主キーの配列
-		//
-		//arr_candidateそれぞれの値を<li>で囲んで表示。
-		//同時に、イベントハンドラを記述。
-		function displayItems(arr_candidate, arr_subinfo, arr_primary_key) {
-
-			//候補リストを、一旦リセット
-			$(Elem.results).empty();
-			$(Elem.sub_info).empty();
-			for (var i = 0; i < arr_candidate.length; i++) {
-
-				//候補リスト
-				var $li = $('<li>').text(arr_candidate[i]); //!!! against XSS !!!
-			
-				//セレクト専用
-				if(Opt.select_only){
-					$li.attr('id', arr_primary_key[i]);
-				}
-
-				$(Elem.results).append($li);
-
-				//サブ情報のdlを生成
-				if(arr_subinfo){
-					//sub_info属性にJSON文字列そのままを格納
-					var json_subinfo = '{';
-					var $dl = $('<dl>');
-					//テーブルの各行を生成
-					for (var j=0; j < arr_subinfo[i].length; j++) {
-						//sub_info属性の値を整える
-						var json_key = arr_subinfo[i][j][0].replace('\'', '\\\'');
-						var json_val = arr_subinfo[i][j][1].replace('\'', '\\\'');
-						json_subinfo += "'" + json_key + "':" + "'" + json_val + "'";
-						if((j+1) < arr_subinfo[i].length) json_subinfo += ',';
-
-						//thの別名を検索する
-						if(Opt.sub_as[arr_subinfo[i][j][0]] != null){
-							var dt = Opt.sub_as[arr_subinfo[i][j][0]];
-						} else {
-							var dt =  arr_subinfo[i][j][0];
-						}
-						dt = $('<dt>').text(dt); //!!! against XSS !!!
-						if(Opt.sub_info == 'simple') $(dt).addClass('hide'); //シンプル用!!!
-						$dl.append(dt);
-					
-						var dd = $('<dd>').text(arr_subinfo[i][j][1]);	//!!! against XSS !!!
-						$dl.append(dd);
-					}
-					//sub_info属性を候補リストのliに追加
-					json_subinfo += '}';
-					$li.attr('sub_info', json_subinfo);
-					$(Elem.sub_info).append($dl);
-				}
-			}
-
-			//サジェスト結果表示
-			$(Elem.result_area).show();
-			$(Elem.container).addClass(Cls.container_open);
-
-			EH_results(); //イベントハンドラ設定
-			
-			//ボタンのtitle属性変更(閉じる)
-			$(Elem.button).attr('title',Msg['close_btn']);
-		}
-
+		//==============================================
+		//#4-6 Select line
+		//==============================================
 		//**********************************************
 		//現在選択中の候補に決定する
 		//**********************************************
-		function selectCurrentResult(is_enter_key) {
+		//@called processKey, eHandlerForResults
+		function selectCurrentLine(is_enter_key) {
 
 			//選択候補を追いかけてスクロール
 			scrollWindow(true);
 
-			var current = getCurrentResult();
+			var current = getCurrentLine();
 
 			if (current) {
 				$(Elem.combo_input).val($(current).text());
 				//サブ情報があるならsub_info属性を追加・書き換え
-				if(Opt.sub_info) {
+				if (Opt.sub_info) {
 					$(Elem.combo_input).attr('sub_info', $(current).attr('sub_info'));
 				}
-				hideResult();
+				hideResults();
 
 				//added
 				Vars.prev_value = $(Elem.combo_input).val();
 
+				$(Elem.hidden).val($(current).attr('pkey'));
 				//セレクト専用
-				if(Opt.select_only){
-					$(Elem.hidden).val($(current).attr('id'));
-					btnAttrDefault();
-				}
+				if (Opt.select_only) btnAttrDefault();
 			}
-			if(Opt.bind_to){
+			if (Opt.bind_to) {
 			 	//候補選択を引き金に、イベントを発火する
 				$(Elem.combo_input).trigger(Opt.bind_to, is_enter_key);
 			}
@@ -1335,27 +1436,24 @@ MIT License
 		//現在選択中の候補の情報を取得
 		//**********************************************
 		//@return object current_result 現在選択中の候補のオブジェクト(<li>要素)
-		function getCurrentResult() {
+		//@called scrollWindow, processKey, selectCurrentLine, suggest, nextLine, prevLine
+		function getCurrentLine() {
 			if ($(Elem.result_area).is(':hidden')) return false;
 			var obj = $(Elem.results).children('li.' + Cls.select);
 			if ($(obj).length) return obj;
 			else return false;
 		}
 		//**********************************************
-		//現在行の番号を取得
-		//**********************************************
-		function getCurrentLine() {
-			var obj = $(Elem.results).children('li.' + Cls.select);
-			if (!obj.length) return -1;			
-			return $(Elem.results).children('li').index(obj);
-		}
-		//**********************************************
 		//選択候補を次に移す
 		//**********************************************
-		function nextResult() {
-			var idx = getCurrentLine();
-			if (idx > -1) {
-				$(Elem.results).children('li').eq(idx).removeClass(Cls.select);
+		//@called processKey
+		function nextLine() {
+			var obj = getCurrentLine();
+			if (!obj) {
+				var idx = -1;
+			} else {
+				var idx = $(Elem.results).children('li').index(obj);
+				$(obj).removeClass(Cls.select);
 			}
 			idx++;
 			if (idx < $(Elem.results).children('li').length) {
@@ -1372,12 +1470,14 @@ MIT License
 		//**********************************************
 		//選択候補を前に移す
 		//**********************************************
-		function prevResult() {
-			var idx = getCurrentLine();
-			if (idx > -1) {
-				$(Elem.results).children('li').eq(idx).removeClass(Cls.select);
+		//@called processKey
+		function prevLine() {
+			var obj = getCurrentLine();
+			if (!obj) {
+				var idx = $(Elem.results).children('li').length;
 			} else {
-				idx = $(Elem.results).children('li').length;
+				var idx = $(Elem.results).children('li').index(obj);
+				$(obj).removeClass(Cls.select);
 			}
 			idx--;
 			if (idx > -1) {
@@ -1390,97 +1490,6 @@ MIT License
 			}
 			//選択候補を追いかけてスクロール
 			scrollWindow();
-		}
-		//**********************************************
-		//候補リストを暗く、入力欄を明瞭に
-		//サブ情報は隠す
-		//**********************************************
-		//@called nextResult, prevResult, afterAjax, selectCurrentResult, 
-		//@called processKey, hideResult, EH_input
-		function cssFocusInput() {
-			$(Elem.results).addClass(Cls.re_off);
-			$(Elem.combo_input).removeClass(Cls.input_off);
-			$(Elem.sub_info).children('dl').hide();
-		}
-		//**********************************************
-		//候補リストを明瞭に、入力欄を暗く
-		//**********************************************
-		//@called nextResult, prevResult, afterAjax, EH_results
-		function cssFocusResults() {
-			$(Elem.results).removeClass(Cls.re_off);
-			$(Elem.combo_input).addClass(Cls.input_off);
-		}
-		//**********************************************
-		//候補エリアを消去
-		//**********************************************
-		function hideResult() {
-			if (Vars.key_paging) {
-				//選択候補を追いかけてスクロール
-				scrollWindow(true);
-				Vars.key_paging = false;
-			}
-			cssFocusInput();
-			
-			$(Elem.results).empty();
-			$(Elem.sub_info).empty();
-			$(Elem.result_area).hide();
-			$(Elem.container).removeClass(Cls.container_open);
-			
-			abortAjax();      //Ajax通信をキャンセル
-			btnAttrDefault(); //ボタンのtitle属性初期化
-		}
-		//**********************************************
-		//全件表示とページ移動時、直前の行番号と同じ候補を選択状態にする
-		//**********************************************
-		function MoveToSameLine(){
-			var idx = Vars.is_paging; //真偽値を収めるべき変数に、例外的に数値が入っている。
-			var limit = $(Elem.results).children('li').length - 1;
-			if (idx > limit) idx = limit;
-			var obj = $(Elem.results).children('li').eq(idx);
-			
-			$(obj).addClass(Cls.select);
-			setSubInfo(obj);
-
-			Vars.is_paging = false; //次回に備えて初期化する
-		}
-		//================================================================================
-		//09.サブ情報
-		//--------------------------------------------------------------------------------
-		//**********************************************
-		//サブ情報を表示する
-		//**********************************************
-		// @paramas object  obj   サブ情報を右隣に表示させる<li>要素
-		function setSubInfo(obj){
-			//サブ情報を表示しない設定なら、ここで終了
-			if(!Opt.sub_info) return; 
-
-			//サブ情報の座標設定用の基本情報
-			Vars.size_results = ($(Elem.results).outerHeight() - $(Elem.results).height()) / 2;
-			Vars.size_navi    = $(Elem.navi).outerHeight();
-			Vars.size_li      = $(Elem.results).children('li:first').outerHeight();
-			Vars.size_left    = $(Elem.results).outerWidth();
-
-			//現在の<li>の番号は？
-			var idx = $(Elem.results).children('li').index(obj);
-
-			//一旦、サブ情報全非表示 (<dl>単位で非表示にする)
-			$(Elem.sub_info).children('dl').hide();
-
-			//位置調整
-			var t_top = 0;
-			if($(Elem.navi).css('display') != 'none') t_top += Vars.size_navi;
-			t_top += (Vars.size_results + Vars.size_li * idx);
-			var t_left = Vars.size_left;
-
-			t_top  += 'px';
-			t_left += 'px';
-
-			$(Elem.sub_info).children('dl').eq(idx).css({
-				'position': 'absolute',
-				'top'     : t_top,
-				'left'    : t_left,
-				'display' : 'block'
-			});
 		}
 	} //the end of "individual"
 })(jQuery);

@@ -84,7 +84,11 @@ Simple
 /**************************************
  Results
 **************************************/
-.ac_result_area{
+.ac_selected {
+	background-color:#def;
+	font-weight:bold;
+}
+.ac_result_area {
 	background-color : transparent;
 	margin : 0;
 	padding : 0;

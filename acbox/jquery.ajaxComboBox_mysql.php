@@ -1,8 +1,12 @@
 <?php
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //You MUST change this value.
-$sqlite = array(
-	'path'   => '../sample/sample.sqlite',
+$mysql = array(
+	'server'   => 'localhost',
+	'database' => 'acbox',
+	'user'     => 'root',
+	'passwd'   => '',
+	'encode'   => 'utf8'
 );
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -10,7 +14,13 @@ $sqlite = array(
 //****************************************************
 //Connect to Database.
 //****************************************************
-$sqlite['resource'] = sqlite_open($sqlite['path'],'0600');
+$mysql['resource'] = mysql_connect(
+	$mysql['server'],
+	$mysql['user'],
+	$mysql['passwd']
+);
+mysql_select_db($mysql['database'], $mysql['resource']);
+mysql_query("SET NAMES {$mysql['encode']}");
 
 
 if (isset($_GET['page_num'])) {
@@ -18,13 +28,13 @@ if (isset($_GET['page_num'])) {
 	//Parameters from JavaScript.
 	//****************************************************
 	$param = array(
-		'db_table'     => sqlite_escape_string($_GET['db_table']),
-		'page_num'     => sqlite_escape_string($_GET['page_num']),
-		'per_page'     => sqlite_escape_string($_GET['per_page']),
-		'and_or'       => sqlite_escape_string($_GET['and_or']),
-		'select_field' => sqlite_escape_string($_GET['select_field']),
-		'primary_key'  => sqlite_escape_string($_GET['primary_key']),
-		'order_by'     => sqlite_escape_string($_GET['order_by']),
+		'db_table'     => mysql_escape_string($_GET['db_table']),
+		'page_num'     => mysql_escape_string($_GET['page_num']),
+		'per_page'     => mysql_escape_string($_GET['per_page']),
+		'and_or'       => mysql_escape_string($_GET['and_or']),
+		'select_field' => mysql_escape_string($_GET['select_field']),
+		'primary_key'  => mysql_escape_string($_GET['primary_key']),
+		'order_by'     => mysql_escape_string($_GET['order_by']),
 		'order_field'  => array(),
 		'search_field' => array(),
 		'q_word'       => array()
@@ -32,10 +42,9 @@ if (isset($_GET['page_num'])) {
 	$esc = array('order_field', 'search_field', 'q_word');
 	for ($i=0; $i<count($esc); $i++) {
 		for ($j=0; $j<count($_GET[$esc[$i]]); $j++) {
-			$param[$esc[$i]][$j] = sqlite_escape_string($_GET[$esc[$i]][$j]);
+			$param[$esc[$i]][$j] = mysql_escape_string($_GET[$esc[$i]][$j]);
 		}
 	}
-
 
 	//****************************************************
 	//Create a SQL. (shared by MySQL and SQLite)
@@ -86,7 +95,6 @@ if (isset($_GET['page_num'])) {
 		$param['offset']		
 	);
 
-
 	//****************************************************
 	//Query database
 	//****************************************************
@@ -96,32 +104,32 @@ if (isset($_GET['page_num'])) {
 	//----------------------------------------------------
 	//Search
 	//----------------------------------------------------
-	$rows = sqlite_query($sqlite['resource'], $query);
-	while ($row = sqlite_fetch_array($rows,SQLITE_ASSOC)) {
+	$rows = mysql_query($query, $mysql['resource']);
+	while ($row = mysql_fetch_array($rows, MYSQL_ASSOC)) {
 		$return['result'][] = $row;
 	}
 	//----------------------------------------------------
-	//Whole count
+	//Whole
 	//----------------------------------------------------
 	$query = "SELECT COUNT(*) FROM {$param['db_table']} WHERE {$param['where']}";
-	$rows = sqlite_query($sqlite['resource'], $query);
-	while ($row = sqlite_fetch_array($rows, SQLITE_NUM)) {
+	$rows = mysql_query($query, $mysql['resource']);
+	while ($row = mysql_fetch_array($rows, MYSQL_NUM)) {
 		$return['cnt_whole'] = $row[0];
 	}
+
 	//****************************************************
-	//Return
+	//End.
 	//****************************************************
 	echo json_encode($return);
-
 } else {
 	//****************************************************
 	//Parameters from JavaScript.
 	//****************************************************
 	$param = array(
-		'db_table'  => sqlite_escape_string($_GET['db_table']),
-		'field'     => sqlite_escape_string($_GET['field']),
-		'pkey_name' => sqlite_escape_string($_GET['pkey_name']),
-		'pkey_val'  => sqlite_escape_string($_GET['pkey_val'])
+		'db_table'  => mysql_escape_string($_GET['db_table']),
+		'field'     => mysql_escape_string($_GET['field']),
+		'pkey_name' => mysql_escape_string($_GET['pkey_name']),
+		'pkey_val'  => mysql_escape_string($_GET['pkey_val'])
 	);
 	//****************************************************
 	//get initialize value
@@ -134,13 +142,12 @@ if (isset($_GET['page_num'])) {
 		$param['pkey_name'],
 		$param['pkey_val']
 	);
-	$rows  = sqlite_query($sqlite['resource'], $query);
-	while ($row = sqlite_fetch_array($rows, SQLITE_ASSOC)) echo json_encode($row);
+	$rows  = mysql_query($query, $mysql['resource']);
+	while ($row = mysql_fetch_array($rows, MYSQL_ASSOC)) echo json_encode($row);
 }
-
 
 //****************************************************
 //End
 //****************************************************
-sqlite_close($sqlite['resource']);
+mysql_close($mysql['resource']);
 ?>

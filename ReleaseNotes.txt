@@ -1,0 +1,25 @@
+v5.0 (2012-06-04)
+	(English)
+	* "minchars" option was abolished.
+	* "init_src" option was abolished.
+	* "img_dir" option wasu abolished.
+	  Please set a path to "button_img" option.
+	* "init_record" option was newly prepared instead of "init_val".
+	* "plugin_type" option was newly prepared.
+	  You can set "combobox" or "simple".
+	* You can not change the name of CSS class which applied to this ComboBox.
+	* The selected item is emphasized.
+	
+	(Japanese)
+	* "minchars"オプションを廃止しました。1文字から検索を行います。
+	* "init_src"オプションを廃止しました。
+	  送信先のPHPは"jquery.ajaxComboBox.php"に統一します。
+	* "img_dir"オプションを廃止しました。
+	  "button_img"は、絶対パスまたは相対パスで指定して下さい。
+	* "init_val"オプションを廃止して、代わりに"init_record"を新設します。
+	  データベースのプライマリキーの値を指定します。
+	* "plugin_type"オプションを追加しました。
+	  通常の"combobox"と、ボタンのないシンプルな"simple"を選べます。
+	* コンボボックスに適用されるCSSクラスの名称変更をオプションで指定することはできなくなりました。
+	* "sub_info"オプションの値に"simple"と設定することで、サブ情報の項目名を非表示にできるようにしました。
+	* 選択された項目は、リスト内で太字で強調表示するようにしました。
