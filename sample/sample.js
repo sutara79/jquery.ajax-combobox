@@ -242,6 +242,8 @@ jQuery(document).ready(function($){
 	$('#lang_en').attr('disabled', 'disabled');
 });
 function displayResult(id){
-	if ($('#' + id + '_primary_key').length) alert($('#' + id + '_primary_key').val());
-	else                                      alert($('#' + id).val());
+	alert(
+		id +                  ': ' + $('#' + id).val() + '\n' +
+		id + '_primary_key' + ': ' + $('#' + id + '_primary_key').val()
+	);
 }
