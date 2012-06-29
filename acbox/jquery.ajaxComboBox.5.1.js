@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.0
+jquery.ajaxComboBox.5.1
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -309,7 +309,13 @@ MIT License
 			var hidden_name = ($(elems.combo_input).attr('name') != undefined)
 				? $(elems.combo_input).attr('name')
 				: $(elems.combo_input).attr('id');
-			hidden_name += '_primary_key';
+				
+			//CakePHP用の対策 例:data[search][user] -> data[search][user_primary_key]
+			if (hidden_name.match(/\]$/)) {
+				hidden_name = hidden_name.replace(/\]?$/, '_primary_key]');
+			} else {
+				hidden_name += '_primary_key';
+			}
 			elems.hidden = $('<input type="hidden" />')
 				.attr({
 					'name': hidden_name,

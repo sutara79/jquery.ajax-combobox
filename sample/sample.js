@@ -238,7 +238,6 @@ jQuery(document).ready(function($){
 		$('.' + $(ev.target).attr('id')).show();
 		$(ev.target).attr('disabled', 'disabled');
 	});
-	$('.lang_ja').hide();
 	$('#lang_en').attr('disabled', 'disabled');
 });
 function displayResult(id){

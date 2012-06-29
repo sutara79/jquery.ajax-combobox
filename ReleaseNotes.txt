@@ -1,3 +1,13 @@
+v5.1 (2012-06-30)
+	(English)
+	* The naming for the hidden field that used "select_only" option, is adapted to CakePHP.
+
+	(Japanese)
+	* セレクト専用オプションのための隠しフィールドのname属性の命名を、CakePHPにも対応しました。
+	  ex: data[search][user] のテキストボックスに対応する隠しフィールドは、
+	      data[search][user_primary_key]となります。
+
+
 v5.0 (2012-06-04)
 	(English)
 	* "minchars" option was abolished.

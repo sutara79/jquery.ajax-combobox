@@ -1,6 +1,9 @@
 *{
 	font-family:"メイリオ", sans-serif;
 }
+.lang_ja {
+	display:none;
+}
 nav#language {
 	padding:4px;
 	border:1px solid #aaa;
