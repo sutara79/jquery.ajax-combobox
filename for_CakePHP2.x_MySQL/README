@@ -1,5 +1,5 @@
-last-modified : 2012-06-30
-CakePHP 2.1.3 + MySQL
+last-modified : 2012-07-06
+CakePHP 2.2.0 + MySQL
 
 
 Please access "posts/index".
@@ -11,13 +11,13 @@ app
 		## database.php
 		## core.php
 	Controller
-		## PostsController.php
+		## NationsController.php
 	Model
-		## Post.php
+		## Nation.php
 	View
 		Layouts
-			## default.ctp
-		## Posts
+			## ajaxComboBox.ctp
+		## Nations
 			## ajax_search.ctp
 			## edit.ctp
 			## index.ctp
@@ -27,5 +27,5 @@ app
 		img
 			## jquery.ajaxComboBox.button.png
 		js
-			## jquery.ajaxComboBox.5.1.js
+			## jquery.ajaxComboBox.5.2.js
 			

@@ -32,8 +32,6 @@ if (isset($_GET['page_num'])) {
 		'page_num'     => mysql_escape_string($_GET['page_num']),
 		'per_page'     => mysql_escape_string($_GET['per_page']),
 		'and_or'       => mysql_escape_string($_GET['and_or']),
-		'select_field' => mysql_escape_string($_GET['select_field']),
-		'primary_key'  => mysql_escape_string($_GET['primary_key']),
 		'order_by'     => mysql_escape_string($_GET['order_by']),
 		'order_field'  => array(),
 		'search_field' => array(),
@@ -56,7 +54,7 @@ if (isset($_GET['page_num'])) {
 	for($i = 0; $i < count($param['q_word']); $i++){
 		$depth2 = array();
 		for($j = 0; $j < count($param['search_field']); $j++){
-			$depth2[] = "{$param['search_field'][$j]} LIKE '%{$param['q_word'][$i]}%'";
+			$depth2[] = "`{$param['search_field'][$j]}` LIKE '%{$param['q_word'][$i]}%'";
 		}
 		$depth1[] = '(' . join(' OR ', $depth2) . ')';
 	}
@@ -68,10 +66,10 @@ if (isset($_GET['page_num'])) {
 	$str = '(CASE ';
 	for ($i = 0, $j = 0; $i < count($param['q_word']); $i++) {
 		for ($k = 0; $k < count($param['order_field']); $k++) {
-			$str .= "WHEN {$param['order_field'][$k]} LIKE '{$param['q_word'][$i]}' ";
+			$str .= "WHEN `{$param['order_field'][$k]}` LIKE '{$param['q_word'][$i]}' ";
 			$str .= "THEN $j ";
 			$j++;
-			$str .= "WHEN {$param['order_field'][$k]} LIKE '{$param['q_word'][$i]}%' ";
+			$str .= "WHEN `{$param['order_field'][$k]}` LIKE '{$param['q_word'][$i]}%' ";
 			$str .= "THEN $j ";
 			$j++;
 		}
@@ -85,9 +83,7 @@ if (isset($_GET['page_num'])) {
 
 
 	$query = sprintf(
-		"SELECT %s, %s FROM %s WHERE %s ORDER BY %s LIMIT %s OFFSET %s",
-		$param['select_field'],
-		$param['primary_key'],
+		"SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %s OFFSET %s",
 		$param['db_table'],
 		$param['where'],
 		$param['orderby'],
@@ -111,7 +107,7 @@ if (isset($_GET['page_num'])) {
 	//----------------------------------------------------
 	//Whole
 	//----------------------------------------------------
-	$query = "SELECT COUNT(*) FROM {$param['db_table']} WHERE {$param['where']}";
+	$query = "SELECT COUNT(*) FROM `{$param['db_table']}` WHERE {$param['where']}";
 	$rows = mysql_query($query, $mysql['resource']);
 	while ($row = mysql_fetch_array($rows, MYSQL_NUM)) {
 		$return['cnt_whole'] = $row[0];
@@ -127,7 +123,6 @@ if (isset($_GET['page_num'])) {
 	//****************************************************
 	$param = array(
 		'db_table'  => mysql_escape_string($_GET['db_table']),
-		'field'     => mysql_escape_string($_GET['field']),
 		'pkey_name' => mysql_escape_string($_GET['pkey_name']),
 		'pkey_val'  => mysql_escape_string($_GET['pkey_val'])
 	);
@@ -135,9 +130,7 @@ if (isset($_GET['page_num'])) {
 	//get initialize value
 	//****************************************************
 	$query = sprintf(
-		"SELECT %s, %s FROM %s WHERE %s = '%s'",
-		$param['field'],
-		$param['pkey_name'],
+		"SELECT * FROM `%s` WHERE `%s` = '%s'",
 		$param['db_table'],
 		$param['pkey_name'],
 		$param['pkey_val']

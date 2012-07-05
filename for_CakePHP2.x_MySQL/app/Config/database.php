@@ -7,7 +7,7 @@ class DATABASE_CONFIG {
 		'host'       => 'localhost',
 		'login'      => 'root',
 		'password'   => '',
-		'database'   => 'acbox',
+		'database'   => 'acbox', // ### PLEASE CHANGE ###
 		'prefix'     => '',
 		'encoding'   => 'utf8'
 	);

@@ -41,7 +41,7 @@
  *
  * Options:
  *
- * - `handler` - callback - The callback to handle errors. You can set this to any callback type,
+ * - `handler` - callback - The callback to handle errors. You can set this to any callable type,
  *    including anonymous functions.
  * - `level` - int - The level of errors you are interested in capturing.
  * - `trace` - boolean - Include stack traces for errors in log files.
@@ -133,7 +133,7 @@
  * Defines the default error type when using the log() function. Used for
  * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
  */
-	define('LOG_ERROR', 2);
+	define('LOG_ERROR', LOG_ERR);
 
 /**
  * Session configuration.
@@ -189,7 +189,7 @@
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '9898989898989898989898989');
+	Configure::write('Security.cipherSeed', '1234123412341234');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

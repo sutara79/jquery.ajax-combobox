@@ -1,3 +1,11 @@
+v5.2 (2012-07-06)
+	(English)
+	* The error that occurs when "SQL reserved words" is used as table-name or field-name is corrected.
+	
+	(Japanese)
+	* テーブル名、フィールド名にSQLの予約語が使われている場合にエラーが出る不具合を修正しました。
+
+
 v5.1 (2012-06-30)
 	(English)
 	* The naming for the hidden field that used "select_only" option, is adapted to CakePHP.
