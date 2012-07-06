@@ -1,6 +1,18 @@
+v5.3 (2012-07-07)
+	(English)
+	* The error that occurs when "NULL" is permitted at database and using "sub_info" option
+	  is corrected. 
+	* When "sub_info:'simple' and Sub-info is NULL, Sub-info is not displayed.
+
+	(Japanese)
+	* データベースの値でNULLを許可している場合、サブ情報の表示に失敗する不具合を修正しました。
+	* sub_info:'simple' の場合、サブ情報の値が空白ならば表示させないようにしました。
+
+
 v5.2 (2012-07-06)
 	(English)
-	* The error that occurs when "SQL reserved words" is used as table-name or field-name is corrected.
+	* The error that occurs when "SQL reserved words" is used as table-name or field-name
+	  is corrected.
 	
 	(Japanese)
 	* テーブル名、フィールド名にSQLの予約語が使われている場合にエラーが出る不具合を修正しました。

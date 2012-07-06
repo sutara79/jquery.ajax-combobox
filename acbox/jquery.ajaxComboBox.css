@@ -203,6 +203,13 @@ Simple
 	background : #eee;
 	color : #000;
 }
+.ac_subinfo dl.ac_dl_empty {
+	margin:0;
+	padding:0;
+	border:0;
+	width:0;
+	height:0;
+}
 .ac_subinfo dt{
 	width : 92px;
 	clear : both;

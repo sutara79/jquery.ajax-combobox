@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.2
+jquery.ajaxComboBox.5.3
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -432,7 +432,6 @@ MIT License
 					Opt.source,
 					{
 						db_table  : Opt.db_table,
-						field     : Opt.field,
 						pkey_name : Opt.primary_key,
 						pkey_val  : Opt.init_record
 					},
@@ -443,6 +442,7 @@ MIT License
 			//初期化用Ajax後の処理
 			//------------------------------------------
 			function _afterInit(data) {
+//				if (!data) return;
 				$(Elem.combo_input).val(data[Opt.field]);
 				$(Elem.hidden).val(data[Opt.primary_key]);
 				Vars.prev_value = data[Opt.field];
@@ -1252,7 +1252,11 @@ MIT License
 					for (key in arr_subinfo[i]) {
 						//sub_info属性の値を整える
 						var json_key = key.replace('\'', '\\\'');
+						
+						//DBのデータ値がnullの場合の対処
+						if (arr_subinfo[i][key] == null) arr_subinfo[i][key] = '';
 						var json_val = arr_subinfo[i][key].replace('\'', '\\\'');
+
 						str_subinfo.push("'" + json_key + "':" + "'" + json_val + "'");
 
 						//thの別名を検索する
@@ -1269,7 +1273,11 @@ MIT License
 					//sub_info属性を候補リストのliに追加
 					str_subinfo = '{' + str_subinfo.join(',') + '}';
 					$(list).attr('sub_info', str_subinfo);
+
 					$(Elem.sub_info).append($dl);
+					if (Opt.sub_info == 'simple' && $dl.children('dd').text() == '') {
+						$dl.addClass('ac_dl_empty');
+					}
 				}
 			}
 
