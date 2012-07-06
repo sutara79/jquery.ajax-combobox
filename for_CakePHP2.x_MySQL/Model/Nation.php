@@ -92,7 +92,7 @@ class Nation extends AppModel {
 			//****************************************************
 			//End.
 			//****************************************************
-			echo json_encode($return);
+			return json_encode($return);
 
 
 
@@ -115,7 +115,7 @@ class Nation extends AppModel {
 				$param['pkey_val']
 			);
 			$rows  = $this->query($query);
-			echo json_encode($rows[0][$param['db_table']]);
+			return json_encode($rows[0][$param['db_table']]);
 		}
 	}
 }
