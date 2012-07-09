@@ -2,22 +2,22 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>jquery.ajaxComboBox.5.3.js</title>
+		<title>jquery.ajaxComboBox.5.4.js</title>
 		<link rel="stylesheet" type="text/css" href="acbox/jquery.ajaxComboBox.css">
 
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-		<script type="text/javascript" src="acbox/jquery.ajaxComboBox.5.3.js"></script>
+		<script type="text/javascript" src="acbox/jquery.ajaxComboBox.5.4.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="sample/sample.css">
 		<script type="text/javascript" src="sample/sample.js"></script>
 	</head>
 	<body>
-		<h1>jquery.ajaxComboBox.5.3.js</h1>
+		<h1>jquery.ajaxComboBox.5.4.js</h1>
 		<nav id="language">
 			<button id="lang_en">English</button>
 			<button id="lang_ja">Japanese</button>
 		</nav>
-		<p class="date">2012-07-07</p>
+		<p class="date">2012-07-09</p>
 		<ul>
 			<li>Server Side : PHP5</li>
 			<li>DataBase : SQLite or MySQL</li>
@@ -157,6 +157,22 @@
 					<li><a href="#sample07_01">
 						<span class="lang_en">Basic</span>
 						<span class="lang_ja">基本</span>
+					</a></li>
+				</ol>
+			</li>
+			<li class="big_idx">
+				<a href="#sample08">
+					<span class="lang_en">"prev_val" attribute</span>
+					<span class="lang_ja">独自属性 "prev_val"</span>
+				</a>
+				<ol>
+					<li><a href="#sample08_01">
+						<span class="lang_en">Example</span>
+						<span class="lang_ja">使用例</span>
+					</a></li>
+					<li><a href="#sample08_02">
+						<span class="lang_en">Not use "prev_val"</span>
+						<span class="lang_ja">"prev_val"を設定しないばあい</span>
 					</a></li>
 				</ol>
 			</li>
@@ -833,6 +849,72 @@ var data = [
 
 </code>
 		<div class="top_navi"><a href="#idx_area"> To contents </a></div>
+
+		<!--**************************************************** -->
+		<h4 id="sample08">
+			<span class="lang_en">"prev_val" attribute</span>
+			<span class="lang_ja">独自属性 "prev_val"</span>
+		</h4>
+		<h5 id="sample08_01">
+			<span class="lang_en">Example</span>
+			<span class="lang_ja">使用例</span>
+		</h5>
+		<label for="ac08_01">
+			<span class="lang_en">Nation:</span>
+			<span class="lang_ja">国名:</span>
+		</label>
+		<input id="ac08_01" type="text">
+		<button id="ac08_01_btn">
+			<span class="lang_en">Change the value dynamically</span>
+			<span class="lang_ja">動的にテキストボックスの値を変更する</span>
+		</button>
+		<p class="lang_en">
+			Click the button, and focus on text-box.
+		</p>
+		<p class="lang_ja">
+			ボタンをクリックし、テキストボックスをフォーカスしてみて下さい。
+		</p>
+<code>
+  $('#ac08_01_btn').click(function() {
+    var str = 'Ja';
+    $('#ac08_01').val(str);
+    $('#ac08_01').attr(<span class="red">'prev_val'</span>, <span class="green">str</span>);
+  });
+
+</code>
+		<h5 id="sample08_02">
+			<span class="lang_en">Not use "prev_val"</span>
+			<span class="lang_ja">"prev_val"を設定しないばあい</span>
+		</h5>
+		<label for="ac08_02">
+			<span class="lang_en">Nation:</span>
+			<span class="lang_ja">国名:</span>
+		</label>
+		<input id="ac08_02" type="text">
+		<button id="ac08_02_btn">
+			<span class="lang_en">Change the value dynamically</span>
+			<span class="lang_ja">動的にテキストボックスの値を変更する</span>
+		</button>
+		<p class="lang_en">
+			Click the button, and focus on text-box.
+		</p>
+		<p class="lang_ja">
+			ボタンをクリックし、テキストボックスをフォーカスしてみて下さい。
+		</p>
+<code>
+  $('#ac08_02_btn').click(function() {
+    var str = 'Ja';
+    $('#ac08_02').val(str);
+  });
+
+</code>
+
+
+		<div class="top_navi"><a href="#idx_area"> To contents </a></div>
+
+
+		<!--**************************************************** -->
+
 
 		<address>
 			Author : sutara_lumpur /

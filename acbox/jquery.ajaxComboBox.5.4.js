@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.3
+jquery.ajaxComboBox.5.4
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -248,8 +248,6 @@ MIT License
 				xhr             : false, //XMLHttpオブジェクトを格納
 				key_paging      : false, //キーでページ移動したか？
 				key_select      : false, //キーで候補移動したか？？
-				prev_value      : '',    //初期値
-
 
 				//サブ情報
 				size_navi       : null,  //サブ情報表示用(ページナビの高さ)
@@ -277,6 +275,9 @@ MIT License
 				.attr('autocomplete', 'off')
 				.addClass(Cls.input)
 				.wrap('<div>'); //This "div" is "container".
+			if (!$(elems.combo_input).attr('prev_val')) {
+				$(elems.combo_input).attr('prev_val', '');
+			}
 
 			elems.container = $(elems.combo_input).parent().addClass(Cls.container);
 			elems.button    = $('<div>').addClass(Cls.button);
@@ -442,10 +443,9 @@ MIT License
 			//初期化用Ajax後の処理
 			//------------------------------------------
 			function _afterInit(data) {
-//				if (!data) return;
 				$(Elem.combo_input).val(data[Opt.field]);
 				$(Elem.hidden).val(data[Opt.primary_key]);
-				Vars.prev_value = data[Opt.field];
+				$(Elem.combo_input).attr('prev_val', data[Opt.field]);
 				if (Opt.select_only) {
 					//選択状態
 					$(Elem.combo_input)
@@ -705,8 +705,8 @@ MIT License
 		//@called processKey, setTimerCheckValue
 		function checkValue() {
 			var now_value = $(Elem.combo_input).val();
-			if (now_value != Vars.prev_value) {
-				Vars.prev_value = now_value;
+			if (now_value != $(Elem.combo_input).attr('prev_val')) {
+				$(Elem.combo_input).attr('prev_val', now_value);
 				//sub_info属性を削除
 				$(Elem.combo_input).removeAttr('sub_info');
 
@@ -1420,7 +1420,7 @@ MIT License
 				hideResults();
 
 				//added
-				Vars.prev_value = $(Elem.combo_input).val();
+				$(Elem.combo_input).attr('prev_val', $(Elem.combo_input).val());
 
 				$(Elem.hidden).val($(current).attr('pkey'));
 				//セレクト専用

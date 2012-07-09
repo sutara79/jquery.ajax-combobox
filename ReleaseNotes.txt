@@ -1,3 +1,15 @@
+v5.4 (2012-07-09)
+	(English)
+	* "prev_val" attribute is generated in text-box.
+	  Ajax-search can also be prevented if you wish
+	  when you change the value of text-box dynamically. 
+
+	(Japanese)
+	* プラグインを適用したテキストボックスに"prev_val"という独自属性を設けることにより、
+	  ユーザー側ではなくサイト側でテキストボックスの値を動的に変更した際、
+	  Ajax検索することを阻止できるようになりました。
+
+
 v5.3 (2012-07-07)
 	(English)
 	* The error that occurs when "NULL" is permitted at database and using "sub_info" option

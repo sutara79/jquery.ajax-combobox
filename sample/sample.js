@@ -228,7 +228,33 @@ jQuery(document).ready(function($){
 			'order_field' : 'name',
 			'sub_info'    : true
 		}
-	)
+	);
+	//------------------------------------------------------
+	//prev_val
+	//------------------------------------------------------
+	$('#ac08_01').ajaxComboBox(
+		'acbox/jquery.ajaxComboBox.php',
+		{
+			'lang'        : 'en',
+			'db_table'    : 'nation'
+		}
+	);
+	$('#ac08_01_btn').click(function() {
+		var str = 'Ja';
+		$('#ac08_01').val(str);
+		$('#ac08_01').attr('prev_val', str);
+	});
+	$('#ac08_02').ajaxComboBox(
+		'acbox/jquery.ajaxComboBox.php',
+		{
+			'lang'        : 'en',
+			'db_table'    : 'nation'
+		}
+	);
+	$('#ac08_02_btn').click(function() {
+		var str = 'Ja';
+		$('#ac08_02').val(str);
+	});
 	//------------------------------------------------------
 	//Utility (Change language)
 	//------------------------------------------------------
