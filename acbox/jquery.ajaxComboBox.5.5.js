@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.4
+jquery.ajaxComboBox.5.5
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -1273,10 +1273,22 @@ MIT License
 					//sub_info属性を候補リストのliに追加
 					str_subinfo = '{' + str_subinfo.join(',') + '}';
 					$(list).attr('sub_info', str_subinfo);
-
 					$(Elem.sub_info).append($dl);
-					if (Opt.sub_info == 'simple' && $dl.children('dd').text() == '') {
-						$dl.addClass('ac_dl_empty');
+
+					//sub_info:simple かつ、サブ情報の項目が1つのみの場合
+					if (Opt.sub_info == 'simple' && $dl.children('dd').length == 1) {
+						//ddの内容が空白の場合
+						if ($dl.children('dd').text() == '') {
+							$dl.addClass('ac_dl_empty');
+
+						//ddの幅をdlに合わせる
+						} else {
+							$dl.children('dd').width(
+								$dl.width() -
+								parseInt($dl.children('dd').css('padding-left'), 10) -
+								parseInt($dl.children('dd').css('padding-right'), 10)
+							);
+						}
 					}
 				}
 			}

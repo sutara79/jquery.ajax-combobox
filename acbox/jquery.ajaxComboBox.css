@@ -212,6 +212,7 @@ Simple
 }
 .ac_subinfo dt{
 	width : 92px;
+	word-wrap:break-word;
 	clear : both;
 	float : left;
 	margin : 0;
@@ -227,6 +228,7 @@ Simple
 }
 .ac_subinfo dd{
 	width : 152px;
+	word-wrap:break-word;
 	float : left;
 	margin : 0;
 	padding : 2px 4px;

@@ -1,3 +1,13 @@
+v5.5 (2012-07-13)
+	(English)
+	* The width of sub-info when "sub_info:simple", was corrected.
+	* "word-wrap : break-word" was added to the CSS of sub-info.
+	
+	(Japanese)
+	* sub_info:simpleの場合の、サブ情報の幅の乱れを修正しました。
+	* サブ情報にCSS指定(word-wrap : break-word;)を追加しました。
+
+
 v5.4 (2012-07-09)
 	(English)
 	* "prev_val" attribute is generated in text-box.
