@@ -3,17 +3,28 @@ class Nation extends AppModel {
 	public $name = 'Nation';
 	public $useTable = 'nation';
 	
+	//****************************************************
+	//Change the method according to the kind of database.
+	//****************************************************
+	public function escapeForDB($str) {
+		$db = ConnectionManager::$config->{$this->useDbConfig}['datasource'];
+		if (preg_match('/sqlite/i', $str)) return sqlite_escape_string($str);
+		else return mysql_escape_string($str);
+	}
+	//****************************************************
+	//Search
+	//****************************************************
 	public function modelAjaxSearch($not_escaped) {
 		if (isset($not_escaped['page_num'])) {
 			//****************************************************
 			//Parameters from JavaScript.
 			//****************************************************
 			$param = array(
-				'db_table'     => mysql_escape_string($not_escaped['db_table']),
-				'page_num'     => mysql_escape_string($not_escaped['page_num']),
-				'per_page'     => mysql_escape_string($not_escaped['per_page']),
-				'and_or'       => mysql_escape_string($not_escaped['and_or']),
-				'order_by'     => mysql_escape_string($not_escaped['order_by']),
+				'db_table'     => $this->escapeForDB($not_escaped['db_table']),
+				'page_num'     => $this->escapeForDB($not_escaped['page_num']),
+				'per_page'     => $this->escapeForDB($not_escaped['per_page']),
+				'and_or'       => $this->escapeForDB($not_escaped['and_or']),
+				'order_by'     => $this->escapeForDB($not_escaped['order_by']),
 				'order_field'  => array(),
 				'search_field' => array(),
 				'q_word'       => array()
@@ -21,7 +32,7 @@ class Nation extends AppModel {
 			$esc = array('order_field', 'search_field', 'q_word');
 			for ($i=0; $i<count($esc); $i++) {
 				for ($j=0; $j<count($not_escaped[$esc[$i]]); $j++) {
-					$param[$esc[$i]][$j] = mysql_escape_string($not_escaped[$esc[$i]][$j]);
+					$param[$esc[$i]][$j] = $this->escapeForDB($not_escaped[$esc[$i]][$j]);
 				}
 			}
 
@@ -29,93 +40,68 @@ class Nation extends AppModel {
 			//Create a SQL. (shared by MySQL and SQLite)
 			//****************************************************
 			//----------------------------------------------------
-			// WHERE
+			//conditions
 			//----------------------------------------------------
-			$depth1 = array();
-			for($i = 0; $i < count($param['q_word']); $i++){
-				$depth2 = array();
-				for($j = 0; $j < count($param['search_field']); $j++){
-					$depth2[] = "`{$param['search_field'][$j]}` LIKE '%{$param['q_word'][$i]}%'";
-				}
-				$depth1[] = '(' . join(' OR ', $depth2) . ')';
-			}
-			$param['where'] = join(" {$param['and_or']} ", $depth1);
-
-			//----------------------------------------------------
-			// ORDER BY
-			//----------------------------------------------------
-			$str = '(CASE ';
-			for ($i = 0, $j = 0; $i < count($param['q_word']); $i++) {
-				for ($k = 0; $k < count($param['order_field']); $k++) {
-					$str .= "WHEN `{$param['order_field'][$k]}` LIKE '{$param['q_word'][$i]}' ";
-					$str .= "THEN $j ";
-					$j++;
-					$str .= "WHEN `{$param['order_field'][$k]}` LIKE '{$param['q_word'][$i]}%' ";
-					$str .= "THEN $j ";
-					$j++;
+			$conditions = array();
+			for ($i=0; $i<count($param['q_word']); $i++) {
+				for ($j=0; $j<count($param['search_field']); $j++) {
+					$conditions[$param['and_or']][$i]['OR']["{$param['search_field'][$j]} LIKE"] = "%{$param['q_word'][$i]}%";
 				}
 			}
-			$param['orderby'] = $str . "ELSE $j END) {$param['order_by']}";
-
 			//----------------------------------------------------
-			// OFFSET
+			//order
 			//----------------------------------------------------
-			$param['offset']  = ($param['page_num'] - 1) * $param['per_page'];
-
-
-			$query = sprintf(
-				"SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %s OFFSET %s",
-				$param['db_table'],
-				$param['where'],
-				$param['orderby'],
-				$param['per_page'],
-				$param['offset']		
+			$order = "(CASE ";
+			for ($i=0, $cnt=0; $i<count($param['order_field']); $i++) {
+				for ($j=0; $j<count($param['q_word']); $j++) {
+					$param['q_word'][$j] = $this->escapeForDB($param['q_word'][$j]);
+					$order .= "WHEN {$param['order_field'][$i]} = '{$param['q_word'][$j]}' THEN $cnt ";
+					$cnt++;
+					$order .= "WHEN {$param['order_field'][$i]} LIKE '{$param['q_word'][$j]}%' THEN $cnt ";
+					$cnt++;
+					$order .= "WHEN {$param['order_field'][$i]} LIKE '%{$param['q_word'][$j]}%' THEN $cnt ";
+				}
+			}
+			$cnt++;
+			$order .= "ELSE $cnt END)";
+			//----------------------------------------------------
+			//parameters
+			//----------------------------------------------------
+			$arr_params = array(
+				'conditions' => $conditions,
+				'order'      => $order,
+				'limit'      => $param['per_page'],
+				'page'       => $param['page_num'],
+				'recursive'  => 0
 			);
-			//****************************************************
-			//Query database
-			//****************************************************
+			$data = $this->find('all', $arr_params);
+			
 			$return = array();
-			//----------------------------------------------------
-			//Search
-			//----------------------------------------------------
-			$rows = $this->query($query);
-			for ($i=0; $i<count($rows); $i++) {
-				$return['result'][] = $rows[$i][$param['db_table']];
+			for($i=0; $i<count($data); $i++){
+				$return['result'][] = $data[$i][$this->name];
 			}
-			//----------------------------------------------------
-			//Whole
-			//----------------------------------------------------
-			$query = "SELECT COUNT(*) as cnt FROM `{$param['db_table']}` WHERE {$param['where']}";
-			$rows = $this->query($query);
-			$return['cnt_whole'] = $rows[0][0]['cnt'];
-
-			//****************************************************
-			//End.
-			//****************************************************
+			$return['cnt_whole'] = $this->find('count', array(
+				'conditions' => $arr_params['conditions'],
+				'recursive'  => 0
+			));
 			return json_encode($return);
-
-
 
 		} else {
 			//****************************************************
 			//Parameters from JavaScript.
 			//****************************************************
 			$param = array(
-				'db_table'  => mysql_escape_string($not_escaped['db_table']),
-				'pkey_name' => mysql_escape_string($not_escaped['pkey_name']),
-				'pkey_val'  => mysql_escape_string($not_escaped['pkey_val'])
+				'pkey_name' => $this->escapeForDB($not_escaped['pkey_name']),
+				'pkey_val'  => $this->escapeForDB($not_escaped['pkey_val'])
 			);
 			//****************************************************
 			//get initialize value
 			//****************************************************
-			$query = sprintf(
-				"SELECT * FROM `%s` WHERE `%s` = '%s'",
-				$param['db_table'],
-				$param['pkey_name'],
-				$param['pkey_val']
+			$arr_params = array(
+				'conditions' => array($param['pkey_name'] => $param['pkey_val'])
 			);
-			$rows  = $this->query($query);
-			return json_encode($rows[0][$param['db_table']]);
+			$data = $this->find('all', $arr_params);
+			echo json_encode($data[0][$this->name]);
 		}
 	}
 }
