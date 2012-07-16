@@ -1,3 +1,13 @@
+v5.6 (2012-07-16)
+	(English)
+	* The database used in this plug-in was changed into SQLite3 from SQLite2.
+	* You can search "%" and "_" from database.
+
+	(Japanese)
+	* 使用するデータベースをSQLite2からSQLite3へ変更しました。
+	* "%(パーセント)"や"_(アンダーバー)"を検索できない不具合を修正しました。
+
+
 v5.5 (2012-07-13)
 	(English)
 	* The width of sub-info when "sub_info:simple", was corrected.

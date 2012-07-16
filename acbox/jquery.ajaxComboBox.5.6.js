@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.5
+jquery.ajaxComboBox.5.6
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */

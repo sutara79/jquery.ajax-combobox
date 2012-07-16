@@ -2,7 +2,7 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //You MUST change this value.
 $sqlite = array(
-	'path'   => '../sample/sample.sqlite',
+	'path'   => '../sample/sample.sqlite3',
 );
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -10,8 +10,7 @@ $sqlite = array(
 //****************************************************
 //Connect to Database.
 //****************************************************
-$sqlite['resource'] = sqlite_open($sqlite['path'],'0600');
-
+$sqlite['resource'] = new SQLite3($sqlite['path']);
 
 if (isset($_GET['page_num'])) {
 	//****************************************************
@@ -30,22 +29,26 @@ if (isset($_GET['page_num'])) {
 	$esc = array('order_field', 'search_field', 'q_word');
 	for ($i=0; $i<count($esc); $i++) {
 		for ($j=0; $j<count($_GET[$esc[$i]]); $j++) {
-			$param[$esc[$i]][$j] = sqlite_escape_string($_GET[$esc[$i]][$j]);
+			$param[$esc[$i]][$j] = sqlite_escape_string(
+				str_replace(
+					array('\\',   '%',  '_'),
+					array('\\\\', '\%', '\_'),
+					$_GET[$esc[$i]][$j]
+				)
+			);
 		}
 	}
-
-
 	//****************************************************
 	//Create a SQL. (shared by MySQL and SQLite)
 	//****************************************************
 	//----------------------------------------------------
 	// WHERE
-	//----------------------------------------------------
+	//----------------------------------------"1"------------
 	$depth1 = array();
 	for($i = 0; $i < count($param['q_word']); $i++){
 		$depth2 = array();
 		for($j = 0; $j < count($param['search_field']); $j++){
-			$depth2[] = "\"{$param['search_field'][$j]}\" LIKE '%{$param['q_word'][$i]}%' ";
+			$depth2[] = "\"{$param['search_field'][$j]}\" LIKE '%{$param['q_word'][$i]}%' ESCAPE '\' ";
 		}
 		$depth1[] = '(' . join(' OR ', $depth2) . ')';
 	}
@@ -54,24 +57,27 @@ if (isset($_GET['page_num'])) {
 	//----------------------------------------------------
 	// ORDER BY
 	//----------------------------------------------------
+	$cnt = 0;
 	$str = '(CASE ';
-	for ($i = 0, $j = 0; $i < count($param['q_word']); $i++) {
-		for ($k = 0; $k < count($param['order_field']); $k++) {
-			$str .= "WHEN \"{$param['order_field'][$k]}\" LIKE '{$param['q_word'][$i]}' ";
-			$str .= "THEN $j ";
-			$j++;
-			$str .= "WHEN \"{$param['order_field'][$k]}\" LIKE '{$param['q_word'][$i]}%' ";
-			$str .= "THEN $j ";
-			$j++;
+	for ($i = 0; $i < count($param['q_word']); $i++) {
+		for ($j = 0; $j < count($param['order_field']); $j++) {
+			$str .= "WHEN \"{$param['order_field'][$j]}\" = '{$param['q_word'][$i]}' ";
+			$str .= "THEN $cnt ";
+			$cnt++;
+			$str .= "WHEN \"{$param['order_field'][$j]}\" LIKE '{$param['q_word'][$i]}%' ESCAPE '\' ";
+			$str .= "THEN $cnt ";
+			$cnt++;
+			$str .= "WHEN \"{$param['order_field'][$j]}\" LIKE '%{$param['q_word'][$i]}%' ESCAPE '\' ";
+			$str .= "THEN $cnt ";
 		}
 	}
-	$param['orderby'] = $str . "ELSE $j END) {$param['order_by']}";
+	$cnt++;
+	$param['orderby'] = $str . "ELSE $cnt END) {$param['order_by']}";
 
 	//----------------------------------------------------
 	// OFFSET
 	//----------------------------------------------------
 	$param['offset']  = ($param['page_num'] - 1) * $param['per_page'];
-
 
 	$query = sprintf(
 		"SELECT * FROM \"%s\" WHERE %s ORDER BY %s LIMIT %s OFFSET %s",
@@ -81,7 +87,6 @@ if (isset($_GET['page_num'])) {
 		$param['per_page'],
 		$param['offset']		
 	);
-
 	//****************************************************
 	//Query database
 	//****************************************************
@@ -91,16 +96,16 @@ if (isset($_GET['page_num'])) {
 	//----------------------------------------------------
 	//Search
 	//----------------------------------------------------
-	$rows = sqlite_query($sqlite['resource'], $query);
-	while ($row = sqlite_fetch_array($rows, SQLITE_ASSOC)) {
+	$rows = $sqlite['resource']->query($query);
+	while ($row = $rows->fetchArray(SQLITE3_ASSOC)) {
 		$return['result'][] = $row;
 	}
 	//----------------------------------------------------
 	//Whole count
 	//----------------------------------------------------
 	$query = "SELECT COUNT(*) FROM \"{$param['db_table']}\" WHERE {$param['where']}";
-	$rows = sqlite_query($sqlite['resource'], $query);
-	while ($row = sqlite_fetch_array($rows, SQLITE_NUM)) {
+	$rows = $sqlite['resource']->query($query);
+	while ($row = $rows->fetchArray(SQLITE3_NUM)) {
 		$return['cnt_whole'] = $row[0];
 	}
 	//****************************************************
@@ -121,18 +126,16 @@ if (isset($_GET['page_num'])) {
 	//get initialize value
 	//****************************************************
 	$query = sprintf(
-		"SELECT * FROM \"%s\" WHERE \"%s\" = '%s'",
+		"SELECT * FROM \"%s\" WHERE \"%s\" = '%s' ESCAPE '\'",
 		$param['db_table'],
 		$param['pkey_name'],
 		$param['pkey_val']
 	);
-	$rows  = sqlite_query($sqlite['resource'], $query);
-	while ($row = sqlite_fetch_array($rows, SQLITE_ASSOC)) echo json_encode($row);
+	$rows = $sqlite['resource']->query($query);
+	while ($row = $rows->fetchArray(SQLITE3_ASSOC)) echo json_encode($row);
 }
-
-
 //****************************************************
 //End
 //****************************************************
-sqlite_close($sqlite['resource']);
+$sqlite['resource']->close();
 ?>

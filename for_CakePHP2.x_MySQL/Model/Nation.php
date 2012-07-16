@@ -1,41 +1,45 @@
 <?php
 class Nation extends AppModel {
 	public $name = 'Nation';
-	public $useTable = 'nation';
+	public $useTable = 'name';
 	
 	//****************************************************
 	//Change the method according to the kind of database.
 	//****************************************************
-	public function escapeForDB($str) {
-		$db = ConnectionManager::$config->{$this->useDbConfig}['datasource'];
-		if (preg_match('/sqlite/i', $str)) return sqlite_escape_string($str);
-		else return mysql_escape_string($str);
+	public function escapeForDB($str, $quote=false) {
+		$ds = ConnectionManager::$config->{$this->useDbConfig}['datasource'];
+		//SQLite
+		if (preg_match('/sqlite/i', $ds)) {
+			$str = sqlite_escape_string(
+				str_replace(
+					array('\\', '%', '_'),
+					array('\\\\', '\%', '\_'),
+					$str
+				)
+			);
+			if ($quote) $str = '"'.$str.'"';
+		//MySQL
+		} else {
+			$str = str_replace(
+				array('%', '_'),
+				array('\%', '\_'),
+				mysql_escape_string($str)
+			);
+			if ($quote) $str = '`'.$str.'`';
+		}
+		return $str;
 	}
 	//****************************************************
 	//Search
 	//****************************************************
 	public function modelAjaxSearch($not_escaped) {
-		if (isset($not_escaped['page_num'])) {
-			//****************************************************
-			//Parameters from JavaScript.
-			//****************************************************
-			$param = array(
-				'db_table'     => $this->escapeForDB($not_escaped['db_table']),
-				'page_num'     => $this->escapeForDB($not_escaped['page_num']),
-				'per_page'     => $this->escapeForDB($not_escaped['per_page']),
-				'and_or'       => $this->escapeForDB($not_escaped['and_or']),
-				'order_by'     => $this->escapeForDB($not_escaped['order_by']),
-				'order_field'  => array(),
-				'search_field' => array(),
-				'q_word'       => array()
-			);
-			$esc = array('order_field', 'search_field', 'q_word');
-			for ($i=0; $i<count($esc); $i++) {
-				for ($j=0; $j<count($not_escaped[$esc[$i]]); $j++) {
-					$param[$esc[$i]][$j] = $this->escapeForDB($not_escaped[$esc[$i]][$j]);
-				}
-			}
+		//insert "ESCAPE '\'" if SQLite3
+		$ds = ConnectionManager::$config->{$this->useDbConfig}['datasource'];
+		if (preg_match('/sqlite/i', $ds)) 	$esc_sqlite = "ESCAPE '\'";
+		else $esc_sqlite = '';
 
+
+		if (isset($not_escaped['page_num'])) {
 			//****************************************************
 			//Create a SQL. (shared by MySQL and SQLite)
 			//****************************************************
@@ -43,23 +47,27 @@ class Nation extends AppModel {
 			//conditions
 			//----------------------------------------------------
 			$conditions = array();
-			for ($i=0; $i<count($param['q_word']); $i++) {
-				for ($j=0; $j<count($param['search_field']); $j++) {
-					$conditions[$param['and_or']][$i]['OR']["{$param['search_field'][$j]} LIKE"] = "%{$param['q_word'][$i]}%";
+			for ($i=0; $i<count($not_escaped['q_word']); $i++) {
+				$clear_q = $this->escapeForDB($not_escaped['q_word'][$i]);
+				for ($j=0; $j<count($not_escaped['search_field']); $j++) {
+					$clear_s = $this->escapeForDB($not_escaped['search_field'][$j]);
+
+					$conditions[$not_escaped['and_or']][$i]['OR']["$clear_s LIKE"] = "%$clear_q%";
 				}
 			}
 			//----------------------------------------------------
 			//order
 			//----------------------------------------------------
 			$order = "(CASE ";
-			for ($i=0, $cnt=0; $i<count($param['order_field']); $i++) {
-				for ($j=0; $j<count($param['q_word']); $j++) {
-					$param['q_word'][$j] = $this->escapeForDB($param['q_word'][$j]);
-					$order .= "WHEN {$param['order_field'][$i]} = '{$param['q_word'][$j]}' THEN $cnt ";
+			for ($i=0, $cnt=0; $i<count($not_escaped['order_field']); $i++) {
+				$clear_o = $this->escapeForDB($not_escaped['order_field'][$i], true);
+				for ($j=0; $j<count($not_escaped['q_word']); $j++) {
+					$clear_q = $this->escapeForDB($not_escaped['q_word'][$j]);
+					$order .= "WHEN $clear_o = '$clear_q' THEN $cnt ";
 					$cnt++;
-					$order .= "WHEN {$param['order_field'][$i]} LIKE '{$param['q_word'][$j]}%' THEN $cnt ";
+					$order .= "WHEN $clear_o LIKE '$clear_q%' $esc_sqlite THEN $cnt ";
 					$cnt++;
-					$order .= "WHEN {$param['order_field'][$i]} LIKE '%{$param['q_word'][$j]}%' THEN $cnt ";
+					$order .= "WHEN $clear_o LIKE '%$clear_q%' $esc_sqlite THEN $cnt ";
 				}
 			}
 			$cnt++;
@@ -70,8 +78,8 @@ class Nation extends AppModel {
 			$arr_params = array(
 				'conditions' => $conditions,
 				'order'      => $order,
-				'limit'      => $param['per_page'],
-				'page'       => $param['page_num'],
+				'limit'      => $not_escaped['per_page'],
+				'page'       => $not_escaped['page_num'],
 				'recursive'  => 0
 			);
 			$data = $this->find('all', $arr_params);
@@ -88,17 +96,10 @@ class Nation extends AppModel {
 
 		} else {
 			//****************************************************
-			//Parameters from JavaScript.
-			//****************************************************
-			$param = array(
-				'pkey_name' => $this->escapeForDB($not_escaped['pkey_name']),
-				'pkey_val'  => $this->escapeForDB($not_escaped['pkey_val'])
-			);
-			//****************************************************
 			//get initialize value
 			//****************************************************
 			$arr_params = array(
-				'conditions' => array($param['pkey_name'] => $param['pkey_val'])
+				'conditions' => array($not_escaped['pkey_name'] => $not_escaped['pkey_val'])
 			);
 			$data = $this->find('all', $arr_params);
 			echo json_encode($data[0][$this->name]);

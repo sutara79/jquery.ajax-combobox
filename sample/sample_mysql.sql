@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- ホスト: localhost
--- 生成時間: 2012 年 6 月 01 日 10:45
+-- 生成時間: 2012 年 7 月 16 日 06:49
 -- サーバのバージョン: 5.5.16
 -- PHP のバージョン: 5.3.8
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `name` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=251 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=254 ;
 
 --
 -- テーブルのデータをダンプしています `name`
@@ -325,7 +325,10 @@ INSERT INTO `name` (`id`, `name`, `created`, `modified`) VALUES
 (247, 'monica', '2008-11-15 00:00:00', '2008-11-15 00:00:00'),
 (248, 'muriel', '2008-11-15 00:00:00', '2008-11-15 00:00:00'),
 (249, 'myra', '2008-11-15 00:00:00', '2008-11-15 00:00:00'),
-(250, '田中田中田中田中田中', '2008-11-15 00:00:00', '2008-11-15 00:00:00');
+(250, '田中田中田中田中田中', '2008-11-15 00:00:00', '2008-11-15 00:00:00'),
+(251, '10%foo''bar\\', '2012-07-16 00:00:00', '2012-07-16 00:00:00'),
+(252, '20%foo`bar_', NULL, NULL),
+(253, '30%foo"bar&', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -339,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `nation` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=97 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
 
 --
 -- テーブルのデータをダンプしています `nation`

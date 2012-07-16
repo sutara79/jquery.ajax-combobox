@@ -40,10 +40,15 @@ if (isset($_GET['page_num'])) {
 	$esc = array('order_field', 'search_field', 'q_word');
 	for ($i=0; $i<count($esc); $i++) {
 		for ($j=0; $j<count($_GET[$esc[$i]]); $j++) {
-			$param[$esc[$i]][$j] = mysql_escape_string($_GET[$esc[$i]][$j]);
+			$param[$esc[$i]][$j] = mysql_escape_string(
+				str_replace(
+					array('\\',   '%',  '_'),
+					array('\\\\', '\%', '\_'),
+					$_GET[$esc[$i]][$j]
+				)
+			);
 		}
 	}
-
 	//****************************************************
 	//Create a SQL. (shared by MySQL and SQLite)
 	//****************************************************
@@ -54,7 +59,7 @@ if (isset($_GET['page_num'])) {
 	for($i = 0; $i < count($param['q_word']); $i++){
 		$depth2 = array();
 		for($j = 0; $j < count($param['search_field']); $j++){
-			$depth2[] = "`{$param['search_field'][$j]}` LIKE '%{$param['q_word'][$i]}%'";
+			$depth2[] = "`{$param['search_field'][$j]}` LIKE '%{$param['q_word'][$i]}%'  ";
 		}
 		$depth1[] = '(' . join(' OR ', $depth2) . ')';
 	}
@@ -63,18 +68,22 @@ if (isset($_GET['page_num'])) {
 	//----------------------------------------------------
 	// ORDER BY
 	//----------------------------------------------------
+	$cnt = 0;
 	$str = '(CASE ';
-	for ($i = 0, $j = 0; $i < count($param['q_word']); $i++) {
-		for ($k = 0; $k < count($param['order_field']); $k++) {
-			$str .= "WHEN `{$param['order_field'][$k]}` LIKE '{$param['q_word'][$i]}' ";
-			$str .= "THEN $j ";
-			$j++;
-			$str .= "WHEN `{$param['order_field'][$k]}` LIKE '{$param['q_word'][$i]}%' ";
-			$str .= "THEN $j ";
-			$j++;
+	for ($i = 0; $i < count($param['q_word']); $i++) {
+		for ($j = 0; $j < count($param['order_field']); $j++) {
+			$str .= "WHEN `{$param['order_field'][$j]}` = '{$param['q_word'][$i]}' ";
+			$str .= "THEN $cnt ";
+			$cnt++;
+			$str .= "WHEN `{$param['order_field'][$j]}` LIKE '{$param['q_word'][$i]}%' ";
+			$str .= "THEN $cnt ";
+			$cnt++;
+			$str .= "WHEN `{$param['order_field'][$j]}` LIKE '%{$param['q_word'][$i]}%' ";
+			$str .= "THEN $cnt ";
 		}
 	}
-	$param['orderby'] = $str . "ELSE $j END) {$param['order_by']}";
+	$cnt++;
+	$param['orderby'] = $str . "ELSE $cnt END) {$param['order_by']}";
 
 	//----------------------------------------------------
 	// OFFSET
@@ -90,7 +99,6 @@ if (isset($_GET['page_num'])) {
 		$param['per_page'],
 		$param['offset']		
 	);
-
 	//****************************************************
 	//Query database
 	//****************************************************
@@ -130,7 +138,7 @@ if (isset($_GET['page_num'])) {
 	//get initialize value
 	//****************************************************
 	$query = sprintf(
-		"SELECT * FROM `%s` WHERE `%s` = '%s'",
+		"SELECT * FROM `%s` WHERE `%s` = '%s' ",
 		$param['db_table'],
 		$param['pkey_name'],
 		$param['pkey_val']

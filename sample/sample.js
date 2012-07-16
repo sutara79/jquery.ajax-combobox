@@ -35,6 +35,7 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'name',
+			'order_field' : 'name',
 			'per_page'    : 20,
 			'navi_num'    : 10
 		}
@@ -44,6 +45,7 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'name',
+			'order_field' : 'name',
 			'navi_num'    : 1,
 			'navi_simple' : true
 		}
