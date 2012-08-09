@@ -1,3 +1,14 @@
+v5.7 (2012-08-09)
+	(English)
+	* The error that "Result-list" is not displayed on the right position when the CSS value of "position" of ".ac_container" is not "static"
+	  is corrected. 
+	
+	(Japanese)
+	* ".ac_container"のCSSが"position:static"以外だと、
+	  候補リストが正常な位置に表示されない不具合を修正しました。
+	  "position"の値に関わらず、正常に表示されます。
+
+
 v5.6 (2012-07-16)
 	(English)
 	* The database used in this plug-in was changed into SQLite3 from SQLite2.

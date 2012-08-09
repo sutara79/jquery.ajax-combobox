@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.6
+jquery.ajaxComboBox.5.7
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -1253,8 +1253,13 @@ MIT License
 						//sub_info属性の値を整える
 						var json_key = key.replace('\'', '\\\'');
 						
-						//DBのデータ値がnullの場合の対処
-						if (arr_subinfo[i][key] == null) arr_subinfo[i][key] = '';
+						if (arr_subinfo[i][key] == null) {
+							//DBのデータ値がnullの場合の対処
+							arr_subinfo[i][key] = '';
+						} else {
+							//DBのデータ値が数値の場合の対処
+							arr_subinfo[i][key] += '';
+						}
 						var json_val = arr_subinfo[i][key].replace('\'', '\\\'');
 
 						str_subinfo.push("'" + json_key + "':" + "'" + json_val + "'");
@@ -1296,13 +1301,21 @@ MIT License
 			//サジェスト結果表示
 			//表示のたびに、結果リストの位置を調整しなおしている。
 			//このプラグイン以外でページ内の要素の位置をずらす処理がある場合に対処するため。
-			var offset = $(Elem.combo_input).offset();
-			$(Elem.result_area)
-				.css({
+			if ($(Elem.container).css('position') == 'static') {
+				//position: static
+				var offset = $(Elem.combo_input).offset();
+				$(Elem.result_area).css({
 					top  : offset.top + $(Elem.combo_input).outerHeight() + 'px',
 					left : offset.left + 'px'
-				})
-				.show();
+				});
+			} else {
+				//position: relative, absolute, fixed
+				$(Elem.result_area).css({
+					top  : $(Elem.combo_input).outerHeight() + 'px',
+					left : '0px'
+				});
+			}
+			$(Elem.result_area).show();
 			$(Elem.container).addClass(Cls.container_open);
 
 			eHandlerForResults(); //イベントハンドラ設定
