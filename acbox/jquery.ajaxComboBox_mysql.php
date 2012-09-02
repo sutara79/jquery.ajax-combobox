@@ -164,7 +164,7 @@ if (isset($_GET['page_num'])) {
 	//get initialize value
 	//****************************************************
 	$query = sprintf(
-		"SELECT * FROM `%s` WHERE `%s` = '%s' ",
+		"SELECT * FROM `%s` WHERE `%s` = '%s'",
 		$param['db_table'],
 		$param['pkey_name'],
 		$param['pkey_val']
