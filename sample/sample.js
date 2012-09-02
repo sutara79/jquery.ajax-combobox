@@ -26,8 +26,7 @@ jQuery(document).ready(function($){
 		'acbox/jquery.ajaxComboBox.php',
 		{
 			'lang'        : 'en',
-			'db_table'    : 'nation',
-			'order_field' : 'id'
+			'db_table'    : 'nation'
 		}
 	);
 	$('#ac01_02').ajaxComboBox(
@@ -35,7 +34,6 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'name',
-			'order_field' : 'name',
 			'per_page'    : 20,
 			'navi_num'    : 10
 		}
@@ -45,7 +43,6 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'name',
-			'order_field' : 'name',
 			'navi_num'    : 1,
 			'navi_simple' : true
 		}
@@ -64,6 +61,18 @@ jQuery(document).ready(function($){
 			'lang'        : 'en',
 			'db_table'    : 'nation',
 			'and_or'      : 'OR'
+		}
+	);
+	$('#ac01_06').ajaxComboBox(
+		'acbox/jquery.ajaxComboBox.php',
+		{
+			'lang'        : 'en',
+			'db_table'    : 'nation',
+			'field'       : 'name',
+			'order_by'    : [
+				'modified DESC',
+				'created'
+			]
 		}
 	);
 	//------------------------------------------------------
@@ -149,7 +158,6 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'nation',
-			'order_field' : 'id',
 			'sub_info'    : true,
 			'show_field'  : 'id',
 			'select_only' : true,
@@ -164,7 +172,6 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'nation',
-			'order_field' : 'id',
 			'init_record' : 28
 		}
 	);
@@ -194,7 +201,6 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'nation',
-			'order_field' : 'id',
 			'bind_to'     : 'foo'
 		}
 	)
@@ -206,7 +212,6 @@ jQuery(document).ready(function($){
 		{
 			'lang'        : 'en',
 			'db_table'    : 'nation',
-			'order_field' : 'id',
 			'bind_to'     : 'foo'
 		}
 	)
@@ -227,7 +232,6 @@ jQuery(document).ready(function($){
 			'lang'        : 'en',
 			'plugin_type' : 'simple', 
 			'db_table'    : 'nation',
-			'order_field' : 'name',
 			'sub_info'    : true
 		}
 	);

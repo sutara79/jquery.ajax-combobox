@@ -2,8 +2,8 @@ Infomation
 ==========================================================================================
 jQuery Plugin
 	Name       : jquery.ajaxComboBox
-	Version    : 5.7
-	Update     : 2012-08-09
+	Version    : 5.9
+	Update     : 2012-09-02
 	Author     : Yuusaku Miyazaki (宮崎 雄策) (toumin.m7@gmail.com)
 	Author-URI : http://d.hatena.ne.jp/sutara_lumpur/20090124/1232781879
 	License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -12,6 +12,7 @@ jQuery Plugin
 			Author     : Peter Vulgaris
 			Author-URI : http://www.vulgarisoip.com/
 ==========================================================================================
+
 
 # Note:
 	(English)
@@ -26,6 +27,11 @@ jQuery Plugin
 	そして、ファイル名の"jquery.ajaxComboBox_mysql.php" を
 	"./acbox/jquery.ajaxComboBox.php"に変更して、
 	ファイル冒頭のMySQLとの接続設定を、お使いの環境に合わせて変更して下さい。
+
+
+# CakePHP (CakePHP + ajaxComboBox + MySQL)
+	If you want to use this plugin on CakePHP, please check this sample.
+	https://github.com/SutaraLumpur/ajaxComboBox_for_CakePHP
 
 
 # Structure:

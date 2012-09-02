@@ -47,7 +47,9 @@ Simple
 	text-align : center;
 	position : relative;
 	cursor : pointer;
-	float : left;
+	float : left !important;
+	clear: none !important;
+	padding:0px !important;
 	
 	border-top-right-radius : 4px;
 	-moz-border-radius-topright : 4px;
@@ -179,10 +181,18 @@ Simple
 .navi_last{
 	margin:auto 4px !important;
 }
+.ac_navi .info {
+	margin:0px !important;
+	padding:0px !important;
+}
 
 /**************************************
  Sub-info
 **************************************/
+.ac_subinfo {
+	margin:0px !important;
+	padding:0px !important;
+}
 .ac_subinfo dl{
 	display:none;
 	z-index : 200;

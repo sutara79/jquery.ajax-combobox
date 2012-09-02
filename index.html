@@ -2,22 +2,22 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>jquery.ajaxComboBox.5.7.js</title>
+		<title>jquery.ajaxComboBox.5.9.js</title>
 		<link rel="stylesheet" type="text/css" href="acbox/jquery.ajaxComboBox.css">
 
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-		<script type="text/javascript" src="acbox/jquery.ajaxComboBox.5.7.js"></script>
+		<script type="text/javascript" src="acbox/jquery.ajaxComboBox.5.9.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="sample/sample.css">
 		<script type="text/javascript" src="sample/sample.js"></script>
 	</head>
 	<body>
-		<h1>jquery.ajaxComboBox.5.7.js</h1>
+		<h1>jquery.ajaxComboBox.5.9.js</h1>
 		<nav id="language">
 			<button id="lang_en">English</button>
 			<button id="lang_ja">Japanese</button>
 		</nav>
-		<p class="date">2012-08-09</p>
+		<p class="date">2012-09-02</p>
 		<ul>
 			<li>Server Side : PHP 5.3</li>
 			<li>DataBase : SQLite3 or MySQL</li>
@@ -57,6 +57,10 @@
 					<li><a href="#sample01_05">
 						<span class="lang_en">Change from "AND" to "OR"</span>
 						<span class="lang_ja">OR検索へ切り替える</span>
+					</a></li>
+					<li><a href="#sample01_06">
+						<span class="lang_en">The rule of order</span>
+						<span class="lang_ja">並べ替えの規則を決める</span>
 					</a></li>
 				</ol>
 			</li>
@@ -206,8 +210,7 @@
 	'acbox/jquery.ajaxComboBox.php',
 	{
 	  <span class="green">'lang'        : 'en',</span>
-	  'db_table'    : 'nation',
-	  'order_field' : 'id'
+	  'db_table'    : 'nation'
 	}
   );
 
@@ -333,6 +336,55 @@
       <span class="green">'and_or'      : 'OR'</span>
     }
   );
+
+</code>
+		<!--------------------------------------------------------->
+		<h5 id="sample01_06">
+			<span class="lang_en">The rule of order</span>
+			<span class="lang_ja">並べ替えの規則を決める</span>
+		</h5>
+		<p class="lang_en">
+			Basically, it is arranged by "search_field" option.<br>
+			You can also arrange it by "order_by" option.
+		</p>
+		<p class="lang_ja">
+			基本的には、"search_field"オプションに指定されたフィールドの昇順に並べ替えられます。<br>
+			"order_by"オプションで任意に指定することもできます。
+		</p>
+		<label for="ac01_06">
+			<span class="lang_en">Nation:</span>
+			<span class="lang_ja">国名:</span>
+		</label>
+		<input id="ac01_06" type="text">
+		<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_06')">
+<code>
+  $('#ac01_06').ajaxComboBox(
+    'acbox/jquery.ajaxComboBox.php',
+    {
+      'lang'        : 'en',
+      'db_table'    : 'nation',
+      'field'       : 'name',
+      'order_by'    : [
+        'modified DESC',
+        'created'
+      ]
+    }
+  );
+
+</code>
+<br>
+<code>
+  <span class="green">(field-name)</span>
+  'order_by' : 'name'
+  
+  <span class="green">(field-name + ASC/DESC)</span>
+  'order_by' : 'name DESC'
+  
+  <span class="green">(array)</span>
+  'order_by' : [
+  	'name DESC',
+  	'id'
+  ]
 
 </code>
 
@@ -632,7 +684,6 @@
 	{
 	  'lang'        : 'en',
 	  'db_table'    : 'nation',
-	  'order_field' : 'id',
 	  'show_field'  : 'id',
 	  'sub_info'    : true,
 	  'select_only' : true,
@@ -672,7 +723,6 @@
 	{
 	  'lang'        : 'en',
 	  'db_table'    : 'nation',
-	  'order_field' : 'id',
 	  <span class="green">'init_record' : </span><span class="red">28</span>
 	}
   );
@@ -757,7 +807,6 @@ var data = [
     'acbox/jquery.ajaxComboBox.php',
     {
       'db_table'    : 'nation',
-      'order_field' : 'id',
       <span class="green">'bind_to'     : '<span class="red">foo</span>'</span>
     }
   )
@@ -796,7 +845,6 @@ var data = [
     'acbox/jquery.ajaxComboBox.php',
     {
       'db_table'    : 'nation',
-      'order_field' : 'id',
       'bind_to'     : 'foo'
     }
   )
@@ -842,7 +890,6 @@ var data = [
       'lang'        : 'en',
       <span class="green">'plugin_type' : 'simple', </span>
       'db_table'    : 'nation',
-      'order_field' : 'name',
       'sub_info'    : true
     }
   )

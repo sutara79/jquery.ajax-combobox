@@ -1,3 +1,26 @@
+v5.9 (2012-09-02)
+	(English)
+	* "order_field" option was abolished.
+	* The means of "order_by" option was changed. 
+
+	(Japanese)
+	* "order_field"オプションを廃止しました。
+	* "order_by"オプションの仕様が変更されました。
+	
+	### Detail of "order_by" option ###
+	http://www.usamimi.info/~sutara/ajaxComboBox/#sample01_06
+
+
+v5.8 (2012-08-24)
+	(English)
+	* The PHP file was corrected so that "_"(underbar) and "%"(percent)
+	  could be proccessed correctly on SQLite3. 
+
+	(Japanese)
+	* SQLite3の検索において、検索文字列の中の"_(アンダーバー)"や
+	  "%(パーセント)"を正しく扱うように、PHPファイルを変更しました。
+
+
 v5.7 (2012-08-09)
 	(English)
 	* The error that "Result-list" is not displayed on the right position
