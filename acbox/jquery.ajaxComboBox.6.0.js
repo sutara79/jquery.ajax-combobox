@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.5.9
+jquery.ajaxComboBox.6.0
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -31,13 +31,16 @@ MIT License
 		eHandlerForButton();
 		eHandlerForInput();
 		eHandlerForWhole();
+		eHandlerForTextArea();
+		
+		if (Opt.shorten_url) findShort();
 
 		//That's all.
 		return true;
 
 
 		//==============================================
-		//#1.Global vars
+		//#1. Global vars
 		//==============================================
 		//**********************************************
 		//Initialize options of plugin
@@ -67,13 +70,22 @@ MIT License
 				navi_simple : false,      //先頭、末尾のページへのリンクを表示するか？
 
 				//サブ情報
-				sub_info    : false, //サブ情報を表示するかどうか？ !!! true, false, 'simple'
+				sub_info    : false, //true, false, 'simple'
 				sub_as      : {},    //サブ情報での、カラム名の別名
 				show_field  : '',    //サブ情報で表示するカラム(複数指定はカンマ区切り)
 				hide_field  : '',    //サブ情報で非表示にするカラム(複数指定はカンマ区切り)
 
 				//セレクト専用
-				select_only : false  //セレクト専用にするかどうか？
+				select_only : false, //セレクト専用にするかどうか？
+
+				//タグ検索
+				tags        : false,
+
+				//URL短縮用
+				shorten_url : false, //短縮実行ボタンのセレクタ
+				shorten_src : 'acbox/bitly.php',
+				shorten_min : 20,
+				shorten_reg : false
 			}, _options);
 			//----------------------------------------
 			// 2nd
@@ -88,10 +100,10 @@ MIT License
 			//大文字で統一
 			_options.and_or = _options.and_or.toUpperCase();
 
-			//カンマ区切りのオプションを配列に変換している。
+			//カンマ区切りのオプションを配列に変換する。
 			var arr = ['hide_field', 'show_field', 'search_field'];
 			for (var i=0; i<arr.length; i++) {
-				_options[arr[i]] = _options[arr[i]].replace(/[\s　]+/g, '').split(',');
+				_options[arr[i]] = _strToArray(_options[arr[i]]);
 			}
 			//----------------------------------------
 			// 4th
@@ -102,29 +114,160 @@ MIT License
 				: _options.order_by;
 			//order_by を多層配列に
 			//【例】 [ ['id', 'ASC'], ['name', 'DESC'] ]
-			var arr = [];
-			if (typeof _options['order_by'] == 'object') {
-				for (var i=0; i<_options['order_by'].length; i++) {
-					var orders = $.trim(_options['order_by'][i]).split(' ');
-					arr[i] =  (orders.length == 2)
-						? orders
-						: [orders[0], 'ASC'];
-				}
-			} else {
-				var orders = $.trim(_options['order_by']).split(' ');
-				if (orders.length == 2) {
-					arr[0] = orders;
-				} else {
-					arr[0] = (orders[0].match(/^(ASC|DESC)$/i))
-						? [_options['search_field'][0], orders[0]]
-						: [orders[0], 'ASC'];
-				}
-			}
-			_options['order_by'] = arr;
+			_options['order_by'] = _setOrderbyOption(_options['order_by'], _options['field']);
 			//----------------------------------------
-			// end
+			// Textarea
+			//----------------------------------------
+			if (_options.plugin_type == 'textarea') {
+				_options.shorten_reg = _setRegExpShort(_options.shorten_reg, _options.shorten_min);
+			}
+			if (_options.tags) {
+				_options.tags = _setTagPattern(_options.tags);
+			}
+			//----------------------------------------
+			// Return
 			//----------------------------------------
 			return _options;
+
+			//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			//----------------------------------------------
+			//カンマ区切りの文字列を配列にする。
+			//----------------------------------------------
+			function _strToArray(str) {
+				return str.replace(/[\s　]+/g, '').split(',');
+			}
+			//----------------------------------------------
+			//URL短縮用。 URLらしき文字列を検索するための正規表現。
+			//----------------------------------------------
+			function _setRegExpShort(shorten_reg, shorten_min) {
+				if (shorten_reg) return shorten_reg; //ユーザが正規表現を設定しているなら、それを使う。
+				var reg = '(?:^|[\\s|　\\[(<「『（【［＜〈《]+)';
+				reg += '(';
+				reg += 'https:\\/\\/[^\\s|　\\])>」』）】］＞〉》]{' + (shorten_min - 7) + ',}';
+				reg += '|';
+				reg += 'http:\\/\\/[^\\s|　\\])>」』）】］＞〉》]{'  + (shorten_min - 6) + ',}';
+				reg += '|';
+				reg += 'ftp:\\/\\/[^\\s|　\\])>」』）】］＞〉》]{'   + (shorten_min - 5) + ',}';
+				reg += ')';
+				return new RegExp(reg, 'g');
+			}
+			//----------------------------------------------
+			//各タグについての設定
+			//----------------------------------------------
+			function _setTagPattern(tags) {
+				for (var i=0; i<tags.length; i++) {
+					//タグごとのDB接続設定
+					tags[i] = _setTagOptions(tags[i]);
+
+					//タグ抽出の正規表現を設定する。
+					tags[i]['pattern'] = _setRegExpTag(tags[i]['pattern'], tags[i]['space']);
+				}
+				return tags;
+
+				//----------------------------------------------
+				//各タグの検索方法を設定する
+				//----------------------------------------------
+				function _setTagOptions(tag) {
+					tag = $.extend({
+						//スペース挿入
+						space       : [true, true],
+						
+						//DB接続
+						db_table    : _options.db_table,
+						field       : _options.field,
+						search_field: _options.search_field,
+						primary_key : _options.primary_key,
+
+						//サブ情報
+						sub_info    : _options.sub_info,
+						sub_as      : _options.sub_as,
+						show_field  : _options.show_field,
+						hide_field  : _options.hide_field
+					}, tag);
+
+					//カンマ区切りのオプションを配列に変換する。
+					var arr = ['hide_field', 'show_field', 'search_field'];
+					for (var i=0; i<arr.length; i++) {
+						if (typeof tag[arr[i]] != 'object') {
+							tag[arr[i]] = _strToArray(tag[arr[i]]);
+						}
+					}
+					//order_byを配列にする
+					tag.order_by = (tag.order_by == undefined)
+						? _options.order_by
+						: _setOrderbyOption(tag.order_by, tag.field);
+					return tag;
+				}
+				//----------------------------------------------
+				//各タグを抽出するための一連の正規表現を作成する。
+				//----------------------------------------------
+				function _setRegExpTag(pattern, space) {
+					//ユーザオプションを正規表現エスケープ
+					var esc_left  = pattern[0].replace(/[\s\S]*/, _escapeForReg);
+					var esc_right = pattern[1].replace(/[\s\S]*/, _escapeForReg);
+					
+					return {
+						//素のカッコ文字
+						left : pattern[0],
+						right : pattern[1],
+
+						//キャレットの左側へ、開始カッコまでを抜き出す正規表現
+						reg_left : new RegExp(
+							esc_left + '((?:(?!' + esc_left + '|' + esc_right + ')[^\\s　])*)$'
+						),
+						//キャレットの右側へ、終了カッコまでを抜き出す正規表現
+						reg_right : new RegExp(
+							'^((?:(?!' + esc_left + '|' + esc_right + ')[^\\s　])+)'
+						),
+						//候補選択後、開始カッコ前にスペースを挿入するかを判断するための正規表現
+						//これに当てはまらない場合、スペースを挿入する。
+						space_left : new RegExp(
+							'^' + esc_left + '$|[\\s　]+' + esc_left + '$'
+						),
+						//候補選択後、終了カッコ前にスペースを挿入するかを判断するための正規表現
+						//これに当てはまらない場合、スペースを挿入する。
+						space_right : new RegExp(
+							'^$|^[\\s　]+'
+						),
+						//候補選択後、終了カッコを補完するかを判断するための正規表現
+						comp_right : new RegExp(
+							'^' + esc_right
+						)
+					};
+
+					//----------------------------------------------
+					//正規表現用にエスケープする。
+					//----------------------------------------------
+					function _escapeForReg(text) {
+						return '\\u' + (0x10000 + text.charCodeAt(0)).toString(16).slice(1);
+					}
+				}
+			}
+			//----------------------------------------
+			//"order_by"オプションを配列にする
+			//----------------------------------------
+			//コンボボックスとタグ、両方のorder_byの配列化に使用する。
+			function _setOrderbyOption(arg_order, arg_field) {
+				var arr = [];
+				if (typeof arg_order == 'object') {
+					for (var i=0; i<arg_order.length; i++) {
+						var orders = $.trim(arg_order[i]).split(' ');
+						arr[i] =  (orders.length == 2)
+							? orders
+							: [orders[0], 'ASC'];
+					}
+				} else {
+					var orders = $.trim(arg_order).split(' ');
+					if (orders.length == 2) {
+						arr[0] = orders;
+					} else {
+						arr[0] = (orders[0].match(/^(ASC|DESC)$/i))
+							? [arg_field, orders[0]]
+							: [orders[0], 'ASC'];
+					}
+				}
+				return arr;
+			}	
 		}
 		//**********************************************
 		//"title attr" for each languages
@@ -231,7 +374,8 @@ MIT License
 				select    : 'ac_over', //選択中の<li>
 				sub_info  : 'ac_subinfo', //サブ情報
 				select_ok : 'ac_select_ok',
-				select_ng : 'ac_select_ng'
+				select_ng : 'ac_select_ng',
+				input_off : 'ac_input_off' //非選択状態
 			};
 			switch (Opt.plugin_type) {
 				//コンボボックス
@@ -241,17 +385,19 @@ MIT License
 						btn_on    : 'ac_btn_on', //ボタン(mover時)
 						btn_out   : 'ac_btn_out', //ボタン(mout時)
 						input     : 'ac_input', //テキストボックス
-						input_off : 'ac_input_off' //テキストボックス(非選択状態)
 					});
 					break;
 
 				case 'simple':
 					class_name = $.extend(class_name, {
-						button    : 'ac_s_button', //ボタンのCSSクラス
-						btn_on    : 'ac_s_btn_on', //ボタン(mover時)
-						btn_out   : 'ac_s_btn_out', //ボタン(mout時)
-						input     : 'ac_s_input', //テキストボックス
-						input_off : 'ac_s_input_off' //テキストボックス(非選択状態)
+						input     : 'ac_s_input' //テキストボックス
+					});
+					break;
+
+				case 'textarea':
+					class_name = $.extend(class_name, {
+						input     : 'ac_textarea', //テキストボックス
+						btn_short_off : 'ac_btn_short_off'
 					});
 					break;
 			}
@@ -278,12 +424,16 @@ MIT License
 				xhr             : false, //XMLHttpオブジェクトを格納
 				key_paging      : false, //キーでページ移動したか？
 				key_select      : false, //キーで候補移動したか？？
+				prev_value      : '',    //初期値
 
 				//サブ情報
 				size_navi       : null,  //サブ情報表示用(ページナビの高さ)
 				size_results    : null,  //サブ情報表示用(リストの上枠線)
 				size_li         : null,  //サブ情報表示用(候補一行分の高さ)
-				size_left       : null   //サブ情報表示用(リストの横幅)
+				size_left       : null,   //サブ情報表示用(リストの横幅)
+				
+				//タグ検索
+				tag             : null
 			};
 			return localvars;
 		}
@@ -305,15 +455,16 @@ MIT License
 				.attr('autocomplete', 'off')
 				.addClass(Cls.input)
 				.wrap('<div>'); //This "div" is "container".
-			if (!$(elems.combo_input).attr('prev_val')) {
-				$(elems.combo_input).attr('prev_val', '');
-			}
 
 			elems.container = $(elems.combo_input).parent().addClass(Cls.container);
-			elems.button    = $('<div>').addClass(Cls.button);
-			elems.img       = $('<img>').attr('src', Opt.button_img);
-			elems.clear     = $('<div>').css('clear', 'left');
-
+			elems.clear  = $('<div>').css('clear', 'left');
+			if (Opt.plugin_type == 'combobox') {
+				elems.button = $('<div>').addClass(Cls.button);
+				elems.img    = $('<img>').attr('src', Opt.button_img);
+			} else {
+				elems.button = false;
+				elems.img    = false;
+			}
 			//サジェストリスト
 			elems.result_area = $('<div>').addClass(Cls.re_area);
 			elems.navi        = $('<div>').addClass(Cls.navi);
@@ -323,32 +474,50 @@ MIT License
 			elems.sub_info    = $('<div>').addClass(Cls.sub_info);
 
 			//primary_keyカラムの値を送信するためのinput:hiddenを作成
-			var hidden_name = ($(elems.combo_input).attr('name') != undefined)
-				? $(elems.combo_input).attr('name')
-				: $(elems.combo_input).attr('id');
-				
-			//CakePHP用の対策 例:data[search][user] -> data[search][user_primary_key]
-			if (hidden_name.match(/\]$/)) {
-				hidden_name = hidden_name.replace(/\]?$/, '_primary_key]');
+			if (Opt.plugin_type == 'textarea') {
+				elems.hidden = false;
 			} else {
-				hidden_name += '_primary_key';
+				var hidden_name = ($(elems.combo_input).attr('name') != undefined)
+					? $(elems.combo_input).attr('name')
+					: $(elems.combo_input).attr('id');	
+				//CakePHP用の対策 例:data[search][user] -> data[search][user_primary_key]
+				if (hidden_name.match(/\]$/)) {
+					hidden_name = hidden_name.replace(/\]?$/, '_primary_key]');
+				} else {
+					hidden_name += '_primary_key';
+				}
+				elems.hidden = $('<input type="hidden" />')
+					.attr({
+						'name': hidden_name,
+						'id'  : hidden_name
+					})
+					.val('');
 			}
-			elems.hidden = $('<input type="hidden" />')
-				.attr({
-					'name': hidden_name,
-					'id'  : hidden_name
-				})
-				.val('');
 			//----------------------------------------------
 			//部品をページに配置
 			//----------------------------------------------
-			$(elems.container)
-				.append(elems.button)
-				.append(elems.clear)
-				.append(elems.result_area)
-				.append(elems.hidden);
-
-			$(elems.button).append(elems.img);
+			switch (Opt.plugin_type) {
+				case 'combobox':
+					$(elems.container)
+						.append(elems.button)
+						.append(elems.clear)
+						.append(elems.result_area)
+						.append(elems.hidden);
+					$(elems.button).append(elems.img);
+					break;
+				
+				case 'simple':
+					$(elems.container)
+						.append(elems.clear)
+						.append(elems.result_area)
+						.append(elems.hidden);
+					break;
+				
+				case 'textarea':
+					$(elems.container)
+						.append(elems.clear)
+						.append(elems.result_area);
+			}
 			$(elems.result_area)
 				.append(elems.navi)
 				.append(elems.results)
@@ -357,29 +526,20 @@ MIT License
 				.append(elems.navi_info)
 				.append(elems.navi_p);
 
+
 			//----------------------------------------------
 			//サイズ調整
 			//----------------------------------------------
 			//ComboBoxの幅
 			if (Opt.plugin_type == 'combobox') {
-				var w = $(elems.combo_input).outerWidth() + $(elems.button).outerWidth();
+				$(elems.container).width(
+					$(elems.combo_input).outerWidth() + $(elems.button).outerWidth()
+				);
+				//ボタンの高さ
+				$(elems.button).height($(elems.combo_input).innerHeight());
 			} else {
-				var w = $(elems.combo_input).outerWidth();
+				$(elems.container).width($(elems.combo_input).outerWidth());
 			}
-			$(elems.container).width(w);
-			//ボタンの高さ
-			$(elems.button).height(
-				$(elems.combo_input).innerHeight()
-			);
-			//候補リストの幅とトップ位置
-			$(elems.result_area)
-				.width(
-					$(elems.container).width() -
-					($(elems.result_area).outerWidth() - $(elems.result_area).innerWidth())
-				)
-				.css({
-					'top':$(elems.container).outerHeight() + $(elems.container).offset().top
-				});
 			return elems;
 		}
 		//==============================================
@@ -392,36 +552,41 @@ MIT License
 		function btnAttrDefault() {
 			if (Opt.select_only) {
 				if ($(Elem.combo_input).val() != '') {
-					if ($(Elem.hidden).val() != '') {
-						//選択状態
-						$(Elem.combo_input)
-							.attr('title',Msg.select_ok)
-							.removeClass(Cls.select_ng)
-							.addClass(Cls.select_ok);
-					} else {
-						//入力途中
-						$(Elem.combo_input)
-							.attr('title',Msg.select_ng)
-							.removeClass(Cls.select_ok)
-							.addClass(Cls.select_ng);
+					if (Opt.plugin_type != 'textarea') {
+						if ($(Elem.hidden).val() != '') {
+							//選択状態
+							$(Elem.combo_input)
+								.attr('title',Msg.select_ok)
+								.removeClass(Cls.select_ng)
+								.addClass(Cls.select_ok);
+						} else {
+							//入力途中
+							$(Elem.combo_input)
+								.attr('title',Msg.select_ng)
+								.removeClass(Cls.select_ok)
+								.addClass(Cls.select_ng);
+						}
 					}
 				} else {
 					//完全な初期状態へ戻す
-					$(Elem.hidden).val('');
+					if (Opt.plugin_type != 'textarea') $(Elem.hidden).val('');
 					$(Elem.combo_input)
 						.removeAttr('title')
 						.removeClass(Cls.select_ng)
 				}
 			}
-			//初期状態
-			$(Elem.button).attr('title', Msg.get_all_btn);
-			$(Elem.img).attr('src', Opt.button_img);
+			if (Opt.plugin_type == 'combobox') {
+				$(Elem.button).attr('title', Msg.get_all_btn);
+				$(Elem.img).attr('src', Opt.button_img);
+			}
 		}
 		//**********************************************
 		//ボタンの画像の位置を調整する
 		//**********************************************
 		//@called individual
 		function btnPositionAdjust() {
+			if (Opt.plugin_type != 'combobox') return;
+
 			var width_btn  = $(Elem.button).innerWidth();
 			var height_btn = $(Elem.button).innerHeight();
 			var width_img  = $(Elem.img).width();
@@ -446,7 +611,7 @@ MIT License
 			//セレクト専用への値挿入
 			//------------------------------------------
 			//hiddenへ値を挿入
-			$(Elem.hidden).val(Opt.init_record);
+			if (Opt.plugin_type != 'textarea') $(Elem.hidden).val(Opt.init_record);
 
 			//テキストボックスへ値を挿入
 			if (typeof Opt.source == 'object') {
@@ -474,8 +639,8 @@ MIT License
 			//------------------------------------------
 			function _afterInit(data) {
 				$(Elem.combo_input).val(data[Opt.field]);
-				$(Elem.hidden).val(data[Opt.primary_key]);
-				$(Elem.combo_input).attr('prev_val', data[Opt.field]);
+				if (Opt.plugin_type != 'textarea') $(Elem.hidden).val(data[Opt.primary_key]);
+				Vars.prev_value = data[Opt.field];
 				if (Opt.select_only) {
 					//選択状態
 					$(Elem.combo_input)
@@ -493,6 +658,8 @@ MIT License
 		//**********************************************
 		//@called individual
 		function eHandlerForButton() {
+			if (Opt.plugin_type != 'combobox') return;
+
 			$(Elem.button)
 				.mouseup(function(ev) {
 					if ($(Elem.result_area).is(':hidden')) {
@@ -530,7 +697,7 @@ MIT License
 				$(Elem.combo_input).keydown(processKey);
 			}
 			$(Elem.combo_input)
-				.focus(function() { setTimerCheckValue() })
+				.focus(setTimerCheckValue)
 				.click(function() {
 					cssFocusInput();
 					$(Elem.results).children('li').removeClass(Cls.select);
@@ -625,19 +792,23 @@ MIT License
 				lastPage();
 			});
 		}
-		//#4 Functions
+		function eHandlerForTextArea() {
+			if (!Opt.shorten_url) return;
+			//URL短縮用ボタン
+			$(Opt.shorten_url).click(getShortURL);
+		}
 		//==============================================
-		//#4-1 Appearance
+		//#4. Appearance
 		//==============================================
 		//**********************************************
 		//image for loading
 		//**********************************************
-		function setLoadImg() {
+		//@called suggest
+		function setLoading() {
 			$(Elem.navi_info).text(Msg.loading);
-			if ($(Elem.results).children('dl').is(':hidden')) {
-				$(Elem.results).empty();
-				$(Elem.sub_info).empty();
-				$(Elem.result_area).show();
+			if ($(Elem.results).html() == '') {
+				$(Elem.navi).children('p').empty();
+				calcWidthResults();
 				$(Elem.container).addClass(Cls.container_open);
 			}
 		}
@@ -719,8 +890,24 @@ MIT License
 			$(Elem.results).removeClass(Cls.re_off);
 			$(Elem.combo_input).addClass(Cls.input_off);
 		}
+		//**********************************************
+		//URL短縮ボタンを使用可能にする
+		//**********************************************
+		function btnShortEnable() {
+			$(Opt.shorten_url)
+				.removeClass(Cls.btn_short_off)
+				.removeAttr('disabled');
+		}
+		//**********************************************
+		//URL短縮ボタンを使用不可にする
+		//**********************************************
+		function btnShortDisable() {
+			$(Opt.shorten_url)
+				.addClass(Cls.btn_short_off)
+				.attr('disabled', 'disabled');
+		}
 		//==============================================
-		//4-2 Input by user
+		//#5. Input by user
 		//==============================================
 		//**********************************************
 		//入力値変化監視をタイマーで予約
@@ -735,25 +922,226 @@ MIT License
 		//@called processKey, setTimerCheckValue
 		function checkValue() {
 			var now_value = $(Elem.combo_input).val();
-			if (now_value != $(Elem.combo_input).attr('prev_val')) {
-				$(Elem.combo_input).attr('prev_val', now_value);
-				//sub_info属性を削除
-				$(Elem.combo_input).removeAttr('sub_info');
+			if (now_value != Vars.prev_value) {
+				Vars.prev_value = now_value;
+				if(Opt.plugin_type == 'textarea') {
+					//URLを探し、短縮ボタンを表示or非表示
+					findShort();
 
-				//hiddenの値を削除
-				$(Elem.hidden).val('');
+					//タグとして検索すべき文字列を探す
+					var tag = findTag(now_value);
+					if (tag) {
+						_setTextAreaNewSearch(tag);
+						suggest(tag);
+					}
+				} else {
+					//sub_info属性を削除
+					$(Elem.combo_input).removeAttr('sub_info');
 
-				//セレクト専用時
-				if (Opt.select_only) btnAttrDefault();
+					//hiddenの値を削除
+					if (Opt.plugin_type != 'textarea') $(Elem.hidden).val('');
 
-				//ページ数をリセット
-				Vars.page_suggest = 1;
+					//セレクト専用時
+					if (Opt.select_only) btnAttrDefault();
 
-				Vars.is_suggest = true;
-				suggest();
+					//ページ数をリセット
+					Vars.page_suggest = 1;
+
+					Vars.is_suggest = true;
+					
+					suggest();
+				}
+			} else if (
+				//textareaで、現在のタグから別のタグへ移動していないか検査する。
+				Opt.plugin_type == 'textarea' &&
+				$(Elem.result_area).is(':visible')
+			) {
+				var new_tag = findTag(now_value);
+				if (!new_tag) {
+					hideResults();
+				} else if (
+					new_tag.str != Vars.tag.str ||
+					new_tag.pos_left != Vars.tag.pos_left
+				) {
+					_setTextAreaNewSearch(new_tag);
+					suggest();
+				}
 			}
 			//一定時間ごとの監視を再開
 			setTimerCheckValue();
+		}
+		function _setTextAreaNewSearch(tag) {
+			Vars.tag          = tag;
+			Vars.page_suggest = 1;
+			Opt.search_field  = Opt.tags[Vars.tag.type].search_field;
+			Opt.order_by      = Opt.tags[Vars.tag.type].order_by;
+			Opt.primary_key   = Opt.tags[Vars.tag.type].primary_key;
+			Opt.db_table      = Opt.tags[Vars.tag.type].db_table;
+			Opt.field         = Opt.tags[Vars.tag.type].field;
+			Opt.sub_info      = Opt.tags[Vars.tag.type].sub_info;
+			Opt.sub_as        = Opt.tags[Vars.tag.type].sub_as;
+			Opt.show_field    = Opt.tags[Vars.tag.type].show_field;
+			Opt.hide_field    = Opt.tags[Vars.tag.type].hide_field;
+		}
+		//***************************************************
+		//URLを探し、短縮ボタンを表示or非表示
+		//***************************************************
+		//@called 
+		function findShort() {
+			var flag = null;
+			var arr  = null; //ループの中で一時的に使用
+
+			while ((arr = Opt.shorten_reg.exec($(Elem.combo_input).val())) != null) {
+				flag = true;
+				Opt.shorten_reg.lastIndex = 0; //execのループを中断するなら、必ずリセットしておくこと!
+				break;
+			}
+			if (flag) btnShortEnable();
+			else btnShortDisable();
+		}
+		//***************************************************
+		//AjaxでURLを短縮してもらう
+		//***************************************************
+		//@called setEventHandler
+		function getShortURL() {
+			//テキストエリアを入力禁止に
+			$(Elem.combo_input).attr('disabled', 'disabled');
+		
+			var text    = $(Elem.combo_input).val(); //Ajax後も使用する
+			var matches = [];   //結果を最終的に格納する
+			var arr     = null; //ループの中で一時的に使用
+
+			while ((arr = Opt.shorten_reg.exec(text)) != null) {
+				matches[matches.length] = arr[1];			
+			}
+
+			//URLがなければ、ここで終了。
+			//ボタンが表示された直後に文章が変更された場合などに対応
+			if (matches.length < 1) {
+				//テキストエリアを入力可能に
+				$(Elem.combo_input).removeAttr('disabled');
+				return;
+			}
+		
+			//可変長オブジェクトを引数にする
+			var obj_param = {};
+			for (var i=0; i<matches.length; i++) {
+				obj_param['p_'+i] = matches[i];
+			}
+			//bitlyへ送信
+			$.getJSON(
+				Opt.shorten_src,
+				obj_param,
+				function (json) {
+					//元URLと短縮URLを順番に置換する
+					var i = 0;
+					var result = text.replace(Opt.shorten_reg, function(){
+						var matched = arguments[0].replace(arguments[1], json[i]);
+						i++;
+						return matched;
+					});
+
+					//画面を整える
+					$(Elem.combo_input).focus();
+					$(Elem.combo_input).val(result);
+					btnShortDisable();
+				
+					//テキストエリアを入力可能に
+					$(Elem.combo_input).removeAttr('disabled');
+				}
+			);
+		}
+		//***************************************************
+		//キャレット位置周辺の文字列を抜き出す
+		//***************************************************
+		//@called
+		//@params str now_value テキストエリア全文
+		//@return arr           キャレット位置周辺の文字列と、抜き出す範囲(左、右)のオブジェクト配列
+		function findTag(now_value) {
+			//キャレット位置を取得
+			var pos  = getCaretPos($(Elem.combo_input).get(0));
+
+			for (var i=0; i<Opt.tags.length; i++) {
+				//-----------------------------------------------
+				//キャレット位置から左へ空白までを抜き出す
+				//-----------------------------------------------
+				var left = now_value.substring(0, pos);
+				left = left.match(Opt.tags[i].pattern.reg_left);
+				if (!left) continue;
+				left = left[1]; //短縮していることに注意!
+				var pos_left = pos - left.length;
+				if (pos_left < 0) pos_left = 0;
+			
+				//-----------------------------------------------
+				//キャレット位置から右へ空白までを抜き出す
+				//-----------------------------------------------
+				var right = now_value.substring(pos, now_value.length);
+				right = right.match(Opt.tags[i].pattern.reg_right);
+				if (right) {
+					right = right[1]; //短縮していることに注意!
+					var pos_right = pos + right.length;
+				} else {
+					right = '';
+					var pos_right = pos;
+				}
+				var str = left + '' + right;
+				Vars.is_suggest = (str == '') ? false : true;
+				return {
+					type      : i,
+					str       : str,
+					pos_left  : pos_left,
+					pos_right : pos_right
+				};
+			}
+			return false;
+		}
+		//***************************************************
+		//キャレットの位置を取得
+		//***************************************************
+		//@called
+		//@params element item プラグイン呼び出し元の要素( $(elem).get(0) )
+		//@return int          キャレットの現在位置
+		function getCaretPos(item) {
+			var pos = 0;
+			//---------------------------------------------------
+			//ブラウザ分岐
+			//---------------------------------------------------
+			if (document.selection) {
+				// IE
+				item.focus();
+				var Sel = document.selection.createRange();
+				Sel.moveStart ("character", -item.value.length);
+				pos = Sel.text.length;
+
+			} else if (item.selectionStart || item.selectionStart == "0") {
+				// Firefox, Chrome
+				pos = item.selectionStart;
+			}
+			return pos;
+		}
+		//***************************************************
+		//指定位置にキャレットを移動
+		//***************************************************
+		//@called ajaxShortURL
+		//@params int     pos  キャレットを移動させる位置
+		function setCaretPos(pos) {
+			var item = $(Elem.combo_input).get(0);
+			//---------------------------------------------------
+			//ブラウザ分岐
+			//---------------------------------------------------
+			if (item.setSelectionRange) {
+				// Firefox, Chrome
+				item.focus();
+				item.setSelectionRange(pos, pos);
+
+			} else if (item.createTextRange) {
+				// IE
+				var range = item.createTextRange();
+				range.collapse(true);
+				range.moveEnd("character", pos);
+				range.moveStart("character", pos);
+				range.select();
+			}
 		}
 		//**********************************************
 		//キー入力への対応
@@ -764,7 +1152,7 @@ MIT License
 			if (
 				($.inArray(e.keyCode, [27,38,40,9]) > -1 && $(Elem.result_area).is(':visible')) ||
 				($.inArray(e.keyCode, [37,39,13,9]) > -1 && getCurrentLine()) ||
-				e.keyCode == 40
+				(e.keyCode == 40 && Opt.plugin_type != 'textarea')
 			) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -818,7 +1206,7 @@ MIT License
 			}
 		}
 		//==============================================
-		//#4-3 Search
+		//#6. Search
 		//==============================================
 		//**********************************************
 		//abort Ajax
@@ -833,16 +1221,21 @@ MIT License
 		//**********************************************
 		//send request to PHP(server side)
 		//**********************************************
+		//@called firstPage, nextPage, prevPage, lastPage, eHandlerForButton, eHandlerForNaviPaging, checkValue, processKey
 		function suggest() {
-			var q_word = (Vars.is_suggest) ? $.trim($(Elem.combo_input).val()) : '';
-			if (q_word.length < 1 && Vars.is_suggest) {
-				hideResults();
-				return;
+			if (Opt.plugin_type != 'textarea') {
+				var q_word = (Vars.is_suggest) ? $.trim($(Elem.combo_input).val()) : '';
+				if (q_word.length < 1 && Vars.is_suggest) {
+					hideResults();
+					return;
+				}
+				q_word = q_word.split(/[\s　]+/);
+			} else {
+				var q_word = [Vars.tag.str];
 			}
-			q_word = q_word.split(/[\s　]+/);
 
 			abortAjax(); //Ajax通信をキャンセル
-			setLoadImg(); //ローディング表示
+			setLoading(); //ローディング表示
 			$(Elem.sub_info).children('dl').hide(); //サブ情報消去
 
 			//ここで、本来は真偽値が格納される変数に数値を格納している。
@@ -861,14 +1254,14 @@ MIT License
 
 			//データ取得
 			if (typeof Opt.source == 'object') searchForJSON(q_word, which_page_num);
-			else                                searchForDB(q_word, which_page_num);
+			else searchForDB(q_word, which_page_num);
+			
 		}
 		//**********************************************
 		//DBから返されたそのままのオブジェクトを、候補リストを生成しやすいように加工する。
 		//**********************************************
 		//@called suggest
 		function searchForDB(q_word, which_page_num) {
-			//ここでAjax通信を行っている
 			Vars.xhr = $.getJSON(
 				Opt.source,
 				{
@@ -878,7 +1271,6 @@ MIT License
 					search_field : Opt.search_field,
 					and_or       : Opt.and_or,
 					order_by     : Opt.order_by,
-					primary_key  : Opt.primary_key,
 					db_table     : Opt.db_table
 				},
 				function(json) {
@@ -1050,12 +1442,13 @@ MIT License
 			$(Elem.navi_p).hide();
 			$(Elem.results).empty();
 			$(Elem.sub_info).empty();
-			$(Elem.result_area).show();
+			//$(Elem.result_area).show();
+			calcWidthResults();
 			$(Elem.container).addClass(Cls.container_open);
 			cssFocusInput();
 		}
 		//==============================================
-		//#4-4 Show or hide results
+		//#7. Show or hide results
 		//==============================================
 		//**********************************************
 		//候補表示の準備
@@ -1078,7 +1471,7 @@ MIT License
 				json.candidate.length === 1 &&
 				json.candidate[0] == q_word[0]
 			) {
-				$(Elem.hidden).val(json.primary_key[0]);
+				if (Opt.plugin_type != 'textarea') $(Elem.hidden).val(json.primary_key[0]);
 				btnAttrDefault();
 			}
 			//候補リストを表示する
@@ -1132,9 +1525,11 @@ MIT License
 				//表示する一連のページ番号の左右端
 				var left  = page_num - Math.ceil ((Opt.navi_num - 1) / 2);
 				var right = page_num + Math.floor((Opt.navi_num - 1) / 2);
-
 				//現ページが端近くの場合のleft,rightの調整
-				while (left < 1) left ++;right++;
+				while (left < 1) {
+					left ++;
+					right++;
+				}
 				while (right > last_page) right--;
 				while ((right-left < Opt.navi_num - 1) && left > 1) left--;
 
@@ -1267,7 +1662,10 @@ MIT License
 						title : arr_candidate[i]
 					});
 
-				if (arr_primary_key[i] == $(Elem.hidden).val()) {
+				if (
+					Opt.plugin_type != 'textarea' &&
+					arr_primary_key[i] == $(Elem.hidden).val()
+				) {
 					$(list).addClass(Cls.selected);
 				}
 				$(Elem.results).append(list);
@@ -1281,7 +1679,7 @@ MIT License
 					for (key in arr_subinfo[i]) {
 						//sub_info属性の値を整える
 						var json_key = key.replace('\'', '\\\'');
-						
+
 						if (arr_subinfo[i][key] == null) {
 							//DBのデータ値がnullの場合の対処
 							arr_subinfo[i][key] = '';
@@ -1301,28 +1699,16 @@ MIT License
 						if (Opt.sub_info == 'simple') $(dt).addClass('hide');
 						$dl.append(dt);
 
-						var dd = $('<dd>').text(arr_subinfo[i][key]);	//!!! against XSS !!!
+						var dd = $('<dd>').text(arr_subinfo[i][key]); //!!! against XSS !!!
 						$dl.append(dd);
 					}
 					//sub_info属性を候補リストのliに追加
 					str_subinfo = '{' + str_subinfo.join(',') + '}';
 					$(list).attr('sub_info', str_subinfo);
+					
 					$(Elem.sub_info).append($dl);
-
-					//sub_info:simple かつ、サブ情報の項目が1つのみの場合
-					if (Opt.sub_info == 'simple' && $dl.children('dd').length == 1) {
-						//ddの内容が空白の場合
-						if ($dl.children('dd').text() == '') {
-							$dl.addClass('ac_dl_empty');
-
-						//ddの幅をdlに合わせる
-						} else {
-							$dl.children('dd').width(
-								$dl.width() -
-								parseInt($dl.children('dd').css('padding-left'), 10) -
-								parseInt($dl.children('dd').css('padding-right'), 10)
-							);
-						}
+					if (Opt.sub_info == 'simple' && $dl.children('dd').text() == '') {
+						$dl.addClass('ac_dl_empty');
 					}
 				}
 			}
@@ -1330,6 +1716,25 @@ MIT License
 			//サジェスト結果表示
 			//表示のたびに、結果リストの位置を調整しなおしている。
 			//このプラグイン以外でページ内の要素の位置をずらす処理がある場合に対処するため。
+			calcWidthResults();
+
+			$(Elem.container).addClass(Cls.container_open);
+			eHandlerForResults(); //イベントハンドラ設定
+
+			//ボタンのtitle属性変更(閉じる)
+			if (Opt.plugin_type == 'combobox') $(Elem.button).attr('title',Msg.close_btn);
+		}
+		function calcWidthResults() {
+			//候補の幅とトップ位置を再計算 (textareaがリサイズされることに対処するため)
+			//ComboBoxの幅
+			if (Opt.plugin_type == 'combobox') {
+				var w = $(Elem.combo_input).outerWidth() + $(Elem.button).outerWidth();
+			} else {
+				var w = $(Elem.combo_input).outerWidth();
+			}
+			$(Elem.container).width(w);
+			
+			//containerのpositionの値に合わせてtop,leftを設定する。
 			if ($(Elem.container).css('position') == 'static') {
 				//position: static
 				var offset = $(Elem.combo_input).offset();
@@ -1344,13 +1749,13 @@ MIT License
 					left : '0px'
 				});
 			}
-			$(Elem.result_area).show();
-			$(Elem.container).addClass(Cls.container_open);
-
-			eHandlerForResults(); //イベントハンドラ設定
-
-			//ボタンのtitle属性変更(閉じる)
-			$(Elem.button).attr('title',Msg.close_btn);
+			//幅を設定した後、表示する。
+			$(Elem.result_area)
+				.width(
+					$(Elem.container).width() -
+					($(Elem.result_area).outerWidth() - $(Elem.result_area).innerWidth())
+				)
+				.show();
 		}
 		//**********************************************
 		//候補エリアを消去
@@ -1373,7 +1778,7 @@ MIT License
 			btnAttrDefault(); //ボタンのtitle属性初期化
 		}
 		//==============================================
-		//#4-5 Paging
+		//#8. Paging
 		//==============================================
 		//**********************************************
 		//1ページ目へ
@@ -1452,7 +1857,7 @@ MIT License
 			}
 		}
 		//==============================================
-		//#4-6 Select line
+		//#9. Select line
 		//==============================================
 		//**********************************************
 		//現在選択中の候補に決定する
@@ -1466,19 +1871,53 @@ MIT License
 			var current = getCurrentLine();
 
 			if (current) {
-				$(Elem.combo_input).val($(current).text());
-				//サブ情報があるならsub_info属性を追加・書き換え
-				if (Opt.sub_info) {
-					$(Elem.combo_input).attr('sub_info', $(current).attr('sub_info'));
+				if (Opt.plugin_type != 'textarea') {
+					$(Elem.combo_input).val($(current).text());
+					//サブ情報があるならsub_info属性を追加・書き換え
+					if (Opt.sub_info) {
+						$(Elem.combo_input).attr('sub_info', $(current).attr('sub_info'));
+					}
+					if (Opt.select_only) btnAttrDefault();
+					$(Elem.hidden).val($(current).attr('pkey'));
+				} else {
+					var left = Vars.prev_value.substring(0, Vars.tag.pos_left);
+					var right = Vars.prev_value.substring(Vars.tag.pos_right);
+					//閉じカッコがあるタグの場合、rightの冒頭がその形式でない場合は追加する。
+					//前後にスペースを挿入するかどうかもここで判断する。
+					//行頭の場合はスペースは挿入しない。
+					var ctext = $(current).text();
+					//左側空白の補完
+					if (
+						Opt.tags[Vars.tag.type].space[0] &&
+						!left.match(Opt.tags[Vars.tag.type].pattern.space_left)
+					) {
+						var p_len = Opt.tags[Vars.tag.type].pattern.left.length;
+						var l_len = left.length;
+						left = left.substring(0, (l_len - p_len)) +
+							' ' +
+							left.substring((l_len - p_len));
+					}
+					//右側カッコの補完
+					if (!right.match(Opt.tags[Vars.tag.type].pattern.comp_right)) {
+						right = Opt.tags[Vars.tag.type].pattern.right + right;
+					}
+					//右側空白の補完
+					if (
+						Opt.tags[Vars.tag.type].space[1] &&
+						!right.match(Opt.tags[Vars.tag.type].pattern.space_right)
+					) {
+						var p_len = Opt.tags[Vars.tag.type].pattern.right.length;
+						right = right.substring(0, p_len) +
+							' ' +
+							right.substring(p_len);
+					}
+
+					$(Elem.combo_input).val(left + '' + ctext + '' + right);
+					setCaretPos(left.length + ctext.length);
 				}
+				
+				Vars.prev_value = $(Elem.combo_input).val();
 				hideResults();
-
-				//added
-				$(Elem.combo_input).attr('prev_val', $(Elem.combo_input).val());
-
-				$(Elem.hidden).val($(current).attr('pkey'));
-				//セレクト専用
-				if (Opt.select_only) btnAttrDefault();
 			}
 			if (Opt.bind_to) {
 			 	//候補選択を引き金に、イベントを発火する

@@ -1,3 +1,15 @@
+v6.0 (2012-09-06)
+	(English)
+	* You can newly choose "textarea" in "plugin_type" options.
+		* "textarea" cannot use "select_only" options.
+		* "textarea" cannot record "sub_info" after selecting.
+
+	(Japanese)
+	* "plugin_type"オプションに"textarea"を追加しました。
+		* "textarea"では、セレクト専用のオプションは使えません。
+		* "textarea"では、候補を選択後、サブ情報を記憶させることができません。
+
+
 v5.9 (2012-09-02)
 	(English)
 	* "order_field" option was abolished.

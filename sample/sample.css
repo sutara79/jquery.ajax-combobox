@@ -1,16 +1,40 @@
 *{
 	font-family:"メイリオ", sans-serif;
 }
-.lang_ja {
-	display:none;
+#container {
+	width:960px;
+	margin:auto;
 }
-nav#language {
+header {
+}
+nav {
+	float:left;
+	width:300px;
+	margin-right:20px;
+	font-size:15px;
+}
+article {
+	float:left;
+	width: 640px;
+}
+footer {
+	clear:left;
+}
+/* ------------------------------------- */
+nav ol{
+	padding-left:1.5em;
+}
+/* ------------------------------------- */
+#language {
 	padding:4px;
 	border:1px solid #aaa;
 	background:#eef;
 	position:fixed;
 	top:0px;
 	right:0px;
+}
+.lang_ja {
+	display:none;
 }
 .ac_container{
 	margin:0.4em 0;
@@ -19,7 +43,7 @@ h4{
 	margin-top:2em;
 	border-top:2px solid #486;
 	border-left:8px solid #486;
-	padding:3px 6px;
+	padding:3px 0px 3px 6px;
 	font-size:18px;
 	font-weight:bold;
 	color:#364;

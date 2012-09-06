@@ -21,6 +21,7 @@ Simple
 	width : auto;
 	background : white;
 	border : none;
+	position:relative;
 }
 .ac_input {
 	border : 1px solid #79b;
@@ -213,13 +214,6 @@ Simple
 	background : #eee;
 	color : #000;
 }
-.ac_subinfo dl.ac_dl_empty {
-	margin:0;
-	padding:0;
-	border:0;
-	width:0;
-	height:0;
-}
 .ac_subinfo dt{
 	width : 92px;
 	word-wrap:break-word;
@@ -238,8 +232,8 @@ Simple
 }
 .ac_subinfo dd{
 	width : 152px;
-	word-wrap:break-word;
 	float : left;
+	word-wrap:break-word;
 	margin : 0;
 	padding : 2px 4px;
 	font-size : 13px;
@@ -274,10 +268,21 @@ Simple
 .ac_container_open .ac_s_input{
 	border-radius : 4px 4px 0px 0px !important;
 }
-.ac_s_button,
-.ac_s_btn_on,
-.ac_s_btn_out {
-	display:none;
+
+/*=====================================
+ TextArea
+-------------------------------------*/
+.ac_textarea {
+	border : 1px solid #79b;
+	background-color : white;
+	font-size : 16px;
+	padding : 4px;
+	margin : 0;
+	
+	border-radius : 4px;
+
+	box-shadow : 1px 1px 1px rgba(0,0,0,0.2) inset;
+	-webkit-box-shadow : 1px 1px 1px rgba(0,0,0,0.2) inset;
 }
 /*-------------------------------------
  選択してないほうの表示を暗くする
@@ -285,9 +290,12 @@ Simple
 .ac_results_off {
 	background:rgba(255, 255, 255, 0.8);
 }
-.ac_input_off, .ac_s_input_off {
+.ac_input_off {
 	background: #eee;
 	color:#555;
+}
+.ac_hide {
+	display:none;
 }
 
 

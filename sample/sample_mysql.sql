@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- ホスト: localhost
--- 生成時間: 2012 年 7 月 16 日 06:49
+-- 生成時間: 2012 年 9 月 05 日 06:56
 -- サーバのバージョン: 5.5.16
 -- PHP のバージョン: 5.3.8
 
@@ -342,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `nation` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=97 ;
 
 --
 -- テーブルのデータをダンプしています `nation`
@@ -445,6 +445,46 @@ INSERT INTO `nation` (`id`, `name`, `created`, `modified`) VALUES
 (94, 'Yemen', '2009-01-01 00:00:00', '2009-01-01 00:00:00'),
 (95, 'Zaire', '2009-01-01 00:00:00', '2009-01-01 00:00:00'),
 (96, 'Zambia', '2009-01-01 00:00:00', '2009-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `tag`
+--
+
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `japanese` varchar(100) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+
+--
+-- テーブルのデータをダンプしています `tag`
+--
+
+INSERT INTO `tag` (`id`, `name`, `japanese`, `created`, `modified`) VALUES
+(1, 'PhysicalEducation', '体育学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Musicology', '音楽学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Mathematics', '数学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Biology', '生物学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Chemistry', '化学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Sociology', '社会学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'Linguistics', '言語学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Anthropology', '人類学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'Philosophy', '哲学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'Geometry', '幾何学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'Architecture', '建築学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'PoliticalScience', '政治学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'Jurisprudence', '法律学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 'Archaeology', '考古学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'History', '歴史学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'Psychology', '心理学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 'MedicalScience', '医学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 'Literature', '文学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, 'Astronomy', '天文学', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
