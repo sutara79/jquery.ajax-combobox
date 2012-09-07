@@ -1,6 +1,6 @@
 /*
 jQuery Plugin
-jquery.ajaxComboBox.6.0
+jquery.ajaxComboBox.6.1
 Yuusaku Miyazaki (toumin.m7@gmail.com)
 MIT License
 */
@@ -1042,8 +1042,9 @@ MIT License
 					});
 
 					//画面を整える
-					$(Elem.combo_input).focus();
 					$(Elem.combo_input).val(result);
+					Vars.prev_value = result;
+					$(Elem.combo_input).focus();
 					btnShortDisable();
 				
 					//テキストエリアを入力可能に
@@ -1061,6 +1062,20 @@ MIT License
 			//キャレット位置を取得
 			var pos  = getCaretPos($(Elem.combo_input).get(0));
 
+			//for Opera.
+			//selectionStartで改行を2文字分に認識してしまう仕様に対応する。
+			//"pos"をsubstringで正しく扱える値に修正する。
+			if (window.opera) {
+				var textwhole = $(Elem.combo_input).val();
+				var textdouble = textwhole.replace(/\n/g, '\nq');
+				var range = textdouble.substr(0, pos);
+				var arr_skip = range.match(/\n/g);
+				var len_skip = (arr_skip)
+					? arr_skip.length
+					: 0;
+				pos = pos - len_skip;
+			}
+			//抽出したタグの情報を保存する。
 			for (var i=0; i<Opt.tags.length; i++) {
 				//-----------------------------------------------
 				//キャレット位置から左へ空白までを抜き出す
@@ -1133,7 +1148,6 @@ MIT License
 				// Firefox, Chrome
 				item.focus();
 				item.setSelectionRange(pos, pos);
-
 			} else if (item.createTextRange) {
 				// IE
 				var range = item.createTextRange();
@@ -1913,7 +1927,16 @@ MIT License
 					}
 
 					$(Elem.combo_input).val(left + '' + ctext + '' + right);
-					setCaretPos(left.length + ctext.length);
+
+					var pos = left.length + ctext.length;
+					//for Opera.
+//%					if (window.opera) {
+						var skip = left + '' + ctext;
+						skip = skip.match(/\n/g);
+						skip = (skip) ? skip.length : 0;
+						pos += skip;
+//%					}
+					setCaretPos(pos);
 				}
 				
 				Vars.prev_value = $(Elem.combo_input).val();
