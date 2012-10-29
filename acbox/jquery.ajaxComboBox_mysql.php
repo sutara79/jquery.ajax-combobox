@@ -37,19 +37,22 @@ if (isset($_GET['page_num'])) {
 		'q_word'       => array()
 	);
 	//-------------------------------------------
-	//search_field, q_word の処理
+	//q_word の処理
 	//-------------------------------------------
-	$esc = array('search_field', 'q_word');
-	for ($i=0; $i<count($esc); $i++) {
-		for ($j=0; $j<count($_GET[$esc[$i]]); $j++) {
-			$param[$esc[$i]][$j] = mysql_escape_string(
-				str_replace(
-					array('\\',   '%',  '_'),
-					array('\\\\', '\%', '\_'),
-					$_GET[$esc[$i]][$j]
-				)
-			);
-		}
+	for ($i=0; $i<count($_GET['q_word']); $i++) {
+		$param['q_word'][$i] = mysql_escape_string(
+			str_replace(
+				array('\\',   '%',  '_'),
+				array('\\\\', '\%', '\_'),
+				$_GET['q_word'][$i]
+			)
+		);
+	}
+	//-------------------------------------------
+	//search_field の処理
+	//-------------------------------------------
+	for ($i=0; $i<count($_GET['search_field']); $i++) {
+		$param['search_field'][$i] = mysql_escape_string($_GET['search_field'][$i]);
 	}
 	//-------------------------------------------
 	//order_byの処理
