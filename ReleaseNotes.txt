@@ -1,3 +1,11 @@
+v6.2 (2012-11-02)
+	(English)
+	* The error about searching when you used the under bar for a field name of the database was corrected.
+
+	(Japanese)
+	* データベースのフィールド名にアンダーバー(_)が使われていると、検索が正常に行われない不具合を修正しました。
+
+
 v6.1 (2012-09-08)
 	(English)
 	* Searching for tags on "Opera" browser became able to work correctly.
