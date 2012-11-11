@@ -1,3 +1,11 @@
+v6.3 (2012-11-11)
+	(English)
+	* It was modified for adapting to Opera12 but not Opera11.
+
+	(Japanese)
+	* Opera12用に処理を変更しました。引き換えに、Opera11では正しく動作しません。
+
+
 v6.2 (2012-11-02)
 	(English)
 	* The error about searching when you used the under bar for a field name of the database was corrected.
