@@ -1,3 +1,10 @@
+v7.0 (2013-07-25)
+	(English)
+	* The method of the connection with the database is changed to PDO.
+	
+	(Japanese)
+	* DBへの接続の方式をPDOに変更しました。
+
 v6.3 (2012-11-11)
 	(English)
 	* It was modified for adapting to Opera12 but not Opera11.

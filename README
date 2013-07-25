@@ -2,8 +2,8 @@ Infomation
 ==========================================================================================
 jQuery Plugin
 	Name       : jquery.ajaxComboBox
-	Version    : 6.3
-	Update     : 2012-11-11
+	Version    : 7.0
+	Update     : 2013-07-25
 	Author     : Yuusaku Miyazaki (宮崎 雄策) (toumin.m7@gmail.com)
 	Author-URI : http://d.hatena.ne.jp/sutara_lumpur/20090124/1232781879
 	License    : MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -18,17 +18,11 @@ jQuery Plugin
 
 # Note:
 	(English)
-	To start the sample page at your local computer with MySQL,
-	import the SQL file "./sample/acbox_mysql.sql".
-	Then, rename "jquery.ajaxComboBox_mysql.php" to "./acbox/jquery.ajaxComboBox.php",
-	and change the value to connect MySQL in the file.
+	Change the value to connect Database in "./acbox/jquery.ajaxComboBox.php".
 	
 	(Japanese)
-	MySQLでサンプルを試したい場合は、サンプル用のデータを収めたSQLファイルの
-	"./sample/acbox_mysql.sql"をインポートして下さい。
-	そして、ファイル名の"jquery.ajaxComboBox_mysql.php" を
-	"./acbox/jquery.ajaxComboBox.php"に変更して、
-	ファイル冒頭のMySQLとの接続設定を、お使いの環境に合わせて変更して下さい。
+	"./acbox/jquery.ajaxComboBox.php"の冒頭のデータベースへの接続設定を、お使いの環境に合わせて変更して下さい。
+
 
 # Structure:
 	$.fn.ajaxComboBox
@@ -152,3 +146,11 @@ jQuery Plugin
 			src_short
 			min_short
 			reg_short
+
+
+# Extensions
+	addComboBox
+		http://www.usamimi.info/~sutara/sample/addComboBox/
+
+	ajaxComboBox_for_CakePHP
+		https://github.com/SutaraLumpur/ajaxComboBox_for_CakePHP

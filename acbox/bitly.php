@@ -2,6 +2,8 @@
 //==============================================================
 //Please change following variables.
 //--------------------------------------------------------------
+$bitly_usr = 'sutaralumpur';
+$bitly_key = 'R_78cdcab8506ce7c79d7634373b1ebec9';
 
 //$bitly_usr = 'username';
 //$bitly_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';

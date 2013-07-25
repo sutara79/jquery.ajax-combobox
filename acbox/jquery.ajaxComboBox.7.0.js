@@ -1,9 +1,9 @@
-/*
-jQuery Plugin
-jquery.ajaxComboBox.6.2
-Yuusaku Miyazaki (toumin.m7@gmail.com)
-MIT License
-*/
+/**
+ * jQuery Plugin
+ * jquery.ajaxComboBox.7.0
+ * Yuusaku Miyazaki (toumin.m7@gmail.com)
+ * MIT License
+ */
 (function($) {
 	//Start point
 	$.fn.ajaxComboBox = function(_source, _options) {
@@ -37,7 +37,6 @@ MIT License
 
 		//That's all.
 		return true;
-
 
 		//==============================================
 		//#1. Global vars
@@ -688,14 +687,7 @@ MIT License
 		//**********************************************
 		//@called individual
 		function eHandlerForInput() {
-			//for cross browser
-			if (window.opera) {
-				//for Opera
-				$(Elem.combo_input).keypress(processKey);
-			} else {
-				//others
-				$(Elem.combo_input).keydown(processKey);
-			}
+			$(Elem.combo_input).keydown(processKey);
 			$(Elem.combo_input)
 				.focus(setTimerCheckValue)
 				.click(function() {
@@ -758,14 +750,12 @@ MIT License
 				ev.preventDefault();
 				firstPage();
 			});
-
 			//"< prev"
 			$(Elem.navi).find('.navi_prev').mouseup(function(ev) {
 				$(Elem.combo_input).focus();
 				ev.preventDefault();
 				prevPage();
 			});
-
 			//the number of page
 			$(Elem.navi).find('.navi_page').mouseup(function(ev) {
 				$(Elem.combo_input).focus();
@@ -777,14 +767,12 @@ MIT License
 				Vars.is_paging = true;
 				suggest();
 			});
-
 			//"next >"
 			$(Elem.navi).find('.navi_next').mouseup(function(ev) {
 				$(Elem.combo_input).focus();
 				ev.preventDefault();
 				nextPage();
 			});
-
 			//"last >>"
 			$(Elem.navi).find('.navi_last').mouseup(function(ev) {
 				$(Elem.combo_input).focus();
@@ -816,7 +804,6 @@ MIT License
 		//選択候補を追いかけて画面をスクロール
 		//**********************************************
 		//キー操作による候補移動、ページ移動のみに適用
-		//
 		//@param boolean enforce 移動先をテキストボックスに強制するか？
 		function scrollWindow(enforce) {
 			//------------------------------------------
@@ -847,7 +834,6 @@ MIT License
 				: document.body.scrollTop;
 
 			var scroll_bottom = scroll_top + client_height - target_size;
-
 			//------------------------------------------
 			//スクロール処理
 			//------------------------------------------
@@ -857,16 +843,13 @@ MIT License
 					//上へスクロール
 					//※ブラウザの高さがターゲットよりも低い場合もこちらへ分岐する。
 					gap = target_top - scroll_top;
-
 				} else if (target_top > scroll_bottom) {
 					//下へスクロール
 					gap = target_top - scroll_bottom;
-
 				} else {
 					//スクロールは行われない
 					return;
 				}
-
 			} else if (target_top < scroll_top) {
 				gap = target_top - scroll_top;
 			}
@@ -924,7 +907,7 @@ MIT License
 			var now_value = $(Elem.combo_input).val();
 			if (now_value != Vars.prev_value) {
 				Vars.prev_value = now_value;
-				if(Opt.plugin_type == 'textarea') {
+				if (Opt.plugin_type == 'textarea') {
 					//URLを探し、短縮ボタンを表示or非表示
 					findShort();
 
@@ -990,7 +973,6 @@ MIT License
 		function findShort() {
 			var flag = null;
 			var arr  = null; //ループの中で一時的に使用
-
 			while ((arr = Opt.shorten_reg.exec($(Elem.combo_input).val())) != null) {
 				flag = true;
 				Opt.shorten_reg.lastIndex = 0; //execのループを中断するなら、必ずリセットしておくこと!
@@ -1014,7 +996,6 @@ MIT License
 			while ((arr = Opt.shorten_reg.exec(text)) != null) {
 				matches[matches.length] = arr[1];			
 			}
-
 			//URLがなければ、ここで終了。
 			//ボタンが表示された直後に文章が変更された場合などに対応
 			if (matches.length < 1) {
@@ -1022,7 +1003,6 @@ MIT License
 				$(Elem.combo_input).removeAttr('disabled');
 				return;
 			}
-		
 			//可変長オブジェクトを引数にする
 			var obj_param = {};
 			for (var i=0; i<matches.length; i++) {
@@ -1040,7 +1020,6 @@ MIT License
 						i++;
 						return matched;
 					});
-
 					//画面を整える
 					$(Elem.combo_input).val(result);
 					Vars.prev_value = result;
@@ -1062,19 +1041,6 @@ MIT License
 			//キャレット位置を取得
 			var pos  = getCaretPos($(Elem.combo_input).get(0));
 
-			//for Opera.
-			//selectionStartで改行を2文字分に認識してしまう仕様に対応する。
-			//"pos"をsubstringで正しく扱える値に修正する。
-			if (window.opera) {
-				var textwhole = $(Elem.combo_input).val();
-				var textdouble = textwhole.replace(/\n/g, '\nq');
-				var range = textdouble.substr(0, pos);
-				var arr_skip = range.match(/\n/g);
-				var len_skip = (arr_skip)
-					? arr_skip.length
-					: 0;
-				pos = pos - len_skip;
-			}
 			//抽出したタグの情報を保存する。
 			for (var i=0; i<Opt.tags.length; i++) {
 				//-----------------------------------------------
@@ -1086,7 +1052,6 @@ MIT License
 				left = left[1]; //短縮していることに注意!
 				var pos_left = pos - left.length;
 				if (pos_left < 0) pos_left = 0;
-			
 				//-----------------------------------------------
 				//キャレット位置から右へ空白までを抜き出す
 				//-----------------------------------------------
@@ -1213,7 +1178,6 @@ MIT License
 						hideResults();
 						break;
 				}
-
 			} else {
 				if (e.keyCode != 16) cssFocusInput(); //except Shift(16)
 				checkValue();
@@ -1247,7 +1211,6 @@ MIT License
 			} else {
 				var q_word = [Vars.tag.str];
 			}
-
 			abortAjax(); //Ajax通信をキャンセル
 			setLoading(); //ローディング表示
 			$(Elem.sub_info).children('dl').hide(); //サブ情報消去
@@ -1255,15 +1218,10 @@ MIT License
 			//ここで、本来は真偽値が格納される変数に数値を格納している。
 			if (Vars.is_paging) {
 				var obj = getCurrentLine();
-				if (obj) {
-					Vars.is_paging = $(Elem.results).children('li').index(obj);
-				} else {
-					Vars.is_paging = -1;
-				}
+				Vars.is_paging = (obj) ? $(Elem.results).children('li').index(obj) : -1;
 			} else if (!Vars.is_suggest) {
 				Vars.is_paging = 0;
 			}
-
 			var which_page_num = (Vars.is_suggest) ? Vars.page_suggest : Vars.page_all;
 
 			//データ取得
@@ -1298,7 +1256,7 @@ MIT License
 						return;
 					}
 					json.cnt_page = json.result.length;
-					for (i=0; i<json.cnt_page; i++) {
+					for (i = 0; i < json.cnt_page; i++) {
 						json.subinfo[i] = [];
 						for (key in json.result[i]) {
 							if (key == Opt.primary_key) {
@@ -1334,7 +1292,6 @@ MIT License
 			var esc_q = [];
 			var sorted = [];
 			var json = {};
-
 			var i = 0;
 			var arr_reg = [];
 			do { //全件表示のため、do-while文を使う。
@@ -1343,7 +1300,6 @@ MIT License
 				arr_reg[i] = new RegExp(esc_q[i], 'gi');
 				i++;
 			} while (i<q_word.length);
-
 
 			//SELECT * FROM source WHERE field LIKE q_word;
 			for (var i=0; i<Opt.source.length; i++) {
@@ -1357,9 +1313,7 @@ MIT License
 						if (Opt.and_or == 'AND') break;
 					}
 				}
-				if (flag) {
-					matched.push(Opt.source[i]);
-				}
+				if (flag) matched.push(Opt.source[i]);
 			}
 			//見つからなければすぐに終了
 			if (matched.length == undefined) {
@@ -1393,7 +1347,6 @@ MIT License
 				matched3.sort(compareDESC);
 			}
 			sorted = sorted.concat(matched1).concat(matched2).concat(matched3);
-
 			//----------------------------------------------
 			//searchInsteadOfDB内のsort用の比較関数
 			//----------------------------------------------
@@ -1403,16 +1356,14 @@ MIT License
 			function compareDESC(a, b) {
 				return b[Opt.order_by[0][0]].localeCompare(a[Opt.order_by[0][0]]);
 			}
-
 			//LIMIT xx OFFSET xx
 			var start = (which_page_num - 1) * Opt.per_page;
 			var end   = start + Opt.per_page;
 			//----------------------------------------------
 			//最終的に返るオブジェクトを作成
 			//----------------------------------------------
-			for (var i=start, sub=0; i<end; i++, sub++) {
+			for (var i = start, sub = 0; i < end; i++, sub++) {
 				if (sorted[i] == undefined) break;
-
 				for (var key in sorted[i]) {
 					//セレクト専用
 					if (key == Opt.primary_key) {
@@ -1433,12 +1384,8 @@ MIT License
 							) {
 								continue;
 							}
-							if (json.subinfo == undefined) {
-								json.subinfo = [];
-							}
-							if (json.subinfo[sub] == undefined) {
-								json.subinfo[sub] = [];
-							}
+							if (json.subinfo == undefined) json.subinfo = [];
+							if (json.subinfo[sub] == undefined) json.subinfo[sub] = [];
 							json.subinfo[sub][key] = sorted[i][key];
 						}
 					}
@@ -1512,7 +1459,6 @@ MIT License
 		//@param integer cnt_page    Cadidates of this page.
 		//@param integer page_num    全件、または予測候補の一覧のページ数
 		function setNavi(cnt_whole, cnt_page, page_num) {
-
 			var num_page_top = Opt.per_page * (page_num - 1) + 1;
 			var num_page_end = num_page_top + cnt_page - 1;
 
@@ -1522,7 +1468,6 @@ MIT License
 				.replace('num_page_end' , num_page_end);
 
 			$(Elem.navi_info).text(cnt_result);
-
 			//----------------------------------------------
 			//ページング部分
 			//----------------------------------------------
@@ -1535,7 +1480,6 @@ MIT License
 				} else {
 					Vars.max_all = last_page;
 				}
-
 				//表示する一連のページ番号の左右端
 				var left  = page_num - Math.ceil ((Opt.navi_num - 1) / 2);
 				var right = page_num + Math.floor((Opt.navi_num - 1) / 2);
@@ -1573,7 +1517,6 @@ MIT License
 						.attr('title', Msg.prev_title)
 						.appendTo(Elem.navi_p);
 				}
-
 				//各ページへのリンクの表示
 				for (i = left; i <= right; i++) {
 					//現在のページ番号は<span>で囲む(強調表示用)
@@ -1585,7 +1528,6 @@ MIT License
 						.html(num_link)
 						.appendTo(Elem.navi_p);
 				}
-
 				//『次のX件 >>』の表示
 				if (page_num == last_page) {
 					$('<span></span>')
@@ -1721,12 +1663,9 @@ MIT License
 					$(list).attr('sub_info', str_subinfo);
 					
 					$(Elem.sub_info).append($dl);
-					if (Opt.sub_info == 'simple' && $dl.children('dd').text() == '') {
-						$dl.addClass('ac_dl_empty');
-					}
+					if (Opt.sub_info == 'simple' && $dl.children('dd').text() == '') $dl.addClass('ac_dl_empty');
 				}
 			}
-
 			//サジェスト結果表示
 			//表示のたびに、結果リストの位置を調整しなおしている。
 			//このプラグイン以外でページ内の要素の位置をずらす処理がある場合に対処するため。
@@ -1925,20 +1864,10 @@ MIT License
 							' ' +
 							right.substring(p_len);
 					}
-
 					$(Elem.combo_input).val(left + '' + ctext + '' + right);
-
 					var pos = left.length + ctext.length;
-					//for Opera.
-//%					if (window.opera) {
-						var skip = left + '' + ctext;
-						skip = skip.match(/\n/g);
-						skip = (skip) ? skip.length : 0;
-						pos += skip;
-//%					}
 					setCaretPos(pos);
 				}
-				
 				Vars.prev_value = $(Elem.combo_input).val();
 				hideResults();
 			}
