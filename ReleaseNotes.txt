@@ -1,3 +1,11 @@
+v7.1 (2013-08-09)
+	(English)
+	* bug fix for IE7 SCRIPT1028 error.
+	
+	(Japanese)
+	* IE7でエラーが起きるバグを修正しました。
+
+
 v7.0 (2013-07-25)
 	(English)
 	* The method of the connection with the database is changed to PDO.

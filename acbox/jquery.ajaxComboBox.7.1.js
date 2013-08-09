@@ -1,6 +1,6 @@
 /**
  * jQuery Plugin
- * jquery.ajaxComboBox.7.0
+ * jquery.ajaxComboBox.7.1
  * Yuusaku Miyazaki (toumin.m7@gmail.com)
  * MIT License
  */
@@ -192,54 +192,49 @@
 						}
 					}
 					//order_byを配列にする
-					tag.order_by = (tag.order_by == undefined)
-						? _options.order_by
-						: _setOrderbyOption(tag.order_by, tag.field);
+					tag.order_by = (tag.order_by == undefined) ?
+						_options.order_by :
+						_setOrderbyOption(tag.order_by, tag.field);
 					return tag;
 				}
 				//----------------------------------------------
 				//各タグを抽出するための一連の正規表現を作成する。
 				//----------------------------------------------
 				function _setRegExpTag(pattern, space) {
+					//正規表現用エスケープの内部関数
+					function _escapeForReg(text) {
+						return '\\u' + (0x10000 + text.charCodeAt(0)).toString(16).slice(1);
+					};
+
 					//ユーザオプションを正規表現エスケープ
 					var esc_left  = pattern[0].replace(/[\s\S]*/, _escapeForReg);
 					var esc_right = pattern[1].replace(/[\s\S]*/, _escapeForReg);
 					
 					return {
 						//素のカッコ文字
-						left : pattern[0],
-						right : pattern[1],
+						left: pattern[0],
+						right: pattern[1],
 
 						//キャレットの左側へ、開始カッコまでを抜き出す正規表現
-						reg_left : new RegExp(
+						reg_left: new RegExp(
 							esc_left + '((?:(?!' + esc_left + '|' + esc_right + ')[^\\s　])*)$'
 						),
 						//キャレットの右側へ、終了カッコまでを抜き出す正規表現
-						reg_right : new RegExp(
+						reg_right: new RegExp(
 							'^((?:(?!' + esc_left + '|' + esc_right + ')[^\\s　])+)'
 						),
 						//候補選択後、開始カッコ前にスペースを挿入するかを判断するための正規表現
 						//これに当てはまらない場合、スペースを挿入する。
-						space_left : new RegExp(
+						space_left: new RegExp(
 							'^' + esc_left + '$|[\\s　]+' + esc_left + '$'
 						),
 						//候補選択後、終了カッコ前にスペースを挿入するかを判断するための正規表現
 						//これに当てはまらない場合、スペースを挿入する。
-						space_right : new RegExp(
-							'^$|^[\\s　]+'
-						),
-						//候補選択後、終了カッコを補完するかを判断するための正規表現
-						comp_right : new RegExp(
-							'^' + esc_right
-						)
-					};
+						space_right: new RegExp('^$|^[\\s　]+'),
 
-					//----------------------------------------------
-					//正規表現用にエスケープする。
-					//----------------------------------------------
-					function _escapeForReg(text) {
-						return '\\u' + (0x10000 + text.charCodeAt(0)).toString(16).slice(1);
-					}
+						//候補選択後、終了カッコを補完するかを判断するための正規表現
+						comp_right: new RegExp('^' + esc_right)
+					};
 				}
 			}
 			//----------------------------------------
@@ -249,21 +244,17 @@
 			function _setOrderbyOption(arg_order, arg_field) {
 				var arr = [];
 				if (typeof arg_order == 'object') {
-					for (var i=0; i<arg_order.length; i++) {
+					for (var i = 0; i < arg_order.length; i++) {
 						var orders = $.trim(arg_order[i]).split(' ');
-						arr[i] =  (orders.length == 2)
-							? orders
-							: [orders[0], 'ASC'];
+						arr[i] =  (orders.length == 2) ? orders : [orders[0], 'ASC'];
 					}
 				} else {
 					var orders = $.trim(arg_order).split(' ');
-					if (orders.length == 2) {
-						arr[0] = orders;
-					} else {
-						arr[0] = (orders[0].match(/^(ASC|DESC)$/i))
-							? [arg_field, orders[0]]
-							: [orders[0], 'ASC'];
-					}
+					arr[0] = (orders.length == 2) ?
+						orders :
+						(orders[0].match(/^(ASC|DESC)$/i)) ?
+							[arg_field, orders[0]] :
+							[orders[0], 'ASC'];
 				}
 				return arr;
 			}	
@@ -363,40 +354,40 @@
 		function initCssClassName() {
 			//各モード共通
 			var class_name = {
-				container      : 'ac_container', //ComboBoxを包むdivタグ
-				container_open : 'ac_container_open',
-				selected       : 'ac_selected',
-				re_area   : 'ac_result_area', //結果リストの<div>
-				navi      : 'ac_navi', //ページナビを囲む<div>
-				results   : 'ac_results', //候補一覧を囲む<ul>
-				re_off    : 'ac_results_off', //候補一覧(非選択状態)
-				select    : 'ac_over', //選択中の<li>
-				sub_info  : 'ac_subinfo', //サブ情報
-				select_ok : 'ac_select_ok',
-				select_ng : 'ac_select_ng',
-				input_off : 'ac_input_off' //非選択状態
+				container:      'ac_container', //ComboBoxを包むdivタグ
+				container_open: 'ac_container_open',
+				selected:       'ac_selected',
+				re_area:        'ac_result_area', //結果リストの<div>
+				navi:           'ac_navi', //ページナビを囲む<div>
+				results:        'ac_results', //候補一覧を囲む<ul>
+				re_off:         'ac_results_off', //候補一覧(非選択状態)
+				select:         'ac_over', //選択中の<li>
+				sub_info:       'ac_subinfo', //サブ情報
+				select_ok:      'ac_select_ok',
+				select_ng:      'ac_select_ng',
+				input_off:      'ac_input_off' //非選択状態
 			};
 			switch (Opt.plugin_type) {
 				//コンボボックス
 				case 'combobox':
 					class_name = $.extend(class_name, {
-						button    : 'ac_button', //ボタンのCSSクラス
-						btn_on    : 'ac_btn_on', //ボタン(mover時)
-						btn_out   : 'ac_btn_out', //ボタン(mout時)
-						input     : 'ac_input', //テキストボックス
+						button:  'ac_button', //ボタンのCSSクラス
+						btn_on:  'ac_btn_on', //ボタン(mover時)
+						btn_out: 'ac_btn_out', //ボタン(mout時)
+						input:   'ac_input' //テキストボックス
 					});
 					break;
 
 				case 'simple':
 					class_name = $.extend(class_name, {
-						input     : 'ac_s_input' //テキストボックス
+						input: 'ac_s_input' //テキストボックス
 					});
 					break;
 
 				case 'textarea':
 					class_name = $.extend(class_name, {
-						input     : 'ac_textarea', //テキストボックス
-						btn_short_off : 'ac_btn_short_off'
+						input: 'ac_textarea', //テキストボックス
+						btn_short_off: 'ac_btn_short_off'
 					});
 					break;
 			}
