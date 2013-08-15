@@ -11,7 +11,7 @@ $sqlite = array(
 	'username' => '',
 	'password' => ''
 );
-new AjaxComboBox($mysql);
+new AjaxComboBox($sqlite);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 class AjaxComboBox {
@@ -37,8 +37,8 @@ class AjaxComboBox {
 			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 		);
 		$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		// クオーテーションをダブルクオートで統一する。
-		$this->db->query("SET sql_mode='ANSI_QUOTES'");
+		// クオーテーションをダブルクオートで統一する。(MySQLの場合のみ)
+		if (preg_match('/^mysql/ui', $connect['dsn'])) $this->db->query("SET sql_mode='ANSI_QUOTES'");
 	}
 	function getSearchValue() {
 		$this->validateParam();
