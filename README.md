@@ -3,7 +3,7 @@
 A jQuery plugin for creating a text box it can auto-complete and pull-down-select.
 
 ## Demo
-[](http://www.usamimi.info/~sutara/ajaxComboBox/)
+http://www.usamimi.info/~sutara/ajaxComboBox/
 
 
 ## Usage
@@ -22,7 +22,6 @@ A jQuery plugin for creating a text box it can auto-complete and pull-down-selec
 ``` javascript
 $('#box01').ajaxComboBox('foo.php');
 ```
-
 
 ## Note
 Change the value to connect Database in "**./acbox/jquery.ajaxComboBox.php**".
@@ -55,11 +54,11 @@ new AjaxComboBox($sqlite);
 
 #### jquery.suggest 1.1
 + Author: Peter Vulgaris
-+ [](http://www.vulgarisoverip.com/2007/08/06/jquerysuggest-11/)
++ http://www.vulgarisoverip.com/2007/08/06/jquerysuggest-11/
 
 #### jquery.caretpos.js 0.1
 + Author: tubureteru
-+ [](http://d.hatena.ne.jp/tubureteru/20110101/)
++ http://d.hatena.ne.jp/tubureteru/20110101/
 
 
 ## Author
