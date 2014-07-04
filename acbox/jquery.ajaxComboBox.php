@@ -11,7 +11,7 @@ $sqlite = array(
 	'username' => '',
 	'password' => ''
 );
-new AjaxComboBox($mysql);
+new AjaxComboBox($sqlite);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 class AjaxComboBox {
