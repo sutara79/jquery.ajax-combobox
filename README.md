@@ -5,6 +5,9 @@ A jQuery plugin for creating a text box it can auto-complete and pull-down-selec
 ## Demo
 http://www.usamimi.info/~sutara/ajaxComboBox/
 
+## JSDoc
+http://www.usamimi.info/~sutara/ajaxComboBox/JSDoc
+
 
 ## Usage
 

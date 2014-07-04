@@ -39,7 +39,7 @@ var tag_data = [
 	{id:18,name:'Literature',       japanese:'文学'},
 	{id:19,name:'Astronomy',        japanese:'天文学'}
 ];
-jQuery(document).ready(function($){
+jQuery(document).ready(function($) {
 	//------------------------------------------------------
 	//Basic
 	//------------------------------------------------------
@@ -91,7 +91,7 @@ jQuery(document).ready(function($){
 			db_table    : 'nation',
 			field       : 'name',
 			order_by    : [
-				'modified DESC',
+				'name DESC',
 				'created'
 			]
 		}
@@ -211,7 +211,7 @@ jQuery(document).ready(function($){
 			},
 			select_only : true,
 			init_record : ['A009'],
-			primary_key : 'id'
+			primary_key : 'id',
 		}
 	);
 	//------------------------------------------------------

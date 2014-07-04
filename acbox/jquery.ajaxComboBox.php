@@ -11,7 +11,7 @@ $sqlite = array(
 	'username' => '',
 	'password' => ''
 );
-new AjaxComboBox($sqlite);
+new AjaxComboBox($mysql);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 class AjaxComboBox {
@@ -29,6 +29,7 @@ class AjaxComboBox {
 		);
 		$this->db = null;
 	}
+
 	function connectDB($connect) {
 		$this->db = new PDO(
 			$connect['dsn'],
@@ -38,8 +39,9 @@ class AjaxComboBox {
 		);
 		$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		// クオーテーションをダブルクオートで統一する。(MySQLの場合のみ)
-		if (preg_match('/^mysql/ui', $connect['dsn'])) $this->db->query("SET sql_mode='ANSI_QUOTES'");
+		if ($this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql') $this->db->query("SET sql_mode='ANSI_QUOTES'");
 	}
+
 	function getSearchValue() {
 		$this->validateParam();
 		$this->arrangeParam();
@@ -49,6 +51,7 @@ class AjaxComboBox {
 
 		return $this->queryDB();
 	}
+
 	function validateParam() {
 		//----------------------------------------------------
 		// GET送信されたパラメータをひとつずつ配列に格納する。
@@ -91,6 +94,7 @@ class AjaxComboBox {
 		}
 		$this->param = $p;
 	}
+
 	function arrangeParam() {
 		// OFFSET句用
 		$this->param['offset']  = ($this->param['page_num'] - 1) * $this->param['per_page'];
@@ -102,6 +106,7 @@ class AjaxComboBox {
 		$this->param['esc'] = ($this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'sqlite') ?
 			"ESCAPE '\'" : '';
 	}
+
 	function makeSqlAll() {
 		return array(
 			sprintf(
@@ -115,6 +120,7 @@ class AjaxComboBox {
 			"SELECT COUNT(*) FROM {$this->param['db_table']}"
 		);
 	}
+
 	function makeSqlSuggest() {
 		// 明示的に初期化。
 		$this->bind = array();
@@ -169,6 +175,7 @@ class AjaxComboBox {
 			"SELECT COUNT(*) FROM {$this->param['db_table']} WHERE {$this->param['where']}"
 		);
 	}
+
 	function queryDB() {
 		// $return が返信JSONとなる
 		$return = array();
@@ -179,7 +186,7 @@ class AjaxComboBox {
 		$sth = $this->db->prepare($this->query[0]);
 		if ($cnt > 0) {
 			for ($i = 0; $i < $cnt; $i++) {
-				$sth->bindParam($i+1, $this->bind[$i], PDO::PARAM_STR);
+				$sth->bindValue($i + 1, $this->bind[$i], PDO::PARAM_STR);
 			}
 		}
 		$sth->execute();
@@ -191,7 +198,7 @@ class AjaxComboBox {
 		if ($cnt > 0) {
 			$j = count($this->param['q_word']) * count($this->param['search_field']);
 			for ($i = 0; $i < $j; $i++) {
-				$sth->bindParam($i+1, $this->bind[$i], PDO::PARAM_STR);
+				$sth->bindValue($i + 1, $this->bind[$i], PDO::PARAM_STR);
 			}
 		}
 		$sth->execute();
@@ -200,6 +207,7 @@ class AjaxComboBox {
 
 		return $return;
 	}
+
 	function getInitialValue() {
 		//----------------------------------------------------
 		//Parameters from JavaScript.
@@ -219,9 +227,8 @@ class AjaxComboBox {
 				$p['pkey_name']
 			)
 		);
-		$sth->bindParam(1, $p['pkey_val'], PDO::PARAM_STR);
+		$sth->bindValue(1, $p['pkey_val'], PDO::PARAM_STR);
 		$sth->execute();
 		return $sth->fetch(PDO::FETCH_ASSOC);
 	}
 }
-?>

@@ -2,31 +2,30 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>jquery.ajaxComboBox.7.1.js</title>
+		<title>jquery.ajaxComboBox.7.2.js</title>
 		<link rel="stylesheet" href="acbox/jquery.ajaxComboBox.css">
 		<link rel="stylesheet" href="sample/sample.css">
 		<script src="http://code.jquery.com/jquery.min.js"></script>
-		<script src="acbox/jquery.ajaxComboBox.7.1.js"></script>
+		<script src="acbox/jquery.ajaxComboBox.7.2.js"></script>
 		<script src="sample/sample.js"></script>
 	</head>
 	<body>
 		<section id="container">
 		<header>
-			<h1>jquery.ajaxComboBox.7.1.js</h1>
+			<h1>jquery.ajaxComboBox.7.2.js</h1>
 			<div id="language">
 				<button id="lang_en">English</button>
 				<button id="lang_ja">Japanese</button>
 			</div>
-			<p class="date">2013-08-09</p>
+			<p class="date">2014-07-05</p>
 			<h5>
 				<span class="lang_en">Requirements</span>
 				<span class="lang_ja">要件</span>
 			</h5>
 			<ul>
-				<li>PHP : 5.4</li>
-				<li>DataBase : PDO (MySQL, SQLite3 ...)</li>
-				<li>DOCTYPE : HTML5</li>
-				<li>jQuery : 1.10</li>
+				<li>PHP : 5.5.6</li>
+				<li>DataBase : PDO (MySQL, SQLite3, etc.)</li>
+				<li>jQuery : 1.11.1</li>
 			</ul>
 		</header>
 		<!--**************************************************** -->
@@ -405,7 +404,7 @@
       db_table    : 'nation',
       field       : 'name',
       order_by    : [
-        'modified DESC',
+        'name DESC',
         'created'
       ]
     }
@@ -493,7 +492,7 @@
 	  <span class="green">sub_as      : {</span>
 		<span class="green">id       : 'Employer ID',</span>
 		<span class="green">post     : 'Post',</span>
-		<span class="green">'position' : 'Position'</span>
+		<span class="green">position : 'Position'</span>
 	  <span class="green">}</span>
 	}
   );
@@ -656,7 +655,7 @@
 				<span class="lang_ja">基本</span>
 			</h5>
 			<p class="lang_en">
-				When the value that doesn't exist in the list is input, warning is received.
+				When the value that does not exist in the list is input, warning is received.
 			</p>
 			<p class="lang_ja">
 				候補を選択した際、<br>
@@ -1114,9 +1113,7 @@ var  <span class="green">tag_data</span> = [
       db_table: ,
       field: ,
       search_field: ,
-      select_field: ,
       order_by: ,
-      primary_key: ,
       sub_info: ,
       sub_as: ,
       show_field: ,
