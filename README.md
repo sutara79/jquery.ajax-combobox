@@ -56,20 +56,18 @@ new AjaxComboBox($sqlite);
 ## Forked
 
 #### jquery.suggest 1.1
-+ Author: Peter Vulgaris
-+ http://www.vulgarisoverip.com/2007/08/06/jquerysuggest-11/
+- Author: Peter Vulgaris
+- http://www.vulgarisoverip.com/2007/08/06/jquerysuggest-11/
 
 #### jquery.caretpos.js 0.1
-+ Author: tubureteru
-+ http://d.hatena.ne.jp/tubureteru/20110101/
-
+- Author: tubureteru
+- http://d.hatena.ne.jp/tubureteru/20110101/
 
 ## Author
 Yuusaku Miyazaki (宮崎 雄策)
 
-+ [Mail](toumin.m7@gmail.com)
-+ [Blog](http://d.hatena.ne.jp/sutara_lumpur/20090124/1232781879)
-
+- Mail: toumin.m7@gmail.com
+- [Blog](http://d.hatena.ne.jp/sutara_lumpur/20090124/1232781879)
 
 ## License
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
