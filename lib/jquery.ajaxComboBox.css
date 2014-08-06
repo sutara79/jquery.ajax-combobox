@@ -1,27 +1,23 @@
+/**
+ * @file jquery.ajaxComboBoxのためのスタイル指定
+ * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
+ * @license MIT license
+ */
+
 @charset "UTF-8";
 
 /**
- * Contents
- *     Container
- *     "Get all" button
- *     Results
- *     Navi
- *     Sub-info
- *     Select only
- *     Simple
- *     Text Area
+ * Container
  */
-/**************************************
- Container
-**************************************/
-.ac_container{
-	margin : 0;
-	padding : 0;
-	width : auto;
-	background : white;
-	border : none;
+.ac_container {
+	margin: 0;
+	padding: 0;
+	width: auto;
+	background: white;
+	border: none;
 	position: relative;
 }
+
 .ac_input {
 	border: 1px solid #79b;
 	border-right: none;
@@ -33,160 +29,183 @@
 	width: 320px;
 	float: left;
 	border-radius: 4px 0px 0px 4px;
-	box-shadow:         1px 1px 1px rgba(0,0,0,0.2) inset;
 	-moz-box-shadow:    1px 1px 1px rgba(0,0,0,0.2) inset;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2) inset;
+	box-shadow:         1px 1px 1px rgba(0,0,0,0.2) inset;
 }
-.ac_container_open .ac_input{
-	border-radius : 4px 0px 0px 0px !important;
+
+.ac_container_open .ac_input {
+	border-radius: 4px 0px 0px 0px !important;
 }
-/**************************************
- "Get all" button
-**************************************/
-.ac_button{
-	border : 1px solid #79b;
-	width : 32px;
-	text-align : center;
-	position : relative;
-	cursor : pointer;
-	float : left !important;
+
+/**
+ * "Get all" button
+ */
+.ac_button {
+	border: 1px solid #79b;
+	width: 32px;
+	text-align: center;
+	position: relative;
+	cursor: pointer;
+	float: left !important;
 	clear: none !important;
-	padding:0px !important;
+	padding: 0px !important;
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
-.ac_container_open .ac_button{
-	border-bottom-right-radius : 0 !important;
+
+.ac_container_open .ac_button {
+	border-bottom-right-radius: 0 !important;
 }
-.ac_button img{
-	position : absolute;
-	height : 16px;
-	width : 16px;
+
+.ac_button img {
+	position: absolute;
+	height: 16px;
+	width: 16px;
 }
-.ac_btn_out{
-	background : #bde;
+
+.ac_btn_out {
+	background: #bde;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#eeffff', endColorstr='#99aabb');
 	background-image: linear-gradient(to bottom, #eeffff, #99aabb);
 }
-.ac_btn_on{
-	background : #dee;
+
+.ac_btn_on {
+	background: #dee;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#ffffff', endColorstr='#bbbbcc');
 	background-image: linear-gradient(to bottom, #ffffff, #bbbbcc);
 }
-/**************************************
- Results
-**************************************/
+
+/**
+ * Results
+ */
 .ac_result_area {
-	background-color : transparent;
-	margin : 0;
-	padding : 0;
-	list-style : none;
-	position : absolute;
-	z-index : 100;
-	display : none;
-	border : 1px solid #79b;
-	border-top : 0;
-	box-shadow :         2px 2px 2px rgba(0,0,0,0.4);
-	-moz-box-shadow :    2px 2px 2px rgba(0,0,0,0.4);
-	-webkit-box-shadow : 2px 2px 2px rgba(0,0,0,0.4);
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	z-index: 100;
+	display: none;
+	border: 1px solid #79b;
+	border-top: 0;
+	box-shadow:         2px 2px 2px rgba(0,0,0,0.4);
+	-moz-box-shadow:    2px 2px 2px rgba(0,0,0,0.4);
+	-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
 }
+
 .ac_results {
-	background-color : white;
-	margin : 0;
-	padding : 0;
-	list-style : none;
+	background-color: white;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
-.ac_results li{
-	margin : 0;
-	height : auto !important;
-	padding : 3px 5px;
-	white-space : nowrap;
-	color : #000;
-	text-align : left;
-	overflow : hidden;
-	font-size : 14px;
-	line-height : 1;
-	position : relative;
+
+.ac_results li {
+	margin: 0;
+	height: auto !important;
+	padding: 3px 5px;
+	white-space: nowrap;
+	color: #000;
+	text-align: left;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 1;
+	position: relative;
 }
+
 .ac_selected {
-	background-color:#def;
-	font-weight:bold;
+	background-color: #def;
+	font-weight: bold;
 }
-.ac_over{
-	cursor : pointer;
-	background-color : #36c;
-	color : #fff !important;
+
+.ac_over {
+	cursor: pointer;
+	background-color: #36c;
+	color: #fff !important;
 }
-/*-------------------------------------
- 選択してないほうの表示を暗くする
--------------------------------------*/
+
+/**
+ * 選択してないほうの表示を暗くする
+ */
 .ac_results_off {
-	background:rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.8);
 }
+
 .ac_input_off {
 	background: #eee;
-	color:#555;
+	color: #555;
 }
+
 .ac_hide {
-	display:none;
+	display: none;
 }
-/**************************************
- Navi
-**************************************/
-.ac_navi{
-	background : #eee;
-	border-bottom : 1px solid #79b;
-	margin : 0;
-	padding : 4px;
-	text-align : right;
-	font-size : 13px;
-	font-weight : normal;
-	line-height : 1;
+
+/**
+ * Navi
+ */
+.ac_navi {
+	background: #eee;
+	border-bottom: 1px solid #79b;
+	margin: 0;
+	padding: 4px;
+	text-align: right;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 1;
 }
-.ac_navi a : link,
-.ac_navi a : visited,
-.ac_navi a : hover,
-.ac_navi a : active{
-	color : blue;
-	text-decoration : underline;
-	margin : 0px 4px;
-	font-weight : normal;
+
+.ac_navi a:link,
+.ac_navi a:visited,
+.ac_navi a:hover,
+.ac_navi a:active {
+	color: blue;
+	text-decoration: underline;
+	margin: 0px 4px;
+	font-weight: normal;
 }
-.ac_navi p{
-	font-size : 15px;
-	text-align : center;
-	color : black;
-	padding-top : 4px;
-	margin : 0;
+
+.ac_navi p {
+	font-size: 15px;
+	text-align: center;
+	color: black;
+	padding-top: 4px;
+	margin: 0;
 }
-.ac_navi .current{
-	font-weight : bold;
-	font-size : 16px;
-	color : #00c;
+
+.ac_navi .current {
+	font-weight: bold;
+	font-size: 16px;
+	color: #00c;
 }
-.ac_navi .page_end{
-	color : gray;
-	margin : 0px 4px;
-	font-weight : normal;
+
+.ac_navi .page_end {
+	color: gray;
+	margin: 0px 4px;
+	font-weight: normal;
 }
+
 .navi_page,
 .navi_first,
 .navi_prev,
 .navi_next,
-.navi_last{
-	margin:auto 4px !important;
+.navi_last {
+	margin: auto 4px !important;
 }
+
 .ac_navi .info {
-	margin:0px !important;
-	padding:0px !important;
+	margin: 0px !important;
+	padding: 0px !important;
 }
-/**************************************
- Sub-info
-**************************************/
+
+/**
+ * Sub-info
+ */
 .ac_subinfo {
-	margin:0px !important;
-	padding:0px !important;
+	margin: 0px !important;
+	padding: 0px !important;
 }
+
 .ac_subinfo dl {
 	display: none;
 	z-index: 200;
@@ -203,39 +222,44 @@
 	background: #eee;
 	color: #000;
 }
-.ac_subinfo dt{
-	width : 92px;
-	word-wrap:break-word;
-	clear : both;
-	float : left;
-	margin : 0;
-	padding : 2px 4px;
-	font-size : 13px;
-	text-align : left;
-	font-weight : normal;
-	background : #CEDFF7;
-	color : #37486A;
+
+.ac_subinfo dt {
+	width: 92px;
+	word-wrap: break-word;
+	clear: both;
+	float: left;
+	margin: 0;
+	padding: 2px 4px;
+	font-size: 13px;
+	text-align: left;
+	font-weight: normal;
+	background: #CEDFF7;
+	color: #37486A;
 }
+
 .ac_subinfo dt.hide {
-	display:none !important;
+	display: none !important;
 }
-.ac_subinfo dd{
-	width : 152px;
-	float : left;
+
+.ac_subinfo dd {
+	width: 152px;
+	float: left;
 	word-wrap:break-word;
-	margin : 0;
-	padding : 2px 4px;
-	font-size : 13px;
+	margin: 0;
+	padding: 2px 4px;
+	font-size: 13px;
 }
-/**************************************
- Select only
-**************************************/
-.ac_container .ac_select_ng{
-	background : #fcc;
+
+/**
+ * Select only
+ */
+.ac_container .ac_select_ng {
+	background: #fcc;
 }
-/**************************************
- Simple
-**************************************/
+
+/**
+ * Simple
+ */
 .ac_s_input {
 	border: 1px solid #79b;
 	background-color: white;
@@ -250,12 +274,14 @@
 	-moz-box-shadow:    1px 1px 1px rgba(0,0,0,0.2) inset;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2) inset;
 }
+
 .ac_container_open .ac_s_input{
 	border-radius: 4px 4px 0px 0px !important;
 }
-/**************************************
- Text Area
-**************************************/
+
+/**
+ * Text Area
+ */
 .ac_textarea {
 	border: 1px solid #79b;
 	background-color: white;
