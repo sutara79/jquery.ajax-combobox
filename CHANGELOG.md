@@ -1,4 +1,8 @@
-# Change Log
+# Change Log for jquery.ajax-combobox
+
+### 7.2.1 (2014-08-08)
+- Plugin name was changed.  
+  (プラグイン名、ファイル名、フォルダ名を変更しました。)
 
 ### v7.2 (2014-07-05)
 - Code-refactoring has done.  

@@ -44,14 +44,14 @@ jQuery(document).ready(function($) {
 	//Basic
 	//------------------------------------------------------
 	$('#ac01_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'nation'
 		}
 	);
 	$('#ac01_02').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'name',
@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_03').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'name',
@@ -69,7 +69,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_04').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang         : 'en',
 			db_table     : 'nation',
@@ -77,7 +77,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_05').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang     : 'en',
 			db_table : 'nation',
@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_06').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'nation',
@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
 	//Sub-info
 	//------------------------------------------------------
 	$('#ac02_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang     : 'en',
 			db_table : 'employee',
@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_02').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang     : 'en',
 			db_table : 'employee',
@@ -121,7 +121,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_03').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'employee',
@@ -134,7 +134,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_04').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang       : 'en',
 			db_table   : 'employee',
@@ -146,7 +146,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_05').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang       : 'en',
 			db_table   : 'employee',
@@ -155,7 +155,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_06').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang     : 'en',
 			db_table : 'employee',
@@ -166,7 +166,7 @@ jQuery(document).ready(function($) {
 	//Select-only
 	//------------------------------------------------------
 	$('#ac03_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'employee',
@@ -175,7 +175,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac03_02').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'nation',
@@ -189,7 +189,7 @@ jQuery(document).ready(function($) {
 	//Initial Value
 	//------------------------------------------------------
 	$('#ac04_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'nation',
@@ -218,7 +218,7 @@ jQuery(document).ready(function($) {
 	//Submitting at once when selected
 	//------------------------------------------------------
 	$('#ac06_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'nation',
@@ -229,7 +229,7 @@ jQuery(document).ready(function($) {
 		alert($(this).val() + ' is selected.');
 	});
 	$('#ac06_02').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			db_table    : 'nation',
@@ -248,7 +248,7 @@ jQuery(document).ready(function($) {
 	//simple mode
 	//------------------------------------------------------
 	$('#ac07_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'simple', 
@@ -260,7 +260,7 @@ jQuery(document).ready(function($) {
 	//Basic
 	//------------------------------------------------------
 	$('#ac08_01').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',
@@ -273,7 +273,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_02').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',
@@ -300,7 +300,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_04').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',
@@ -323,7 +323,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_05').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',
@@ -352,7 +352,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_06').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',
@@ -362,7 +362,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_07').ajaxComboBox(
-		'lib/jquery.ajaxComboBox.php',
+		'lib/jquery.ajax-combobox.php',
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',

@@ -1,8 +1,8 @@
 {
-	"name": "ajaxComboBox",
-	"title": "jquery.ajaxComboBox", 
+	"name": "ajax-combobox",
+	"title": "jquery.ajax-combobox", 
 	"description": "jQuery plugin for creating a text box it can auto-complete and pull-down-select.",
-	"version": "7.2.0",
+	"version": "7.2.1",
 	"keywords": [
 		"suggest",
 		"combobox",
@@ -11,7 +11,7 @@
 	"author": {
 		"name": "Yuusaku Miyazaki",
 		"email": "toumin.m7@gmail.com",
-		"url": "https://github.com/SutaraLumpur"
+		"url": "https://github.com/sutara79"
 	},
 	"licenses": [
 		{
@@ -22,7 +22,7 @@
 	"dependencies": {
 		"jquery": ">=1.9"
 	},
-	"demo": "http://www.usamimi.info/~sutara/ajaxComboBox/",
-	"docs": "http://www.usamimi.info/~sutara/ajaxComboBox/JSDoc",
-	"bugs": "https://github.com/SutaraLumpur/jquery.ajaxComboBox.js/issues"
+	"demo": "http://www.usamimi.info/~sutara/ajax-combobox/",
+	"docs": "http://www.usamimi.info/~sutara/ajax-combobox/JSDoc",
+	"bugs": "https://github.com/sutara79/jquery.ajax-combobox.js/issues"
 }

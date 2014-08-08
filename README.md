@@ -1,12 +1,12 @@
-# jquery.ajaxComboBox
+# jquery.ajax-combobox
 
 A jQuery plugin for creating a text box it can auto-complete and pull-down-select.
 
 ## Demo
-http://www.usamimi.info/~sutara/ajaxComboBox/
+http://www.usamimi.info/~sutara/ajax-combobox/
 
 ## JSDoc
-http://www.usamimi.info/~sutara/ajaxComboBox/JSDoc
+http://www.usamimi.info/~sutara/ajax-combobox/jsdoc
 
 
 ## Usage
@@ -14,8 +14,8 @@ http://www.usamimi.info/~sutara/ajaxComboBox/JSDoc
 ##### HTML
 ``` html
 <head>
-	<link rel="stylesheet" href="css/jquery.ajaxComboBox.css">
-	<script src="js/jquery.ajaxComboBox.0.0.js"></script>
+	<link rel="stylesheet" href="css/jquery.ajax-combobox.css">
+	<script src="js/jquery.ajax-combobox.7.2.1.js"></script>
 </head>
 <body>
 	<input type="text" id="box01">
@@ -27,8 +27,8 @@ $('#box01').ajaxComboBox('foo.php');
 ```
 
 ## Note
-Change the value to connect Database in "**./acbox/jquery.ajaxComboBox.php**".
-("**./acbox/jquery.ajaxComboBox.php**"の文頭のデータベースの接続設定を、お使いの環境に合わせて変更して下さい。)
+Change the value to connect Database in "**./lib/jquery.ajax-combobox.php**".
+("**./lib/jquery.ajax-combobox.php**"の文頭のデータベースの接続設定を、お使いの環境に合わせて変更して下さい。)
 ``` php
 <?php
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -45,12 +45,13 @@ $sqlite = array(
 );
 new AjaxComboBox($sqlite);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
+?>
 ```
 
 ## Extensions
 + [addComboBox](http://www.usamimi.info/~sutara/sample/addComboBox/)
 
-+ [ajaxComboBox_for_CakePHP](https://github.com/SutaraLumpur/ajaxComboBox_for_CakePHP)
++ [ajaxComboBox_for_CakePHP](https://github.com/sutara79/ajaxComboBox_for_CakePHP)
 
 
 ## Forked
