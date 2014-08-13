@@ -19,8 +19,8 @@
 					オートコンプリートとドロップダウンリストを組み合わせたコンボボックス
 				</p>
 				<dl class="dl-horizontal">
-					<dt>Version</dt><dd>7.2.1</dd>
-					<dt>Update</dt><dd>2014-08-08</dd>
+					<dt>Version</dt><dd>7.3.0-alpha</dd>
+					<dt>Update</dt><dd>2014-08-13</dd>
 					<dt>Author</dt><dd>Yuusaku Miyazaki</dd>
 					<dt>License</dt><dd><a href="http://opensource.org/licenses/mit-license.php">MIT License</a></dd>
 				</dl>
@@ -67,6 +67,10 @@
 						<a class="list-group-item" href="#sample01_06">
 							<span class="lang_en">Setting the rule of order</span>
 							<span class="lang_ja">並べ替えの規則を決める</span>
+						</a>
+						<a class="list-group-item" href="#sample01_07">
+							<span class="lang_en">Changing the language of the message</span>
+							<span class="lang_ja">メッセージの言語を変える</span>
 						</a>
 					</div>
 					<h4>
@@ -420,6 +424,51 @@ order_by: [
 ]
 </pre>
 						 </div>
+					</section>
+
+					<section id="sample01_07" class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<span class="lang_en">Changing the language of the message</span>
+								<span class="lang_ja">メッセージの言語を変える</span>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<p class="lang_en">
+								Set the <code>lang</code> option.
+							</p>
+							<p class="lang_ja">
+								<code>lang</code>オプションで指定してください。
+							</p>
+							<table class="table">
+								<thead><tr><th>Option value</th><th>Language</th></tr></thead>
+								<tbody>
+									<tr><td>en</td><td>English</td></tr>
+									<tr><td>es</td><td>Spanish<br>(Thanks Joaquin G. de la Zerda)</td></tr>
+									<tr><td>pt-br</td><td>Brazilian Portuguese<br>(Thanks Marcio de Souza)</td></tr>
+									<tr><td>(default)</td><td>Japanese</td></tr>
+								</tbody>
+							</table>
+							<label for="ac01_07_01">
+								<span class="lang_en">Nation (es):</span>
+								<span class="lang_ja">国名 (es):</span>
+							</label>
+							<input id="ac01_07_01" type="text">
+							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_01')">
+							<hr>
+							<label for="ac01_07_02">
+								<span class="lang_en">Nation (pt-br):</span>
+								<span class="lang_ja">国名 (pt-br):</span>
+							</label>
+							<input id="ac01_07_02" type="text">
+							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_02')">
+							<hr>
+							<label for="ac01_07_03">
+								<span class="lang_en">Nation (ja):</span>
+								<span class="lang_ja">国名 (ja):</span>
+							</label>
+							<input id="ac01_07_03" type="text">
+							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_03')">
 					</section>
 
 					<section id="sample02_01" class="panel panel-primary">
@@ -1320,7 +1369,7 @@ $('#ac08_07').ajaxComboBox(
 
 		<!-- JavaScript -->
 		<script src="//code.jquery.com/jquery.min.js"></script>
-		<script src="lib/jquery.ajax-combobox.7.2.1.js"></script><!-- required -->
+		<script src="lib/jquery.ajax-combobox.7.3.0-alpha.js"></script><!-- required -->
 		<script src="sample/jquery.simple-scroll-follow.2.0.0.js"></script>
 		<script src="sample/sample.js"></script>
 	</body>

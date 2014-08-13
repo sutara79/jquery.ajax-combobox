@@ -96,6 +96,10 @@ jQuery(document).ready(function($) {
 			]
 		}
 	);
+	$('#ac01_07_01').ajaxComboBox('lib/jquery.ajax-combobox.php', {lang: 'es', db_table: 'nation'});
+	$('#ac01_07_02').ajaxComboBox('lib/jquery.ajax-combobox.php', {lang: 'pt-br', db_table: 'nation'});
+	$('#ac01_07_03').ajaxComboBox('lib/jquery.ajax-combobox.php', {db_table: 'nation'});
+
 	//------------------------------------------------------
 	//Sub-info
 	//------------------------------------------------------

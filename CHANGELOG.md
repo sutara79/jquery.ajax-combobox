@@ -1,5 +1,12 @@
 # Change Log for jquery.ajax-combobox
 
+### 7.3.0-alpha (2014-08-13)
+- Brazilian Portuguese was added to the language of the message. Thanks Marcio de Souza!  
+  (プラグインのメッセージの言語にブラジル系ポルトガル語を選べるようになりました。マルシオ・ソウザさんに感謝します。)
+- CAUTION: Shortening URL can not work. (v7.2.1 is also)  
+  I am investigating it now.
+  (現在、URL短縮が機能しておらず、調査中です。)
+
 ### 7.2.1 (2014-08-08)
 - Plugin name was changed.  
   (プラグイン名、ファイル名、フォルダ名を変更しました。)

@@ -2,7 +2,7 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //#### You MUST change this value. ####
 $mysql = array(
-	'dsn'      => 'mysql:host=localhost;dbname=acbox;charset=utf8',
+	'dsn'      => 'mysql:host=localhost;dbname=test;charset=utf8',
 	'username' => 'root',
 	'password' => ''
 );

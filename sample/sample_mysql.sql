@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 4.2.7
 -- http://www.phpmyadmin.net
 --
--- ホスト: localhost
--- 生成時間: 2012 年 9 月 05 日 06:56
--- サーバのバージョン: 5.5.16
--- PHP のバージョン: 5.3.8
+-- Host: localhost
+-- Generation Time: 2014 年 8 月 13 日 09:12
+-- サーバのバージョン： 5.6.20
+-- PHP Version: 5.6.0RC3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- データベース: `acbox`
+-- Database: `acbox`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータをダンプしています `employee`
+-- テーブルのデータのダンプ `employee`
 --
 
 INSERT INTO `employee` (`id`, `name`, `post`, `position`) VALUES
@@ -64,15 +64,14 @@ INSERT INTO `employee` (`id`, `name`, `post`, `position`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `name` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=254 ;
 
 --
--- テーブルのデータをダンプしています `name`
+-- テーブルのデータのダンプ `name`
 --
 
 INSERT INTO `name` (`id`, `name`, `created`, `modified`) VALUES
@@ -337,15 +336,14 @@ INSERT INTO `name` (`id`, `name`, `created`, `modified`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `nation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=97 ;
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
 
 --
--- テーブルのデータをダンプしています `nation`
+-- テーブルのデータのダンプ `nation`
 --
 
 INSERT INTO `nation` (`id`, `name`, `created`, `modified`) VALUES
@@ -444,7 +442,8 @@ INSERT INTO `nation` (`id`, `name`, `created`, `modified`) VALUES
 (93, 'Wales', '2009-01-01 00:00:00', '2009-01-01 00:00:00'),
 (94, 'Yemen', '2009-01-01 00:00:00', '2009-01-01 00:00:00'),
 (95, 'Zaire', '2009-01-01 00:00:00', '2009-01-01 00:00:00'),
-(96, 'Zambia', '2009-01-01 00:00:00', '2009-01-01 00:00:00');
+(96, 'Zambia', '2009-01-01 00:00:00', '2009-01-01 00:00:00'),
+(97, 'Brazil', '2009-01-01 00:00:00', '2009-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -453,16 +452,15 @@ INSERT INTO `nation` (`id`, `name`, `created`, `modified`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `japanese` varchar(100) NOT NULL,
   `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `modified` datetime NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- テーブルのデータをダンプしています `tag`
+-- テーブルのデータのダンプ `tag`
 --
 
 INSERT INTO `tag` (`id`, `name`, `japanese`, `created`, `modified`) VALUES
@@ -486,6 +484,47 @@ INSERT INTO `tag` (`id`, `name`, `japanese`, `created`, `modified`) VALUES
 (18, 'Literature', '文学', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (19, 'Astronomy', '天文学', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `name`
+--
+ALTER TABLE `name`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nation`
+--
+ALTER TABLE `nation`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tag`
+--
+ALTER TABLE `tag`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `name`
+--
+ALTER TABLE `name`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=254;
+--
+-- AUTO_INCREMENT for table `nation`
+--
+ALTER TABLE `nation`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
+--
+-- AUTO_INCREMENT for table `tag`
+--
+ALTER TABLE `tag`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
