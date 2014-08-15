@@ -27,7 +27,7 @@ $('#box01').ajaxComboBox('foo.php');
 ```
 
 ## Note
-Change the value to connect Database in "**./lib/jquery.ajax-combobox.php**".
+Change the value to connect Database in "**./lib/jquery.ajax-combobox.php**".  
 ("**./lib/jquery.ajax-combobox.php**"の文頭のデータベースの接続設定を、お使いの環境に合わせて変更して下さい。)
 ``` php
 <?php

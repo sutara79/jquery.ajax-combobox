@@ -360,7 +360,7 @@ jQuery(document).ready(function($) {
 		{
 			lang        : 'en',
 			plugin_type : 'textarea',
-			shorten_url : '#ac08_06_shorten',
+			shorten_btn : '#ac08_06_shorten',
 			shorten_src : 'lib/bitly.php',
 			shorten_min : 20
 		}
@@ -371,7 +371,7 @@ jQuery(document).ready(function($) {
 			lang        : 'en',
 			plugin_type : 'textarea',
 			db_table    : 'tag',
-			shorten_url : '#ac08_07_shorten',
+			shorten_btn : '#ac08_07_shorten',
 			shorten_src : 'lib/bitly.php',
 			shorten_min : 20,
 			tags        : [

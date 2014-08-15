@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>jquery.ajax-combobox</title>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -19,10 +19,10 @@
 					オートコンプリートとドロップダウンリストを組み合わせたコンボボックス
 				</p>
 				<dl class="dl-horizontal">
-					<dt>Version</dt><dd>7.3.0-alpha</dd>
+					<dt>Version</dt><dd>7.3.0</dd>
 					<dt>Update</dt><dd>2014-08-13</dd>
 					<dt>Author</dt><dd>Yuusaku Miyazaki</dd>
-					<dt>License</dt><dd><a href="http://opensource.org/licenses/mit-license.php">MIT License</a></dd>
+					<dt>License</dt><dd><a href="//opensource.org/licenses/mit-license.php">MIT License</a></dd>
 				</dl>
 				<a href="//github.com/sutara79/jquery.ajax-combobox" class="btn btn-primary" role="button">GitHub »</a>
 				<a href="jsdoc/" class="btn btn-primary" role="button">JSDoc »</a>
@@ -1278,11 +1278,11 @@ $('#ac08_05').ajaxComboBox(
 								<span class="lang_ja">学問:</span>
 							</label>
 							<textarea id="ac08_06">
-http://ja.wikipedia.org/wiki/あにゃまる探偵キルミンずぅ good.
-(http://www.google.com/) good.
-ftp://too.short bad.("shorten_min" option)
-Do not touch URLhttp://www.google.com/ bad.
-www.google.com bad. (needs protocol)
+http://ja.wikipedia.org/wiki/あにゃまる探偵キルミンずぅ *good*.
+(http://www.google.com/) *good*.
+ftp://too.short *bad*.("shorten_min" option)
+Do not touch URLhttp://www.google.com/ *bad*.
+www.google.com *bad*. (URI scheme is required)
 </textarea>
 							<button id="ac08_06_shorten">Shorten</button>
 							<h6>JavaScript</h6>
@@ -1292,7 +1292,7 @@ $('#ac08_06').ajaxComboBox(
   {
     lang: 'en',
     plugin_type: 'textarea',
-    <span class="green">shorten_url</span>: <span class="red">'#ac08_06_shorten'</span>,
+    <span class="green">shorten_btn</span>: <span class="red">'#ac08_06_shorten'</span>,
     <span class="green">shorten_src</span>: <span class="red">'lib/bitly.php'</span>,
     <span class="green">shorten_min</span>: <span class="red">20</span>
   }
@@ -1320,11 +1320,11 @@ $('#ac08_06').ajaxComboBox(
 								<span class="lang_ja">学問:</span>
 							</label>
 							<textarea id="ac08_07">[math][his] #phi #gy
-http://ja.wikipedia.org/wiki/あにゃまる探偵キルミンずぅ good.
-(http://www.google.com/) good.
-ftp://too.short bad.("shorten_min" option)
-Do not touch URLhttp://www.google.com/ bad.
-www.google.com bad. (needs protocol)
+http://ja.wikipedia.org/wiki/あにゃまる探偵キルミンずぅ *good*.
+(http://www.google.com/) *good*.
+ftp://too.short *bad*.("shorten_min" option)
+Do not touch URLhttp://www.google.com/ *bad*.
+www.google.com *bad*. (URI scheme is required)
 @lo @lin</textarea>
 							<button id="ac08_07_shorten">Shorten</button>
 							<h6>JavaScript</h6>
@@ -1335,7 +1335,7 @@ $('#ac08_07').ajaxComboBox(
     lang: 'en',
     plugin_type: 'textarea',
     db_table: 'tag',
-    shorten_url: '#ac08_07_shorten',
+    shorten_btn: '#ac08_07_shorten',
     shorten_src: 'lib/bitly.php',
     shorten_min: 20,
     tags: [
@@ -1360,7 +1360,7 @@ $('#ac08_07').ajaxComboBox(
 		</div><!-- .container -->
 		<footer>
 			<div class="container">
-				powered by <a href="http://www.usamimi.info/new/index.html">usamimi.info</a>, <a href="http://getbootstrap.com/">Bootstrap</a>
+				powered by <a href="//www.usamimi.info/new/index.html">usamimi.info</a>, <a href="//getbootstrap.com/">Bootstrap</a>
 			</div>
 		</footer>
 		<div id="jump_to_top">
@@ -1369,7 +1369,7 @@ $('#ac08_07').ajaxComboBox(
 
 		<!-- JavaScript -->
 		<script src="//code.jquery.com/jquery.min.js"></script>
-		<script src="lib/jquery.ajax-combobox.7.3.0-alpha.js"></script><!-- required -->
+		<script src="lib/jquery.ajax-combobox.7.3.0.js"></script><!-- required -->
 		<script src="sample/jquery.simple-scroll-follow.2.0.0.js"></script>
 		<script src="sample/sample.js"></script>
 	</body>

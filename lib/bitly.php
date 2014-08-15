@@ -17,7 +17,7 @@ foreach ($_GET as $url) {
 	$req .= "&login=$bitly_usr";
 	$req .= "&apiKey=$bitly_key";
 	//$req .= '&longUrl='.rawurlencode($url);
-	$req .= '&longUrl=' . urlencode($url);
+	$req .= '&longUrl=' . rawurlencode($url);
 
 	$contents = file_get_contents($req);
 	if(isset($contents)) {
