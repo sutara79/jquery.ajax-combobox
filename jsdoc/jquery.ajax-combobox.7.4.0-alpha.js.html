@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: jquery.ajax-combobox.7.3.1.js</title>
+    <title>JSDoc: Source: jquery.ajax-combobox.7.4.0-alpha.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: jquery.ajax-combobox.7.3.1.js</h1>
+    <h1 class="page-title">Source: jquery.ajax-combobox.7.4.0-alpha.js</h1>
 
     
 
@@ -27,7 +27,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @file jQuery Plugin: jquery.ajaxComboBox
- * @version 7.3.1
+ * @version 7.4.0-alpha
  * @author Yuusaku Miyazaki [toumin.m7@gmail.com]
  * @license MIT License
  */
@@ -39,6 +39,7 @@
  * @memberof jQuery
  * @param {string|Object} source - サーバ側のプログラム、もしくは連想配列そのもの。
  * @param {Object} option - オプションを収めた連想配列。
+ * @param {boolean} [option.instance] - プラグインを呼び出すとき、jQueryオブジェクトではなくインスタンスを返すかどうか
  * @param {string} [option.lang='ja'] - プラグインのメッセージに使われる言語。 ('ja', 'en', 'es' and 'pt-br')
  * @param {string} [option.db_table='tbl'] - 問い合わせるデータベースのテーブル。
  * @param {string} [option.field='name'] - JavaScript側での結果表示に用いるフィールド。
@@ -75,9 +76,11 @@
  * @param {string} [option.tags.hide_field=option.hide_field]
  */
 $.fn.ajaxComboBox = function(source, option) {
-	return this.each(function() {
-		new AjaxComboBox(this, source, option);
+	var arr = [];
+	this.each(function() {
+		arr.push(new AjaxComboBox(this, source, option));
 	});
+	return (option != undefined &amp;&amp; option.instance != undefined &amp;&amp; option.instance) ? $(arr) : this;
 };
 
 /**
@@ -130,37 +133,37 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	_setOption1st: function(source, option) {
 		return $.extend({
 			// 基本設定
-			source      : source,
-			lang        : 'ja',
-			plugin_type : 'combobox',
-			init_record : false,
-			db_table    : 'tbl',
-			field       : 'name',
-			and_or      : 'AND',
-			per_page    : 10,
-			navi_num    : 5,
-			primary_key : 'id',
-			button_img  : 'lib/btn.png',
-			bind_to     : false,
-			navi_simple : false,
+			source: source,
+			lang: 'ja',
+			plugin_type: 'combobox',
+			init_record: false,
+			db_table: 'tbl',
+			field: 'name',
+			and_or: 'AND',
+			per_page: 10,
+			navi_num: 5,
+			primary_key: 'id',
+			button_img: 'lib/btn.png',
+			bind_to: false,
+			navi_simple: false,
 
 			// サブ情報
-			sub_info    : false,
-			sub_as      : {},
-			show_field  : '',
-			hide_field  : '',
+			sub_info: false,
+			sub_as: {},
+			show_field: '',
+			hide_field: '',
 
 			// セレクト専用
-			select_only : false,
+			select_only: false,
 
 			// タグ検索
-			tags        : false,
+			tags: false,
 
 			// URL短縮用
-			shorten_btn : false, //短縮実行ボタンのセレクタ
-			shorten_src : 'lib/bitly.php',
-			shorten_min : 20,
-			shorten_reg : false
+			shorten_btn: false, //短縮実行ボタンのセレクタ
+			shorten_src: 'lib/bitly.php',
+			shorten_min: 20,
+			shorten_reg: false
 		}, option);
 	},
 
@@ -259,19 +262,19 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	_setTagOptions: function(option, idx) {
 		option.tags[idx] = $.extend({
 			// スペース挿入
-			space        : [true, true],
+			space: [true, true],
 			
 			// DB接続
-			db_table     : option.db_table,
-			field        : option.field,
-			search_field : option.search_field,
-			primary_key  : option.primary_key,
+			db_table: option.db_table,
+			field: option.field,
+			search_field: option.search_field,
+			primary_key: option.primary_key,
 
 			// サブ情報
-			sub_info     : option.sub_info,
-			sub_as       : option.sub_as,
-			show_field   : option.show_field,
-			hide_field   : option.hide_field
+			sub_info: option.sub_info,
+			sub_as: option.sub_as,
+			show_field: option.show_field,
+			hide_field: option.hide_field
 		}, option.tags[idx]);
 
 		// カンマ区切りのオプションを配列に変換する。
@@ -481,26 +484,26 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	_setCssClass: function() {
 		//各モード共通
 		var css_class = {
-			container      : 'ac_container', //ComboBoxを包むdivタグ
-			container_open : 'ac_container_open',
-			selected       : 'ac_selected',
-			re_area        : 'ac_result_area', //結果リストの&lt;div>
-			navi           : 'ac_navi', //ページナビを囲む&lt;div>
-			results        : 'ac_results', //候補一覧を囲む&lt;ul>
-			re_off         : 'ac_results_off', //候補一覧(非選択状態)
-			select         : 'ac_over', //選択中の&lt;li>
-			sub_info       : 'ac_subinfo', //サブ情報
-			select_ok      : 'ac_select_ok',
-			select_ng      : 'ac_select_ng',
-			input_off      : 'ac_input_off' //非選択状態
+			container: 'ac_container', //ComboBoxを包むdivタグ
+			container_open: 'ac_container_open',
+			selected: 'ac_selected',
+			re_area: 'ac_result_area', //結果リストの&lt;div>
+			navi: 'ac_navi', //ページナビを囲む&lt;div>
+			results: 'ac_results', //候補一覧を囲む&lt;ul>
+			re_off: 'ac_results_off', //候補一覧(非選択状態)
+			select: 'ac_over', //選択中の&lt;li>
+			sub_info: 'ac_subinfo', //サブ情報
+			select_ok: 'ac_select_ok',
+			select_ng: 'ac_select_ng',
+			input_off: 'ac_input_off' //非選択状態
 		};
 		switch (this.option.plugin_type) {
 			case 'combobox':
 				css_class = $.extend(css_class, {
-					button  : 'ac_button', //ボタンのCSSクラス
-					btn_on  : 'ac_btn_on', //ボタン(mover時)
-					btn_out : 'ac_btn_out', //ボタン(mout時)
-					input   : 'ac_input' //テキストボックス
+					button: 'ac_button', //ボタンのCSSクラス
+					btn_on: 'ac_btn_on', //ボタン(mover時)
+					btn_out: 'ac_btn_out', //ボタン(mout時)
+					input: 'ac_input' //テキストボックス
 				});
 				break;
 
@@ -512,8 +515,8 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 
 			case 'textarea':
 				css_class = $.extend(css_class, {
-					input         : 'ac_textarea', //テキストボックス
-					btn_short_off : 'ac_btn_short_off'
+					input: 'ac_textarea', //テキストボックス
+					btn_short_off: 'ac_btn_short_off'
 				});
 				break;
 		}
@@ -526,29 +529,29 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	 */
 	_setProp: function() {
 		this.prop = {
-			timer_valchange : false, //タイマー変数(一定時間ごとに入力値の変化を監視)
-			is_suggest      : false, //リストのタイプ。false=>全件 / true=>予測
-			page_all        : 1,     //全件表示の際の、現在のページ番号
-			page_suggest    : 1,     //候補表示の際の、現在のページ番号
-			max_all         : 1,     //全件表示の際の、全ページ数
-			max_suggest     : 1,     //候補表示の際の、全ページ数
-			is_paging       : false, //ページ移動か?
-			is_loading      : false, //Ajaxで問い合わせ中かどうか？
-			reserve_btn     : false, //ボタンの背景色変更の予約があるかどうか？
-			reserve_click   : false, //マウスのキーを押し続ける操作に対応するためmousedownを検知
-			xhr             : false, //XMLHttpオブジェクトを格納
-			key_paging      : false, //キーでページ移動したか？
-			key_select      : false, //キーで候補移動したか？？
-			prev_value      : '',    //初期値
+			timer_valchange: false, // タイマー変数(一定時間ごとに入力値の変化を監視)
+			is_suggest: false, // リストのタイプ。false=>全件 / true=>予測
+			page_all: 1,  // 全件表示の際の、現在のページ番号
+			page_suggest: 1, // 候補表示の際の、現在のページ番号
+			max_all: 1,  // 全件表示の際の、全ページ数
+			max_suggest: 1, // 候補表示の際の、全ページ数
+			is_paging: false, // ページ移動か?
+			is_loading: false, // Ajaxで問い合わせ中かどうか？
+			reserve_btn: false, // ボタンの背景色変更の予約があるかどうか？
+			reserve_click: false, // マウスのキーを押し続ける操作に対応するためmousedownを検知
+			xhr: false, // XMLHttpオブジェクトを格納
+			key_paging: false, // キーでページ移動したか？
+			key_select: false, // キーで候補移動したか？？
+			prev_value: '', // 初期値
 
-			//サブ情報
-			size_navi       : null,  //サブ情報表示用(ページナビの高さ)
-			size_results    : null,  //サブ情報表示用(リストの上枠線)
-			size_li         : null,  //サブ情報表示用(候補一行分の高さ)
-			size_left       : null,   //サブ情報表示用(リストの横幅)
+			// サブ情報
+			size_navi: null, // サブ情報表示用(ページナビの高さ)
+			size_results: null, // サブ情報表示用(リストの上枠線)
+			size_li: null, // サブ情報表示用(候補一行分の高さ)
+			size_left: null, // サブ情報表示用(リストの横幅)
 			
-			//タグ検索
-			tag             : null
+			// タグ検索
+			tag: null
 		};
 	},
 
@@ -559,7 +562,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 	 */
 	_setElem: function(combo_input) {
 		// 1. 要素を修正、生成する
-
 		// 本体
 		var elem = {};
 		elem.combo_input = $(combo_input)
@@ -583,7 +585,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 		elem.navi_p      = $('&lt;p>');
 		elem.results     = $('&lt;ul>' ).addClass(this.css_class.results);
 		elem.sub_info    = $('&lt;div>').addClass(this.css_class.sub_info);
-
 		// primary_keyカラムの値を送信するための"input:hidden"を作成
 		if (this.option.plugin_type == 'textarea') {
 			elem.hidden = false;
@@ -600,10 +601,11 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			elem.hidden = $('&lt;input type="hidden" />')
 				.attr({
 					name: hidden_name,
-					id  : hidden_name
+					id: hidden_name
 				})
 				.val('');
 		}
+
 		// 2. 要素をHTML内に配置する
 		switch (this.option.plugin_type) {
 			case 'combobox':
@@ -636,7 +638,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			.append(elem.navi_p);
 
 		// 3. サイズ調整
-
 		// ComboBoxの幅
 		if (this.option.plugin_type == 'combobox') {
 			$(elem.container).width($(elem.combo_input).outerWidth() + $(elem.button).outerWidth());
@@ -1199,10 +1200,10 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			var str = left + '' + right;
 			self.prop.is_suggest = (str == '') ? false : true;
 			return {
-				type      : i,
-				str       : str,
-				pos_left  : pos_left,
-				pos_right : pos_right
+				type: i,
+				str: str,
+				pos_left: pos_left,
+				pos_right: pos_right
 			};
 		}
 		return false;
@@ -1387,13 +1388,13 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 		self.prop.xhr = $.getJSON(
 			self.option.source,
 			{
-				q_word       : q_word,
-				page_num     : which_page_num,
-				per_page     : self.option.per_page,
-				search_field : self.option.search_field,
-				and_or       : self.option.and_or,
-				order_by     : self.option.order_by,
-				db_table     : self.option.db_table
+				q_word: q_word,
+				page_num: which_page_num,
+				per_page: self.option.per_page,
+				search_field: self.option.search_field,
+				and_or: self.option.and_or,
+				order_by: self.option.order_by,
+				db_table: self.option.db_table
 			},
 			function(json) {
 				json.candidate   = [];
@@ -1769,10 +1770,10 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 		t_left += 'px';
 
 		$(self.elem.sub_info).children('dl').eq(idx).css({
-			position : 'absolute',
-			top      : t_top,
-			left     : t_left,
-			display  : 'block'
+			position: 'absolute',
+			top: t_top,
+			left: t_left,
+			display: 'block'
 		});
 	},
 
@@ -1794,8 +1795,8 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			var list = $('&lt;li>')
 				.text(arr_candidate[i]) // XSS対策
 				.attr({
-					pkey  : arr_primary_key[i],
-					title : arr_candidate[i]
+					pkey: arr_primary_key[i],
+					title: arr_candidate[i]
 				});
 
 			if (
@@ -1878,14 +1879,14 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			// position: static
 			var offset = $(self.elem.combo_input).offset();
 			$(self.elem.result_area).css({
-				top  : offset.top + $(self.elem.combo_input).outerHeight() + 'px',
-				left : offset.left + 'px'
+				top: offset.top + $(self.elem.combo_input).outerHeight() + 'px',
+				left: offset.left + 'px'
 			});
 		} else {
 			// position: relative, absolute, fixed
 			$(self.elem.result_area).css({
-				top  : $(self.elem.combo_input).outerHeight() + 'px',
-				left : '0px'
+				top: $(self.elem.combo_input).outerHeight() + 'px',
+				left: '0px'
 			});
 		}
 		// 幅を設定した後、表示する。
@@ -2153,7 +2154,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Aug 18 2014 05:55:30 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Aug 20 2014 01:47:54 GMT+0000 (UTC)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -19,8 +19,8 @@
 					オートコンプリートとドロップダウンリストを組み合わせたコンボボックス
 				</p>
 				<dl class="dl-horizontal">
-					<dt>Version</dt><dd>7.3.1</dd>
-					<dt>Update</dt><dd>2014-08-18</dd>
+					<dt>Version</dt><dd>7.4.0-alpha</dd>
+					<dt>Update</dt><dd>2014-08-20</dd>
 					<dt>Author</dt><dd>Yuusaku Miyazaki</dd>
 					<dt>License</dt><dd><a href="//opensource.org/licenses/mit-license.php">MIT License</a></dd>
 				</dl>
@@ -147,6 +147,10 @@
 						<a class="list-group-item" href="#sample07_01">
 							<span class="lang_en">Simple textbox</span>
 							<span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+						</a>
+						<a class="list-group-item" href="#sample07_02">
+							<span class="lang_en">Getting plugin object</span>
+							<span class="lang_ja">プラグインのオブジェクトを受け取る</span>
 						</a>
 					</div>
 					<h4>
@@ -1012,6 +1016,48 @@ $('#ac07_01').ajaxComboBox(
 						 </div>
 					</section>
 
+					<section id="sample07_02" class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<span class="lang_en">Getting plugin object</span>
+								<span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<p class="lang_en">
+								You can get a instance of the plugin's object, and control after calling the plugin.<br>
+								<strong>WARN</strong>: This is still alpha-version.<br>
+								You can change only <code>source</code> and <code>db_table</code> options.
+							</p>
+							<p class="lang_ja">
+								プラグインのインスタンスを受け取ることで、プラグイン呼び出し後に設定を変更することができます。<br>
+								<strong>注意</strong>: まだアルファ版であり、機能が定まっていません。<br>
+								現時点では <code>source</code> と <code>db_table</code> オプションしか変更できません。
+							</p>
+							<label for="ac07_02">
+								<span class="lang_en">Nation:</span>
+								<span class="lang_ja">国名:</span>
+							</label>
+							<input id="ac07_02" type="text"><br>
+							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac07_02')">
+							<h6>JavaScript</h6>
+<pre>
+var <span class="green">arr_instance</span> = $('#ac07_02').ajaxComboBox(
+  <span class="red">'-----'</span>,
+  {
+    lang: 'en',
+    db_table: <span class="red">'-----'</span>,
+    <span class="green">instance: true</span>
+  }
+);
+$(<span class="green">arr_instance</span>).each(function() {
+  this.option.source = <span class="red">'lib/jquery.ajax-combobox.php'</span>;
+  this.option.db_table = <span class="red">'nation'</span>;
+});
+</pre>
+						 </div>
+					</section>
+
 					<section id="sample08_01" class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">
@@ -1369,7 +1415,7 @@ $('#ac08_07').ajaxComboBox(
 
 		<!-- JavaScript -->
 		<script src="//code.jquery.com/jquery.min.js"></script>
-		<script src="lib/jquery.ajax-combobox.7.3.1.js"></script><!-- required -->
+		<script src="lib/jquery.ajax-combobox.7.4.0-alpha.js"></script><!-- required -->
 		<script src="sample/jquery.simple-scroll-follow.2.0.0.js"></script>
 		<script src="sample/sample.js"></script>
 	</body>

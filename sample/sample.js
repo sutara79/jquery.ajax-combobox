@@ -1,3 +1,4 @@
+// Object instead of Database
 var data = [
 	{id:'A001',name:'Adams',    post:'Sales',          position:'The rank and file'},
 	{id:'A002',name:'Darling',  post:'Sales',          position:'The rank and file'},
@@ -39,58 +40,59 @@ var tag_data = [
 	{id:18,name:'Literature',       japanese:'文学'},
 	{id:19,name:'Astronomy',        japanese:'天文学'}
 ];
+
 jQuery(document).ready(function($) {
-	//------------------------------------------------------
-	//Basic
-	//------------------------------------------------------
+	/**
+	 * Basic
+	 */
 	$('#ac01_01').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'nation'
+			lang: 'en',
+			db_table: 'nation'
 		}
 	);
 	$('#ac01_02').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'name',
-			per_page    : 20,
-			navi_num    : 10
+			lang: 'en',
+			db_table: 'name',
+			per_page: 20,
+			navi_num: 10
 		}
 	);
 	$('#ac01_03').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'name',
-			navi_num    : 1,
-			navi_simple : true
+			lang: 'en',
+			db_table: 'name',
+			navi_num: 1,
+			navi_simple: true
 		}
 	);
 	$('#ac01_04').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang         : 'en',
-			db_table     : 'nation',
-			search_field : 'name, id'
+			lang: 'en',
+			db_table: 'nation',
+			search_field: 'name, id'
 		}
 	);
 	$('#ac01_05').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang     : 'en',
-			db_table : 'nation',
-			and_or   : 'OR'
+			lang: 'en',
+			db_table: 'nation',
+			and_or: 'OR'
 		}
 	);
 	$('#ac01_06').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'nation',
-			field       : 'name',
-			order_by    : [
+			lang: 'en',
+			db_table: 'nation',
+			field: 'name',
+			order_by: [
 				'name DESC',
 				'created'
 			]
@@ -100,133 +102,106 @@ jQuery(document).ready(function($) {
 	$('#ac01_07_02').ajaxComboBox('lib/jquery.ajax-combobox.php', {lang: 'pt-br', db_table: 'nation'});
 	$('#ac01_07_03').ajaxComboBox('lib/jquery.ajax-combobox.php', {db_table: 'nation'});
 
-	//------------------------------------------------------
-	//Sub-info
-	//------------------------------------------------------
+	/**
+	 * Display Sub-info
+	 */
 	$('#ac02_01').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang     : 'en',
-			db_table : 'employee',
-			sub_info : true
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: true
 		}
 	);
 	$('#ac02_02').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang     : 'en',
-			db_table : 'employee',
-			sub_info : true,
-			sub_as   : {
-				id       : 'Employer ID',
-				post     : 'Post',
-				position : 'Position'
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: true,
+			sub_as: {
+				id: 'Employer ID',
+				post: 'Post',
+				position: 'Position'
 			}
 		}
 	);
 	$('#ac02_03').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'employee',
-			sub_info    : true,
-			sub_as      : {
-				post     : 'Post',
-				position : 'Position'
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: true,
+			sub_as: {
+				post: 'Post',
+				position: 'Position'
 			},
-			show_field  : 'position,post'
+			show_field: 'position,post'
 		}
 	);
 	$('#ac02_04').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang       : 'en',
-			db_table   : 'employee',
-			sub_info   : true,
-			sub_as     : {
-				id : 'Employer ID'
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: true,
+			sub_as: {
+				id: 'Employer ID'
 			},
-			hide_field : 'position,post'
+			hide_field: 'position,post'
 		}
 	);
 	$('#ac02_05').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang       : 'en',
-			db_table   : 'employee',
-			sub_info   : 'simple',
-			show_field : 'post'
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: 'simple',
+			show_field: 'post'
 		}
 	);
 	$('#ac02_06').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang     : 'en',
-			db_table : 'employee',
-			sub_info : true
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: true
 		}
 	);
-	//------------------------------------------------------
-	//Select-only
-	//------------------------------------------------------
+
+	/**
+	 * Select-only
+	 */
 	$('#ac03_01').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'employee',
-			sub_info    : true,
-			select_only : true
+			lang: 'en',
+			db_table: 'employee',
+			sub_info: true,
+			select_only: true
 		}
 	);
 	$('#ac03_02').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'nation',
-			sub_info    : true,
-			show_field  : 'id',
-			select_only : true,
-			primary_key : 'name'
+			lang: 'en',
+			db_table: 'nation',
+			sub_info: true,
+			show_field: 'id',
+			select_only: true,
+			primary_key: 'name'
 		}
 	);
-	//------------------------------------------------------
-	//Initial Value
-	//------------------------------------------------------
-	$('#ac04_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
-		{
-			lang        : 'en',
-			db_table    : 'nation',
-			init_record : 28
-		}
-	);
-	//------------------------------------------------------
-	//Search from JSON without database
-	//------------------------------------------------------
-	$('#ac05_01').ajaxComboBox(
-		data,
-		{
-			lang        : 'en',
-			sub_info    : true,
-			sub_as      : {
-				id       : 'Employer ID',
-				post     : 'Post',
-				position : 'Position'
-			},
-			select_only : true,
-			init_record : ['A009'],
-			primary_key : 'id',
-		}
-	);
-	//------------------------------------------------------
-	//Submitting at once when selected
-	//------------------------------------------------------
+
+	/**
+	 * After selected
+	 */
 	$('#ac06_01').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'nation',
-			bind_to     : 'foo'
+			lang: 'en',
+			db_table: 'nation',
+			bind_to: 'foo'
 		}
 	)
 	.bind('foo', function(){
@@ -235,9 +210,9 @@ jQuery(document).ready(function($) {
 	$('#ac06_02').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			db_table    : 'nation',
-			bind_to     : 'foo'
+			lang: 'en',
+			db_table: 'nation',
+			bind_to: 'foo'
 		}
 	)
 	.bind('foo', function(e, is_enter_key){
@@ -248,30 +223,67 @@ jQuery(document).ready(function($) {
 	.keydown(function(e){
 		if(e.keyCode == 13) alert($(this).val() + ' is selected. (by enter key)');
 	});
-	//------------------------------------------------------
-	//simple mode
-	//------------------------------------------------------
+
+	/**
+	 * Others
+	 */
+	$('#ac04_01').ajaxComboBox(
+		'lib/jquery.ajax-combobox.php',
+		{
+			lang: 'en',
+			db_table: 'nation',
+			init_record: 28
+		}
+	);
+	$('#ac05_01').ajaxComboBox(
+		data,
+		{
+			lang: 'en',
+			sub_info: true,
+			sub_as: {
+				id: 'Employer ID',
+				post: 'Post',
+				position: 'Position'
+			},
+			select_only: true,
+			init_record: ['A009'],
+			primary_key: 'id',
+		}
+	);
 	$('#ac07_01').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'simple', 
-			db_table    : 'nation',
-			sub_info    : true
+			lang: 'en',
+			plugin_type: 'simple',
+			db_table: 'nation',
+			sub_info: true
 		}
 	);
-	//------------------------------------------------------
-	//Basic
-	//------------------------------------------------------
+	var arr_instance = $('#ac07_02').ajaxComboBox(
+		'-----',
+		{
+			lang: 'en',
+			db_table: '-----',
+			instance: true
+		}
+	);
+	$(arr_instance).each(function() {
+		this.option.source = 'lib/jquery.ajax-combobox.php';
+		this.option.db_table = 'nation';
+	});
+
+	/**
+	 * Textarea (tag and shorten url)
+	 */
 	$('#ac08_01').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			tags        : [
+			lang: 'en',
+			plugin_type: 'textarea',
+			tags: [
 				{
-					pattern  : ['#', ''],
-					db_table : 'tag'
+					pattern: ['#', ''],
+					db_table: 'tag'
 				}
 			]
 		}
@@ -279,13 +291,13 @@ jQuery(document).ready(function($) {
 	$('#ac08_02').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			tags        : [
+			lang: 'en',
+			plugin_type: 'textarea',
+			tags: [
 				{
-					pattern  : ['[', ']'],
-					space    : [false, false],
-					db_table : 'tag'
+					pattern: ['[', ']'],
+					space: [false, false],
+					db_table: 'tag'
 				}
 			],
 		}
@@ -293,12 +305,12 @@ jQuery(document).ready(function($) {
 	$('#ac08_03').ajaxComboBox(
 		tag_data,
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			tags        : [
+			lang: 'en',
+			plugin_type: 'textarea',
+			tags: [
 				{
-					pattern  : ['@', ''],
-					db_table : 'tag'
+					pattern: ['@', ''],
+					db_table: 'tag'
 				}
 			],
 		}
@@ -306,22 +318,22 @@ jQuery(document).ready(function($) {
 	$('#ac08_04').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			tags        : [
+			lang: 'en',
+			plugin_type: 'textarea',
+			tags: [
 				{
-					pattern  : ['[', ']'],
-					space    : [false, false],
-					db_table : 'tag'
+					pattern: ['[', ']'],
+					space: [false, false],
+					db_table: 'tag'
 				},
 				{
-					pattern  : ['#', ''],
-					db_table : 'tag'
+					pattern: ['#', ''],
+					db_table: 'tag'
 
 				},
 				{
-					pattern  : ['@', ''],
-					db_table : 'tag'
+					pattern: ['@', ''],
+					db_table: 'tag'
 				}
 			],
 		}
@@ -329,28 +341,28 @@ jQuery(document).ready(function($) {
 	$('#ac08_05').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			tags        : [
+			lang: 'en',
+			plugin_type: 'textarea',
+			tags: [
 				{
-					pattern  : ['[', ']'],
-					space    : [false, false],
-					db_table : 'tag',
-					sub_info : true
+					pattern: ['[', ']'],
+					space: [false, false],
+					db_table: 'tag',
+					sub_info: true
 				},
 				{
-					pattern  : ['#', ''],
-					db_table : 'tag',
-					sub_info : true,
-					sub_as   : {
-						id : 'TagID',
-						japanese : '日本語'
+					pattern: ['#', ''],
+					db_table: 'tag',
+					sub_info: true,
+					sub_as: {
+						id: 'TagID',
+						japanese: '日本語'
 					}
 				},
 				{
-					pattern  : ['@', ''],
-					db_table : 'tag',
-					order_by : 'name DESC'
+					pattern: ['@', ''],
+					db_table: 'tag',
+					order_by: 'name DESC'
 				}
 			],
 		}
@@ -358,39 +370,38 @@ jQuery(document).ready(function($) {
 	$('#ac08_06').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			shorten_btn : '#ac08_06_shorten',
-			shorten_src : 'lib/bitly.php',
-			shorten_min : 20
+			lang: 'en',
+			plugin_type: 'textarea',
+			shorten_btn: '#ac08_06_shorten',
+			shorten_src: 'lib/bitly.php',
+			shorten_min: 20
 		}
 	);
 	$('#ac08_07').ajaxComboBox(
 		'lib/jquery.ajax-combobox.php',
 		{
-			lang        : 'en',
-			plugin_type : 'textarea',
-			db_table    : 'tag',
-			shorten_btn : '#ac08_07_shorten',
-			shorten_src : 'lib/bitly.php',
-			shorten_min : 20,
-			tags        : [
+			lang: 'en',
+			plugin_type: 'textarea',
+			db_table: 'tag',
+			shorten_btn: '#ac08_07_shorten',
+			shorten_src: 'lib/bitly.php',
+			shorten_min: 20,
+			tags: [
 				{
-					pattern  : ['[', ']'],
-					space    : [false, false]
+					pattern: ['[', ']'],
+					space: [false, false]
 				},
 				{
-					pattern  : ['#', '']
+					pattern: ['#', '']
 
 				},
 				{
-					pattern  : ['@', '']
+					pattern: ['@', '']
 				}
 			],
 		}
 	);
 
-	//---------------------------------------------------------------------
 	// ページ内リンクのスクロール
 	$('a[href^=#]').click(function() {
 		var href= $(this).attr("href");
@@ -415,11 +426,11 @@ jQuery(document).ready(function($) {
 		min_width: 992,
 		limit_elem: $('article')
 	});
-});
+}); // end of "jQuery(document).ready"
 
-function displayResult(id){
+function displayResult(id) {
 	alert(
-		id +                  ': ' + $('#' + id).val() + '\n' +
+		id + ': ' + $('#' + id).val() + '\n' +
 		id + '_primary_key' + ': ' + $('#' + id + '_primary_key').val()
 	);
 }

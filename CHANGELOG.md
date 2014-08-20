@@ -1,5 +1,9 @@
 # jquery.ajax-combobox CHANGELOG
 
+## 7.4.0-alpha (2014-08-20)
+- `instance` option was added.  
+  (`instance`オプションを追加しました。)
+
 ## 7.3.1 (2014-08-18)
 - Not working in IE8 was solved.  
   (IE8で動作しない問題は解決しました。)
