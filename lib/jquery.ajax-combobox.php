@@ -169,7 +169,7 @@ class AjaxComboBox {
 				$this->param['where'],
 				$this->param['whole_order'],
 				$this->param['per_page'],
-				$this->param['offset']		
+				$this->param['offset']
 			),
 			//whole count
 			"SELECT COUNT(*) FROM {$this->param['db_table']} WHERE {$this->param['where']}"

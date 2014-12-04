@@ -7,50 +7,50 @@
 /* for PC */
 @media screen and (min-width:992px) {
 	nav {
-		position: absolute;
-		box-sizing: border-box;
-		padding: 0 15px;
-		width: 34%;
-		top: 0px;
-		left: auto;
-		right: auto;
 		bottom: auto;
+		box-sizing: border-box;
+		left: auto;
+		padding: 0 15px;
+		position: absolute;
+		right: auto;
+		top: 0px;
+		width: 34%;
 	}
 
 	article {
-		position: relative;
-		box-sizing: border-box;
-		padding: 0 15px;
-		width: 66%;
-		top: 0px;
-		left: 34%;
-		right: auto;
 		bottom: auto;
+		box-sizing: border-box;
+		left: 34%;
+		padding: 0 15px;
+		position: relative;
+		right: auto;
+		top: 0px;
+		width: 66%;
 	}
 }
 
 /* for Smart Phone */
 @media screen and (max-width:991px) {
 	nav {
-		position: static;
-		box-sizing: border-box;
-		padding: 0 15px;
-		width: 100%;
-		top: auto;
-		left: auto;
-		right: auto;
 		bottom: auto;
+		box-sizing: border-box;
+		left: auto;
+		padding: 0 15px;
+		position: static;
+		right: auto;
+		top: auto;
+		width: 100%;
 	}
 
 	article {
-		position: static;
-		box-sizing: border-box;
-		padding: 0 15px;
-		width: 100%;
-		top: auto;
-		left: auto;
-		right: auto;
 		bottom: auto;
+		box-sizing: border-box;
+		left: auto;
+		padding: 0 15px;
+		position: static;
+		right: auto;
+		top: auto;
+		width: 100%;
 	}
 }
 
@@ -92,8 +92,8 @@ article form button {
 }
 
 .ac_container textarea {
-	width: 480px;
 	height: 180px;
+	width: 480px;
 }
 
 .check_btn {

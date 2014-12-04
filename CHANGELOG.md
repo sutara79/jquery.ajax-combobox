@@ -1,5 +1,9 @@
 # jquery.ajax-combobox CHANGELOG
 
+## 7.4.0 (2014-12-04)
+- The combobox was changed into **inline element** from block element.
+  (コンボボックスがボックス要素ではなくインライン要素になりました。)
+
 ## 7.4.0-alpha (2014-08-20)
 - `instance` option was added.  
   (`instance`オプションを追加しました。)

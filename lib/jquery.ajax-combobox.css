@@ -1,57 +1,51 @@
-/**
- * @file jquery.ajaxComboBoxのためのスタイル指定
- * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
- * @license MIT license
- */
-
-@charset "UTF-8";
+@charset "utf-8";
 
 /**
  * Container
  */
 .ac_container {
+	border: none;
 	margin: 0;
 	padding: 0;
-	width: auto;
-	background: white;
-	border: none;
+	display: inline-block;
+	vertical-align: text-bottom;
 	position: relative;
 }
 
 .ac_input {
-	border: 1px solid #79b;
-	border-right: none;
 	background-color: white;
-	display: block !important;
-	font-size: 16px;
-	padding: 4px;
-	margin: 0;
-	width: 320px;
-	float: left;
-	border-radius: 4px 0px 0px 4px;
+	border-radius: 4px 0 0 4px;
+	border-right: none;
+	border: 1px solid #79b;
+	box-shadow:         1px 1px 1px rgba(0,0,0,0.2) inset;
 	-moz-box-shadow:    1px 1px 1px rgba(0,0,0,0.2) inset;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2) inset;
-	box-shadow:         1px 1px 1px rgba(0,0,0,0.2) inset;
+	vertical-align: text-bottom;
+	display: inline-block;
+	font-size: 16px;
+	margin: 0;
+	padding: 4px;
+	width: 320px;
 }
 
 .ac_container_open .ac_input {
-	border-radius: 4px 0px 0px 0px !important;
+	border-radius: 4px 0 0 0 !important;
 }
 
 /**
  * "Get all" button
  */
 .ac_button {
+	display: inline-block;
+	vertical-align: text-bottom;
 	border: 1px solid #79b;
-	width: 32px;
-	text-align: center;
-	position: relative;
-	cursor: pointer;
-	float: left !important;
-	clear: none !important;
-	padding: 0px !important;
-	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	border-left: 0;
+	cursor: pointer;
+	position: relative;
+	text-align: center;
+	width: 32px;
 }
 
 .ac_container_open .ac_button {
@@ -59,20 +53,18 @@
 }
 
 .ac_button img {
-	position: absolute;
 	height: 16px;
+	position: absolute;
 	width: 16px;
 }
 
 .ac_btn_out {
 	background: #bde;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#eeffff', endColorstr='#99aabb');
 	background-image: linear-gradient(to bottom, #eeffff, #99aabb);
 }
 
 .ac_btn_on {
 	background: #dee;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#ffffff', endColorstr='#bbbbcc');
 	background-image: linear-gradient(to bottom, #ffffff, #bbbbcc);
 }
 
@@ -81,37 +73,37 @@
  */
 .ac_result_area {
 	background-color: transparent;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: absolute;
-	z-index: 100;
-	display: none;
-	border: 1px solid #79b;
 	border-top: 0;
+	border: 1px solid #79b;
 	box-shadow:         2px 2px 2px rgba(0,0,0,0.4);
 	-moz-box-shadow:    2px 2px 2px rgba(0,0,0,0.4);
 	-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	z-index: 100;
 }
 
 .ac_results {
 	background-color: white;
+	list-style: none;
 	margin: 0;
 	padding: 0;
-	list-style: none;
 }
 
 .ac_results li {
-	margin: 0;
-	height: auto !important;
-	padding: 3px 5px;
-	white-space: nowrap;
 	color: #000;
-	text-align: left;
-	overflow: hidden;
 	font-size: 14px;
+	height: auto !important;
 	line-height: 1;
+	margin: 0;
+	overflow: hidden;
+	padding: 3px 5px;
 	position: relative;
+	text-align: left;
+	white-space: nowrap;
 }
 
 .ac_selected {
@@ -120,13 +112,13 @@
 }
 
 .ac_over {
-	cursor: pointer;
 	background-color: #36c;
 	color: #fff !important;
+	cursor: pointer;
 }
 
 /**
- * 選択してないほうの表示を暗くする
+ * 選択していないほうの表示を暗くする
  */
 .ac_results_off {
 	background: rgba(255, 255, 255, 0.8);
@@ -147,12 +139,12 @@
 .ac_navi {
 	background: #eee;
 	border-bottom: 1px solid #79b;
-	margin: 0;
-	padding: 4px;
-	text-align: right;
 	font-size: 13px;
 	font-weight: normal;
 	line-height: 1;
+	margin: 0;
+	padding: 4px;
+	text-align: right;
 }
 
 .ac_navi a:link,
@@ -160,29 +152,29 @@
 .ac_navi a:hover,
 .ac_navi a:active {
 	color: blue;
-	text-decoration: underline;
-	margin: 0px 4px;
 	font-weight: normal;
+	margin: 0 4px;
+	text-decoration: underline;
 }
 
 .ac_navi p {
-	font-size: 15px;
-	text-align: center;
 	color: black;
-	padding-top: 4px;
+	font-size: 15px;
 	margin: 0;
+	padding-top: 4px;
+	text-align: center;
 }
 
 .ac_navi .current {
-	font-weight: bold;
-	font-size: 16px;
 	color: #00c;
+	font-size: 16px;
+	font-weight: bold;
 }
 
 .ac_navi .page_end {
 	color: gray;
-	margin: 0px 4px;
 	font-weight: normal;
+	margin: 0 4px;
 }
 
 .navi_page,
@@ -194,47 +186,47 @@
 }
 
 .ac_navi .info {
-	margin: 0px !important;
-	padding: 0px !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 /**
  * Sub-info
  */
 .ac_subinfo {
-	margin: 0px !important;
-	padding: 0px !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 .ac_subinfo dl {
-	display: none;
-	z-index: 200;
-	border: 1px solid #aaa;
-	border-top-right-radius: 4px;
+	background: #eee;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid #aaa;
 	box-shadow:         2px 2px 2px rgba(0,0,0,0.4);
 	-moz-box-shadow:    2px 2px 2px rgba(0,0,0,0.4);
 	-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
-	width: 260px;
+	color: #000;
+	display: none;
 	margin: 0;
 	position: absolute;
-	background: #eee;
-	color: #000;
+	width: 260px;
+	z-index: 200;
 }
 
 .ac_subinfo dt {
-	width: 92px;
-	word-wrap: break-word;
+	background: #CEDFF7;
 	clear: both;
+	color: #37486A;
 	float: left;
+	font-size: 13px;
+	font-weight: normal;
 	margin: 0;
 	padding: 2px 4px;
-	font-size: 13px;
 	text-align: left;
-	font-weight: normal;
-	background: #CEDFF7;
-	color: #37486A;
+	width: 92px;
+	word-wrap: break-word;
 }
 
 .ac_subinfo dt.hide {
@@ -242,12 +234,12 @@
 }
 
 .ac_subinfo dd {
-	width: 152px;
 	float: left;
-	word-wrap:break-word;
+	font-size: 13px;
 	margin: 0;
 	padding: 2px 4px;
-	font-size: 13px;
+	width: 152px;
+	word-wrap: break-word;
 }
 
 /**
@@ -261,35 +253,35 @@
  * Simple
  */
 .ac_s_input {
-	border: 1px solid #79b;
 	background-color: white;
-	display: block !important;
-	font-size: 16px;
-	padding: 4px;
-	margin: 0;
-	width: 320px;
-	float: left;
 	border-radius: 4px;
+	border: 1px solid #79b;
 	box-shadow:         1px 1px 1px rgba(0,0,0,0.2) inset;
 	-moz-box-shadow:    1px 1px 1px rgba(0,0,0,0.2) inset;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2) inset;
+	display: block !important;
+	float: left;
+	font-size: 16px;
+	margin: 0;
+	padding: 4px;
+	width: 320px;
 }
 
-.ac_container_open .ac_s_input{
-	border-radius: 4px 4px 0px 0px !important;
+.ac_container_open .ac_s_input {
+	border-radius: 4px 4px 0 0 !important;
 }
 
 /**
  * Text Area
  */
 .ac_textarea {
-	border: 1px solid #79b;
 	background-color: white;
-	font-size: 16px;
-	padding: 4px;
-	margin: 0;
 	border-radius: 4px;
+	border: 1px solid #79b;
 	box-shadow:         1px 1px 1px rgba(0,0,0,0.2) inset;
 	-moz-box-shadow:    1px 1px 1px rgba(0,0,0,0.2) inset;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2) inset;
+	font-size: 16px;
+	margin: 0;
+	padding: 4px;
 }
