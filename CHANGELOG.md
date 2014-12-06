@@ -1,5 +1,11 @@
 # jquery.ajax-combobox CHANGELOG
 
+## 7.4.1 (2014-12-06)
+- An alert is displayed if an error occurs.
+  (サーバとの通信が失敗した場合はアラートを表示するようにしました。)
+- The plugin used the latest API from bitly.
+  (利用するbitlyのAPIを最新のものに変更しました。)
+
 ## 7.4.0 (2014-12-04)
 - The combobox was changed into **inline element** from block element.
   (コンボボックスがボックス要素ではなくインライン要素になりました。)

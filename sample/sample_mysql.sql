@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `name` varchar(255) DEFAULT NULL,
   `post` varchar(255) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci;
 
 --
 -- テーブルのデータのダンプ `employee`
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `name` (
   `name` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=254 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=254 ;
 
 --
 -- テーブルのデータのダンプ `name`
@@ -340,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `nation` (
   `name` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=98 ;
 
 --
 -- テーブルのデータのダンプ `nation`
@@ -457,7 +457,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `japanese` varchar(100) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
 -- テーブルのデータのダンプ `tag`
