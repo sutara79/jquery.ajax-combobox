@@ -2,7 +2,7 @@
 	"name": "ajax-combobox",
 	"title": "jquery.ajax-combobox", 
 	"description": "jQuery plugin for creating a text box it can auto-complete and pull-down-select.",
-	"version": "7.4.1",
+	"version": "7.4.2",
 	"keywords": [
 		"suggest",
 		"combobox",

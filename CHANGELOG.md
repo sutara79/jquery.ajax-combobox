@@ -1,5 +1,9 @@
 # jquery.ajax-combobox CHANGELOG
 
+## 7.4.2 (2014-12-10)
+- Fixed a defect that occurs searching for JSON without database.
+  (DBの代わりにJSONを検索する際に生じる不具合を修正しました。)
+
 ## 7.4.1 (2014-12-06)
 - An alert is displayed if an error occurs.
   (サーバとの通信が失敗した場合はアラートを表示するようにしました。)
