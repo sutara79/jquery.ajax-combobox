@@ -19,8 +19,8 @@
 					オートコンプリートとドロップダウンリストを組み合わせたコンボボックス
 				</p>
 				<dl class="dl-horizontal">
-					<dt>Version</dt><dd>7.4.2</dd>
-					<dt>Update</dt><dd>2014-12-10</dd>
+					<dt>Version</dt><dd>7.4.3</dd>
+					<dt>Update</dt><dd>2015-01-01</dd>
 					<dt>Author</dt><dd>Yuusaku Miyazaki</dd>
 					<dt>License</dt><dd><a href="//opensource.org/licenses/mit-license.php">MIT License</a></dd>
 				</dl>
@@ -447,32 +447,43 @@ order_by: [
 							<table class="table">
 								<thead><tr><th>Option value</th><th>Language</th></tr></thead>
 								<tbody>
+									<tr><td>de</td><td>German<br>(Thanks Sebastian Gohres)</td></tr>
 									<tr><td>en</td><td>English</td></tr>
 									<tr><td>es</td><td>Spanish<br>(Thanks Joaquin G. de la Zerda)</td></tr>
 									<tr><td>pt-br</td><td>Brazilian Portuguese<br>(Thanks Marcio de Souza)</td></tr>
-									<tr><td>(default)</td><td>Japanese</td></tr>
+									<tr><td>ja (default)</td><td>Japanese</td></tr>
 								</tbody>
 							</table>
 							<label for="ac01_07_01">
-								<span class="lang_en">Nation (es):</span>
-								<span class="lang_ja">国名 (es):</span>
+								<span class="lang_en">Nation (de):</span>
+								<span class="lang_ja">国名 (de):</span>
 							</label>
 							<input id="ac01_07_01" type="text">
 							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_01')">
+
 							<hr>
 							<label for="ac01_07_02">
-								<span class="lang_en">Nation (pt-br):</span>
-								<span class="lang_ja">国名 (pt-br):</span>
+								<span class="lang_en">Nation (es):</span>
+								<span class="lang_ja">国名 (es):</span>
 							</label>
 							<input id="ac01_07_02" type="text">
 							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_02')">
+
 							<hr>
 							<label for="ac01_07_03">
-								<span class="lang_en">Nation (ja):</span>
-								<span class="lang_ja">国名 (ja):</span>
+								<span class="lang_en">Nation (pt-br):</span>
+								<span class="lang_ja">国名 (pt-br):</span>
 							</label>
 							<input id="ac01_07_03" type="text">
 							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_03')">
+
+							<hr>
+							<label for="ac01_07_04">
+								<span class="lang_en">Nation (ja):</span>
+								<span class="lang_ja">国名 (ja):</span>
+							</label>
+							<input id="ac01_07_04" type="text">
+							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_04')">
 					</section>
 
 					<section id="sample02_01" class="panel panel-primary">
@@ -1025,14 +1036,10 @@ $('#ac07_01').ajaxComboBox(
 						</div>
 						<div class="panel-body">
 							<p class="lang_en">
-								You can get a instance of the plugin's object, and control after calling the plugin.<br>
-								<strong>WARN</strong>: This is still alpha-version.<br>
-								You can change only <code>source</code> and <code>db_table</code> options.
+								You can get a instance of the plugin's object, and control after calling the plugin.
 							</p>
 							<p class="lang_ja">
-								プラグインのインスタンスを受け取ることで、プラグイン呼び出し後に設定を変更することができます。<br>
-								<strong>注意</strong>: まだアルファ版であり、機能が定まっていません。<br>
-								現時点では <code>source</code> と <code>db_table</code> オプションしか変更できません。
+								プラグインのインスタンスを受け取ることで、プラグイン呼び出し後に設定を変更することができます。
 							</p>
 							<label for="ac07_02">
 								<span class="lang_en">Nation:</span>
@@ -1415,7 +1422,7 @@ $('#ac08_07').ajaxComboBox(
 
 		<!-- JavaScript -->
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="lib/jquery.ajax-combobox.7.4.2.js"></script><!-- required -->
+		<script src="lib/jquery.ajax-combobox.7.4.3.js"></script><!-- required -->
 		<script src="sample/jquery.simple-scroll-follow.2.0.0.js"></script>
 		<script src="sample/sample.js"></script>
 	</body>

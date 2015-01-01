@@ -1,5 +1,9 @@
 # jquery.ajax-combobox CHANGELOG
 
+## 7.4.3 (2015-01-01)
+- German was added to the language of the message. Thanks Sebastian Gohres!  
+  (プラグインのメッセージの言語にドイツ語を選べるようになりました。Sebastian Gohresさんに感謝します。)
+
 ## 7.4.2 (2014-12-10)
 - Fixed a defect that occurs searching for JSON without database.
   (DBの代わりにJSONを検索する際に生じる不具合を修正しました。)
