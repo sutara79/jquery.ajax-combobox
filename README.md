@@ -27,6 +27,7 @@ $('#box01').ajaxComboBox('foo.php');
 ```
 
 ## Note
+##### Database
 Change the value to connect Database in "**./lib/jquery.ajax-combobox.php**".  
 ("**./lib/jquery.ajax-combobox.php**"の文頭のデータベースの接続設定を、お使いの環境に合わせて変更して下さい。)
 ``` php
@@ -46,6 +47,18 @@ $sqlite = array(
 new AjaxComboBox($sqlite);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 ?>
+```
+
+##### button_img
+Change the value of `button_img`option to your environment.
+
+```javascript
+$('#foo').ajaxComboBox(
+	'bar-directory/jquery.ajax-combobox.php',
+	{
+		button_img: 'bar-directory/btn.png'
+	}
+);
 ```
 
 ## Extensions
