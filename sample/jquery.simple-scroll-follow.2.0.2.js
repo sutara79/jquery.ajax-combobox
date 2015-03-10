@@ -1,6 +1,6 @@
 /**
- * @file jQuery Plugin: jquery.simpleScrollFollow
- * @version 2.0.0
+ * @file jQuery Plugin: jquery.simple-scroll-follow
+ * @version 2.0.2
  * @author Yuusaku Miyazaki [toumin.m7@gmail.com]
  * @license MIT License
  */
@@ -11,7 +11,7 @@
  * @global
  * @memberof jQuery
  * @param {Object} [option] オプションを格納した連想配列
- * @param {boolean|undefined} [option.instance=undefined] - プラグインを呼び出すとき、jQueryオブジェクトではなく、インスタンスを返すかどうかの真偽値
+ * @param {boolean} [option.instance] - プラグインを呼び出すとき、jQueryオブジェクトではなくインスタンスを返すかどうか
  * @param {boolean} [option.enabled=true] - スクロールを有効にするかどうかの真偽値
  * @param {Object|string} [option.limit_elem='window'] - 追尾要素のスクロールの下限の基準となる要素のjQueryオブジェクト、またはセレクタ文字列
  * @param {number} [option.min_width=0] - 追尾スクロールを有効にする最低限の画面幅
@@ -69,7 +69,7 @@ $.extend(SimpleScrollFollow.prototype, /** @lends SimpleScrollFollow.prototype *
 				top: '',
 				bottom: '',
 				left: '',
-				right: '',
+				right: ''
 			})
 			.width('');
 	},
@@ -105,7 +105,7 @@ $.extend(SimpleScrollFollow.prototype, /** @lends SimpleScrollFollow.prototype *
 		self.option = $.extend({
 			enabled: true,
 			limit_elem: $('body'),
-			min_width: 0,
+			min_width: 0
 		}, option);
 	},
 
@@ -139,7 +139,7 @@ $.extend(SimpleScrollFollow.prototype, /** @lends SimpleScrollFollow.prototype *
 			if (!self.option.enabled) return false;
 
 			// 最低幅を下回る場合は即座に終了する
-			if (!window.matchMedia('(min-width: ' + self.option.min_width +'px)').matches) {
+			if ($(window).width() < self.option.min_width) {
 				self.moveDefaultPosition(self);
 				return false;
 			}
@@ -287,7 +287,7 @@ $.extend(SimpleScrollFollow.prototype, /** @lends SimpleScrollFollow.prototype *
 				$(window).trigger('scroll');
 			}, 200);
 		});
-	},
+	}
 }); // endo of "$.extend"
 
 })( /** namespace */ jQuery);
