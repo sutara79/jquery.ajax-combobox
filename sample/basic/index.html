@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>Sample: Basic</title>
+		<link rel="stylesheet" href="../../lib/jquery.ajax-combobox.css">
+	</head>
+	<body>
+		<h1>Sample: Basic</h1>
+		<form action="send.php" method="post">
+			<input id="foo" name="foo" type="text">
+			<p><button type="submit">Send</button></p>
+		</form>
+
+		<!-- JavaScript -->
+		<script src="//code.jquery.com/jquery.min.js"></script>
+		<script src="../../lib/jquery.ajax-combobox.js"></script>
+		<script>
+			$('#foo').ajaxComboBox(
+				'../../lib/jquery.ajax-combobox.php',
+				{
+					button_img: '../../lib/btn.png',
+					db_table: 'nation',
+					lang: 'en'
+				}
+			);
+		</script>
+	</body>
+</html>
