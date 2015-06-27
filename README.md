@@ -5,10 +5,6 @@ A jQuery plugin for creating a text box it can auto-complete and pull-down-selec
 ## Demo
 http://www.usamimi.info/~sutara/ajax-combobox/
 
-## JSDoc
-http://www.usamimi.info/~sutara/ajax-combobox/jsdoc
-
-
 ## Usage
 
 ##### HTML
@@ -28,8 +24,8 @@ $('#box01').ajaxComboBox('foo.php');
 
 ## Note
 ##### Database
-Change the value to connect Database in "**./lib/jquery.ajax-combobox.php**".  
-("**./lib/jquery.ajax-combobox.php**"の文頭のデータベースの接続設定を、お使いの環境に合わせて変更して下さい。)
+Change the value to connect Database in "**./dist/jquery.ajax-combobox.php**".  
+("**./dist/jquery.ajax-combobox.php**"の文頭のデータベースの接続設定を、お使いの環境に合わせて変更して下さい。)
 ``` php
 <?php
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
