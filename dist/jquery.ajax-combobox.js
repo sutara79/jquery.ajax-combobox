@@ -1,7 +1,7 @@
 /**
  * @file jQuery Plugin: jquery.ajax-combobox
  * @version 7.4.3
- * @author Yuusaku Miyazaki [toumin.m7@gmail.com]
+ * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
  * @license MIT License
  */
 (function($) {
@@ -31,9 +31,9 @@
  * @param {string} [option.hide_field] - サブ情報で非表示にするフィールド。カンマ区切りで複数指定可能。 (e.g.: 'id' or 'id, job, age')
  * @param {boolean} [option.select_only=false] - セレクト専用にする。(データベースに登録された値しか受け入れない)
  * @param {string} [option.primary_key='id'] - セレクト専用時、Form の hidden の値に指定される、レコードを特定できるフィールド。
- * @param {string} [option.button_img='lib/btn.png'] - ボタンに使われる画像
+ * @param {string} [option.button_img='dist/btn.png'] - ボタンに使われる画像
  * @param {string} [option.shorten_btn] - (option.plugin_type='textarea' の場合に限り、)短縮実行ボタンのセレクタ。
- * @param {string} [option.shorten_src='lib/bitly.php'] - URL短縮を外部に依頼するスクリプトのパス。
+ * @param {string} [option.shorten_src='dist/bitly.php'] - URL短縮を外部に依頼するスクリプトのパス。
  * @param {number} [option.shorten_min=20] - URL短縮を実行する最小の文字数。
  * @param {Object} [option.shorten_reg] - URLを検出するための正規表現。
  * @param {Array} [option.tags=false] - (option.plugin_type='textarea' の場合に限り、)タグ検索の設定。
@@ -116,7 +116,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			per_page: 10,
 			navi_num: 5,
 			primary_key: 'id',
-			button_img: 'lib/btn.png',
+			button_img: 'dist/btn.png',
 			bind_to: false,
 			navi_simple: false,
 
@@ -134,7 +134,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 
 			// URL短縮用
 			shorten_btn: false, // 短縮実行ボタンのセレクタ
-			shorten_src: 'lib/bitly.php',
+			shorten_src: 'dist/bitly.php',
 			shorten_min: 20,
 			shorten_reg: false
 		}, option);

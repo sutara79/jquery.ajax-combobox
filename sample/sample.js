@@ -46,14 +46,14 @@ jQuery(document).ready(function($) {
 	 * Basic
 	 */
 	$('#ac01_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation'
 		}
 	);
 	$('#ac01_02').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'name',
@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_03').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'name',
@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_04').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -79,7 +79,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_05').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -87,7 +87,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac01_06').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -98,16 +98,16 @@ jQuery(document).ready(function($) {
 			]
 		}
 	);
-	$('#ac01_07_01').ajaxComboBox('lib/jquery.ajax-combobox.php', {lang: 'de', db_table: 'nation'});
-	$('#ac01_07_02').ajaxComboBox('lib/jquery.ajax-combobox.php', {lang: 'es', db_table: 'nation'});
-	$('#ac01_07_03').ajaxComboBox('lib/jquery.ajax-combobox.php', {lang: 'pt-br', db_table: 'nation'});
-	$('#ac01_07_04').ajaxComboBox('lib/jquery.ajax-combobox.php', {db_table: 'nation'});
+	$('#ac01_07_01').ajaxComboBox('dist/jquery.ajax-combobox.php', {lang: 'de', db_table: 'nation'});
+	$('#ac01_07_02').ajaxComboBox('dist/jquery.ajax-combobox.php', {lang: 'es', db_table: 'nation'});
+	$('#ac01_07_03').ajaxComboBox('dist/jquery.ajax-combobox.php', {lang: 'pt-br', db_table: 'nation'});
+	$('#ac01_07_04').ajaxComboBox('dist/jquery.ajax-combobox.php', {db_table: 'nation'});
 
 	/**
 	 * Display Sub-info
 	 */
 	$('#ac02_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_02').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -128,7 +128,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_03').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -141,7 +141,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_04').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -153,7 +153,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_05').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -162,7 +162,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac02_06').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -174,7 +174,7 @@ jQuery(document).ready(function($) {
 	 * Select-only
 	 */
 	$('#ac03_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'employee',
@@ -183,7 +183,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac03_02').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -198,7 +198,7 @@ jQuery(document).ready(function($) {
 	 * After selected
 	 */
 	$('#ac06_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -209,7 +209,7 @@ jQuery(document).ready(function($) {
 		alert($(this).val() + ' is selected.');
 	});
 	$('#ac06_02').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -229,7 +229,7 @@ jQuery(document).ready(function($) {
 	 * Others
 	 */
 	$('#ac04_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			db_table: 'nation',
@@ -252,7 +252,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac07_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'simple',
@@ -269,7 +269,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$(arr_instance).each(function() {
-		this.option.source = 'lib/jquery.ajax-combobox.php';
+		this.option.source = 'dist/jquery.ajax-combobox.php';
 		this.option.db_table = 'nation';
 	});
 
@@ -277,7 +277,7 @@ jQuery(document).ready(function($) {
 	 * Textarea (tag and shorten url)
 	 */
 	$('#ac08_01').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'textarea',
@@ -290,7 +290,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_02').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'textarea',
@@ -317,7 +317,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_04').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'textarea',
@@ -340,7 +340,7 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_05').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'textarea',
@@ -369,23 +369,23 @@ jQuery(document).ready(function($) {
 		}
 	);
 	$('#ac08_06').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'textarea',
 			shorten_btn: '#ac08_06_shorten',
-			shorten_src: 'lib/bitly.php',
+			shorten_src: 'dist/bitly.php',
 			shorten_min: 20
 		}
 	);
 	$('#ac08_07').ajaxComboBox(
-		'lib/jquery.ajax-combobox.php',
+		'dist/jquery.ajax-combobox.php',
 		{
 			lang: 'en',
 			plugin_type: 'textarea',
 			db_table: 'tag',
 			shorten_btn: '#ac08_07_shorten',
-			shorten_src: 'lib/bitly.php',
+			shorten_src: 'dist/bitly.php',
 			shorten_min: 20,
 			tags: [
 				{

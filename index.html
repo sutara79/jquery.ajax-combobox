@@ -1,12 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>jquery.ajax-combobox</title>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="lib/jquery.ajax-combobox.css">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="dist/jquery.ajax-combobox.css">
 		<link rel="stylesheet" href="sample/sample.css">
+		<script src="//cdn.jsdelivr.net/jquery/1.11.3/jquery.min.js"></script>
+		<script src="dist/jquery.ajax-combobox.js"></script><!-- required -->
+		<script src="sample/jquery.simple-scroll-follow.js"></script>
+		<script src="sample/sample.js"></script>
 	</head>
 	<body>
 		<header class="jumbotron">
@@ -25,7 +29,6 @@
 					<dt>License</dt><dd><a href="//opensource.org/licenses/mit-license.php">MIT License</a></dd>
 				</dl>
 				<a href="//github.com/sutara79/jquery.ajax-combobox" class="btn btn-primary" role="button">GitHub »</a>
-				<a href="jsdoc/" class="btn btn-primary" role="button">JSDoc »</a>
 			</div>
 		</header>
 		<div class="container">
@@ -218,7 +221,7 @@
 							<h6>JavaScript</h6>
 <pre>
 $('#ac01_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     <span class="green">lang: 'en',</span>
     db_table: 'nation'
@@ -254,7 +257,7 @@ $('#ac01_01').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac01_02').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'name',
@@ -292,7 +295,7 @@ $('#ac01_02').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac01_03').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'name',
@@ -330,7 +333,7 @@ $('#ac01_03').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac01_04').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang        : 'en',
     db_table    : 'nation',
@@ -367,7 +370,7 @@ $('#ac01_04').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac01_05').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'nation',
@@ -403,7 +406,7 @@ $('#ac01_05').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac01_06').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'nation',
@@ -511,7 +514,7 @@ order_by: [
 							<h6>JavaScript</h6>
 <pre>
 $('#ac02_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'employee',
@@ -547,7 +550,7 @@ $('#ac02_01').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac02_02').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'employee',
@@ -588,7 +591,7 @@ $('#ac02_02').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac02_03').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'employee',
@@ -629,7 +632,7 @@ $('#ac02_03').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac02_04').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'employee',
@@ -668,7 +671,7 @@ $('#ac02_04').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac02_05').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'employee',
@@ -754,7 +757,7 @@ alert(result);
 							<h6>JavaScript</h6>
 <pre>
 $('#ac03_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'employee',
@@ -807,7 +810,7 @@ $('#ac03_01').ajaxComboBox(
 							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac03_02')">
 <pre>
 $('#ac03_02').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     db_table: 'nation',
@@ -837,7 +840,7 @@ $('#ac03_02').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac06_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     db_table: 'nation',
    <span class="green">bind_to</span>: <span class="red">'foo'</span>
@@ -880,7 +883,7 @@ $('#ac06_01').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac06_02').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     db_table: 'nation',
     bind_to: 'foo'
@@ -922,7 +925,7 @@ $('#ac06_02').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac04_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang        : 'en',
     db_table    : 'nation',
@@ -1016,7 +1019,7 @@ $('#ac05_01').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac07_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     <span class="green">plugin_type: 'simple', </span>
@@ -1059,7 +1062,7 @@ var <span class="green">arr_instance</span> = $('#ac07_02').ajaxComboBox(
   }
 );
 $(<span class="green">arr_instance</span>).each(function() {
-  this.option.source = <span class="red">'lib/jquery.ajax-combobox.php'</span>;
+  this.option.source = <span class="red">'dist/jquery.ajax-combobox.php'</span>;
   this.option.db_table = <span class="red">'nation'</span>;
 });
 </pre>
@@ -1096,7 +1099,7 @@ $(<span class="green">arr_instance</span>).each(function() {
 							<h6>JavaScript</h6>
 <pre>
 $('#ac08_01').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     <span class="green">plugin_type</span>: <span class="red">'textarea'</span>,
@@ -1138,7 +1141,7 @@ $('#ac08_01').ajaxComboBox(
 						<h6>JavaScript</h6>
 <pre>
 $('#ac08_02').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     plugin_type: 'textarea',
@@ -1214,7 +1217,7 @@ var  <span class="green">tag_data</span> = [
 						<h6>JavaScript</h6>
 <pre>
 $('#ac08_04').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     plugin_type: 'textarea',
@@ -1279,7 +1282,7 @@ $('#ac08_04').ajaxComboBox(
 							<h6>JavaScript</h6>
 <pre>
 $('#ac08_05').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     plugin_type: 'textarea',
@@ -1342,12 +1345,12 @@ www.google.com *bad*. (URI scheme is required)
 							<h6>JavaScript</h6>
 <pre>
 $('#ac08_06').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     plugin_type: 'textarea',
     <span class="green">shorten_btn</span>: <span class="red">'#ac08_06_shorten'</span>,
-    <span class="green">shorten_src</span>: <span class="red">'lib/bitly.php'</span>,
+    <span class="green">shorten_src</span>: <span class="red">'dist/bitly.php'</span>,
     <span class="green">shorten_min</span>: <span class="red">20</span>
   }
 );
@@ -1384,13 +1387,13 @@ www.google.com *bad*. (URI scheme is required)
 							<h6>JavaScript</h6>
 <pre>
 $('#ac08_07').ajaxComboBox(
-  'lib/jquery.ajax-combobox.php',
+  'dist/jquery.ajax-combobox.php',
   {
     lang: 'en',
     plugin_type: 'textarea',
     db_table: 'tag',
     shorten_btn: '#ac08_07_shorten',
-    shorten_src: 'lib/bitly.php',
+    shorten_src: 'dist/bitly.php',
     shorten_min: 20,
     tags: [
       {
@@ -1420,11 +1423,5 @@ $('#ac08_07').ajaxComboBox(
 		<div id="jump_to_top">
 			<a href="#" class="btn btn-default">Top</a>
 		</div>
-
-		<!-- JavaScript -->
-		<script src="//code.jquery.com/jquery.min.js"></script>
-		<script src="lib/jquery.ajax-combobox.js"></script><!-- required -->
-		<script src="sample/jquery.simple-scroll-follow.js"></script>
-		<script src="sample/sample.js"></script>
 	</body>
 </html>
