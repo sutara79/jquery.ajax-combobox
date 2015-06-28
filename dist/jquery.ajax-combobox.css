@@ -26,10 +26,12 @@
 	margin: 0;
 	padding: 4px;
 	width: 320px;
+	height: 32px;
+	box-sizing: border-box;
 }
 
 .ac_container_open .ac_input {
-	border-radius: 4px 0 0 0 !important;
+	border-radius: 4px 4px 0 0 !important;
 }
 
 /**
@@ -46,13 +48,17 @@
 	position: relative;
 	text-align: center;
 	width: 32px;
+	height: 32px;
+	box-sizing: border-box;
 }
 
-.ac_container_open .ac_button {
+.ac_container_open > .ac_button {
 	border-bottom-right-radius: 0 !important;
 }
 
-.ac_button img {
+.ac_button > img {
+	top: 6px;
+	left: 8px;
 	height: 16px;
 	position: absolute;
 	width: 16px;
@@ -93,7 +99,7 @@
 	padding: 0;
 }
 
-.ac_results li {
+.ac_results > li {
 	color: #000;
 	font-size: 14px;
 	height: auto !important;
@@ -147,17 +153,17 @@
 	text-align: right;
 }
 
-.ac_navi a:link,
-.ac_navi a:visited,
-.ac_navi a:hover,
-.ac_navi a:active {
+.ac_navi > p > a:link,
+.ac_navi > p > a:visited,
+.ac_navi > p > a:hover,
+.ac_navi > p > a:active {
 	color: blue;
 	font-weight: normal;
 	margin: 0 4px;
 	text-decoration: underline;
 }
 
-.ac_navi p {
+.ac_navi > p {
 	color: black;
 	font-size: 15px;
 	margin: 0;
@@ -165,13 +171,13 @@
 	text-align: center;
 }
 
-.ac_navi .current {
+.ac_navi > p > a >.current {
 	color: #00c;
 	font-size: 16px;
 	font-weight: bold;
 }
 
-.ac_navi .page_end {
+.ac_navi > p >.page_end {
 	color: gray;
 	font-weight: normal;
 	margin: 0 4px;
@@ -185,7 +191,7 @@
 	margin: auto 4px !important;
 }
 
-.ac_navi .info {
+.ac_navi > .info {
 	margin: 0 !important;
 	padding: 0 !important;
 }
@@ -198,7 +204,7 @@
 	padding: 0 !important;
 }
 
-.ac_subinfo dl {
+.ac_subinfo > dl {
 	background: #eee;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
@@ -215,7 +221,7 @@
 	z-index: 200;
 }
 
-.ac_subinfo dt {
+.ac_subinfo > dl > dt {
 	background: #CEDFF7;
 	clear: both;
 	color: #37486A;
@@ -229,11 +235,11 @@
 	word-wrap: break-word;
 }
 
-.ac_subinfo dt.hide {
+.ac_subinfo > dl > dt.hide {
 	display: none !important;
 }
 
-.ac_subinfo dd {
+.ac_subinfo > dl > dd {
 	float: left;
 	font-size: 13px;
 	margin: 0;
@@ -245,7 +251,7 @@
 /**
  * Select only
  */
-.ac_container .ac_select_ng {
+.ac_container > .ac_select_ng {
 	background: #fcc;
 }
 
@@ -267,7 +273,7 @@
 	width: 320px;
 }
 
-.ac_container_open .ac_s_input {
+.ac_container_open > .ac_s_input {
 	border-radius: 4px 4px 0 0 !important;
 }
 

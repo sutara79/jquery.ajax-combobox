@@ -1,6 +1,6 @@
 /**
  * @file jQuery Plugin: jquery.ajax-combobox
- * @version 7.4.3
+ * @version 7.4.4
  * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
  * @license MIT License
  */
@@ -72,7 +72,6 @@ function AjaxComboBox(combo_input, source, option) {
 	this._setElem(combo_input);
 
 	this._setButtonAttrDefault();
-	this._setButtonPosition();
 	this._setInitRecord();
 
 	this._ehButton();
@@ -641,7 +640,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 		// ComboBoxの幅
 		if (this.option.plugin_type == 'combobox') {
 			$(elem.container).width($(elem.combo_input).outerWidth() + $(elem.button).outerWidth());
-			$(elem.button).height($(elem.combo_input).innerHeight());
 		} else {
 			$(elem.container).width($(elem.combo_input).outerWidth());
 		}
@@ -683,24 +681,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
 			$(this.elem.button).attr('title', this.message.get_all_btn);
 			$(this.elem.img).attr('src', this.option.button_img);
 		}
-	},
-
-	/**
-	 * @private
-	 * @desc ボタンの画像の位置を調整する
-	 */
-	_setButtonPosition: function() {
-		if (this.option.plugin_type != 'combobox') return;
-
-		var width_btn  = $(this.elem.button).innerWidth();
-		var height_btn = $(this.elem.button).innerHeight();
-		var width_img  = $(this.elem.img).width();
-		var height_img = $(this.elem.img).height();
-
-		var left = width_btn / 2 - (width_img / 2);
-		var top = height_btn / 2 - (height_img / 2);
-
-		$(this.elem.img).css({top: top, left: left});
 	},
 
 	/**
