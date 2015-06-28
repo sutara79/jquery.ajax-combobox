@@ -2,7 +2,7 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //#### You MUST change this value. ####
 $mysql = array(
-	'dsn'      => 'mysql:host=localhost;dbname=test;charset=utf8',
+	'dsn'      => 'mysql:host=localhost;dbname=test;charset=utf8;port=3360',
 	'username' => 'root',
 	'password' => ''
 );
@@ -12,6 +12,7 @@ $sqlite = array(
 	'password' => ''
 );
 new AjaxComboBox($sqlite);
+// new AjaxComboBox($mysql);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 /**
