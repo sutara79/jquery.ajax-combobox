@@ -1,101 +1,101 @@
 @charset "utf-8";
 
 #contents {
-	position: relative;
+  position: relative;
 }
 
 /* for PC */
 @media screen and (min-width:992px) {
-	nav {
-		bottom: auto;
-		box-sizing: border-box;
-		left: auto;
-		padding: 0 15px;
-		position: absolute;
-		right: auto;
-		top: 0px;
-		width: 34%;
-	}
+  nav {
+    bottom: auto;
+    box-sizing: border-box;
+    left: auto;
+    padding: 0 15px;
+    position: absolute;
+    right: auto;
+    top: 0px;
+    width: 34%;
+  }
 
-	article {
-		bottom: auto;
-		box-sizing: border-box;
-		left: 34%;
-		padding: 0 15px;
-		position: relative;
-		right: auto;
-		top: 0px;
-		width: 66%;
-	}
+  article {
+    bottom: auto;
+    box-sizing: border-box;
+    left: 34%;
+    padding: 0 15px;
+    position: relative;
+    right: auto;
+    top: 0px;
+    width: 66%;
+  }
 }
 
 /* for Smart Phone */
 @media screen and (max-width:991px) {
-	nav {
-		bottom: auto;
-		box-sizing: border-box;
-		left: auto;
-		padding: 0 15px;
-		position: static;
-		right: auto;
-		top: auto;
-		width: 100%;
-	}
+  nav {
+    bottom: auto;
+    box-sizing: border-box;
+    left: auto;
+    padding: 0 15px;
+    position: static;
+    right: auto;
+    top: auto;
+    width: 100%;
+  }
 
-	article {
-		bottom: auto;
-		box-sizing: border-box;
-		left: auto;
-		padding: 0 15px;
-		position: static;
-		right: auto;
-		top: auto;
-		width: 100%;
-	}
+  article {
+    bottom: auto;
+    box-sizing: border-box;
+    left: auto;
+    padding: 0 15px;
+    position: static;
+    right: auto;
+    top: auto;
+    width: 100%;
+  }
 }
 
 body {
-	-webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 footer {
-	background: #eee;
+  background: #eee;
 }
 
 footer div {
-	padding: 16px 0px;
-	text-align: right;
+  padding: 16px 0px;
+  text-align: right;
 }
 
 h6 {
-	color: #777;
-	font-size: 14px;
+  color: #777;
+  font-size: 14px;
 }
 
 pre {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 article form a.btn,
 article form input,
 article form button {
-	margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .green { color: #5cb85c;}
 .red { color: #d9534f;}
 
 #jump_to_top {
-	position: fixed;
-	right: 16px;
-	top: 16px;
+  position: fixed;
+  right: 16px;
+  top: 16px;
 }
 
 .ac_container textarea {
-	height: 180px;
-	width: 480px;
+  height: 180px;
+  width: 480px;
 }
 
 .check_btn {
-	margin-top: 8px;
+  margin-top: 8px;
 }

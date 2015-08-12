@@ -1,224 +1,224 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<title>jquery.ajax-combobox</title>
-		<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.4/css/bootstrap.min.css">
-		<link rel="stylesheet" href="dist/jquery.ajax-combobox.css">
-		<link rel="stylesheet" href="sample/sample.css">
-		<script src="//cdn.jsdelivr.net/jquery/1.11.3/jquery.min.js"></script>
-		<script src="dist/jquery.ajax-combobox.js"></script><!-- required -->
-		<script src="//cdn.jsdelivr.net/jquery.simple-scroll-follow/2.0.3/jquery.simple-scroll-follow.min.js"></script>
-		<script src="sample/sample.js"></script>
-	</head>
-	<body>
-		<header class="jumbotron">
-			<div class="container">
-				<h1>jquery.ajax-combobox</h1>
-				<p class="lang_en">
-					create a text box it can auto-complete and pull-down-select.
-				</p>
-				<p class="lang_ja">
-					オートコンプリートとドロップダウンリストを組み合わせたコンボボックス
-				</p>
-				<dl class="dl-horizontal">
-					<dt>Version</dt><dd>7.4.4</dd>
-					<dt>Update</dt><dd>2015-06-28</dd>
-					<dt>Author</dt><dd>Yuusaku Miyazaki</dd>
-					<dt>License</dt><dd><a href="//opensource.org/licenses/mit-license.php">MIT License</a></dd>
-				</dl>
-				<a href="//github.com/sutara79/jquery.ajax-combobox" class="btn btn-primary" role="button">GitHub »</a>
-			</div>
-		</header>
-		<div class="container">
-			<div id="contents" class="row">
-				<nav id="index">
-					<div id="language" class="btn-group">
-						<button id="lang_en" class="btn btn-default">English</button>
-						<button id="lang_ja" class="btn btn-default">Japanese</button>
-					</div>
-					<h3>
-						<span class="lang_en">Index</span>
-						<span class="lang_ja">目次</span>
-					</h3>
-					<h4>
-							<span class="lang_en">Basic</span>
-							<span class="lang_ja">基本</span>
-					</h4>
-					<div class="list-group">
-						<a class="list-group-item" href="#sample01_01">
-							<span class="lang_en">Usage</span>
-							<span class="lang_ja">使い方</span>
-						</a>
-						<a class="list-group-item" href="#sample01_02">
-							<span class="lang_en">Changing the amount of displays of the list</span>
-							<span class="lang_ja">候補リスト・隣接ページの表示数を変更</span>
-						</a>
-						<a class="list-group-item" href="#sample01_03">
-							<span class="lang_en">Simple Page-navi</span>
-							<span class="lang_ja">ページナビをシンプルに</span>
-						</a>
-						<a class="list-group-item" href="#sample01_04">
-							<span class="lang_en">Search for several fields</span>
-							<span class="lang_ja">複数のフィールドから検索</span>
-						</a>
-						<a class="list-group-item" href="#sample01_05">
-							<span class="lang_en">Change from "AND" to "OR"</span>
-							<span class="lang_ja">OR検索へ切り替える</span>
-						</a>
-						<a class="list-group-item" href="#sample01_06">
-							<span class="lang_en">Setting the rule of order</span>
-							<span class="lang_ja">並べ替えの規則を決める</span>
-						</a>
-						<a class="list-group-item" href="#sample01_07">
-							<span class="lang_en">Changing the language of the message</span>
-							<span class="lang_ja">メッセージの言語を変える</span>
-						</a>
-					</div>
-					<h4>
-						<span class="lang_en">Display Sub-info</span>
-						<span class="lang_ja">サブ情報を表示</span>
-					</h4>
-					<div class="list-group">
-						<a class="list-group-item" href="#sample02_01">
-							<span class="lang_en">Basic of Sub-info</span>
-							<span class="lang_ja">サブ情報の基本</span>
-						</a>
-						<a class="list-group-item" href="#sample02_02">
-							<span class="lang_en">Change the field name of Sub-info</span>
-							<span class="lang_ja">表の項目名を変更する</span>
-						</a>
-						<a class="list-group-item" href="#sample02_03">
-							<span class="lang_en">Setting of display field of Sub-info</span>
-							<span class="lang_ja">サブ情報の表示カラムの設定</span>
-						</a>
-						<a class="list-group-item" href="#sample02_04">
-							<span class="lang_en">Setting of hidden field of Sub-info</span>
-							<span class="lang_ja">サブ情報の非表示カラムの設定</span>
-						</a>
-						<a class="list-group-item" href="#sample02_05">
-							<span class="lang_en">Hide the field name of Sub-info</span>
-							<span class="lang_ja">サブ情報の項目名を非表示にする</span>
-						</a>
-						<a class="list-group-item" href="#sample02_06">
-							<span class="lang_en">How to use Sub-info for other purpose</span>
-							<span class="lang_ja">サブ情報を他で利用する</span>
-						</a>
-					</div>
-					<h4>
-						<span class="lang_en">Select-only</span>
-						<span class="lang_ja">セレクト専用</span>
-					</h4>
-					<div class="list-group">
-						<a class="list-group-item" href="#sample03_01">
-							<span class="lang_en">Basic of Select-only</span>
-							<span class="lang_ja">セレクト専用の基本</span>
-						</a>
-						<a class="list-group-item" href="#sample03_02">
-							<span class="lang_en">Setting of Primary key</span>
-							<span class="lang_ja">送信する値のカラムを変更</span>
-						</a>
-					</div>
-					<h4>
-						<span class="lang_en">After selected</span>
-						<span class="lang_ja">候補選択と同時に、別のイベントを発火する</span>
-					</h4>
-					<div class="list-group">
-						<a class="list-group-item" href="#sample06_01">
-							<span class="lang_en">Basic of after selected</span>
-							<span class="lang_ja">イベント発火の方法</span>
-						</a>
-						<a class="list-group-item" href="#sample06_02">
-							<span class="lang_en">Not enclosed by "form" tag</span>
-							<span class="lang_ja">formタグで囲んでいない場合</span>
-						</a>
-					</div>
-					<h4>
-						<span class="lang_en">Others</span>
-						<span class="lang_ja">その他</span>
-					</h4>
-					<div class="list-group">
-						<a class="list-group-item" href="#sample04_01">
-							<span class="lang_en">Initial value</span>
-							<span class="lang_ja">初期値設定</span>
-						</a>
-						<a class="list-group-item" href="#sample05_01">
-							<span class="lang_en">Search for JSON without database</span>
-							<span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
-						</a>
-						<a class="list-group-item" href="#sample07_01">
-							<span class="lang_en">Simple textbox</span>
-							<span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
-						</a>
-						<a class="list-group-item" href="#sample07_02">
-							<span class="lang_en">Getting plugin object</span>
-							<span class="lang_ja">プラグインのオブジェクトを受け取る</span>
-						</a>
-					</div>
-					<h4>
-						<span class="lang_en">Textarea (tag and shorten url)</span>
-						<span class="lang_ja">テキストエリア (タグ検索とURL短縮)</span>
-					</h4>
-					<div class="list-group">
-						<a class="list-group-item" href="#sample08_01">
-							<span class="lang_en">Basic of textarea</span>
-							<span class="lang_ja">テキストエリアの基本</span>
-						</a>
-						<a class="list-group-item" href="#sample08_02">
-							<span class="lang_en">Do not insert space</span>
-							<span class="lang_ja">タグ補完後に空白を挿入しない</span>
-						</a>
-						<a class="list-group-item" href="#sample08_03">
-							<span class="lang_en">Search for JSON without database</span>
-							<span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
-						</a>
-						<a class="list-group-item" href="#sample08_04">
-							<span class="lang_en">Several patterns of tags</span>
-							<span class="lang_ja">複数のタグパターン</span>
-						</a>
-						<a class="list-group-item" href="#sample08_05">
-							<span class="lang_en">Set options for every tags</span>
-							<span class="lang_ja">タグごとにオプションを設定する</span>
-						</a>
-						<a class="list-group-item" href="#sample08_06">
-							<span class="lang_en">Shorten URL</span>
-							<span class="lang_ja">URLを短縮する</span>
-						</a>
-						<a class="list-group-item" href="#sample08_07">
-							<span class="lang_en">Using both</span>
-							<span class="lang_ja">両方を使う</span>
-						</a>
-					</div>
-				</nav>
-				<article>
-					<section id="sample01_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Usage</span>
-								<span class="lang_ja">使い方</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								First parameter => File name transmitted by Ajax<br>
-								Second parameter => Options
-							</p>
-							<p class="lang_ja">
-								第1引数にAjax送信先のファイル名を、<br>
-								第2引数にオプションを設定します。
-							</p>
-							<label for="ac01_01">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac01_01" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_01')">
-							<h6>HTML</h6>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>jquery.ajax-combobox</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/jquery.ajax-combobox.css">
+    <link rel="stylesheet" href="sample/sample.css">
+    <script src="//cdn.jsdelivr.net/jquery/1.11.3/jquery.min.js"></script>
+    <script src="dist/jquery.ajax-combobox.js"></script><!-- required -->
+    <script src="//cdn.jsdelivr.net/jquery.simple-scroll-follow/2.0.3/jquery.simple-scroll-follow.min.js"></script>
+    <script src="sample/sample.js"></script>
+  </head>
+  <body>
+    <header class="jumbotron">
+      <div class="container">
+        <h1>jquery.ajax-combobox</h1>
+        <p class="lang_en">
+          create a text box it can auto-complete and pull-down-select.
+        </p>
+        <p class="lang_ja">
+          オートコンプリートとドロップダウンリストを組み合わせたコンボボックス
+        </p>
+        <dl class="dl-horizontal">
+          <dt>Version</dt><dd>7.4.4</dd>
+          <dt>Update</dt><dd>2015-06-28</dd>
+          <dt>Author</dt><dd>Yuusaku Miyazaki</dd>
+          <dt>License</dt><dd><a href="//opensource.org/licenses/mit-license.php">MIT License</a></dd>
+        </dl>
+        <a href="//github.com/sutara79/jquery.ajax-combobox" class="btn btn-primary" role="button">GitHub »</a>
+      </div>
+    </header>
+    <div class="container">
+      <div id="contents" class="row">
+        <nav id="index">
+          <div id="language" class="btn-group">
+            <button id="lang_en" class="btn btn-default">English</button>
+            <button id="lang_ja" class="btn btn-default">Japanese</button>
+          </div>
+          <h3>
+            <span class="lang_en">Index</span>
+            <span class="lang_ja">目次</span>
+          </h3>
+          <h4>
+              <span class="lang_en">Basic</span>
+              <span class="lang_ja">基本</span>
+          </h4>
+          <div class="list-group">
+            <a class="list-group-item" href="#sample01_01">
+              <span class="lang_en">Usage</span>
+              <span class="lang_ja">使い方</span>
+            </a>
+            <a class="list-group-item" href="#sample01_02">
+              <span class="lang_en">Changing the amount of displays of the list</span>
+              <span class="lang_ja">候補リスト・隣接ページの表示数を変更</span>
+            </a>
+            <a class="list-group-item" href="#sample01_03">
+              <span class="lang_en">Simple Page-navi</span>
+              <span class="lang_ja">ページナビをシンプルに</span>
+            </a>
+            <a class="list-group-item" href="#sample01_04">
+              <span class="lang_en">Search for several fields</span>
+              <span class="lang_ja">複数のフィールドから検索</span>
+            </a>
+            <a class="list-group-item" href="#sample01_05">
+              <span class="lang_en">Change from "AND" to "OR"</span>
+              <span class="lang_ja">OR検索へ切り替える</span>
+            </a>
+            <a class="list-group-item" href="#sample01_06">
+              <span class="lang_en">Setting the rule of order</span>
+              <span class="lang_ja">並べ替えの規則を決める</span>
+            </a>
+            <a class="list-group-item" href="#sample01_07">
+              <span class="lang_en">Changing the language of the message</span>
+              <span class="lang_ja">メッセージの言語を変える</span>
+            </a>
+          </div>
+          <h4>
+            <span class="lang_en">Display Sub-info</span>
+            <span class="lang_ja">サブ情報を表示</span>
+          </h4>
+          <div class="list-group">
+            <a class="list-group-item" href="#sample02_01">
+              <span class="lang_en">Basic of Sub-info</span>
+              <span class="lang_ja">サブ情報の基本</span>
+            </a>
+            <a class="list-group-item" href="#sample02_02">
+              <span class="lang_en">Change the field name of Sub-info</span>
+              <span class="lang_ja">表の項目名を変更する</span>
+            </a>
+            <a class="list-group-item" href="#sample02_03">
+              <span class="lang_en">Setting of display field of Sub-info</span>
+              <span class="lang_ja">サブ情報の表示カラムの設定</span>
+            </a>
+            <a class="list-group-item" href="#sample02_04">
+              <span class="lang_en">Setting of hidden field of Sub-info</span>
+              <span class="lang_ja">サブ情報の非表示カラムの設定</span>
+            </a>
+            <a class="list-group-item" href="#sample02_05">
+              <span class="lang_en">Hide the field name of Sub-info</span>
+              <span class="lang_ja">サブ情報の項目名を非表示にする</span>
+            </a>
+            <a class="list-group-item" href="#sample02_06">
+              <span class="lang_en">How to use Sub-info for other purpose</span>
+              <span class="lang_ja">サブ情報を他で利用する</span>
+            </a>
+          </div>
+          <h4>
+            <span class="lang_en">Select-only</span>
+            <span class="lang_ja">セレクト専用</span>
+          </h4>
+          <div class="list-group">
+            <a class="list-group-item" href="#sample03_01">
+              <span class="lang_en">Basic of Select-only</span>
+              <span class="lang_ja">セレクト専用の基本</span>
+            </a>
+            <a class="list-group-item" href="#sample03_02">
+              <span class="lang_en">Setting of Primary key</span>
+              <span class="lang_ja">送信する値のカラムを変更</span>
+            </a>
+          </div>
+          <h4>
+            <span class="lang_en">After selected</span>
+            <span class="lang_ja">候補選択と同時に、別のイベントを発火する</span>
+          </h4>
+          <div class="list-group">
+            <a class="list-group-item" href="#sample06_01">
+              <span class="lang_en">Basic of after selected</span>
+              <span class="lang_ja">イベント発火の方法</span>
+            </a>
+            <a class="list-group-item" href="#sample06_02">
+              <span class="lang_en">Not enclosed by "form" tag</span>
+              <span class="lang_ja">formタグで囲んでいない場合</span>
+            </a>
+          </div>
+          <h4>
+            <span class="lang_en">Others</span>
+            <span class="lang_ja">その他</span>
+          </h4>
+          <div class="list-group">
+            <a class="list-group-item" href="#sample04_01">
+              <span class="lang_en">Initial value</span>
+              <span class="lang_ja">初期値設定</span>
+            </a>
+            <a class="list-group-item" href="#sample05_01">
+              <span class="lang_en">Search for JSON without database</span>
+              <span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
+            </a>
+            <a class="list-group-item" href="#sample07_01">
+              <span class="lang_en">Simple textbox</span>
+              <span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+            </a>
+            <a class="list-group-item" href="#sample07_02">
+              <span class="lang_en">Getting plugin object</span>
+              <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+            </a>
+          </div>
+          <h4>
+            <span class="lang_en">Textarea (tag and shorten url)</span>
+            <span class="lang_ja">テキストエリア (タグ検索とURL短縮)</span>
+          </h4>
+          <div class="list-group">
+            <a class="list-group-item" href="#sample08_01">
+              <span class="lang_en">Basic of textarea</span>
+              <span class="lang_ja">テキストエリアの基本</span>
+            </a>
+            <a class="list-group-item" href="#sample08_02">
+              <span class="lang_en">Do not insert space</span>
+              <span class="lang_ja">タグ補完後に空白を挿入しない</span>
+            </a>
+            <a class="list-group-item" href="#sample08_03">
+              <span class="lang_en">Search for JSON without database</span>
+              <span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
+            </a>
+            <a class="list-group-item" href="#sample08_04">
+              <span class="lang_en">Several patterns of tags</span>
+              <span class="lang_ja">複数のタグパターン</span>
+            </a>
+            <a class="list-group-item" href="#sample08_05">
+              <span class="lang_en">Set options for every tags</span>
+              <span class="lang_ja">タグごとにオプションを設定する</span>
+            </a>
+            <a class="list-group-item" href="#sample08_06">
+              <span class="lang_en">Shorten URL</span>
+              <span class="lang_ja">URLを短縮する</span>
+            </a>
+            <a class="list-group-item" href="#sample08_07">
+              <span class="lang_en">Using both</span>
+              <span class="lang_ja">両方を使う</span>
+            </a>
+          </div>
+        </nav>
+        <article>
+          <section id="sample01_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Usage</span>
+                <span class="lang_ja">使い方</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                First parameter => File name transmitted by Ajax<br>
+                Second parameter => Options
+              </p>
+              <p class="lang_ja">
+                第1引数にAjax送信先のファイル名を、<br>
+                第2引数にオプションを設定します。
+              </p>
+              <label for="ac01_01">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac01_01" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_01')">
+              <h6>HTML</h6>
 <pre>
 &lt;input id="ac01_01" type="text"&gt;
 </pre>
-							<h6>JavaScript</h6>
+              <h6>JavaScript</h6>
 <pre>
 $('#ac01_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -228,33 +228,33 @@ $('#ac01_01').ajaxComboBox(
   }
 );
 </pre>
-							<a class="btn btn-success" href="sample/basic/" target="_blank">Sample » (new window)</a>
-						</div>
-					</section>
+              <a class="btn btn-success" href="sample/basic/" target="_blank">Sample » (new window)</a>
+            </div>
+          </section>
 
-					<section id="sample01_02" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Changing the amount of displays of the list</span>
-								<span class="lang_ja">候補リスト・隣接ページの表示数を変更</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								"per_page" option => The number of displays of lists is changed.<br>
-								"navi_num" option => The number of page is changed.
-							</p>
-							<p class="lang_ja">
-								"per_page"オプションで、候補リストの表示数を、<br>
-								"navi_num"オプションで、隣接ページの表示数を変更できます。
-							</p>
-							<label for="ac01_02">
-								<span class="lang_en">Name:</span>
-								<span class="lang_ja">人名:</span>
-							</label>
-							<input id="ac01_02" type="text" style="width:400px">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_02')">
-							<h6>JavaScript</h6>
+          <section id="sample01_02" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Changing the amount of displays of the list</span>
+                <span class="lang_ja">候補リスト・隣接ページの表示数を変更</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                "per_page" option => The number of displays of lists is changed.<br>
+                "navi_num" option => The number of page is changed.
+              </p>
+              <p class="lang_ja">
+                "per_page"オプションで、候補リストの表示数を、<br>
+                "navi_num"オプションで、隣接ページの表示数を変更できます。
+              </p>
+              <label for="ac01_02">
+                <span class="lang_en">Name:</span>
+                <span class="lang_ja">人名:</span>
+              </label>
+              <input id="ac01_02" type="text" style="width:400px">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_02')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac01_02').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -266,33 +266,33 @@ $('#ac01_02').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample01_03" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Simple Page-navi</span>
-								<span class="lang_ja">ページナビをシンプルに</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Please set "navi_simple" option when you want to narrow<br>
-								the width of the ComboBox as much as possible.
-							</p>
-							<p class="lang_ja">
-								ComBoxの幅をできるだけ狭くしたい場合、"navi_simple"オプションで<br>
-								先頭・末尾のページへのリンクを非表示にできます。<br>
-								なお、キーボードのショートカットは有効のままです。(Shift + 右・左)
-							</p>
-							<label for="ac01_03">
-								<span class="lang_en">Name:</span>
-								<span class="lang_ja">人名:</span>
-							</label>
-							<input id="ac01_03" type="text" style="width:160px">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_03')">
-							<h6>JavaScript</h6>
+          <section id="sample01_03" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Simple Page-navi</span>
+                <span class="lang_ja">ページナビをシンプルに</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Please set "navi_simple" option when you want to narrow<br>
+                the width of the ComboBox as much as possible.
+              </p>
+              <p class="lang_ja">
+                ComBoxの幅をできるだけ狭くしたい場合、"navi_simple"オプションで<br>
+                先頭・末尾のページへのリンクを非表示にできます。<br>
+                なお、キーボードのショートカットは有効のままです。(Shift + 右・左)
+              </p>
+              <label for="ac01_03">
+                <span class="lang_en">Name:</span>
+                <span class="lang_ja">人名:</span>
+              </label>
+              <input id="ac01_03" type="text" style="width:160px">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_03')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac01_03').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -304,33 +304,33 @@ $('#ac01_03').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample01_04" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Search for several fields</span>
-								<span class="lang_ja">複数のフィールドから検索</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Set several fields for "search_field" option.<br>
-								Please input "23" to the following box.
-							</p>
-							<p class="lang_ja">
-								カンマ区切りでフィールド名を指定することで、<br>
-								同じテーブルの中の複数のフィールドから検索できます。<br>
-								試しに、下のボックスに『23』と入力してみてください。
-							</p>
-							<label for="ac01_04">
-								<span class="lang_en">Nation (name, id):</span>
-								<span class="lang_ja">国名 (name, id):</span>
-							</label>
-							<input id="ac01_04" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_04')">
-							<h6>JavaScript</h6>
+          <section id="sample01_04" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Search for several fields</span>
+                <span class="lang_ja">複数のフィールドから検索</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Set several fields for "search_field" option.<br>
+                Please input "23" to the following box.
+              </p>
+              <p class="lang_ja">
+                カンマ区切りでフィールド名を指定することで、<br>
+                同じテーブルの中の複数のフィールドから検索できます。<br>
+                試しに、下のボックスに『23』と入力してみてください。
+              </p>
+              <label for="ac01_04">
+                <span class="lang_en">Nation (name, id):</span>
+                <span class="lang_ja">国名 (name, id):</span>
+              </label>
+              <input id="ac01_04" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_04')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac01_04').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -341,33 +341,33 @@ $('#ac01_04').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample01_05" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Change from "AND" to "OR"</span>
-								<span class="lang_ja">OR検索へ切り替える</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								You can change the type of search from "AND" to "OR".<br>
-								Please input "ame ja" to the following box.
-							</p>
-							<p class="lang_ja">
-								スペース区切りで複数の言葉で検索した場合、<br>
-								デフォルトではAND検索となりますが、OR検索にすることもできます。<br>
-								試しに、下のボックスに『ame ja』と入力してみてください。
-							</p>
-							<label for="ac01_05">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac01_05" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_05')">
-							<h6>JavaScript</h6>
+          <section id="sample01_05" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Change from "AND" to "OR"</span>
+                <span class="lang_ja">OR検索へ切り替える</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                You can change the type of search from "AND" to "OR".<br>
+                Please input "ame ja" to the following box.
+              </p>
+              <p class="lang_ja">
+                スペース区切りで複数の言葉で検索した場合、<br>
+                デフォルトではAND検索となりますが、OR検索にすることもできます。<br>
+                試しに、下のボックスに『ame ja』と入力してみてください。
+              </p>
+              <label for="ac01_05">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac01_05" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_05')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac01_05').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -378,32 +378,32 @@ $('#ac01_05').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample01_06" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Setting the rule of order</span>
-								<span class="lang_ja">並べ替えの規則を決める</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Basically, it is arranged by "search_field" option.<br>
-								You can also arrange it by "order_by" option.
-							</p>
-							<p class="lang_ja">
-								基本的には、"search_field"オプションに指定されたフィールドの昇順に並べ替えられます。<br>
-								"order_by"オプションで任意に指定することもできます。
-							</p>
-							<label for="ac01_06">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac01_06" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_06')">
-							<h6>JavaScript</h6>
+          <section id="sample01_06" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Setting the rule of order</span>
+                <span class="lang_ja">並べ替えの規則を決める</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Basically, it is arranged by "search_field" option.<br>
+                You can also arrange it by "order_by" option.
+              </p>
+              <p class="lang_ja">
+                基本的には、"search_field"オプションに指定されたフィールドの昇順に並べ替えられます。<br>
+                "order_by"オプションで任意に指定することもできます。
+              </p>
+              <label for="ac01_06">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac01_06" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_06')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac01_06').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -431,87 +431,87 @@ order_by: [
  'id'
 ]
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample01_07" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Changing the language of the message</span>
-								<span class="lang_ja">メッセージの言語を変える</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Set the <code>lang</code> option.
-							</p>
-							<p class="lang_ja">
-								<code>lang</code>オプションで指定してください。
-							</p>
-							<table class="table">
-								<thead><tr><th>Option value</th><th>Language</th></tr></thead>
-								<tbody>
-									<tr><td>de</td><td>German<br>(Thanks Sebastian Gohres)</td></tr>
-									<tr><td>en</td><td>English</td></tr>
-									<tr><td>es</td><td>Spanish<br>(Thanks Joaquin G. de la Zerda)</td></tr>
-									<tr><td>pt-br</td><td>Brazilian Portuguese<br>(Thanks Marcio de Souza)</td></tr>
-									<tr><td>ja (default)</td><td>Japanese</td></tr>
-								</tbody>
-							</table>
-							<label for="ac01_07_01">
-								<span class="lang_en">Nation (de):</span>
-								<span class="lang_ja">国名 (de):</span>
-							</label>
-							<input id="ac01_07_01" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_01')">
+          <section id="sample01_07" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Changing the language of the message</span>
+                <span class="lang_ja">メッセージの言語を変える</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Set the <code>lang</code> option.
+              </p>
+              <p class="lang_ja">
+                <code>lang</code>オプションで指定してください。
+              </p>
+              <table class="table">
+                <thead><tr><th>Option value</th><th>Language</th></tr></thead>
+                <tbody>
+                  <tr><td>de</td><td>German<br>(Thanks Sebastian Gohres)</td></tr>
+                  <tr><td>en</td><td>English</td></tr>
+                  <tr><td>es</td><td>Spanish<br>(Thanks Joaquin G. de la Zerda)</td></tr>
+                  <tr><td>pt-br</td><td>Brazilian Portuguese<br>(Thanks Marcio de Souza)</td></tr>
+                  <tr><td>ja (default)</td><td>Japanese</td></tr>
+                </tbody>
+              </table>
+              <label for="ac01_07_01">
+                <span class="lang_en">Nation (de):</span>
+                <span class="lang_ja">国名 (de):</span>
+              </label>
+              <input id="ac01_07_01" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_01')">
 
-							<hr>
-							<label for="ac01_07_02">
-								<span class="lang_en">Nation (es):</span>
-								<span class="lang_ja">国名 (es):</span>
-							</label>
-							<input id="ac01_07_02" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_02')">
+              <hr>
+              <label for="ac01_07_02">
+                <span class="lang_en">Nation (es):</span>
+                <span class="lang_ja">国名 (es):</span>
+              </label>
+              <input id="ac01_07_02" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_02')">
 
-							<hr>
-							<label for="ac01_07_03">
-								<span class="lang_en">Nation (pt-br):</span>
-								<span class="lang_ja">国名 (pt-br):</span>
-							</label>
-							<input id="ac01_07_03" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_03')">
+              <hr>
+              <label for="ac01_07_03">
+                <span class="lang_en">Nation (pt-br):</span>
+                <span class="lang_ja">国名 (pt-br):</span>
+              </label>
+              <input id="ac01_07_03" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_03')">
 
-							<hr>
-							<label for="ac01_07_04">
-								<span class="lang_en">Nation (ja):</span>
-								<span class="lang_ja">国名 (ja):</span>
-							</label>
-							<input id="ac01_07_04" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_04')">
-					</section>
+              <hr>
+              <label for="ac01_07_04">
+                <span class="lang_en">Nation (ja):</span>
+                <span class="lang_ja">国名 (ja):</span>
+              </label>
+              <input id="ac01_07_04" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac01_07_04')">
+          </section>
 
-					<section id="sample02_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Basic of Sub-info</span>
-								<span class="lang_ja">サブ情報の基本</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Each candidate can be distinguished when there is a candidate of the same name.
-							</p>
-							<p class="lang_ja">
-								同一名の候補がある場合、右側にサブ情報を表示させて<br>
-								それぞれを区別することができます。
-							</p>
-							<label for="ac02_01">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac02_01" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_01')">
-							<h6>JavaScript</h6>
+          <section id="sample02_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Basic of Sub-info</span>
+                <span class="lang_ja">サブ情報の基本</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Each candidate can be distinguished when there is a candidate of the same name.
+              </p>
+              <p class="lang_ja">
+                同一名の候補がある場合、右側にサブ情報を表示させて<br>
+                それぞれを区別することができます。
+              </p>
+              <label for="ac02_01">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac02_01" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_01')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac02_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -522,32 +522,32 @@ $('#ac02_01').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample02_02" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Change the field name of Sub-info</span>
-								<span class="lang_ja">表の項目名を変更する</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								"sub_as" option can change the field-name.
-							</p>
-							<p class="lang_ja">
-								何も設定しないと、サブ情報の表の項目名は、データベースの<br>
-								カラム名が表示されてしまいます。<br>
-								"sub_as"オプションで、表示名を変更できます。
-							</p>
-							<label for="ac02_02">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac02_02" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_02')">
-							<h6>JavaScript</h6>
+          <section id="sample02_02" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Change the field name of Sub-info</span>
+                <span class="lang_ja">表の項目名を変更する</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                "sub_as" option can change the field-name.
+              </p>
+              <p class="lang_ja">
+                何も設定しないと、サブ情報の表の項目名は、データベースの<br>
+                カラム名が表示されてしまいます。<br>
+                "sub_as"オプションで、表示名を変更できます。
+              </p>
+              <label for="ac02_02">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac02_02" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_02')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac02_02').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -563,32 +563,32 @@ $('#ac02_02').ajaxComboBox(
   }
 );
 </code>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample02_03" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Setting of display field of Sub-info</span>
-								<span class="lang_ja">サブ情報の表示カラムの設定</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								"show_field" option choose the displayed field-name.
-							</p>
-							<p class="lang_ja">
-								"show_field"オプションで設定します。<br>
-								カンマ区切りで、複数のカラム名を指定します。<br>
-								オプションでの記述の順番でカラムを取得します。
-							</p>
-							<label for="ac02_03">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac02_03" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_03')">
-							<h6>JavaScript</h6>
+          <section id="sample02_03" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Setting of display field of Sub-info</span>
+                <span class="lang_ja">サブ情報の表示カラムの設定</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                "show_field" option choose the displayed field-name.
+              </p>
+              <p class="lang_ja">
+                "show_field"オプションで設定します。<br>
+                カンマ区切りで、複数のカラム名を指定します。<br>
+                オプションでの記述の順番でカラムを取得します。
+              </p>
+              <label for="ac02_03">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac02_03" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_03')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac02_03').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -604,32 +604,32 @@ $('#ac02_03').ajaxComboBox(
   }
 );
 </code>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample02_04" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Setting of hidden field of Sub-info</span>
-								<span class="lang_ja">サブ情報の非表示カラムの設定</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								"hide_field" option choose the hidden field-name.
-							</p>
-							<p class="lang_ja">
-								"hide_field"オプションで設定します。<br>
-								複数のカラムを取得する場合の記述のルールは<br>
-								"show_field"オプションと同じです。
-							</p>
-							<label for="ac02_04">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac02_04" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_04')">
-							<h6>JavaScript</h6>
+          <section id="sample02_04" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Setting of hidden field of Sub-info</span>
+                <span class="lang_ja">サブ情報の非表示カラムの設定</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                "hide_field" option choose the hidden field-name.
+              </p>
+              <p class="lang_ja">
+                "hide_field"オプションで設定します。<br>
+                複数のカラムを取得する場合の記述のルールは<br>
+                "show_field"オプションと同じです。
+              </p>
+              <label for="ac02_04">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac02_04" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_04')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac02_04').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -644,31 +644,31 @@ $('#ac02_04').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample02_05" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Hide the field name of Sub-info</span>
-								<span class="lang_ja">サブ情報の項目名を非表示にする</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Set "simple" to "sub_info" option instead of "true".
-							</p>
-							<p class="lang_ja">
-								"sub_info"オプションに"true"の代わりに"simple"と指定することで、<br>
-								サブ情報の項目名を非表示にできます。
-							</p>
-							<label for="ac02_05">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac02_05" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_05')">
-							<h6>JavaScript</h6>
+          <section id="sample02_05" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Hide the field name of Sub-info</span>
+                <span class="lang_ja">サブ情報の項目名を非表示にする</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Set "simple" to "sub_info" option instead of "true".
+              </p>
+              <p class="lang_ja">
+                "sub_info"オプションに"true"の代わりに"simple"と指定することで、<br>
+                サブ情報の項目名を非表示にできます。
+              </p>
+              <label for="ac02_05">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac02_05" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac02_05')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac02_05').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -680,46 +680,46 @@ $('#ac02_05').ajaxComboBox(
   }
 );
 </code>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample02_06" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">How to use Sub-info for other purpose</span>
-								<span class="lang_ja">サブ情報を他で利用する</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								The "sub_info" attribute is added to text box<br>
-								when you select from list.<br>
-								So, you can use Sub-info for other purpose.
-							</p>
-							<p class="lang_ja">
-								候補を選択した際、<br>
-								テキストボックスの『sub_info』という独自の属性に<br>
-								JSON形式でサブ情報が格納されるので、他で利用することが可能です。
-							</p>
-							<label for="ac02_06">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
+          <section id="sample02_06" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">How to use Sub-info for other purpose</span>
+                <span class="lang_ja">サブ情報を他で利用する</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                The "sub_info" attribute is added to text box<br>
+                when you select from list.<br>
+                So, you can use Sub-info for other purpose.
+              </p>
+              <p class="lang_ja">
+                候補を選択した際、<br>
+                テキストボックスの『sub_info』という独自の属性に<br>
+                JSON形式でサブ情報が格納されるので、他で利用することが可能です。
+              </p>
+              <label for="ac02_06">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
 
-							<input id="ac02_06" type="text">
-							<input class="check_btn" type="button" value="Check Sub-info" onclick="func_02_06()">
-							<script>
-							function func_02_06() {
-								var result = 'Sub-info\n';
-								var json = $('#ac02_06').attr('sub_info');
-								var obj = eval( '(' + json + ')' );
-								for(var key in obj) {
-									result += key + ' : ' + obj[key] + '\n';
-								} 
-								alert(result);
-							}
-							</script>
-							<h6>JavaScript</h6>
+              <input id="ac02_06" type="text">
+              <input class="check_btn" type="button" value="Check Sub-info" onclick="func_02_06()">
+              <script>
+              function func_02_06() {
+                var result = 'Sub-info\n';
+                var json = $('#ac02_06').attr('sub_info');
+                var obj = eval( '(' + json + ')' );
+                for(var key in obj) {
+                  result += key + ' : ' + obj[key] + '\n';
+                } 
+                alert(result);
+              }
+              </script>
+              <h6>JavaScript</h6>
 <pre>
 var result = 'Sub-info\n';
 var json = $('#ac_02_06')<span class="green">.attr('sub_info')</span>;
@@ -729,32 +729,32 @@ for(var key in obj) {
 } 
 alert(result);
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample03_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Basic of Select-only</span>
-								<span class="lang_ja">セレクト専用の基本</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								When the value that does not exist in the list is input, warning is received.
-							</p>
-							<p class="lang_ja">
-								候補を選択した際、<br>
-								テキストボックスの『sub_info』という独自の属性に<br>
-								JSON形式でサブ情報が格納されるので、他で利用することが可能です。
-							</p>
-							<label for="ac03_01">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac03_01" name="ac03_01" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac03_01')">
-							<h6>JavaScript</h6>
+          <section id="sample03_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Basic of Select-only</span>
+                <span class="lang_ja">セレクト専用の基本</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                When the value that does not exist in the list is input, warning is received.
+              </p>
+              <p class="lang_ja">
+                候補を選択した際、<br>
+                テキストボックスの『sub_info』という独自の属性に<br>
+                JSON形式でサブ情報が格納されるので、他で利用することが可能です。
+              </p>
+              <label for="ac03_01">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac03_01" name="ac03_01" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac03_01')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac03_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -766,17 +766,17 @@ $('#ac03_01').ajaxComboBox(
   }
 );
 </pre>
-							<p class="lang_en">
-								If this option is set, the value of "Primary_key" field transmit by the form.
-							</p>
-							<p class="lang_ja">
-								なお、このオプションを設定すると、フォームで送信されるのは<br>
-								"primary_key"オプションで設定したカラムの値になります。
-								この値は、候補リストの&lt;li&gt;要素のid属性にもなります。<br><br>
-								テキストボックスと同じname属性を持つ隠しフィールド(hidden)を<br>
-								生成し、リストから選択した場合のみ、"primary_key"の値を<br>
-								hiddenのvalue属性に設定しています。
-							</p>
+              <p class="lang_en">
+                If this option is set, the value of "Primary_key" field transmit by the form.
+              </p>
+              <p class="lang_ja">
+                なお、このオプションを設定すると、フォームで送信されるのは<br>
+                "primary_key"オプションで設定したカラムの値になります。
+                この値は、候補リストの&lt;li&gt;要素のid属性にもなります。<br><br>
+                テキストボックスと同じname属性を持つ隠しフィールド(hidden)を<br>
+                生成し、リストから選択した場合のみ、"primary_key"の値を<br>
+                hiddenのvalue属性に設定しています。
+              </p>
 <pre>
 <span class="gray">// Textbox</span>
 &lt;input id=&quot;ac03_01_1&quot; name=&quot;<span class="green">ac03_01_1</span>&quot; type=&quot;text&quot; /&gt;
@@ -791,23 +791,23 @@ $('#ac03_01').ajaxComboBox(
 <span class="gray">// Hidden field</span>
 &lt;input type=&quot;hidden&quot; name=&quot;<span class="green">ac03_01_1</span>&quot; value=&quot;<span class="red">A011</span>&quot;/&gt;
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample03_02" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Setting of Primary key</span>
-								<span class="lang_ja">送信する値のカラムを変更</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<label for="ac03_02">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac03_02" name="ac03_02" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac03_02')">
+          <section id="sample03_02" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Setting of Primary key</span>
+                <span class="lang_ja">送信する値のカラムを変更</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <label for="ac03_02">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac03_02" name="ac03_02" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac03_02')">
 <pre>
 $('#ac03_02').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -821,23 +821,23 @@ $('#ac03_02').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample06_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Basic of after selected</span>
-								<span class="lang_ja">イベント発火の方法</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<label for="ac06_01">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac06_01" type="text">
-							<h6>JavaScript</h6>
+          <section id="sample06_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Basic of after selected</span>
+                <span class="lang_ja">イベント発火の方法</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <label for="ac06_01">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac06_01" type="text">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac06_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -850,37 +850,37 @@ $('#ac06_01').ajaxComboBox(
   alert($(this).val() + ' is selected.');
 });
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample06_02" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Not enclosed by "form" tag</span>
-								<span class="lang_ja">formタグで囲んでいない場合</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								If text box is not enclosed by form tag and event handler is set<br>
-								for inputting enter key, when one of the list is selected by enter key<br>
-								function is doubly executed.<br>
-								To avoid this situation, a argument that become true when selected by<br>
-								enter key is set When originality event of plugin is fired.
-							</p>
-							<p class="lang_ja">
-								テキストボックスをフォームタグで囲まず、Enterキーが押された場合の<br>
-								イベントハンドラを独自に用意している場合、候補をEnterキーで選ぶと<br>
-								イベントが重複して実行されてしまいます。<br>
-								それを防ぐため、プラグインの独自イベントが発火する際に、<br>
-								Enterキーで候補が選ばれた場合はtrueとなる引数を追加しました。
-							</p>
-							<label for="ac06_02">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac06_02" type="text">
-							<h6>JavaScript</h6>
+          <section id="sample06_02" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Not enclosed by "form" tag</span>
+                <span class="lang_ja">formタグで囲んでいない場合</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                If text box is not enclosed by form tag and event handler is set<br>
+                for inputting enter key, when one of the list is selected by enter key<br>
+                function is doubly executed.<br>
+                To avoid this situation, a argument that become true when selected by<br>
+                enter key is set When originality event of plugin is fired.
+              </p>
+              <p class="lang_ja">
+                テキストボックスをフォームタグで囲まず、Enterキーが押された場合の<br>
+                イベントハンドラを独自に用意している場合、候補をEnterキーで選ぶと<br>
+                イベントが重複して実行されてしまいます。<br>
+                それを防ぐため、プラグインの独自イベントが発火する際に、<br>
+                Enterキーで候補が選ばれた場合はtrueとなる引数を追加しました。
+              </p>
+              <label for="ac06_02">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac06_02" type="text">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac06_02').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -898,31 +898,31 @@ $('#ac06_02').ajaxComboBox(
   if(e.keyCode == 13) alert($(this).val() + ' is selected. (by enter key)');
 });
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample04_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Initial value</span>
-								<span class="lang_ja">初期値設定</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								<span class="underline bold">NOTE: please set the value of the primary key of database.</span>
-							</p>
-							<p class="lang_ja">
-								ComboBoxに初期値を設定します。<br>
-								<span class="underline bold">初期値は、'primary_key'オプションのDBカラムの値を指定して下さい。</span>
-							</p>
-							<label for="ac04_01">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac04_01" name="ac04_01" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac04_01')">
-							<h6>JavaScript</h6>
+          <section id="sample04_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Initial value</span>
+                <span class="lang_ja">初期値設定</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                <span class="underline bold">NOTE: please set the value of the primary key of database.</span>
+              </p>
+              <p class="lang_ja">
+                ComboBoxに初期値を設定します。<br>
+                <span class="underline bold">初期値は、'primary_key'オプションのDBカラムの値を指定して下さい。</span>
+              </p>
+              <label for="ac04_01">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac04_01" name="ac04_01" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac04_01')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac04_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -933,25 +933,25 @@ $('#ac04_01').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample05_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Search for JSON without database</span>
-								<span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								Search from JSON without database or server-side like PHP.
-							</p>
-							<p class="lang_ja">
-								データベースもサーバサイド言語も使わず、JSON形式のデータを検索します。<br>
-								JSON形式のデータは、下記のようなオブジェクト配列にする必要があります。
-							</p>
-							<h6>JavaScript</h6>
+          <section id="sample05_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Search for JSON without database</span>
+                <span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                Search from JSON without database or server-side like PHP.
+              </p>
+              <p class="lang_ja">
+                データベースもサーバサイド言語も使わず、JSON形式のデータを検索します。<br>
+                JSON形式のデータは、下記のようなオブジェクト配列にする必要があります。
+              </p>
+              <h6>JavaScript</h6>
 <pre>
 var data = [
   {id:'A001',name:'Adams',post:'Sales',position:'The rank and file'},
@@ -961,20 +961,20 @@ var data = [
   ...
 ];
 </pre>
-							<p class="lang_en">
-								Set JSON object instead of a name of server-side file.
-							</p>
-							<p class="lang_ja">
-								Ajax通信するサーバサイドのファイル名の代わりに、<br>
-								JSON形式のオブジェクト配列を指定します。
-							</p>
-							<label for="ac05_01">
-								<span class="lang_en">Employee:</span>
-								<span class="lang_ja">社員名:</span>
-							</label>
-							<input id="ac05_01" name="ac05_01" type="text">
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac05_01')">
-							<h6>JavaScript</h6>
+              <p class="lang_en">
+                Set JSON object instead of a name of server-side file.
+              </p>
+              <p class="lang_ja">
+                Ajax通信するサーバサイドのファイル名の代わりに、<br>
+                JSON形式のオブジェクト配列を指定します。
+              </p>
+              <label for="ac05_01">
+                <span class="lang_en">Employee:</span>
+                <span class="lang_ja">社員名:</span>
+              </label>
+              <input id="ac05_01" name="ac05_01" type="text">
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac05_01')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac05_01').ajaxComboBox(
   <span class="green">data</span>,
@@ -991,32 +991,32 @@ $('#ac05_01').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample07_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Simple textbox</span>
-								<span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								If it removes that the pull-down button is hidden,<br>
-								there is no change at all with the usual combo-box.
-							</p>
-							<p class="lang_ja">
-								プルダウンボタンのない、シンプルなテキストボックスです。<br>
-								ボタンが非表示なっている以外は、通常のコンボボックスと何ら変わりはありません。
-							</p>
-							<label for="ac07_01">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac07_01" type="text"><br>
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac07_01')">
-							<h6>JavaScript</h6>
+          <section id="sample07_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Simple textbox</span>
+                <span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                If it removes that the pull-down button is hidden,<br>
+                there is no change at all with the usual combo-box.
+              </p>
+              <p class="lang_ja">
+                プルダウンボタンのない、シンプルなテキストボックスです。<br>
+                ボタンが非表示なっている以外は、通常のコンボボックスと何ら変わりはありません。
+              </p>
+              <label for="ac07_01">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac07_01" type="text"><br>
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac07_01')">
+              <h6>JavaScript</h6>
 <pre>
 $('#ac07_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1028,30 +1028,30 @@ $('#ac07_01').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample07_02" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Getting plugin object</span>
-								<span class="lang_ja">プラグインのオブジェクトを受け取る</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								You can get a instance of the plugin's object, and control after calling the plugin.
-							</p>
-							<p class="lang_ja">
-								プラグインのインスタンスを受け取ることで、プラグイン呼び出し後に設定を変更することができます。
-							</p>
-							<label for="ac07_02">
-								<span class="lang_en">Nation:</span>
-								<span class="lang_ja">国名:</span>
-							</label>
-							<input id="ac07_02" type="text"><br>
-							<input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac07_02')">
-							<h6>JavaScript</h6>
+          <section id="sample07_02" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Getting plugin object</span>
+                <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                You can get a instance of the plugin's object, and control after calling the plugin.
+              </p>
+              <p class="lang_ja">
+                プラグインのインスタンスを受け取ることで、プラグイン呼び出し後に設定を変更することができます。
+              </p>
+              <label for="ac07_02">
+                <span class="lang_en">Nation:</span>
+                <span class="lang_ja">国名:</span>
+              </label>
+              <input id="ac07_02" type="text"><br>
+              <input class="check_btn" type="button" value="Check the value." onclick="displayResult('ac07_02')">
+              <h6>JavaScript</h6>
 <pre>
 var <span class="green">arr_instance</span> = $('#ac07_02').ajaxComboBox(
   <span class="red">'-----'</span>,
@@ -1066,37 +1066,37 @@ $(<span class="green">arr_instance</span>).each(function() {
   this.option.db_table = <span class="red">'nation'</span>;
 });
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_01" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Basic of textarea</span>
-								<span class="lang_ja">テキストエリアの基本</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								You can search and complement a tag such as "Twitter hashtag" in textarea.
-							</p>
-							<p class="lang_ja">
-								テキストエリアの中にある、Twitterハッシュタグのような文字列を検索・補完することができます。
-							</p>
-							<p class="lang_en">
-								Set "textarea" to "plugin_type" option.
-								Specify "start symbol" and "end symbol" by using array.
-							</p>
-							<p class="lang_ja">
-								"plugin_type"オプションに"textarea"を指定し、開始記号と終了記号を設定することで、テキストエリア内でのタグ検索が可能です。
-							</p>
-							<label for="ac08_01">
-								<span class="lang_en">Learning:</span>
-								<span class="lang_ja">学問:</span>
-							</label>
-							<textarea id="ac08_01">#philosophy #gy
+          <section id="sample08_01" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Basic of textarea</span>
+                <span class="lang_ja">テキストエリアの基本</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                You can search and complement a tag such as "Twitter hashtag" in textarea.
+              </p>
+              <p class="lang_ja">
+                テキストエリアの中にある、Twitterハッシュタグのような文字列を検索・補完することができます。
+              </p>
+              <p class="lang_en">
+                Set "textarea" to "plugin_type" option.
+                Specify "start symbol" and "end symbol" by using array.
+              </p>
+              <p class="lang_ja">
+                "plugin_type"オプションに"textarea"を指定し、開始記号と終了記号を設定することで、テキストエリア内でのタグ検索が可能です。
+              </p>
+              <label for="ac08_01">
+                <span class="lang_en">Learning:</span>
+                <span class="lang_ja">学問:</span>
+              </label>
+              <textarea id="ac08_01">#philosophy #gy
 #lo #lin</textarea>
-							<h6>JavaScript</h6>
+              <h6>JavaScript</h6>
 <pre>
 $('#ac08_01').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1112,33 +1112,33 @@ $('#ac08_01').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_02" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Do not insert space</span>
-								<span class="lang_ja">タグ補完後に空白を挿入しない</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-						<p class="lang_en">
-							In an initial state, a space is inserted after complement.<br>
-							You can prevent by using "space" option.
-						</p>
-						<p class="lang_ja">
-							デフォルトでは、タグ補完後に両側に空白が挿入されます。<br>
-							(すでに空白が存在する場合や、行頭、行末の場合は除きます)<br>
-							"space"オプションで、この挙動を変えることができます。
-						</p>
-						<label for="ac08_02">
-							<span class="lang_en">Learning:</span>
-							<span class="lang_ja">学問:</span>
-						</label>
-						<textarea id="ac08_02">[mathematics][his] [phi][gy]
+          <section id="sample08_02" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Do not insert space</span>
+                <span class="lang_ja">タグ補完後に空白を挿入しない</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+            <p class="lang_en">
+              In an initial state, a space is inserted after complement.<br>
+              You can prevent by using "space" option.
+            </p>
+            <p class="lang_ja">
+              デフォルトでは、タグ補完後に両側に空白が挿入されます。<br>
+              (すでに空白が存在する場合や、行頭、行末の場合は除きます)<br>
+              "space"オプションで、この挙動を変えることができます。
+            </p>
+            <label for="ac08_02">
+              <span class="lang_en">Learning:</span>
+              <span class="lang_ja">学問:</span>
+            </label>
+            <textarea id="ac08_02">[mathematics][his] [phi][gy]
 [lo][lin]</textarea>
-						<h6>JavaScript</h6>
+            <h6>JavaScript</h6>
 <pre>
 $('#ac08_02').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1155,24 +1155,24 @@ $('#ac08_02').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_03" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Search for JSON without database</span>
-								<span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<label for="ac08_03">
-								<span class="lang_en">Learning:</span>
-								<span class="lang_ja">学問:</span>
-							</label>
-							<textarea id="ac08_03">@mathematics @his @phi @gy
+          <section id="sample08_03" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Search for JSON without database</span>
+                <span class="lang_ja">データベースではなく、JSON形式のデータを検索する</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <label for="ac08_03">
+                <span class="lang_en">Learning:</span>
+                <span class="lang_ja">学問:</span>
+              </label>
+              <textarea id="ac08_03">@mathematics @his @phi @gy
 @lo @lin</textarea>
-						<h6>JavaScript</h6>
+            <h6>JavaScript</h6>
 <pre>
 ('#ac08_03').ajaxComboBox(
   <span class="green">tag_data</span>,
@@ -1196,25 +1196,25 @@ var  <span class="green">tag_data</span> = [
   ...
 ];
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_04" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Several patterns of tags</span>
-								<span class="lang_ja">複数のタグパターン</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<label for="ac08_04">
-								<span class="lang_en">Learning:</span>
-								<span class="lang_ja">学問:</span>
-							</label>
+          <section id="sample08_04" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Several patterns of tags</span>
+                <span class="lang_ja">複数のタグパターン</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <label for="ac08_04">
+                <span class="lang_en">Learning:</span>
+                <span class="lang_ja">学問:</span>
+              </label>
 
-							<textarea id="ac08_04">[mathematics][his] #phi #gy
+              <textarea id="ac08_04">[mathematics][his] #phi #gy
 @lo @lin</textarea>
-						<h6>JavaScript</h6>
+            <h6>JavaScript</h6>
 <pre>
 $('#ac08_04').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1239,24 +1239,24 @@ $('#ac08_04').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_05" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Set options for every tags</span>
-								<span class="lang_ja">タグごとにオプションを設定する</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								You can set following options for every tags.
-							</p>
-							<p class="lang_ja">
-								下記のオプションは、タグごとに設定することができます。
-							</p>
-							<h6>JavaScript</h6>
+          <section id="sample08_05" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Set options for every tags</span>
+                <span class="lang_ja">タグごとにオプションを設定する</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                You can set following options for every tags.
+              </p>
+              <p class="lang_ja">
+                下記のオプションは、タグごとに設定することができます。
+              </p>
+              <h6>JavaScript</h6>
 <pre>
 {
   tags: [
@@ -1273,13 +1273,13 @@ $('#ac08_04').ajaxComboBox(
   ]
 }
 </pre>
-							<label for="ac08_05">
-								<span class="lang_en">Learning:</span>
-								<span class="lang_ja">学問:</span>
-							</label>
-							<textarea id="ac08_05">[mathematics][his] #phi #gy
+              <label for="ac08_05">
+                <span class="lang_en">Learning:</span>
+                <span class="lang_ja">学問:</span>
+              </label>
+              <textarea id="ac08_05">[mathematics][his] #phi #gy
 @lo @lin</textarea>
-							<h6>JavaScript</h6>
+              <h6>JavaScript</h6>
 <pre>
 $('#ac08_05').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1311,38 +1311,38 @@ $('#ac08_05').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_06" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Shorten URL</span>
-								<span class="lang_ja">URLを短縮する</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								The result of having shortened URL using external service can be made to reflect in text area. <br>
-								At present, it corresponds only to service of "bit.ly". 
-							</p>
-							<p class="lang_ja">
-								外部サービスを利用してURLを短縮した結果を、テキストエリア内に反映させることができます。<br>
-								現在のところ、"bit.ly"にしか対応していません。<br>
-							</p>
-							<label for="ac08_06">
-								<span class="lang_en">Learning:</span>
-								<span class="lang_ja">学問:</span>
-							</label>
-							<textarea id="ac08_06">
+          <section id="sample08_06" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Shorten URL</span>
+                <span class="lang_ja">URLを短縮する</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                The result of having shortened URL using external service can be made to reflect in text area. <br>
+                At present, it corresponds only to service of "bit.ly". 
+              </p>
+              <p class="lang_ja">
+                外部サービスを利用してURLを短縮した結果を、テキストエリア内に反映させることができます。<br>
+                現在のところ、"bit.ly"にしか対応していません。<br>
+              </p>
+              <label for="ac08_06">
+                <span class="lang_en">Learning:</span>
+                <span class="lang_ja">学問:</span>
+              </label>
+              <textarea id="ac08_06">
 http://ja.wikipedia.org/wiki/あにゃまる探偵キルミンずぅ *good*.
 (http://www.google.com/) *good*.
 ftp://too.short *bad*.("shorten_min" option)
 Do not touch URLhttp://www.google.com/ *bad*.
 www.google.com *bad*. (URI scheme is required)
 </textarea>
-							<button id="ac08_06_shorten">Shorten</button>
-							<h6>JavaScript</h6>
+              <button id="ac08_06_shorten">Shorten</button>
+              <h6>JavaScript</h6>
 <pre>
 $('#ac08_06').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1355,36 +1355,36 @@ $('#ac08_06').ajaxComboBox(
   }
 );
 </pre>
-						 </div>
-					</section>
+             </div>
+          </section>
 
-					<section id="sample08_07" class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="lang_en">Using both</span>
-								<span class="lang_ja">両方を使う</span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<p class="lang_en">
-								By combining "Complement a tag" and "Shorten URL", the contribution to external service such as "Twitter" becomes convenient. 
-							</p>
-							<p class="lang_ja">
-								タグ補完とURL短縮を組み合わせることで、Twitterなどの外部サービスとの連携が便利になります。
-							</p>
-							<label for="ac08_07">
-								<span class="lang_en">Learning:</span>
-								<span class="lang_ja">学問:</span>
-							</label>
-							<textarea id="ac08_07">[math][his] #phi #gy
+          <section id="sample08_07" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="lang_en">Using both</span>
+                <span class="lang_ja">両方を使う</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p class="lang_en">
+                By combining "Complement a tag" and "Shorten URL", the contribution to external service such as "Twitter" becomes convenient. 
+              </p>
+              <p class="lang_ja">
+                タグ補完とURL短縮を組み合わせることで、Twitterなどの外部サービスとの連携が便利になります。
+              </p>
+              <label for="ac08_07">
+                <span class="lang_en">Learning:</span>
+                <span class="lang_ja">学問:</span>
+              </label>
+              <textarea id="ac08_07">[math][his] #phi #gy
 http://ja.wikipedia.org/wiki/あにゃまる探偵キルミンずぅ *good*.
 (http://www.google.com/) *good*.
 ftp://too.short *bad*.("shorten_min" option)
 Do not touch URLhttp://www.google.com/ *bad*.
 www.google.com *bad*. (URI scheme is required)
 @lo @lin</textarea>
-							<button id="ac08_07_shorten">Shorten</button>
-							<h6>JavaScript</h6>
+              <button id="ac08_07_shorten">Shorten</button>
+              <h6>JavaScript</h6>
 <pre>
 $('#ac08_07').ajaxComboBox(
   'dist/jquery.ajax-combobox.php',
@@ -1410,18 +1410,18 @@ $('#ac08_07').ajaxComboBox(
   }
 );
 </pre>
-						</div>
-					</section>
-				</article>
-			</div><!-- .row -->
-		</div><!-- .container -->
-		<footer>
-			<div class="container">
-				powered by <a href="//www.usamimi.info/new/index.html">usamimi.info</a>, <a href="//getbootstrap.com/">Bootstrap</a>
-			</div>
-		</footer>
-		<div id="jump_to_top">
-			<a href="#" class="btn btn-default">Top</a>
-		</div>
-	</body>
+            </div>
+          </section>
+        </article>
+      </div><!-- .row -->
+    </div><!-- .container -->
+    <footer>
+      <div class="container">
+        powered by <a href="//www.usamimi.info/new/index.html">usamimi.info</a>, <a href="//getbootstrap.com/">Bootstrap</a>
+      </div>
+    </footer>
+    <div id="jump_to_top">
+      <a href="#" class="btn btn-default">Top</a>
+    </div>
+  </body>
 </html>
