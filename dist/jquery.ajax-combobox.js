@@ -53,7 +53,7 @@ $.fn.ajaxComboBox = function(source, option) {
   this.each(function() {
     arr.push(new AjaxComboBox(this, source, option));
   });
-  return (option != undefined && option.instance != undefined && option.instance) ? $(arr) : this;
+  return (option !== undefined && option.instance !== undefined && option.instance) ? $(arr) : this;
 };
 
 /**
@@ -147,9 +147,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _setOption2nd: function(option) {
     // 検索するフィールド(カンマ区切りで複数指定可能)
-    option.search_field = (option.search_field == undefined)
-      ? option.field
-      : option.search_field;
+    option.search_field = (option.search_field === undefined) ?
+      option.field :
+      option.search_field;
 
     // 大文字で統一
     option.and_or = option.and_or.toUpperCase();
@@ -161,9 +161,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     }
 
     // CASE WHEN後のORDER BY指定
-    option.order_by = (option.order_by == undefined) 
-      ? option.search_field
-      : option.order_by;
+    option.order_by = (option.order_by === undefined) ?
+      option.search_field :
+      option.order_by;
 
     // order_by を多層配列に
     // 例:  [ ['id', 'ASC'], ['name', 'DESC'] ]
@@ -258,7 +258,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     }
 
     // order_byを配列にする
-    option.tags[idx].order_by = (option.tags[idx].order_by == undefined) ?
+    option.tags[idx].order_by = (option.tags[idx].order_by === undefined) ?
       option.order_by :
       this._setOrderbyOption(option.tags[idx].order_by, option.tags[idx].field);
 
@@ -320,13 +320,14 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _setOrderbyOption: function(arg_order, arg_field) {
     var arr = [];
+    var orders = [];
     if (typeof arg_order == 'object') {
       for (var i = 0; i < arg_order.length; i++) {
-        var orders = $.trim(arg_order[i]).split(' ');
+        orders = $.trim(arg_order[i]).split(' ');
         arr[i] =  (orders.length == 2) ? orders : [orders[0], 'ASC'];
       }
     } else {
-      var orders = $.trim(arg_order).split(' ');
+      orders = $.trim(arg_order).split(' ');
       arr[0] = (orders.length == 2) ?
         orders :
         (orders[0].match(/^(ASC|DESC)$/i)) ?
@@ -591,9 +592,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     if (this.option.plugin_type == 'textarea') {
       elem.hidden = false;
     } else {
-      var hidden_name = ($(elem.combo_input).attr('name') != undefined)
-        ? $(elem.combo_input).attr('name')
-        : $(elem.combo_input).attr('id');  
+      var hidden_name = ($(elem.combo_input).attr('name') !== undefined) ?
+        $(elem.combo_input).attr('name') :
+        $(elem.combo_input).attr('id');
       // CakePHP用の対策 例:data[search][user] -> data[search][user_primary_key]
       if (hidden_name.match(/\]$/)) {
         hidden_name = hidden_name.replace(/\]?$/, '_primary_key]');
@@ -653,9 +654,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _setButtonAttrDefault: function() {
     if (this.option.select_only) {
-      if ($(this.elem.combo_input).val() != '') {
+      if ($(this.elem.combo_input).val() !== '') {
         if (this.option.plugin_type != 'textarea') {
-          if ($(this.elem.hidden).val() != '') {
+          if ($(this.elem.hidden).val() !== '') {
             // 選択状態
             $(this.elem.combo_input)
               .attr('title',this.message.select_ok)
@@ -674,7 +675,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
         if (this.option.plugin_type != 'textarea') $(this.elem.hidden).val('');
         $(this.elem.combo_input)
           .removeAttr('title')
-          .removeClass(this.css_class.select_ng)
+          .removeClass(this.css_class.select_ng);
       }
     }
     if (this.option.plugin_type == 'combobox') {
@@ -696,9 +697,10 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     // テキストボックスへ値を挿入
     if (typeof this.option.source == 'object') {
       // sourceがデータセットの場合
+      var data;
       for (var i = 0; i < this.option.source.length; i++) {
         if (this.option.source[i][this.option.primary_key] == this.option.init_record) {
-          var data = this.option.source[i];
+          data = this.option.source[i];
           break;
         }
       }
@@ -798,7 +800,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   _ehWhole: function() {
     var self = this;
     var stop_hide = false; // このプラグイン内でのマウスクリックなら、ページ全体での候補消去を中止。
-    $(self.elem.container).mousedown(function() { stop_hide = true });
+    $(self.elem.container).mousedown(function() {
+      stop_hide = true;
+    });
     $('html').mousedown(function() {
       if (stop_hide) stop_hide = false;
       else           self._hideResults(self);
@@ -911,7 +915,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     var matches = []; // 結果を最終的に格納する
     var arr = null; // ループの中で一時的に使用
 
-    while ((arr = self.option.shorten_reg.exec(text)) != null) {
+    while ((arr = self.option.shorten_reg.exec(text)) !== null) {
       matches[matches.length] = arr[1];
     }
     // URLがなければ、ここで終了。
@@ -976,9 +980,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     // 使用する変数を定義
     var current_result = self._getCurrentLine(self);
 
-    var target_top = (current_result && !enforce)
-      ? current_result.offset().top
-      : $(self.elem.container).offset().top;
+    var target_top = (current_result && !enforce) ?
+      current_result.offset().top :
+      $(self.elem.container).offset().top;
 
     var target_size;
 
@@ -1154,7 +1158,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   _findUrlToShorten: function(self) {
     var flag = null;
     var arr  = null; // ループの中で一時的に使用
-    while ((arr = self.option.shorten_reg.exec($(self.elem.combo_input).val())) != null) {
+    while ((arr = self.option.shorten_reg.exec($(self.elem.combo_input).val())) !== null) {
       flag = true;
       self.option.shorten_reg.lastIndex = 0; // .exec() のループを中断する場合、必ずリセットしておくこと
       break;
@@ -1175,27 +1179,28 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     var pos  = self._getCaretPosition($(self.elem.combo_input).get(0));
 
     // 抽出したタグの情報を保存する。
+    var left, pos_left, right, pos_right, str;
     for (var i = 0; i < self.option.tags.length; i++) {
       // キャレット位置から左へ空白までを抜き出す
-      var left = now_value.substring(0, pos);
+      left = now_value.substring(0, pos);
       left = left.match(self.option.tags[i].pattern.reg_left);
       if (!left) continue;
       left = left[1]; // 短縮していることに注意!
-      var pos_left = pos - left.length;
+      pos_left = pos - left.length;
       if (pos_left < 0) pos_left = 0;
 
       // キャレット位置から右へ空白までを抜き出す
-      var right = now_value.substring(pos, now_value.length);
+      right = now_value.substring(pos, now_value.length);
       right = right.match(self.option.tags[i].pattern.reg_right);
       if (right) {
         right = right[1]; // 短縮していることに注意!
-        var pos_right = pos + right.length;
+        pos_right = pos + right.length;
       } else {
         right = '';
-        var pos_right = pos;
+        pos_right = pos;
       }
-      var str = left + '' + right;
-      self.prop.is_suggest = (str == '') ? false : true;
+      str = left + '' + right;
+      self.prop.is_suggest = (str === '') ? false : true;
       return {
         type: i,
         str: str,
@@ -1331,15 +1336,16 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _suggest: function(self) {
     // コンボボックスの種類によって検索文字列の形式を変える
+    var q_word;
     if (self.option.plugin_type != 'textarea') {
-      var q_word = (self.prop.is_suggest) ? $.trim($(self.elem.combo_input).val()) : '';
+      q_word = (self.prop.is_suggest) ? $.trim($(self.elem.combo_input).val()) : '';
       if (q_word.length < 1 && self.prop.is_suggest) {
         self._hideResults(self);
         return;
       }
       q_word = q_word.split(/[\s　]+/);
     } else {
-      var q_word = [self.prop.tag.str];
+      q_word = [self.prop.tag.str];
     }
 
     self._abortAjax(self);
@@ -1367,7 +1373,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _setLoading: function(self) {
     $(self.elem.navi_info).text(self.message.loading);
-    if ($(self.elem.results).html() == '') {
+    if ($(self.elem.results).html() === '') {
       $(self.elem.navi).children('p').empty();
       self._calcWidthResults(self);
       $(self.elem.container).addClass(self.css_class.container_open);
@@ -1407,7 +1413,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
         json.cnt_page = json.result.length;
         for (i = 0; i < json.cnt_page; i++) {
           json.subinfo[i] = [];
-          for (key in json.result[i]) {
+          for (var key in json.result[i]) {
             if (key == self.option.primary_key) {
               json.primary_key.push(json.result[i][key]);
             }
@@ -1415,7 +1421,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
               json.candidate.push(json.result[i][key]);
             } else if ($.inArray(key, self.option.hide_field) == -1) {
               if (
-                self.option.show_field != ''                 &&
+                self.option.show_field !== '' &&
                 $.inArray('*', self.option.show_field) == -1 &&
                 $.inArray(key, self.option.show_field) == -1
               ) {
@@ -1464,7 +1470,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     } while (i < q_word.length);
 
     // SELECT * FROM source WHERE field LIKE q_word;
-    for (var i = 0; i < self.option.source.length; i++) {
+    for (i = 0; i < self.option.source.length; i++) {
       var flag = false;
       for (var j=0; j<arr_reg.length; j++) {
         if (self.option.source[i][self.option.field].match(arr_reg[j])) {
@@ -1479,7 +1485,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     }
 
     // 見つからなければすぐに終了
-    if (matched.length == undefined) {
+    if (matched.length === undefined) {
       self._notFoundSearch(self);
       return;
     }
@@ -1491,7 +1497,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     var matched1 = [];
     var matched2 = [];
     var matched3 = [];
-    for (var i = 0; i < matched.length; i++) {
+    for (i = 0; i < matched.length; i++) {
       if (matched[i][self.option.order_by[0][0]].match(reg1)) {
         matched1.push(matched[i]);
       } else if (matched[i][self.option.order_by[0][0]].match(reg2)) {
@@ -1517,37 +1523,37 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     var end   = start + self.option.per_page;
 
     // 最終的に返るオブジェクトを作成
-    for (var i = start, sub = 0; i < end; i++, sub++) {
-      if (sorted[i] == undefined) break;
+    for (i = start, sub = 0; i < end; i++, sub++) {
+      if (sorted[i] === undefined) break;
       for (var key in sorted[i]) {
         // セレクト専用
         if (key == self.option.primary_key) {
-          if (json.primary_key == undefined) json.primary_key = [];
+          if (json.primary_key === undefined) json.primary_key = [];
           json.primary_key.push(sorted[i][key]);
         }
         if (key == self.option.field) {
           // 変換候補を取得
-          if (json.candidate == undefined) json.candidate = [];
+          if (json.candidate === undefined) json.candidate = [];
           json.candidate.push(sorted[i][key]);
         } else {
           // サブ情報
           if ($.inArray(key, self.option.hide_field) == -1) {
             if (
-              self.option.show_field != ''                 &&
+              self.option.show_field !== '' &&
               $.inArray('*', self.option.show_field) == -1 &&
               $.inArray(key, self.option.show_field) == -1
             ) {
               continue;
             }
-            if (json.subinfo == undefined) json.subinfo = [];
-            if (json.subinfo[sub] == undefined) json.subinfo[sub] = [];
+            if (json.subinfo === undefined) json.subinfo = [];
+            if (json.subinfo[sub] === undefined) json.subinfo[sub] = [];
             json.subinfo[sub][key] = sorted[i][key];
           }
         }
       }
     }
     // json.cnt_page = json.candidate.length;
-    if (json.candidate == undefined) json.candidate = [];
+    if (json.candidate === undefined) json.candidate = [];
     json.cnt_page = json.candidate.length;
     self._prepareResults(self, json, q_word, which_page_num);
   },
@@ -1691,16 +1697,19 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
       } else {
         if (!self.option.navi_simple) {
           $('<a>')
-            .attr({href: 'javascript:void(0)', 'class': 'navi_first'})
+            .attr({
+              'href': '#',
+              'class': 'navi_first'
+            })
             .text('<< 1')
             .attr('title', self.message.first_title)
             .appendTo(self.elem.navi_p);
         }
         $('<a>')
           .attr({
-            href: 'javascript:void(0)',
+            'href': '#',
             'class': 'navi_prev',
-            title: self.message.prev_title
+            'title': self.message.prev_title
           })
           .text(self.message.prev)
           .appendTo(self.elem.navi_p);
@@ -1710,7 +1719,10 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
         // 現在のページ番号は<span>で囲む(強調表示用)
         var num_link = (i == page_num) ? '<span class="current">' + i + '</span>' : i;
         $('<a>')
-          .attr({href: 'javascript:void(0)', 'class': 'navi_page'})
+          .attr({
+            'href': '#',
+            'class': 'navi_page'
+          })
           .html(num_link)
           .appendTo(self.elem.navi_p);
       }
@@ -1728,13 +1740,19 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
         }
       } else {
         $('<a>')
-          .attr({href: 'javascript:void(0)', 'class': 'navi_next'})
+          .attr({
+            'href': '#',
+            'class': 'navi_next'
+          })
           .text(self.message.next)
           .attr('title', self.message.next_title)
           .appendTo(self.elem.navi_p);
         if (!self.option.navi_simple) {
           $('<a>')
-            .attr({href: 'javascript:void(0)', 'class': 'navi_last'})
+            .attr({
+              'href': '#',
+              'class': 'navi_last'
+            })
             .text(last_page + ' >>')
             .attr('title', self.message.last_title)
             .appendTo(self.elem.navi_p);
@@ -1821,11 +1839,12 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
         var str_subinfo = [];
         var $dl = $('<dl>');
         // テーブルの各行を生成
-        for (key in arr_subinfo[i]) {
+        var dt, dd;
+        for (var key in arr_subinfo[i]) {
           // sub_info属性の値を整える
           var json_key = key.replace('\'', '\\\'');
 
-          if (arr_subinfo[i][key] == null) {
+          if (arr_subinfo[i][key] === null) {
             // DBのデータ値がnullの場合の対処
             arr_subinfo[i][key] = '';
           } else {
@@ -1837,14 +1856,14 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
           str_subinfo.push("'" + json_key + "':" + "'" + json_val + "'");
 
           // thの別名を検索する
-          if (self.option.sub_as[key] != null) var dt = self.option.sub_as[key];
-          else                         var dt = key;
+          if (self.option.sub_as[key] !== null) dt = self.option.sub_as[key];
+          else dt = key;
 
           dt = $('<dt>').text(dt); // XSS対策
           if (self.option.sub_info == 'simple') $(dt).addClass('hide');
           $dl.append(dt);
 
-          var dd = $('<dd>').text(arr_subinfo[i][key]); // !!! against XSS !!!
+          dd = $('<dd>').text(arr_subinfo[i][key]); // !!! against XSS !!!
           $dl.append(dd);
         }
         // sub_info属性を候補リストのliに追加
@@ -1852,7 +1871,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
         $(list).attr('sub_info', str_subinfo);
         
         $(self.elem.sub_info).append($dl);
-        if (self.option.sub_info == 'simple' && $dl.children('dd').text() == '') $dl.addClass('ac_dl_empty');
+        if (self.option.sub_info == 'simple' && $dl.children('dd').text() === '') {
+          $dl.addClass('ac_dl_empty');
+        }
       }
     }
     // サジェスト結果表示
@@ -1875,10 +1896,11 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   _calcWidthResults: function(self) {
     // 候補の幅とトップ位置を再計算 (textareaがリサイズされることに対処するため)
     // ComboBoxの幅
+    var w;
     if (self.option.plugin_type == 'combobox') {
-      var w = $(self.elem.combo_input).outerWidth() + $(self.elem.button).outerWidth();
+      w = $(self.elem.combo_input).outerWidth() + $(self.elem.button).outerWidth();
     } else {
-      var w = $(self.elem.combo_input).outerWidth();
+      w = $(self.elem.combo_input).outerWidth();
     }
     $(self.elem.container).width(w);
     
@@ -2035,18 +2057,19 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
       } else {
         var left = self.prop.prev_value.substring(0, self.prop.tag.pos_left);
         var right = self.prop.prev_value.substring(self.prop.tag.pos_right);
+        var ctext, p_len, l_len, pos;
 
         // 閉じカッコがあるタグの場合、rightの冒頭がその形式でない場合は追加する。
         // 前後にスペースを挿入するかどうかもここで判断する。
         // 行頭の場合はスペースは挿入しない。
-        var ctext = $(current).text();
+        ctext = $(current).text();
         // 左側空白の補完
         if (
           self.option.tags[self.prop.tag.type].space[0] &&
           !left.match(self.option.tags[self.prop.tag.type].pattern.space_left)
         ) {
-          var p_len = self.option.tags[self.prop.tag.type].pattern.left.length;
-          var l_len = left.length;
+          p_len = self.option.tags[self.prop.tag.type].pattern.left.length;
+          l_len = left.length;
           left = left.substring(0, (l_len - p_len)) +
             ' ' +
             left.substring((l_len - p_len));
@@ -2060,13 +2083,13 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
           self.option.tags[self.prop.tag.type].space[1] &&
           !right.match(self.option.tags[self.prop.tag.type].pattern.space_right)
         ) {
-          var p_len = self.option.tags[self.prop.tag.type].pattern.right.length;
+          p_len = self.option.tags[self.prop.tag.type].pattern.right.length;
           right = right.substring(0, p_len) +
             ' ' +
             right.substring(p_len);
         }
         $(self.elem.combo_input).val(left + '' + ctext + '' + right);
-        var pos = left.length + ctext.length;
+        pos = left.length + ctext.length;
         self._setCaretPosition(self, pos);
       }
       self.prop.prev_value = $(self.elem.combo_input).val();
@@ -2100,10 +2123,11 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _nextLine: function(self) {
     var obj = self._getCurrentLine(self);
+    var idx;
     if (!obj) {
-      var idx = -1;
+      idx = -1;
     } else {
-      var idx = $(self.elem.results).children('li').index(obj);
+      idx = $(self.elem.results).children('li').index(obj);
       $(obj).removeClass(self.css_class.select);
     }
     idx++;
@@ -2126,10 +2150,11 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
    */
   _prevLine: function(self) {
     var obj = self._getCurrentLine(self);
+    var idx;
     if (!obj) {
-      var idx = $(self.elem.results).children('li').length;
+      idx = $(self.elem.results).children('li').length;
     } else {
-      var idx = $(self.elem.results).children('li').index(obj);
+      idx = $(self.elem.results).children('li').index(obj);
       $(obj).removeClass(self.css_class.select);
     }
     idx--;
