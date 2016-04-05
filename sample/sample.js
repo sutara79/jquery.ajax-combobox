@@ -404,9 +404,9 @@ jQuery(document).ready(function($) {
   );
 
   // ページ内リンクのスクロール
-  $('a[href^=#]').click(function() {
+  $('a[href^="#"]').click(function() {
     var href= $(this).attr("href");
-    var target = $(href == "#" || href == "" ? 'html' : href);
+    var target = $(href == "#" || href === "" ? 'html' : href);
     var position = target.offset().top - 10;
     $('body,html').animate({scrollTop: position}, 200, 'swing');
     history.pushState('', '', $(this)[0].href);
@@ -415,8 +415,8 @@ jQuery(document).ready(function($) {
 
   // 英語・日本語切り替え
   $('#language button').click(function(ev) {
-    $('*[class*=lang_]').hide();
-    $('button[id*=lang_]').removeAttr('disabled');
+    $('*[class*="lang_"]').hide();
+    $('button[id*="lang_"]').removeAttr('disabled');
     $('.' + $(ev.target).attr('id')).show();
     $(ev.target).attr('disabled', 'disabled');
   });
