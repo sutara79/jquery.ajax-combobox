@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sample: option.instance</title>
+<link rel="stylesheet" href="../../dist/jquery.ajax-combobox.css">
+<script src="http://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+<script src="../../dist/jquery.ajax-combobox.js"></script>
+<script>
+$(function () {
+  /**
+   * ComboBox
+   */
+  var arr_instance = $('#foo').ajaxComboBox(
+    '../../dist/jquery.ajax-combobox.php',
+    {
+      button_img: '../../dist/btn.png',
+      db_table: 'nation',
+      lang: 'en',
+      instance: true
+    }
+  );
+  /**
+   * Checkbox
+   */
+  $("#disable-combobox").on("change", function (elem) {
+    if ($(elem.target).prop("checked")) {
+      $(arr_instance).each(function() {
+        this.option.source = null;
+      });
+    } else {
+      $(arr_instance).each(function() {
+        this.option.source = '../../dist/jquery.ajax-combobox.php';
+      });
+    }
+  });
+});
+</script>
+</head>
+<body>
+<h1>Sample: option.instance</h1>
+<input type="checkbox" id="disable-combobox"><label for="disable-combobox">Disable ComboBox</label>
+<form action="send.php" method="post">
+  <input id="foo" name="foo" type="text">
+  <p><button type="submit">Send</button></p>
+</form>
+</body>
+</html>
