@@ -50,15 +50,15 @@
 
           str_subinfo.push("'" + json_key + "':" + "'" + json_val + "'");
 
-          // thの別名を検索する
-          if (self.option.sub_as[key] !== null) dt = self.option.sub_as[key];
-          else dt = key;
-
-          dt = $('<dt>').text(dt); // XSS対策
-          if (self.option.sub_info == 'simple') $(dt).addClass('hide');
+          // If alias exists, set to the text-content of <dt>
+          dt = (self.option.sub_as[key]) ? self.option.sub_as[key] : key;
+          dt = $('<dt>').text(dt); // for XSS
+          if (self.option.sub_info == 'simple') {
+            $(dt).addClass('hide');
+          }
           $dl.append(dt);
 
-          dd = $('<dd>').text(arr_subinfo[i][key]); // !!! against XSS !!!
+          dd = $('<dd>').text(arr_subinfo[i][key]); // for XSS
           $dl.append(dd);
         }
         // sub_info属性を候補リストのliに追加

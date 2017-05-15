@@ -77,6 +77,11 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
       option[arr[i]] = this._strToArray(option[arr[i]]);
     }
 
+    // Show rest fields as sub info
+    if (option.show_field[0] === '') {
+      option.show_field[0] = '*'
+    }
+
     // CASE WHEN後のORDER BY指定
     option.order_by = (option.order_by === undefined) ?
       option.search_field :
@@ -173,6 +178,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         option.tags[idx][arr[i]] = this._strToArray(option.tags[idx][arr[i]]);
       }
     }
+
 
     // order_byを配列にする
     option.tags[idx].order_by = (option.tags[idx].order_by === undefined) ?

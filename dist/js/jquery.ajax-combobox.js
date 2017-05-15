@@ -167,6 +167,11 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
       option[arr[i]] = this._strToArray(option[arr[i]]);
     }
 
+    // Show rest fields as sub info
+    if (option.show_field[0] === '') {
+      option.show_field[0] = '*'
+    }
+
     // CASE WHEN後のORDER BY指定
     option.order_by = (option.order_by === undefined) ?
       option.search_field :
@@ -263,6 +268,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         option.tags[idx][arr[i]] = this._strToArray(option.tags[idx][arr[i]]);
       }
     }
+
 
     // order_byを配列にする
     option.tags[idx].order_by = (option.tags[idx].order_by === undefined) ?
@@ -1859,15 +1865,15 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
 
           str_subinfo.push("'" + json_key + "':" + "'" + json_val + "'");
 
-          // thの別名を検索する
-          if (self.option.sub_as[key] !== null) dt = self.option.sub_as[key];
-          else dt = key;
-
-          dt = $('<dt>').text(dt); // XSS対策
-          if (self.option.sub_info == 'simple') $(dt).addClass('hide');
+          // If alias exists, set to the text-content of <dt>
+          dt = (self.option.sub_as[key]) ? self.option.sub_as[key] : key;
+          dt = $('<dt>').text(dt); // for XSS
+          if (self.option.sub_info == 'simple') {
+            $(dt).addClass('hide');
+          }
           $dl.append(dt);
 
-          dd = $('<dd>').text(arr_subinfo[i][key]); // !!! against XSS !!!
+          dd = $('<dd>').text(arr_subinfo[i][key]); // for XSS
           $dl.append(dd);
         }
         // sub_info属性を候補リストのliに追加
