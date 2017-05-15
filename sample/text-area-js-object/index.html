@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Text area: JS object: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+var tagData = [
+  {id:1 ,name:'PhysicalEducation',japanese:'体育学'},
+  {id:2 ,name:'Musicology',       japanese:'音楽学'},
+  {id:3 ,name:'Mathematics',      japanese:'数学'},
+  {id:4 ,name:'Biology',          japanese:'生物学'},
+  {id:5 ,name:'Chemistry',        japanese:'化学'},
+  {id:6 ,name:'Sociology',        japanese:'社会学'},
+  {id:7 ,name:'Linguistics',      japanese:'言語学'},
+  {id:8 ,name:'Anthropology',     japanese:'人類学'},
+  {id:9 ,name:'Philosophy',       japanese:'哲学'},
+  {id:10,name:'Geometry',         japanese:'幾何学'},
+  {id:11,name:'Architecture',     japanese:'建築学'},
+  {id:12,name:'PoliticalScience', japanese:'政治学'},
+  {id:13,name:'Jurisprudence',    japanese:'法律学'},
+  {id:14,name:'Archaeology',      japanese:'考古学'},
+  {id:15,name:'History',          japanese:'歴史学'},
+  {id:16,name:'Psychology',       japanese:'心理学'},
+  {id:17,name:'MedicalScience',   japanese:'医学'},
+  {id:18,name:'Literature',       japanese:'文学'},
+  {id:19,name:'Astronomy',        japanese:'天文学'}
+];
+
+$(function() {
+  $('#foo').ajaxComboBox(
+    tagData,
+    {
+      plugin_type: 'textarea',
+      tags: [
+        {
+          pattern: ['@', '']
+        }
+      ]
+    }
+  );
+});
+</script>
+</head>
+<body>
+<h1>Text area: JS object: jquery.ajax-combobox</h1>
+<label for="foo">Learning:</label><br>
+<textarea id="foo" rows="6" cols="40">@mathematics @his @phi @gy
+@lo @lin</textarea>
+</body>
+</html>

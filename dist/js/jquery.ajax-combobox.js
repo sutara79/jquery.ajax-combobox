@@ -1,19 +1,26 @@
 /**
- * @file jQuery Plugin: jquery.ajax-combobox
- * @version 7.4.4
+ * @file jquery.ajax-combobox
+ * @version 7.4.5
  * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
- * @license MIT License
+ * @license MIT
  */
-(function($) {
+/** @external "jQuery.fn" */
+/** @external jQuery */
+(function (factory) {
+  if(typeof module === 'object' && typeof module.exports === 'object') {
+    factory(require('jquery'), window, document);
+  } else {
+    factory(jQuery, window, document);
+  }
+}(function($, window, document, undefined) {
 
 /**
- * @desc プラグインをjQueryのプロトタイプに追加する
- * @global
- * @memberof jQuery
+ * @public
+ * @function external:"jQuery.fn".ajaxComboBox
  * @param {string|Object} source - サーバ側のプログラム、もしくは連想配列そのもの。
  * @param {Object} option - オプションを収めた連想配列。
  * @param {boolean} [option.instance] - プラグインを呼び出すとき、jQueryオブジェクトではなくインスタンスを返すかどうか
- * @param {string} [option.lang='ja'] - プラグインのメッセージに使われる言語。 ('ja', 'en', 'es' and 'pt-br')
+ * @param {string} [option.lang='en'] - Language used in this plugin's UI. ('en', 'es', 'pt-br' and 'ja')
  * @param {string} [option.db_table='tbl'] - 問い合わせるデータベースのテーブル。
  * @param {string} [option.field='name'] - JavaScript側での結果表示に用いるフィールド。
  * @param {string} [option.search_field=option.field] - 検索対象のフィールド名。カンマ区切りで複数指定可能。 (e.g.: 'id, name, job')
@@ -51,21 +58,20 @@
 $.fn.ajaxComboBox = function(source, option) {
   var arr = [];
   this.each(function() {
-    arr.push(new AjaxComboBox(this, source, option));
+    arr.push(new $.ajaxComboBox(this, source, option));
   });
   return (option !== undefined && option.instance !== undefined && option.instance) ? $(arr) : this;
 };
 
 /**
- * @global
- * @constructor
+ * @class external:jQuery.ajaxComboBox
  * @classdesc 要素ごとに適用される処理を集めたクラス
  * @param {Object} combo_input - プラグインを適用するHTML要素。
  * @param {string|Object} source - サーバ側のプログラム、もしくは連想配列そのもの。
  * @param {Object} option - オプションを収めた連想配列。
  */
-function AjaxComboBox(combo_input, source, option) {
-  this._setOption(source, option);
+$.ajaxComboBox = function(combo_input, source, option) {
+  this.option = this._setOption(source, option);
   this._setMessage();
   this._setCssClass();
   this._setProp();
@@ -80,33 +86,34 @@ function AjaxComboBox(combo_input, source, option) {
   this._ehTextArea();
 
   if (this.option.shorten_btn) this._findUrlToShorten(this);
-}
+};
 
-$.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
+$.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.prototype */ {
   /**
+   * Initialize options
    * @private
-   * @desc オプションの初期化
-   * @param {string|Object} source - サーバサイド言語へのパス、またはデータそのものの連想配列
-   * @param {Object} option - 連想配列の形式のオプション
+   * @arg {string|object} source - Server side file such as PHP. Or, JS object which contains data.
+   * @arg {object} option - Options sent by user.
+   * @returns {object} Initialized options 
    */
   _setOption: function(source, option) {
     option = this._setOption1st(source, option);
     option = this._setOption2nd(option);
-    this.option = option;
+    return option;
   },
 
   /**
    * @private
    * @desc オプションの初期化 第1段階
-   * @param {string|Object} source - サーバサイド言語へのパス、またはデータそのものの連想配列
-   * @param {Object} option - 連想配列の形式のオプション
-   * @return {Object} - 第1段階が終了したオプション
+   * @arg {string|object} source - サーバサイド言語へのパス、またはデータそのものの連想配列
+   * @arg {object} option - 連想配列の形式のオプション
+   * @return {object} - 第1段階が終了したオプション
    */
   _setOption1st: function(source, option) {
     return $.extend({
       // 基本設定
       source: source,
-      lang: 'ja',
+      lang: 'en',
       plugin_type: 'combobox',
       init_record: false,
       db_table: 'tbl',
@@ -142,8 +149,8 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc オプションの初期化 第2段階
-   * @param {Object} option - 連想配列の形式のオプション
-   * @return {Object} - 第2段階が終了したオプション
+   * @arg {object} option - 連想配列の形式のオプション
+   * @return {object} - 第2段階が終了したオプション
    */
   _setOption2nd: function(option) {
     // 検索するフィールド(カンマ区切りで複数指定可能)
@@ -184,7 +191,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc カンマ区切りの文字列を配列にする。
-   * @param {string} str - 文字列
+   * @arg {string} str - 文字列
    * @return {Array} - 配列
    */
   _strToArray: function(str) {
@@ -194,8 +201,8 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc URL短縮用に、URLらしき文字列を検索するための正規表現を生成する
-   * @param {Object|boolean} shorten_reg - ユーザが指定した正規表現オブジェクト、もしくはfalse
-   * @return {Object} - 正規表現オブジェクト
+   * @arg {object|boolean} shorten_reg - ユーザが指定した正規表現オブジェクト、もしくはfalse
+   * @return {object} - 正規表現オブジェクト
    */
   _setRegExpShort: function(shorten_reg, shorten_min) {
     if (shorten_reg) return shorten_reg; // ユーザが正規表現を設定しているなら、それを使う。
@@ -213,8 +220,8 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc テカテゴリタグの定義方法を設定する
-   * @param {Object} option - オプション全体の連想配列
-   * @return {Object} - タグ定義を格納した連想配列
+   * @arg {object} option - オプション全体の連想配列
+   * @return {object} - タグ定義を格納した連想配列
    */
   _setTagPattern: function(option) {
     for (var i = 0; i < option.tags.length; i++) {
@@ -227,9 +234,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc 各タグの検索方法を設定する
-   * @param {Object} option - オプション全体の連想配列
-   * @param {number} idx - 選択中のタグを表す添字
-   * @return {Object} - タグ1つ分のオプションの連想配列
+   * @arg {object} option - オプション全体の連想配列
+   * @arg {number} idx - 選択中のタグを表す添字
+   * @return {object} - タグ1つ分のオプションの連想配列
    */
   _setTagOptions: function(option, idx) {
     option.tags[idx] = $.extend({
@@ -268,9 +275,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc 各タグを抽出するための一連の正規表現を作成する
-   * @param {Array} pattern - タグの開始と終了のペアを表す配列
-   * @param {Array} space - タグとタグの間の空白を表す配列
-   * @return {Object} - タグのパターンを表す連想配列
+   * @arg {Array} pattern - タグの開始と終了のペアを表す配列
+   * @arg {Array} space - タグとタグの間の空白を表す配列
+   * @return {object} - タグのパターンを表す連想配列
    */
   _setRegExpTag: function(pattern, space) {
     // ユーザオプションを正規表現エスケープ
@@ -304,7 +311,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc 正規表現用エスケープ用の無名関数
-   * @param {string} text - マッチした部分文字列
+   * @arg {string} text - マッチした部分文字列
    * @return {string} - 置換する値
    */
   _escapeForReg: function(text) {
@@ -314,8 +321,8 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc コンボボックスとタグ、両方の order_by を配列にする
-   * @param {Array} arg_order - ORDER BY の情報を格納した配列
-   * @param {string} arg_field - 検索対象のフィールド
+   * @arg {Array} arg_order - ORDER BY の情報を格納した配列
+   * @arg {string} arg_field - 検索対象のフィールド
    * @return {Array} - order_by の配列
    */
   _setOrderbyOption: function(arg_order, arg_field) {
@@ -968,7 +975,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     alert(self.message.ajax_error);
   },
 
-
   /**
    * @private
    * @desc 選択候補を追いかけて画面をスクロールさせる。
@@ -1420,11 +1426,9 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
             if (key == self.option.field) {
               json.candidate.push(json.result[i][key]);
             } else if ($.inArray(key, self.option.hide_field) == -1) {
-              if (
-                self.option.show_field !== '' &&
-                $.inArray('*', self.option.show_field) == -1 &&
-                $.inArray(key, self.option.show_field) == -1
-              ) {
+              if (self.option.show_field !== '' &&
+                  $.inArray('*', self.option.show_field) == -1 &&
+                  $.inArray(key, self.option.show_field) == -1) {
                 continue;
               } else {
                 json.subinfo[i][key] = json.result[i][key];
@@ -1600,10 +1604,10 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   },
 
   /**
+   * Prepare to display search results.
    * @private
-   * @desc 検索結果の表示を準備する
-   * @param {Object} self - このクラスのインスタンスオブジェクトへの参照
-   * @param {Object} json - サーバからのレスポンス
+   * @param {object} self - このクラスのインスタンスオブジェクトへの参照
+   * @param {object} json - サーバからのレスポンス
    * @param {Array} q_word - 検索文字列を収めた配列
    * @param {number} which_page_num - ページ番号
    */
@@ -1647,7 +1651,7 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   /**
    * @private
    * @desc ナビ部分を作成する
-   * @param {Object} self - このクラスのインスタンスオブジェクトへの参照
+   * @param {object} self - このクラスのインスタンスオブジェクトへの参照
    * @param {number} cnt_whole - ヒットした件数
    * @param {number} cnt_page - このページで表示する候補の件数
    * @param {number} page_num - 現在ページの番号
@@ -1766,14 +1770,14 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
   },
 
   /**
+   * Prepare to display sub info.
    * @private
-   * @desc サブ情報を表示する
-   * @param {Object} self - このクラスのインスタンスオブジェクトへの参照
-   * @param {Object} obj - サブ情報を右隣に表示させる<li>要素
+   * @param {object} self - このクラスのインスタンスオブジェクトへの参照
+   * @param {object} obj - Main info ( <li> )
    */
   _setSubInfo: function(self, obj) {
     // サブ情報を表示しない設定なら、ここで終了
-    if (!self.option.sub_info) return; 
+    if (!self.option.sub_info) return;
 
     // サブ情報の座標設定用の基本情報
     self.prop.size_results = ($(self.elem.results).outerHeight() - $(self.elem.results).height()) / 2;
@@ -2169,6 +2173,6 @@ $.extend(AjaxComboBox.prototype, /** @lends AjaxComboBox.prototype */ {
     // 選択候補を追いかけてスクロール
     self._scrollWindow(self, false);
   }
-}); // END OF "$.extend(AjaxComboBox.prototype,"
+}); // End of "$.extend(AjaxComboBox.prototype,"
 
-})( /** namespace */ jQuery);
+})); // End of CommonJS

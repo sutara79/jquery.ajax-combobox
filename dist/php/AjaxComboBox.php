@@ -1,19 +1,6 @@
 <?php
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-//#### You MUST change this value. ####
-$mysql = array(
-  'dsn'      => 'mysql:host=localhost;dbname=test;charset=utf8;port=3360',
-  'username' => 'root',
-  'password' => ''
-);
-$sqlite = array(
-  'dsn'      => 'sqlite:../sample/sample.sqlite3',
-  'username' => '',
-  'password' => ''
-);
-new AjaxComboBox($sqlite);
-// new AjaxComboBox($mysql);
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
+namespace myapp;
+use PDO;
 
 /**
  * コンボボックスで入力された文字列、
@@ -31,7 +18,7 @@ class AjaxComboBox {
    * @param array DB接続用の情報を収めた連想配列
    */
   function __construct($connect) {
-    $this->connectDB($connect);
+    $this->db = $this->connectDB($connect);
 
     // 初期値取得、またはキーワード検索ののちにJavaScriptへ結果を返す
     echo json_encode(
@@ -47,18 +34,20 @@ class AjaxComboBox {
   /**
    * DBと接続し、プロパティに保存する
    * @param array DB接続用の情報を収めた連想配列
+   * @return object PDO object
    */
   function connectDB($connect) {
-    $this->db = new PDO(
+    $db = new PDO(
       $connect['dsn'],
       $connect['username'],
       $connect['password'],
       array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
     );
-    $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
     // クオーテーションをダブルクオートで統一する。(MySQLの場合のみ)
-    if ($this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql') $this->db->query("SET sql_mode='ANSI_QUOTES'");
+    if ($db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql') $db->query("SET sql_mode='ANSI_QUOTES'");
+    return $db;
   }
 
   /**

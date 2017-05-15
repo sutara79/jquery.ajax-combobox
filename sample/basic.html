@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Basic: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="sample.css">
+<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.2/dist/jquery.min.js,npm/bootstrap@3.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.simple-scroll-follow@3.1/dist/jquery.simple-scroll-follow.min.js"></script>
+<script src="sample.js"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="basic.html">Basic <span class="sr-only">(current)</span></a></li>
+        <li><a href="sub-info.html">Sub info</a></li>
+        <li><a href="others.html">Others</a></li>
+        <li><a href="text-area.html">Text area</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<header class="jumbotron">
+  <div class="container">
+    <p>jquery.ajax-combobox</p>
+    <h1 class="subpage-title">Basic</h1>
+  </div>
+</header>
+<div class="container">
+  <div id="contents" class="row">
+    <nav id="index">
+      <div id="language" class="btn-group">
+        <button id="lang_en" class="btn btn-primary">English</button>
+        <button id="lang_ja" class="btn btn-primary">日本語</button>
+      </div>
+      <h3>
+        <span class="lang_en">Index</span>
+        <span class="lang_ja">目次</span>
+      </h3>
+      <div class="list-group">
+        <a class="list-group-item" href="#sample01_01">
+          <span class="lang_en">Usage</span>
+          <span class="lang_ja">使い方</span>
+        </a>
+        <a class="list-group-item" href="#sample01_02">
+          <span class="lang_en">Amount to display at once</span>
+          <span class="lang_ja">一度に表示する数</span>
+        </a>
+        <a class="list-group-item" href="#sample01_04">
+          <span class="lang_en">Search multi fields</span>
+          <span class="lang_ja">複数のフィールドから検索</span>
+        </a>
+        <a class="list-group-item" href="#sample01_05">
+          <span class="lang_en">"OR" search</span>
+          <span class="lang_ja">OR検索へ切り替える</span>
+        </a>
+        <a class="list-group-item" href="#sample01_06">
+          <span class="lang_en">Sorting</span>
+          <span class="lang_ja">並べ替えの規則を決める</span>
+        </a>
+        <a class="list-group-item" href="#sample01_07">
+          <span class="lang_en">Language</span>
+          <span class="lang_ja">メッセージの言語</span>
+        </a>
+        <a class="list-group-item" href="#sample01_03">
+          <span class="lang_en">Simple page navi</span>
+          <span class="lang_ja">ページナビをシンプルに</span>
+        </a>
+      </div>
+    </nav>
+    <article>
+      <section id="sample01_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Usage</span>
+            <span class="lang_ja">使い方</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="usage/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            1st arg: File name to send data by Ajax<br>
+            2nd arg: Options
+          </p>
+          <p class="lang_ja">
+            第1引数にAjax送信先のファイル名を、<br>
+            第2引数にオプションを設定します。
+          </p>
+          <h6>HTML</h6>
+<pre>
+&lt;link rel="stylesheet" href="jquery.ajax-combobox.css"&gt;
+
+&lt;input id="<span class="red">foo</span>" type="text"&gt;
+
+&lt;script src="https://code.jquery.com/jquery-3.2.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.ajax-combobox.js"&gt;&lt;/script&gt;
+</pre>
+          <h6>JavaScript</h6>
+<pre>
+$('<span class="red">#foo</span>').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">lang</span>: 'en', // Set language to English
+    <span class="green">db_table</span>: 'nation', // DB table to search
+    <span class="green">button_img</span>: 'btn.png', // Image for pull-down button
+  }
+);
+</pre>
+        </div>
+      </section>
+
+      <section id="sample01_02" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Amount to display at once</span>
+            <span class="lang_ja">一度に表示する数</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="amount-to-display-at-once/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">per_page</span>: 20, // Amount of list items
+    <span class="green">navi_num</span>: 10 // Amount of pages
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample01_04" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Search multi fields</span>
+            <span class="lang_ja">複数のフィールドから検索</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="search-multi-fields/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">When you set options below, besides its name, you can search by id.</p>
+          <p class="lang_ja">下記のように指定することで、名前の他にIDでも検索できます。</p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">search_field</span>: 'name, id'
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample01_05" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">"OR" search</span>
+            <span class="lang_ja">OR検索へ切り替える</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="or-search/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            Default is "AND". You can change it to "OR".<br>
+          </p>
+          <p class="lang_ja">
+            デフォルトはAND検索ですがOR検索にすることもできます。<br>
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">and_or</span>: 'OR'
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample01_06" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Sorting</span>
+            <span class="lang_ja">並べ替えの規則を決める</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sorting/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            Basically, list is ordered by <code>search_field</code> option.<br>
+            You can change it by <code>order_by</code> option.
+          </p>
+          <p class="lang_ja">
+            基本的には、"search_field"オプションに指定されたフィールドの昇順に並べ替えられます。<br>
+            "order_by"オプションで任意に指定することもできます。
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">order_by</span>: [
+      'name DESC', // ASC or DESC
+      'created'
+    ]
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample01_07" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Language</span>
+            <span class="lang_ja">メッセージの言語</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="language/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            Set <code>lang</code> option to choose language used in this plugin's UI.
+          </p>
+          <p class="lang_ja">
+            このプラグインのUIで使う言語を<code>lang</code>オプションで指定してください。
+          </p>
+          <table class="table">
+            <thead><tr><th>Option value</th><th>Language</th></tr></thead>
+            <tbody>
+              <tr><td>de</td><td>German<br>(Thanks Sebastian Gohres)</td></tr>
+              <tr><td>en (default)</td><td>English</td></tr>
+              <tr><td>es</td><td>Spanish<br>(Thanks Joaquin G. de la Zerda)</td></tr>
+              <tr><td>pt-br</td><td>Brazilian Portuguese<br>(Thanks Marcio de Souza)</td></tr>
+              <tr><td>ja</td><td>Japanese</td></tr>
+            </tbody>
+          </table>
+      </section>
+
+      <section id="sample01_03" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Simple page navi</span>
+            <span class="lang_ja">ページナビをシンプルに</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="simple-page-navi/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            Set <code>navi_simple</code> when you want to narrow the width of the ComboBox as much as possible.<br>
+            Shortcut key is still enable. (<kbd>Shift+Left/Right</kbd>)
+          </p>
+          <p class="lang_ja">
+            ComboBoxの幅をできるだけ狭くしたい場合は、<code>navi_simple</code>オプションで先頭・末尾のページへのリンクを非表示にできます。<br>
+            なお、キーボードのショートカットは有効のままです。(<kbd>Shift+右/左</kbd>)
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">navi_simple</span>: true
+  }
+);
+</pre>
+         </div>
+      </section>
+
+    </article>
+  </div><!-- .row -->
+</div><!-- .container -->
+<footer>
+  <div class="container">
+    powered by <a href="http://www.usamimi.info/new/index.html">usamimi.info</a>, <a href="https://getbootstrap.com/">Bootstrap</a>
+  </div>
+</footer>
+<div id="jump_to_top">
+  <a href="#" class="glyphicon glyphicon-upload" aria-hidden="true"></a>
+</div>
+</body>
+</html>

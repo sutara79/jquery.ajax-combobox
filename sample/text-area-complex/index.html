@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Text area: Complex: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+$(function() {
+  $('#foo').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      plugin_type: 'textarea',
+      db_table: 'tag',
+      shorten_btn: '#foo-shorten',
+      shorten_src: '../../dist/php/bitly.php',
+      shorten_min: 20,
+      tags: [
+        {
+          pattern: ['[', ']'],
+          space: [false, false]
+        },
+        {
+          pattern: ['#', '']
+        },
+        {
+          pattern: ['@', '']
+        }
+      ]
+    }
+  );
+});
+</script>
+</head>
+<body>
+<h1>Text area: Complex: jquery.ajax-combobox</h1>
+<label for="foo">Learning:</label><br>
+<textarea id="foo" rows="8" cols="60">
+https://en.wikipedia.org/wiki/JQuery *good*
+ftp://too.short *bad* (Set "shorten_min" option)
+Do not touch URLhttps://en.wikipedia.org/wiki/JQuery *bad*
+[mathematics][his] #phi #gy
+@lo @lin
+</textarea>
+<p><button id="foo-shorten">Shorten</button></p>
+</body>
+</html>

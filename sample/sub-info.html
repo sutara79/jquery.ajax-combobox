@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sub info: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="sample.css">
+<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.2/dist/jquery.min.js,npm/bootstrap@3.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.simple-scroll-follow@3.1/dist/jquery.simple-scroll-follow.min.js"></script>
+<script src="sample.js"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="basic.html">Basic</a></li>
+        <li class="active"><a href="sub-info.html">Sub info <span class="sr-only">(current)</span></a></li>
+        <li><a href="others.html">Others</a></li>
+        <li><a href="text-area.html">Text area</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<header class="jumbotron">
+  <div class="container">
+    <p>jquery.ajax-combobox</p>
+    <h1 class="subpage-title">Sub info</h1>
+  </div>
+</header>
+<div class="container">
+  <div id="contents" class="row">
+    <nav id="index">
+      <div id="language" class="btn-group">
+        <button id="lang_en" class="btn btn-primary">English</button>
+        <button id="lang_ja" class="btn btn-primary">日本語</button>
+      </div>
+      <h3>
+        <span class="lang_en">Index</span>
+        <span class="lang_ja">目次</span>
+      </h3>
+      <div class="list-group">
+        <a class="list-group-item" href="#sample02_01">
+          <span class="lang_en">Basic</span>
+          <span class="lang_ja">サブ情報の基本</span>
+        </a>
+        <a class="list-group-item" href="#sample02_02">
+          <span class="lang_en">Change the title</span>
+          <span class="lang_ja">表の項目名を変更する</span>
+        </a>
+        <a class="list-group-item" href="#sample02_03">
+          <span class="lang_en">Visible field</span>
+          <span class="lang_ja">サブ情報の表示カラムの設定</span>
+        </a>
+        <a class="list-group-item" href="#sample02_04">
+          <span class="lang_en">Hidden field</span>
+          <span class="lang_ja">サブ情報の非表示カラムの設定</span>
+        </a>
+        <a class="list-group-item" href="#sample02_05">
+          <span class="lang_en">Simple</span>
+          <span class="lang_ja">サブ情報の項目名を非表示にする</span>
+        </a>
+        <a class="list-group-item" href="#sample02_06">
+          <span class="lang_en">Divert</span>
+          <span class="lang_ja">サブ情報を他で利用する</span>
+        </a>
+      </div>
+    </nav>
+    <article>
+
+      <section id="sample02_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Basic</span>
+            <span class="lang_ja">サブ情報の基本</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sub-info-basic/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            Even though duplicate names exist, you can identify it by sub name.
+          </p>
+          <p class="lang_ja">
+            名前が重複していてもサブ情報で区別できます。
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">sub_info</span>: true
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample02_02" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Change the title</span>
+            <span class="lang_ja">表の項目名を変更する</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sub-info-change-title/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            <code>sub_as</code> option can change the title.
+          </p>
+          <p class="lang_ja">
+            何も設定しないと、サブ情報の表の項目名はデータベースのカラム名が表示されてしまいます。<br>
+            <code>sub_as</code>オプションで表示名を変更できます。
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+  sub_info: true,
+    <span class="green">sub_as</span>: {
+      <span class="green">id</span>: 'Employer ID',
+      <span class="green">post</span>: 'Post',
+      <span class="green">position</span>: 'Position'
+    }
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample02_03" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Visible field</span>
+            <span class="lang_ja">サブ情報の表示カラムの設定</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sub-info-visible-field/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">You can specify visible fields by <code>show_field</code> option which accepts comma separated text.</p>
+          <p class="lang_ja">カンマ区切りもできる<code>show_field</code>オプションで表示フィールドを指定できます。</p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    sub_info: true,
+    sub_as: {
+      post: 'Post',
+      position: 'Position'
+    },
+    <span class="green">show_field</span>: 'position, post'
+  }
+);
+</code>
+         </div>
+      </section>
+
+      <section id="sample02_04" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Hidden field</span>
+            <span class="lang_ja">サブ情報の非表示カラムの設定</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sub-info-hidden-field/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">You can specify hidden fields by <code>hide_field</code> option which accepts comma separated text.</p>
+          <p class="lang_ja">カンマ区切りもできる<code>hide_field</code>オプションで非表示フィールドを指定できます。</p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    sub_info: true,
+    sub_as: {
+      post: 'Post',
+      position: 'Position'
+    },
+    <span class="green">hide_field</span>: 'position, post'
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample02_05" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Simple</span>
+            <span class="lang_ja">サブ情報の項目名を非表示にする</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sub-info-simple/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">You can hide field column by setting <code>'simple'</code> to <code>sub_info</code> option instead of <code>true</code>.</p>
+          <p class="lang_ja"><code>sub_info</code>オプションに<code>true</code>の代わりに<code>'simple'</code>と指定することでサブ情報の項目名を非表示にできます。</p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">sub_info</span>: <strong class="red">'simple'</strong>,
+    show_field: 'post'
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample02_06" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Divert</span>
+            <span class="lang_ja">サブ情報を他で利用する</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="sub-info-divert/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            When you select from list, the custom attribute <code>sub_info</code> which contains sub info as JSON is added to the text box <br>
+            Then you can use Sub-info for other purpose.
+          </p>
+          <p class="lang_ja">
+            候補を選択した際、テキストボックスの<code>sub_info</code>という独自の属性にJSON形式でサブ情報が格納されるので、他で利用することが可能です。
+          </p>
+<pre>
+$('#foo').ajaxComboBox();
+
+var <strong>json</strong> = $('#foo').attr('<span class="green">sub_info</span>');
+</pre>
+         </div>
+      </section>
+    </article>
+  </div><!-- .row -->
+</div><!-- .container -->
+<footer>
+  <div class="container">
+    powered by <a href="http://www.usamimi.info/new/index.html">usamimi.info</a>, <a href="https://getbootstrap.com/">Bootstrap</a>
+  </div>
+</footer>
+<div id="jump_to_top">
+  <a href="#" class="glyphicon glyphicon-upload" aria-hidden="true"></a>
+</div>
+</body>
+</html>

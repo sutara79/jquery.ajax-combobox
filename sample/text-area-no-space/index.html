@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Text area: No space: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+$(function() {
+  $('#foo').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      plugin_type: 'textarea',
+      tags: [
+        {
+          pattern: ['[', ']'],
+          space: [false, false],
+          db_table: 'tag'
+        }
+      ]
+    }
+  );
+});
+</script>
+</head>
+<body>
+<h1>Text area: No space: jquery.ajax-combobox</h1>
+<label for="foo">Learning:</label><br>
+<textarea id="foo" rows="6" cols="40">[mathematics][his] [phi][gy]
+[lo][lin]</textarea>
+</body>
+</html>

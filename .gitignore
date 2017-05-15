@@ -1,0 +1,14 @@
+# OS
+.AppleDouble/
+*.DS_Store
+
+# Package manager
+node_modules/
+vendor/
+composer.lock
+
+# Doc & log
+out/
+phpdoc/
+coverage/
+npm-debug.log

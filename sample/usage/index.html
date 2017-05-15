@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sample: Basic</title>
-<link rel="stylesheet" href="../../dist/jquery.ajax-combobox.css">
-<script src="http://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
-<script src="../../dist/jquery.ajax-combobox.js"></script>
+<title>Usage: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
 <script>
-$(function () {
+$(function() {
   $('#foo').ajaxComboBox(
-    '../../dist/jquery.ajax-combobox.php',
+    '../../dist/php/jquery.ajax-combobox.php',
     {
       button_img: '../../dist/btn.png',
       db_table: 'nation',
@@ -21,8 +21,9 @@ $(function () {
 </script>
 </head>
 <body>
-<h1>Sample: Basic</h1>
+<h1>Usage: jquery.ajax-combobox</h1>
 <form action="send.php" method="post">
+  <label for="foo">Nation:</label><br>
   <input id="foo" name="foo" type="text">
   <p><button type="submit">Send</button></p>
 </form>

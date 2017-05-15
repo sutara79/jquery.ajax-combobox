@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>After select: "is_enter_key": jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+$(function() {
+  $('#foo').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      button_img: '../../dist/btn.png',
+      db_table: 'nation',
+      bind_to: 'foo'
+    }
+  )
+  .bind('foo', function(e, is_enter_key) {
+    if (!is_enter_key) {
+      $('#result').text($(this).val() + ' is selected. (by mouse)');
+    }
+  })
+  .keydown(function(e) {
+    if(e.keyCode == 13) {
+      $('#result').text($(this).val() + ' is selected. (by enter key)');
+    }
+  });
+});
+</script>
+</head>
+<body>
+<h1>After select: "is_enter_key": jquery.ajax-combobox</h1>
+<form action="send.php" method="post">
+  <label for="foo">Nation:</label><br>
+  <input id="foo" name="foo" type="text">
+  <p><button type="submit">Send</button></p>
+</form>
+<div id="result"></div>
+</body>
+</html>

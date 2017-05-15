@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>JS object instead of DB: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+var data = [
+  {id:'A001',name:'Adams',    post:'Sales',          position:'The rank and file'},
+  {id:'A002',name:'Darling',  post:'Sales',          position:'The rank and file'},
+  {id:'A003',name:'Kingston', post:'General Affairs',position:'Chief clerk'},
+  {id:'A004',name:'Darling',  post:'General Affairs',position:'Section chief'},
+  {id:'A005',name:'Adams',    post:'Personnel',      position:'The rank and file'},
+  {id:'A006',name:'Kingston', post:'Sales',          position:'Director'},
+  {id:'A007',name:'Kingston', post:'Sales',          position:'Section chief'},
+  {id:'A008',name:'Darling',  post:'Personnel',      position:'Chief'},
+  {id:'A009',name:'Adams',    post:'Personnel',      position:'Chief'},
+  {id:'A010',name:'Adams',    post:'General Affairs',position:'The rank and file'},
+  {id:'A011',name:'Darling',  post:'General Affairs',position:'The rank and file'},
+  {id:'A012',name:'Kingston', post:'Sales',          position:'The rank and file'},
+  {id:'A013',name:'MacKenzie',post:'Sales',          position:'Chief clerk'},
+  {id:'A014',name:'Darling',  post:'Sales',          position:'Vice-chief'},
+  {id:'A015',name:'MacKenzie',post:'General Affairs',position:'Vice-chief'},
+  {id:'A016',name:'Kingston', post:'Personnel',      position:'Director'},
+  {id:'A017',name:'MacKenzie',post:'Personnel',      position:'Section chief'},
+  {id:'A018',name:'MacKenzie',post:'Sales',          position:'Chief'}
+];
+
+$(function() {
+  $('#foo').ajaxComboBox(
+    data,
+    {
+      button_img: '../../dist/btn.png',
+      sub_info: true,
+      sub_as: {
+        id: 'Employer ID',
+        post: 'Post',
+        position: 'Position'
+      },
+      select_only: true,
+      init_record: 'A009',
+      primary_key: 'id',
+    }
+  );
+});
+</script>
+</head>
+<body>
+<h1>JS object instead of DB: jquery.ajax-combobox</h1>
+<form action="send.php" method="post">
+  <label for="foo">Nation:</label><br>
+  <input id="foo" name="foo" type="text">
+  <p><button type="submit">Send</button></p>
+</form>
+</body>
+</html>

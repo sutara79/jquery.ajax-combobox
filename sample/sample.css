@@ -1,4 +1,9 @@
-@charset "utf-8";
+body {
+  background-color: #eee;
+  -webkit-text-size-adjust: 100%;
+  font-size: 15px;
+  padding-top: 50px; /* for Bootstrap .navbar-fiexd-top. see http://getbootstrap.com/components/#navbar-static-top */
+}
 
 #contents {
   position: relative;
@@ -13,7 +18,7 @@
     padding: 0 15px;
     position: absolute;
     right: auto;
-    top: 0px;
+    top: 0;
     width: 34%;
   }
 
@@ -24,7 +29,7 @@
     padding: 0 15px;
     position: relative;
     right: auto;
-    top: 0px;
+    top: 0;
     width: 66%;
   }
 }
@@ -54,16 +59,12 @@
   }
 }
 
-body {
-  -webkit-text-size-adjust: 100%;
-}
-
 footer {
   background: #eee;
 }
 
 footer div {
-  padding: 16px 0px;
+  padding: 16px 0;
   text-align: right;
 }
 
@@ -72,8 +73,12 @@ h6 {
   font-size: 14px;
 }
 
+#list4 th:nth-child(3) {
+  min-width: 120px;
+}
+
 pre {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 article form a.btn,
@@ -82,20 +87,120 @@ article form button {
   margin-bottom: 4px;
 }
 
-.green { color: #5cb85c;}
-.red { color: #d9534f;}
+.green {
+  color: #0c0;
+}
+.red {
+  color: #d9534f;
+}
 
 #jump_to_top {
+  bottom: 16px;
   position: fixed;
   right: 16px;
-  top: 16px;
+}
+#jump_to_top a,
+#jump_to_top a:hover {
+  color: #aa9;
+  font-size: 2.5em;
+  text-decoration: none;
+}
+.btn-container {
+  margin-bottom: 1.2em;
 }
 
-.ac_container textarea {
-  height: 180px;
-  width: 480px;
+/**
+ * 見出し横に表示される、自身へのリンク
+ */
+.js-anchor {
+  font-size: 14px;
+  visibility: hidden;
+  margin-left: -14px;
+}
+.panel-heading:hover .js-anchor {
+  visibility: visible;
+}
+.js-anchor,
+.js-anchor:hover,
+.js-anchor:active {
+  color: inherit;
 }
 
-.check_btn {
-  margin-top: 8px;
+/**
+ * Override Bootstrap3
+ */
+.jumbotron {
+  background-color: #486;
+  background-image: linear-gradient(30deg, #3d8260 12%, transparent 12.5%, transparent 87%, #3d8260 87.5%, #3d8260),
+  linear-gradient(150deg, #3d8260 12%, transparent 12.5%, transparent 87%, #3d8260 87.5%, #3d8260),
+  linear-gradient(30deg, #3d8260 12%, transparent 12.5%, transparent 87%, #3d8260 87.5%, #3d8260),
+  linear-gradient(150deg, #3d8260 12%, transparent 12.5%, transparent 87%, #3d8260 87.5%, #3d8260),
+  linear-gradient(60deg, #4a8e6c 25%, transparent 25.5%, transparent 75%, #4a8e6c 75%, #4a8e6c),
+  linear-gradient(60deg, #4a8e6c 25%, transparent 25.5%, transparent 75%, #4a8e6c 75%, #4a8e6c);
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  background-size: 80px 140px;
+  box-shadow: 0 1px 2px #666;
+  color: #fff;
+  text-shadow: 0 1px 1px #333;
+}
+.jumbotron h1.subpage-title small {
+  color: inherit;
+}
+/* for PC */
+@media screen and (min-width: 768px) {
+  .jumbotron h1.subpage-title {
+    font-size: 48px;
+  }
+}
+.jumbotron-link,
+.jumbotron-link:hover {
+  color: inherit;
+}
+.list-group-item:first-child {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+.list-group-item:last-child {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.panel-primary {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px #aaa;
+  margin-bottom: 30px;
+}
+.panel-primary > .panel-heading {
+  background-color: #777;
+  border-color: #777;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+.btn-primary {
+  background-color: #597;
+  border-color: #509472;
+}
+.btn-primary:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:hover {
+  background-color: #486;
+  border-color: #3f8361;
+}
+.btn-primary:active,
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-primary:focus {
+  background-color: #375;
+  border-color: #2d7250;
+}
+a,
+a:active {
+  color: #486;
+}
+a:hover,
+a:focus {
+  color: #375;
+}
+.navbar {
+  width: 100%;
 }

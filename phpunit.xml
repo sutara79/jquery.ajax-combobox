@@ -1,0 +1,16 @@
+<phpunit bootstrap="./vendor/autoload.php">
+  <testsuites>
+    <testsuite name="jquery.ajax-combobx">
+      <file>./test/php/AjaxComboBoxTest.php</file>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist>
+      <directory>./dist/php</directory>
+      <exclude>
+        <file>./dist/php/jquery.ajax-combobox.php</file>
+        <file>./dist/php/bitly.php</file>
+      </exclude>
+    </whitelist>
+  </filter>
+</phpunit>

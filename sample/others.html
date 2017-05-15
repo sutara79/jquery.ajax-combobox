@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Others: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="sample.css">
+<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.2/dist/jquery.min.js,npm/bootstrap@3.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.simple-scroll-follow@3.1/dist/jquery.simple-scroll-follow.min.js"></script>
+<script src="sample.js"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="basic.html">Basic</a></li>
+        <li><a href="sub-info.html">Sub info</a></li>
+        <li class="active"><a href="others.html">Others <span class="sr-only">(current)</span></a></li>
+        <li><a href="text-area.html">Text area</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<header class="jumbotron">
+  <div class="container">
+    <p>jquery.ajax-combobox</p>
+    <h1 class="subpage-title">Others</h1>
+  </div>
+</header>
+<div class="container">
+  <div id="contents" class="row">
+    <nav id="index">
+      <div id="language" class="btn-group">
+        <button id="lang_en" class="btn btn-primary">English</button>
+        <button id="lang_ja" class="btn btn-primary">日本語</button>
+      </div>
+      <h3>
+        <span class="lang_en">Index</span>
+        <span class="lang_ja">目次</span>
+      </h3>
+      <div class="list-group">
+      <div class="list-group">
+        <a class="list-group-item" href="#sample03_01">
+          <span class="lang_en">Select only: Basic</span>
+          <span class="lang_ja">セレクト専用の基本</span>
+        </a>
+        <a class="list-group-item" href="#sample03_02">
+          <span class="lang_en">Select only: Primary key</span>
+          <span class="lang_ja">送信する値のカラムを変更</span>
+        </a>
+        <a class="list-group-item" href="#sample06_01">
+          <span class="lang_en">After select: Basic</span>
+          <span class="lang_ja">イベント発火の方法</span>
+        </a>
+        <a class="list-group-item" href="#sample06_02">
+          <span class="lang_en">After select: "is_enter_key"</span>
+          <span class="lang_ja">Enterキー押下を検知する方法</span>
+        </a>
+        <a class="list-group-item" href="#sample04_01">
+          <span class="lang_en">Initial value</span>
+          <span class="lang_ja">初期値設定</span>
+        </a>
+        <a class="list-group-item" href="#sample05_01">
+          <span class="lang_en">JS object instead of DB</span>
+          <span class="lang_ja">DBの代わりにJSオブジェクトを検索する</span>
+        </a>
+        <a class="list-group-item" href="#sample07_01">
+          <span class="lang_en">Simple text box</span>
+          <span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+        </a>
+        <a class="list-group-item" href="#sample07_02">
+          <span class="lang_en">Get instance</span>
+          <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+        </a>
+      </div>
+    </nav>
+    <article>
+
+      <section id="sample03_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Select only: Basic</span>
+            <span class="lang_ja">セレクト専用の基本</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="select-only-basic/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            You can search by free word, but must set the value only from the list.
+          </p>
+          <p class="lang_ja">
+            自由な文章で検索できますが、リストの中から選ばなければ警告が表示されます。
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">select_only</span>: true
+  }
+);
+</pre>
+          <p class="lang_en">
+            If this option is set, the value of <code>primary_key</code> field transmit by the form.
+          </p>
+          <p class="lang_ja">
+            なお、このオプションを設定すると、フォームで送信されるのは"primary_key"オプションで設定したカラムの値になります。<br>
+            この値は、候補リストの&lt;li&gt;要素のpkey属性にもなります。<br>
+            テキストボックスと同じname属性を持つ隠しフィールド(hidden)を生成し、リストから選択した場合のみ、"primary_key"の値をhiddenのvalue属性に設定しています。
+          </p>
+<pre>
+<span class="gray">// Text box</span>
+&lt;input id=&quot;foo&quot; name=&quot;<span class="green">foo</span>&quot; type=&quot;text&quot; /&gt;
+
+<span class="gray">// List</span>
+...
+&lt;li pkey=&quot;<span class="red">A010</span>&quot; class=&quot;&quot;&gt;Adams&lt;/li&gt;
+&lt;li pkey=&quot;<span class="red">A009</span>&quot; class=&quot;ac_over&quot;&gt;Adams&lt;/li&gt;
+&lt;li pkey=&quot;<span class="red">A005</span>&quot; class=&quot;&quot;&gt;Adams&lt;/li&gt;
+...
+
+<span class="gray">// Hidden field</span>
+&lt;input type=&quot;hidden&quot; name=&quot;<span class="green">foo</span>&quot; value=&quot;<strong class="red">A011</strong>&quot;/&gt;
+</pre>
+         </div>
+      </section>
+
+      <section id="sample03_02" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Select only: Primary key</span>
+            <span class="lang_ja">送信する値のカラムを変更</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="select-only-primary-key/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">primary_key</span>: 'name' // Default: <strong>'id'</strong>
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample06_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">After select: Basic</span>
+            <span class="lang_ja">イベント発火の方法</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="after-select-basic/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">bind_to</span>: <span class="red">'foo'</span>
+  }
+)
+.bind(<span class="red">'foo'</span>, function() {
+  $('#result').text($(this).val() + ' is selected.');
+});
+</pre>
+         </div>
+      </section>
+
+      <section id="sample06_02" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">After select: "is_enter_key"</span>
+            <span class="lang_ja">Enterキー押下を検知する方法</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="after-select-is-enter-key/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            If text box is not enclosed by form tag and event handler is set<br>
+            for inputting enter key, when one of the list is selected by enter key<br>
+            function is doubly executed.<br>
+            To avoid this situation, a argument that become true when selected by<br>
+            enter key is set When originality event of plugin is fired.
+          </p>
+          <p class="lang_ja">
+            テキストボックスをフォームタグで囲まず、Enterキーが押された場合の<br>
+            イベントハンドラを独自に用意している場合、候補をEnterキーで選ぶと<br>
+            イベントが重複して実行されてしまいます。<br>
+            それを防ぐため、プラグインの独自イベントが発火する際に、<br>
+            Enterキーで候補が選ばれた場合はtrueとなる引数を追加しました。
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    bind_to: 'foo'
+  }
+)
+.bind('foo', function(e, <span class="green">is_enter_key</span>) {
+  if (!<span class="green">is_enter_key</span>) {
+    $('#result').text($(this).val() + ' is selected. (by mouse)');
+  }
+})
+.keydown(function(e) {
+  if(e.keyCode == 13) {
+    $('#result').text($(this).val() + ' is selected. (by enter key)');
+  }
+});
+</pre>
+         </div>
+      </section>
+
+      <section id="sample04_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Initial value</span>
+            <span class="lang_ja">初期値設定</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="initial-value/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">As initial value, set the value of <code>primary_key</code> option.</p>
+          <p class="lang_ja"><code>primary_key</code>オプションの値を初期値として指定できます。</p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">init_record</span>: 10
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample05_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">JS object instead of DB</span>
+            <span class="lang_ja">DBの代わりにJSオブジェクトを検索する</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="js-object/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">Set JS object instead of the name of server-side file to 1st argument.</p>
+          <p class="lang_ja">Ajax通信するサーバサイドのファイル名の代わりに、JSオブジェクトを第1引数に指定します。</p>
+<pre>
+var <span class="green">data</span> = [
+  {id:'A001',name:'Adams',    post:'Sales',          position:'The rank and file'},
+  {id:'A002',name:'Darling',  post:'Sales',          position:'The rank and file'},
+  {id:'A003',name:'Kingston', post:'General Affairs',position:'Chief clerk'},
+  ...
+];
+
+$('#foo').ajaxComboBox(<span class="green">data</span>, {});
+</pre>
+         </div>
+      </section>
+
+      <section id="sample07_01" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Simple text box</span>
+            <span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="simple-text-box/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">Remove pull-down button from text box, but functionality is same as default.</p>
+          <p class="lang_ja">プルダウンボタンが非表示なっている以外は、通常のコンボボックスと何ら変わりありません。</p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    <span class="green">plugin_type</span>: <strong>'simple'</strong>
+  }
+);
+</pre>
+         </div>
+      </section>
+
+      <section id="sample07_02" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span class="lang_en">Get instance</span>
+            <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-container"><a class="btn btn-primary" href="get-instance/" target="_blank">Sample <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></div>
+          <p class="lang_en">
+            You can get an instance of this plugin, and control after apply.<br>
+            NOTE: Method chaining will be destroyed.
+          </p>
+          <p class="lang_ja">
+            プラグインのインスタンスを受け取ることで、プラグイン適用後に設定を変更することができます。<br>
+            その代わり、メソッドチェーンは無効になります。
+          </p>
+<pre>
+var $instance = $('#foo').ajaxComboBox(
+  <span class="red">'-----'</span>,
+  {
+    db_table: <span class="red">'-----'</span>,
+    <span class="green">instance</span>: true
+  }
+);
+$instance.each(function() {
+  this.option.source = <span class="red">'jquery.ajax-combobox.php'</span>;
+  this.option.db_table = <span class="red">'nation'</span>;
+});
+</pre>
+         </div>
+      </section>
+
+    </article>
+  </div><!-- .row -->
+</div><!-- .container -->
+<footer>
+  <div class="container">
+    powered by <a href="http://www.usamimi.info/new/index.html">usamimi.info</a>, <a href="https://getbootstrap.com/">Bootstrap</a>
+  </div>
+</footer>
+<div id="jump_to_top">
+  <a href="#" class="glyphicon glyphicon-upload" aria-hidden="true"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sub info: Visible field: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+$(function() {
+  $('#foo').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      button_img: '../../dist/btn.png',
+      db_table: 'employee',
+      sub_info: true,
+      sub_as: {
+        id: 'Employer ID',
+        post: 'Post',
+        position: 'Position'
+      },
+      show_field: 'position, post'
+    }
+  );
+});
+</script>
+</head>
+<body>
+<h1>Sub info: Visible field: jquery.ajax-combobox</h1>
+<form action="send.php" method="post">
+  <label for="foo">Employee:</label><br>
+  <input id="foo" name="foo" type="text">
+  <p><button type="submit">Send</button></p>
+</form>
+</body>
+</html>
