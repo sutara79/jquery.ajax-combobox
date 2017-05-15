@@ -1655,8 +1655,8 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
   },
 
   /**
+   * Create navigation of result list
    * @private
-   * @desc ナビ部分を作成する
    * @param {object} self - このクラスのインスタンスオブジェクトへの参照
    * @param {number} cnt_whole - ヒットした件数
    * @param {number} cnt_page - このページで表示する候補の件数
@@ -1708,7 +1708,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         if (!self.option.navi_simple) {
           $('<a>')
             .attr({
-              'href': '#',
+              'href': 'javascript:void(0)',
               'class': 'navi_first'
             })
             .text('<< 1')
@@ -1717,7 +1717,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         }
         $('<a>')
           .attr({
-            'href': '#',
+            'href': 'javascript:void(0)',
             'class': 'navi_prev',
             'title': self.message.prev_title
           })
@@ -1730,7 +1730,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         var num_link = (i == page_num) ? '<span class="current">' + i + '</span>' : i;
         $('<a>')
           .attr({
-            'href': '#',
+            'href': 'javascript:void(0)',
             'class': 'navi_page'
           })
           .html(num_link)
@@ -1751,7 +1751,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
       } else {
         $('<a>')
           .attr({
-            'href': '#',
+            'href': 'javascript:void(0)',
             'class': 'navi_next'
           })
           .text(self.message.next)
@@ -1760,7 +1760,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         if (!self.option.navi_simple) {
           $('<a>')
             .attr({
-              'href': '#',
+              'href': 'javascript:void(0)',
               'class': 'navi_last'
             })
             .text(last_page + ' >>')
