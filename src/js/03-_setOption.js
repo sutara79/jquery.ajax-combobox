@@ -104,10 +104,10 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
   },
 
   /**
+   * Split text into array by comma.
    * @private
-   * @desc カンマ区切りの文字列を配列にする。
-   * @arg {string} str - 文字列
-   * @return {Array} - 配列
+   * @arg {string} str - Comma separated string
+   * @return {array} Array splitted by comma
    */
   _strToArray: function(str) {
     return str.replace(/[\s　]+/g, '').split(',');
