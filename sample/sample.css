@@ -1,7 +1,7 @@
 body {
   background-color: #eee;
   -webkit-text-size-adjust: 100%;
-  font-size: 15px;
+  font-size: 16px;
   padding-top: 50px; /* for Bootstrap .navbar-fiexd-top. see http://getbootstrap.com/components/#navbar-static-top */
 }
 
