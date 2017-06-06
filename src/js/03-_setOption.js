@@ -64,20 +64,17 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
    */
   _setOption2nd: function(option) {
     // 検索するフィールド(カンマ区切りで複数指定可能)
-    option.search_field = (option.search_field === undefined) ?
-      option.field :
-      option.search_field;
+    option.search_field = (option.search_field) ? option.search_field : option.field;
 
-    // 大文字で統一
+    // Unify with uppercase
     option.and_or = option.and_or.toUpperCase();
 
-    // カンマ区切りのオプションを配列に変換する。
-    var arr = ['hide_field', 'show_field', 'search_field'];
-    for (var i=0; i<arr.length; i++) {
-      option[arr[i]] = this._strToArray(option[arr[i]]);
-    }
+    // Split string into array by comma
+    option.hide_field   = this._strToArray(option.hide_field);
+    option.show_field   = this._strToArray(option.show_field);
+    option.search_field = this._strToArray(option.search_field);
 
-    // Show rest fields as sub info
+    // Show whole rest fields as sub info, if "show_field" is not set.
     if (option.show_field[0] === '') {
       option.show_field[0] = '*'
     }
@@ -104,7 +101,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
   },
 
   /**
-   * Split text into array by comma.
+   * Split string into array by comma.
    * @private
    * @arg {string} str - Comma separated string
    * @return {array} Array splitted by comma

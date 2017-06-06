@@ -3,24 +3,25 @@
  */
 $(function() {
 
-  module('$.ajaxComboBox._setOption', {
-    setup: function() {
-      $('<input id="target">').appendTo('body');
-      this.target = $('#target');
-    },
-    teardown: function() {
-      $('.ac_container').remove();
-      this.target.remove();
-      $(window, document, 'html').off('click');
-    }
-  });
+  module('$.ajaxComboBox._setOption');
 
-  test('should be default values.', 2, function() {
+  test('should be default values.', 5, function() {
     var option = $.ajaxComboBox.prototype._setOption('foo.php', {
       button_img: '../../dist/btn.png'
     });
-    strictEqual(option.source, 'foo.php');
-    strictEqual(option.lang, 'en');
+    equal(option.source, 'foo.php');
+    equal(option.lang, 'en');
+    deepEqual(option.show_field, ['*']);
+    deepEqual(option.hide_field, ['']);
+    deepEqual(option.search_field, ['name']);
   });
 
+  test('should be modified values.', 1, function() {
+    var option = $.ajaxComboBox.prototype._setOption('foo.php', {
+      button_img: '../../dist/btn.png',
+      search_field: 'id, name'
+    });
+
+    deepEqual(option.search_field, ['id', 'name']);
+  });
 });
