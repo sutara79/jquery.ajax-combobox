@@ -1,109 +1,30 @@
 body {
   background-color: #eee;
   -webkit-text-size-adjust: 100%;
-  font-size: 16px;
-  padding-top: 50px; /* for Bootstrap .navbar-fiexd-top. see http://getbootstrap.com/components/#navbar-static-top */
 }
-
 #contents {
   position: relative;
 }
-
-/* for PC */
-@media screen and (min-width:992px) {
-  nav {
-    bottom: auto;
-    box-sizing: border-box;
-    left: auto;
-    padding: 0 15px;
-    position: absolute;
-    right: auto;
-    top: 0;
-    width: 34%;
-  }
-
-  article {
-    bottom: auto;
-    box-sizing: border-box;
-    left: 34%;
-    padding: 0 15px;
-    position: relative;
-    right: auto;
-    top: 0;
-    width: 66%;
-  }
-}
-
-/* for Smart Phone */
-@media screen and (max-width:991px) {
-  nav {
-    bottom: auto;
-    box-sizing: border-box;
-    left: auto;
-    padding: 0 15px;
-    position: static;
-    right: auto;
-    top: auto;
-    width: 100%;
-  }
-
-  article {
-    bottom: auto;
-    box-sizing: border-box;
-    left: auto;
-    padding: 0 15px;
-    position: static;
-    right: auto;
-    top: auto;
-    width: 100%;
-  }
-}
-
 footer {
   background: #eee;
 }
-
 footer div {
   padding: 16px 0;
   text-align: right;
 }
-
-h6 {
-  color: #777;
-  font-size: 14px;
-}
-
 #list4 th:nth-child(3) {
   min-width: 120px;
 }
-
-pre {
-  font-size: 15px;
-}
-
 article form a.btn,
 article form input,
 article form button {
   margin-bottom: 4px;
 }
-
 .green {
-  color: #0c0;
+  color: #5cb85c;
 }
 .red {
   color: #d9534f;
-}
-
-#jump_to_top {
-  bottom: 16px;
-  position: fixed;
-  right: 16px;
-}
-#jump_to_top a,
-#jump_to_top a:hover {
-  color: #aa9;
-  font-size: 2.5em;
-  text-decoration: none;
 }
 .btn-container {
   margin-bottom: 1.2em;
@@ -113,11 +34,12 @@ article form button {
  * 見出し横に表示される、自身へのリンク
  */
 .js-anchor {
-  font-size: 14px;
+  font-size: 1em;
+  left: 4px;
+  position: absolute;
   visibility: hidden;
-  margin-left: -14px;
 }
-.panel-heading:hover .js-anchor {
+.card-header:hover .js-anchor {
   visibility: visible;
 }
 .js-anchor,
@@ -125,10 +47,39 @@ article form button {
 .js-anchor:active {
   color: inherit;
 }
+.octicon {
+  display: inline-block;
+  fill: currentColor;
+  height: 1.4em;
+  vertical-align: text-bottom;
+}
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  line-height: 1.2;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
 
 /**
- * Override Bootstrap3
+ * Override Bootstrap4
  */
+a,
+a:active {
+  color: #486;
+}
+a:hover,
+a:focus {
+  color: #375;
+}
+h5 {
+  font-weight: normal;
+}
+h6 {
+  color: #777;
+  font-size: 14px;
+}
 .jumbotron {
   background-color: #486;
   background-image: linear-gradient(30deg, #3d8260 12%, transparent 12.5%, transparent 87%, #3d8260 87.5%, #3d8260),
@@ -139,18 +90,11 @@ article form button {
   linear-gradient(60deg, #4a8e6c 25%, transparent 25.5%, transparent 75%, #4a8e6c 75%, #4a8e6c);
   background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
   background-size: 80px 140px;
-  box-shadow: 0 1px 2px #666;
   color: #fff;
   text-shadow: 0 1px 1px #333;
 }
-.jumbotron h1.subpage-title small {
-  color: inherit;
-}
-/* for PC */
-@media screen and (min-width: 768px) {
-  .jumbotron h1.subpage-title {
-    font-size: 48px;
-  }
+.page-title {
+  font-family: Arial;
 }
 .jumbotron-link,
 .jumbotron-link:hover {
@@ -164,28 +108,33 @@ article form button {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 }
-.panel-primary {
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 2px #aaa;
-  margin-bottom: 30px;
+.card {
+  margin-bottom: 1.5em;
 }
-.panel-primary > .panel-heading {
+.card > .card-header {
   background-color: #777;
   border-color: #777;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
+  color: #fff;
 }
 .btn-primary {
   background-color: #597;
   border-color: #509472;
 }
-.btn-primary:hover,
-.btn-primary[disabled]:focus,
-.btn-primary[disabled]:hover {
+.btn-primary:disabled,
+.btn-primary:disabled:focus,
+.btn-primary:disabled:hover {
+  background-color: #597;
+  border-color: #509472;
+}
+.btn-primary:hover {
   background-color: #486;
   border-color: #3f8361;
 }
+.btn-primary:not([disabled]):not(.disabled).active,
+.btn-primary:not([disabled]):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle,
 .btn-primary:active,
 .btn-primary:active:hover,
 .btn-primary:active:focus,
@@ -193,14 +142,24 @@ article form button {
   background-color: #375;
   border-color: #2d7250;
 }
-a,
-a:active {
-  color: #486;
+.btn-primary:not([disabled]):not(.disabled).active,
+.btn-primary:not([disabled]):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle,
+.btn-primary.focus,
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem #6a8;
+  color: #fff;
 }
-a:hover,
-a:focus {
-  color: #375;
+.list-group-item-action {
+  outline: #fff none 0;
 }
-.navbar {
-  width: 100%;
+.list-group-item-action:focus,
+.list-group-item-action:hover,
+.list-group-item-action:active {
+  background-color: #eee;
+}
+
+/* ONLY ajax-combobox */
+body {
+  padding-top: 3.5rem; /* for Bootstrap navbar */
 }
