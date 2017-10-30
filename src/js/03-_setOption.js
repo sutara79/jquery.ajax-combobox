@@ -32,7 +32,7 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
       per_page: 10,
       navi_num: 5,
       primary_key: 'id',
-      button_img: 'dist/btn.png',
+      button_img: '<svg class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg>',
       bind_to: false,
       navi_simple: false,
 

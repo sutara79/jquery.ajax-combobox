@@ -15,7 +15,14 @@
     elem.container = $(elem.combo_input).parent().addClass(this.css_class.container);
     if (this.option.plugin_type == 'combobox') {
       elem.button = $('<div>').addClass(this.css_class.button);
-      elem.img    = $('<img>').attr('src', this.option.button_img);
+
+      // button_img がHTML要素の場合とsrc属性の場合とで分岐させる
+      elem.img = (this.option.button_img.match(/^</)) ?
+                    $(this.option.button_img) :
+                    $('<img>').attr('src', this.option.button_img);
+                    console.log(this.option.button_img);
+                    console.log(this.option.button_img.match(/^</));
+                    console.log(elem.img);
     } else {
       elem.button = false;
       elem.img    = false;
@@ -119,6 +126,6 @@
     }
     if (this.option.plugin_type == 'combobox') {
       $(this.elem.button).attr('title', this.message.get_all_btn);
-      $(this.elem.img).attr('src', this.option.button_img);
+      // $(this.elem.img).attr('src', this.option.button_img);
     }
   },

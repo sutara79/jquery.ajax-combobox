@@ -50,6 +50,7 @@
   width: 32px;
   height: 32px;
   box-sizing: border-box;
+  color: #469;
 }
 
 .ac_container_open > .ac_button {
@@ -72,6 +73,13 @@
 .ac_btn_on {
   background: #dee;
   background-image: linear-gradient(to bottom, #ffffff, #bbbbcc);
+}
+
+.octicon-chevron-down {
+  display: inline-block;
+  fill: currentColor;
+  height: 1.5em;
+  margin-top: 0.2em;
 }
 
 /**

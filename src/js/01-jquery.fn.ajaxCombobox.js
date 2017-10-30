@@ -22,7 +22,7 @@
  * @param {string} [option.hide_field] - サブ情報で非表示にするフィールド。カンマ区切りで複数指定可能。 (e.g.: 'id' or 'id, job, age')
  * @param {boolean} [option.select_only=false] - セレクト専用にする。(データベースに登録された値しか受け入れない)
  * @param {string} [option.primary_key='id'] - セレクト専用時、Form の hidden の値に指定される、レコードを特定できるフィールド。
- * @param {string} [option.button_img='dist/btn.png'] - ボタンに使われる画像
+ * @param {string} [option.button_img='<svg class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg>'] - ボタンに使われる画像
  * @param {string} [option.shorten_btn] - (option.plugin_type='textarea' の場合に限り、)短縮実行ボタンのセレクタ。
  * @param {string} [option.shorten_src='dist/bitly.php'] - URL短縮を外部に依頼するスクリプトのパス。
  * @param {number} [option.shorten_min=20] - URL短縮を実行する最小の文字数。
