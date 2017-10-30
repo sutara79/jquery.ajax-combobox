@@ -2,7 +2,7 @@
   "name": "jquery.ajax-combobox",
   "description": "jQuery plugin to create a text box which can auto-complete and pull-down-select.",
   "license": "MIT",
-  "version": "7.4.5",
+  "version": "7.4.6",
   "author": "Yuusaku Miyazaki <toumin.m7@gmail.com>",
   "homepage": "https://github.com/sutara79/jquery.ajax-combobox",
   "main": "dist/jquery.ajax-combobox.min.js",
@@ -19,10 +19,10 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-uglify": "^3.1.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-qunit-istanbul": "^0.6.0",
-    "package-json-validator": "^0.6.1",
+    "package-json-validator": "^0.6.2",
     "uglifycss": "^0.0.27"
   },
   "scripts": {

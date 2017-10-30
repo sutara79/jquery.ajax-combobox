@@ -1,5 +1,6 @@
 # jquery.ajax-combobox
 
+[![npm version](https://img.shields.io/npm/v/jquery.ajax-combobox.svg)](https://www.npmjs.com/package/jquery.ajax-combobox)
 [![Build Status](https://travis-ci.org/sutara79/jquery.ajax-combobox.svg?branch=master)](https://travis-ci.org/sutara79/jquery.ajax-combobox)
 [![codecov](https://codecov.io/gh/sutara79/jquery.ajax-combobox/branch/master/graph/badge.svg)](https://codecov.io/gh/sutara79/jquery.ajax-combobox)
 [![dependencies Status](https://david-dm.org/sutara79/jquery.ajax-combobox/status.svg)](https://david-dm.org/sutara79/jquery.ajax-combobox)
@@ -15,10 +16,10 @@ http://www.usamimi.info/~sutara/ajax-combobox/
 ## Install
 - [GitHub](https://github.com/sutara79/jquery.ajax-combobox): Clone or download. Only you need is `dist/`.
 - [npm](https://www.npmjs.com/package/jquery.ajax-combobox): `npm i jquery.ajax-combobox`
-- CDN ([jsDelivr](https://github.com/jsdelivr/jsdelivr#usage)):
-    - jquery.ajax-combobox.min.js: [v7.4.5](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.5/dist/js/jquery.ajax-combobox.min.js)
-    - jquery.ajax-combobox.min.css: [v7.4.5](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.5/dist/css/jquery.ajax-combobox.min.css)
-    - btn.png: [v7.4.5](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.5/dist/btn.png)
+- CDN ([jsDelivr](https://www.jsdelivr.com/)):
+    - [jquery.ajax-combobox.min.js (v7.4.6)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.6/dist/js/jquery.ajax-combobox.min.js)
+    - [jquery.ajax-combobox.min.css (v7.4.6)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.6/dist/css/jquery.ajax-combobox.min.css)
+    - [btn.png (v7.4.6)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.6/dist/btn.png)
     - In addition to above, `dist/php/*.php` is REQUIRED.
 
 
