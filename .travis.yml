@@ -1,12 +1,12 @@
 language: php
 
 php:
-  - 7.0
+  - 7.1
 
 install:
-  - composer install
-  - nvm install 6
-  - nvm use 6
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - nvm install 8
+  - nvm use 8
   - npm install
   - npm install codecov
 
