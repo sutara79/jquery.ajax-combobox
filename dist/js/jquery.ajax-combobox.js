@@ -1,6 +1,6 @@
 /**
  * @file jquery.ajax-combobox
- * @version 7.4.6
+ * @version 7.4.7
  * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
  * @license MIT
  */

@@ -17,9 +17,9 @@ http://www.usamimi.info/~sutara/ajax-combobox/
 - [GitHub](https://github.com/sutara79/jquery.ajax-combobox): Clone or download. Only you need is `dist/`.
 - [npm](https://www.npmjs.com/package/jquery.ajax-combobox): `npm i jquery.ajax-combobox`
 - CDN ([jsDelivr](https://www.jsdelivr.com/)):
-    - [jquery.ajax-combobox.min.js (v7.4.6)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.6/dist/js/jquery.ajax-combobox.min.js)
-    - [jquery.ajax-combobox.min.css (v7.4.6)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.6/dist/css/jquery.ajax-combobox.min.css)
-    - [btn.png (v7.4.6)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.6/dist/btn.png)
+    - [jquery.ajax-combobox.min.js (v7.4.7)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.7/dist/js/jquery.ajax-combobox.min.js)
+    - [jquery.ajax-combobox.min.css (v7.4.7)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.7/dist/css/jquery.ajax-combobox.min.css)
+    - [btn.png (v7.4.7)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.4.7/dist/btn.png)
     - In addition to above, `dist/php/*.php` is REQUIRED.
 
 
