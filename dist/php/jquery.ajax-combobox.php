@@ -15,5 +15,5 @@ $sqlite = array(
   'password' => ''
 );
 new AjaxComboBox($sqlite);
-// AjaxComboBox($mysql);
+// new AjaxComboBox($mysql);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
