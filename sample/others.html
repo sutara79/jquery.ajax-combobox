@@ -87,6 +87,10 @@
             <span class="lang_en">Get instance</span>
             <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
           </a>
+          <a class="list-group-item list-group-item-action" href="#button-image">
+            <span class="lang_en">Button image</span>
+            <span class="lang_ja">ボタンの画像</span>
+          </a>
         </div>
       </div>
     </nav>
@@ -351,6 +355,43 @@ $instance.each(function() {
          </div>
       </section>
 
+      <section id="button-image" class="card">
+        <h5 class="card-header">
+          <span class="lang_en">Button image</span>
+          <span class="lang_ja">ボタンの画像</span>
+        </h5>
+        <div class="card-body">
+          <div class="btn-container">
+            <a class="btn btn-primary" href="button-image/" target="_blank">
+              Sample
+              <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
+            </a>
+          </div>
+          <p class="lang_en">
+            You can set <code>button_img</code> option to change image of button.<br>
+            <code>button_img</code> accepts <code>src</code> attribute of <code>&lt;img&gt;</code> or HTML element such as <code>&lt;img&gt;</code>, <code>&lt;svg&gt;</code>.<br>
+            Default value is <a href="https://octicons.github.com/icon/chevron-down/">Octicons</a>.
+          </p>
+          <p class="lang_ja">
+            <code>button_img</code>オプションでボタンの画像を変更できます。<br>
+            <code>button_img</code>には<code>&lt;img&gt;</code>の<code>src</code>属性、または<code>&lt;img&gt;</code>や<code>&lt;svg&gt;</code>などのHTML要素を指定できます。
+            デフォルトは<a href="https://octicons.github.com/icon/chevron-down/">Octicons</a>のSVG画像です。
+          </p>
+<pre>
+$('#foo').ajaxComboBox(
+  'jquery.ajax-combobox.php',
+  {
+    // Default (SVG)
+    <span class="green">button_img</span>: '&lt;svg class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" aria-hidden="true"&gt;&lt;path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"&gt;&lt;/path&gt;&lt;/svg&gt;',
+
+    // Image
+    button_img: '&lt;img src="btn.png"&gt;',
+
+    // src attribute of &lt;img&gt;
+    button_img: 'btn.png',
+  }
+);
+</pre>
     </article>
   </div><!-- .row -->
 </div><!-- .container -->

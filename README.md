@@ -40,7 +40,7 @@ $('#foo').ajaxComboBox('jquery.ajax-combobox.php');
 ```
 
 ## Note
-### DB
+### Database
 Change the value to connect DB in `dist/php/jquery.ajax-combobox.php`
 
 ``` php
@@ -60,18 +60,6 @@ $sqlite = array(
 new AjaxComboBox($sqlite);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 ?>
-```
-
-### button_img
-Change the value of `button_img`option to your environment.
-
-```javascript
-$('#foo').ajaxComboBox(
-  'bar-directory/jquery.ajax-combobox.php',
-  {
-    button_img: '/path/to/btn.png'
-  }
-);
 ```
 
 ## Extensions

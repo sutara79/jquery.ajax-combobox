@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Button image: jquery.ajax-combobox</title>
+<link rel="stylesheet" href="../../dist/css/jquery.ajax-combobox.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../dist/js/jquery.ajax-combobox.js"></script>
+<script>
+$(function() {
+  $('#foo1').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      db_table: 'nation'
+      // Default
+    }
+  );
+  $('#foo2').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      db_table: 'nation',
+      // svg
+      button_img: '<svg class="octicon octicon-triangle-down" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M0 5l6 6 6-6z"></path></svg>'
+    }
+  );
+  $('#foo3').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      db_table: 'nation',
+      // img
+      button_img: '<img src="btn.png">'
+    }
+  );
+  $('#foo4').ajaxComboBox(
+    '../../dist/php/jquery.ajax-combobox.php',
+    {
+      db_table: 'nation',
+      // src attribute
+      button_img: 'btn.png'
+    }
+  );
+});
+</script>
+</head>
+<body>
+<h1>Button image: jquery.ajax-combobox</h1>
+<form action="send.php" method="post">
+  <p>
+    <label for="foo1">Nation:</label><br>
+    <input id="foo1" name="foo1" type="text">
+  </p>
+  <p>
+    <label for="foo2">Nation:</label><br>
+    <input id="foo2" name="foo2" type="text">
+  </p>
+  <p>
+    <label for="foo3">Nation:</label><br>
+    <input id="foo3" name="foo3" type="text">
+  </p>
+  <p>
+    <label for="foo4">Nation:</label><br>
+    <input id="foo4" name="foo4" type="text">
+  </p>
+  <p><button type="submit">Send</button></p>
+</form>
+</body>
+</html>
