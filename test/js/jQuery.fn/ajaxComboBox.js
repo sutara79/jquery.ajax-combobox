@@ -16,15 +16,12 @@ $(function() {
   });
 
   test('should return jQuery object', 1, function() {
-    var returns = this.target.ajaxComboBox('foo.php', {
-      button_img: '../../dist/btn.png'
-    });
+    var returns = this.target.ajaxComboBox('foo.php');
     strictEqual(returns, this.target);
   });
 
   test('should return this plugin\'s instance', 1, function() {
     var returns = this.target.ajaxComboBox('foo.php', {
-      button_img: '../../dist/btn.png',
       instance: true
     });
     ok(returns[0] instanceof $.ajaxComboBox === true);

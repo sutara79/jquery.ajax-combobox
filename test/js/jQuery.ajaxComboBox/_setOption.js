@@ -6,9 +6,7 @@ $(function() {
   module('$.ajaxComboBox._setOption');
 
   test('should be default values.', 5, function() {
-    var option = $.ajaxComboBox.prototype._setOption('foo.php', {
-      button_img: '../../dist/btn.png'
-    });
+    var option = $.ajaxComboBox.prototype._setOption('foo.php');
     equal(option.source, 'foo.php');
     equal(option.lang, 'en');
     deepEqual(option.show_field, ['*']);
@@ -18,7 +16,6 @@ $(function() {
 
   test('should be modified values.', 1, function() {
     var option = $.ajaxComboBox.prototype._setOption('foo.php', {
-      button_img: '../../dist/btn.png',
       search_field: 'id, name'
     });
 
