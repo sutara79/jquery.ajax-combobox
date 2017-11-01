@@ -1,6 +1,6 @@
 /**
  * @file jquery.ajax-combobox
- * @version 7.4.7
+ * @version 7.5.0
  * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
  * @license MIT
  */
@@ -33,7 +33,7 @@
  * @param {string} [option.bind_to] - 候補選択後に実行されるイベントの名前
  * @param {string} [option.and_or='AND'] - AND検索、もしくはOR検索 ('AND' or 'OR')
  * @param {boolean|string} [option.sub_info=false] - サブ情報を表示。'simple'と指定することで項目名を非表示にできる。 (true, false or 'simple')
- * @param {Objec} [option.sub_as={}] - サブ情報のフィールドの別名。連想配列で指定する。
+ * @param {Object} [option.sub_as={}] - サブ情報のフィールドの別名。連想配列で指定する。
  * @param {string} [option.show_field] - サブ情報で表示するフィールド。カンマ区切りで複数指定可能。 (e.g.: 'id' or 'id, job, age')
  * @param {string} [option.hide_field] - サブ情報で非表示にするフィールド。カンマ区切りで複数指定可能。 (e.g.: 'id' or 'id, job, age')
  * @param {boolean} [option.select_only=false] - セレクト専用にする。(データベースに登録された値しか受け入れない)
