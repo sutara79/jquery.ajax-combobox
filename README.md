@@ -19,8 +19,7 @@ http://www.usamimi.info/~sutara/ajax-combobox/
 - CDN ([jsDelivr](https://www.jsdelivr.com/)):
     - [jquery.ajax-combobox.min.js (v7.5.0)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.5.0/dist/js/jquery.ajax-combobox.min.js)
     - [jquery.ajax-combobox.min.css (v7.5.0)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.5.0/dist/css/jquery.ajax-combobox.min.css)
-    - [btn.png (v7.5.0)](https://cdn.jsdelivr.net/npm/jquery.ajax-combobox@7.5.0/dist/btn.png)
-    - In addition to above, `dist/php/*.php` is REQUIRED.
+    - In addition to above, [dist/php/\*.php](https://github.com/sutara79/jquery.ajax-combobox/tree/master/dist/php) is REQUIRED.
 
 
 ## Usage
