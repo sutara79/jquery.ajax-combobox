@@ -1,6 +1,7 @@
 # OS
 .AppleDouble/
 *.DS_Store
+Thumbs.db
 
 # Package manager
 node_modules/

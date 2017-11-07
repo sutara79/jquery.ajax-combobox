@@ -7,7 +7,7 @@
 
 jQuery plugin to create a text box which can auto-complete and pull-down-select.
 
-![image](sample/img/001.png)
+![image](sample/img/readme.png)
 
 ## Demo
 http://www.usamimi.info/~sutara/ajax-combobox/
