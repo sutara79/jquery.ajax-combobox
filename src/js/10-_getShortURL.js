@@ -43,7 +43,9 @@
         self.prop.prev_value = result;
         self._disableButtonShort(self);
       },
-      error: function(jqXHR, textStatus, errorThrown) { self._ajaxErrorNotify(self, errorThrown); },
+      error: function(jqXHR, textStatus, errorThrown) {
+        self._ajaxErrorNotify(self, errorThrown);
+      },
       complete: function() {
         // テキストエリアを入力可能に
         $(self.elem.combo_input).removeAttr('disabled').focus();

@@ -11,7 +11,7 @@ class AjaxComboBox
 {
     var $db = null;
     var $param = null;
-    var $bind = null;
+    var $bind = array();
     var $query = null;
 
     /**

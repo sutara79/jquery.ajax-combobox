@@ -32,7 +32,9 @@
         success: function (json) {
           self._afterInit(self, json);
         },
-        error: function(jqXHR, textStatus, errorThrown) { self._ajaxErrorNotify(self, errorThrown); }
+        error: function(jqXHR, textStatus, errorThrown) {
+          self._ajaxErrorNotify(self, errorThrown);
+        }
       });
     }
   },

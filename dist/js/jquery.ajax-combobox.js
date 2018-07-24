@@ -1,6 +1,6 @@
 /**
  * @file jquery.ajax-combobox
- * @version 7.5.0
+ * @version 7.5.1
  * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
  * @license MIT
  */
@@ -735,7 +735,9 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         success: function (json) {
           self._afterInit(self, json);
         },
-        error: function(jqXHR, textStatus, errorThrown) { self._ajaxErrorNotify(self, errorThrown); }
+        error: function(jqXHR, textStatus, errorThrown) {
+          self._ajaxErrorNotify(self, errorThrown);
+        }
       });
     }
   },
@@ -965,7 +967,9 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
         self.prop.prev_value = result;
         self._disableButtonShort(self);
       },
-      error: function(jqXHR, textStatus, errorThrown) { self._ajaxErrorNotify(self, errorThrown); },
+      error: function(jqXHR, textStatus, errorThrown) {
+        self._ajaxErrorNotify(self, errorThrown);
+      },
       complete: function() {
         // テキストエリアを入力可能に
         $(self.elem.combo_input).removeAttr('disabled').focus();

@@ -5,8 +5,8 @@ php:
 
 install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
-  - nvm install 8
-  - nvm use 8
+  - nvm install 10
+  - nvm use 10
   - npm install
   - npm install codecov
 

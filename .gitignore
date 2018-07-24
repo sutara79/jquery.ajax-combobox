@@ -5,8 +5,10 @@ Thumbs.db
 
 # Package manager
 node_modules/
+package-lock.json
 vendor/
 composer.lock
+temp/
 
 # Doc & log
 out/
