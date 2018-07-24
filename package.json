@@ -19,8 +19,6 @@
   "devDependencies": {
     "mocha": "^5.2.0",
     "power-assert": "^1.6.0",
-    "connect": "^3.6.6",
-    "serve-static": "^1.13.2",
     "puppeteer": "^1.6.0",
     "webpack": "^4.16.2",
     "webpack-cli": "^3.1.0"
