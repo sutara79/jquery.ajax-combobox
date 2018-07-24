@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 選択候補を次に移す
@@ -51,6 +54,4 @@
     // 選択候補を追いかけてスクロール
     self._scrollWindow(self, false);
   }
-}); // End of "$.extend(AjaxComboBox.prototype,"
-
-})); // End of CommonJS
+};

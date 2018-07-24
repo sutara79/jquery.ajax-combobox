@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 独自のソート (昇順)
@@ -37,4 +40,5 @@
     self._calcWidthResults(self);
     $(self.elem.container).addClass(self.css_class.container_open);
     self._setCssFocusedInput(self);
-  },
+  }
+};

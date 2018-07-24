@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc ComboBoxに初期値を挿入する
@@ -56,4 +59,5 @@
         .removeClass(self.css_class.select_ng)
         .addClass(self.css_class.select_ok);
     }
-  },
+  }
+};

@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc プラグインの中で使うメッセージを設定する
@@ -141,3 +144,4 @@
     }
     this.message = message;
   },
+};

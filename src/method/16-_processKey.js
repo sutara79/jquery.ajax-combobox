@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc キー入力への対応
@@ -71,4 +74,5 @@
       self.prop.xhr.abort();
       self.prop.xhr = false;
     }
-  },
+  }
+};

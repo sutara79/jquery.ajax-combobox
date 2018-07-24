@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 現在選択中の候補に決定する
@@ -79,4 +82,5 @@
     var obj = $(self.elem.results).children('li.' + self.css_class.select);
     if ($(obj).length) return obj;
     else               return false;
-  },
+  }
+};

@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 候補一覧の<ul>成形、表示
@@ -142,4 +145,5 @@
 
     self._abortAjax(self);
     self._setButtonAttrDefault(); // ボタンのtitle属性初期化
-  },
+  }
+};

@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 入力値変化の監視をタイマーで予約する
@@ -186,4 +189,5 @@
       range.moveStart("character", pos);
       range.select();
     }
-  },
+  }
+};

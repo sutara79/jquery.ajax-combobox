@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 1ページ目を表示する
@@ -80,4 +83,5 @@
         self._suggest(self);
       }
     }
-  },
+  }
+};

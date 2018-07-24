@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc CSSクラスの名前を設定する
@@ -74,4 +77,5 @@
       // タグ検索
       tag: null
     };
-  },
+  }
+};

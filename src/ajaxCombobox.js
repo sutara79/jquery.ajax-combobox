@@ -5,7 +5,7 @@
  * @param {string|Object} source - サーバ側のプログラム、もしくは連想配列そのもの。
  * @param {Object} option - オプションを収めた連想配列。
  */
-$.ajaxComboBox = function(combo_input, source, option) {
+export default function (combo_input, source, option) {
   this.option = this._setOption(source, option);
   this._setMessage();
   this._setCssClass();
@@ -21,4 +21,4 @@ $.ajaxComboBox = function(combo_input, source, option) {
   this._ehTextArea();
 
   if (this.option.shorten_btn) this._findUrlToShorten(this);
-};
+}

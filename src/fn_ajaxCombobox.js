@@ -1,6 +1,5 @@
 /**
- * @public
- * @function external:"jQuery.fn".ajaxComboBox
+ * @function external:jQuery.prototype.ajaxComboBox
  * @param {string|Object} source - サーバ側のプログラム、もしくは連想配列そのもの。
  * @param {Object} option - オプションを収めた連想配列。
  * @param {boolean} [option.instance] - プラグインを呼び出すとき、jQueryオブジェクトではなくインスタンスを返すかどうか
@@ -39,10 +38,11 @@
  * @param {string} [option.tags.show_field=option.show_field]
  * @param {string} [option.tags.hide_field=option.hide_field]
  */
-$.fn.ajaxComboBox = function(source, option) {
+/*global $*/
+export default function (source, option) {
   var arr = [];
   this.each(function() {
     arr.push(new $.ajaxComboBox(this, source, option));
   });
   return (option !== undefined && option.instance !== undefined && option.instance) ? $(arr) : this;
-};
+}

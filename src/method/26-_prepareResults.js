@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * Prepare to display search results.
    * @private
@@ -200,4 +203,5 @@
       left: t_left,
       display: 'block'
     });
-  },
+  }
+};

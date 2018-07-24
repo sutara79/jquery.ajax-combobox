@@ -1,4 +1,6 @@
-$.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.prototype */ {
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * Initialize options
    * @private
@@ -255,4 +257,5 @@ $.extend($.ajaxComboBox.prototype, /** @lends external:jQuery.ajaxComboBox.proto
           [orders[0], 'ASC'];
     }
     return arr;
-  },
+  }
+};

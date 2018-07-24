@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 選択候補を追いかけて画面をスクロールさせる。
@@ -91,4 +94,5 @@
     $(self.option.shorten_btn)
       .addClass(self.css_class.btn_short_off)
       .attr('disabled', 'disabled');
-  },
+  }
+};

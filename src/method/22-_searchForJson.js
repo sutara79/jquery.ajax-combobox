@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 連想配列に対して検索する
@@ -21,9 +24,9 @@
     } while (i < q_word.length);
 
     // SELECT * FROM source WHERE field LIKE q_word;
-    for (i = 0; i < self.option.source.length; i++) {
+    for (var i = 0; i < self.option.source.length; i++) {
       var flag = false;
-      for (var j=0; j<arr_reg.length; j++) {
+      for (var j = 0; j < arr_reg.length; j++) {
         if (self.option.source[i][self.option.field].match(arr_reg[j])) {
           flag = true;
           if (self.option.and_or == 'OR') break;
@@ -48,7 +51,7 @@
     var matched1 = [];
     var matched2 = [];
     var matched3 = [];
-    for (i = 0; i < matched.length; i++) {
+    for (var i = 0; i < matched.length; i++) {
       if (matched[i][self.option.order_by[0][0]].match(reg1)) {
         matched1.push(matched[i]);
       } else if (matched[i][self.option.order_by[0][0]].match(reg2)) {
@@ -74,7 +77,7 @@
     var end   = start + self.option.per_page;
 
     // 最終的に返るオブジェクトを作成
-    for (i = start, sub = 0; i < end; i++, sub++) {
+    for (var i = start, sub = 0; i < end; i++, sub++) {
       if (sorted[i] === undefined) break;
       for (var key in sorted[i]) {
         // セレクト専用
@@ -107,4 +110,5 @@
     if (json.candidate === undefined) json.candidate = [];
     json.cnt_page = json.candidate.length;
     self._prepareResults(self, json, q_word, which_page_num);
-  },
+  }
+};

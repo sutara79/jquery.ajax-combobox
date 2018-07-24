@@ -14,23 +14,21 @@
     "jquery-plugin"
   ],
   "dependencies": {
-    "jquery": ">=3.0.0"
+    "jquery": "^3.3.1"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^3.1.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-qunit-istanbul": "^0.6.0",
-    "package-json-validator": "^0.6.2",
-    "uglifycss": "^0.0.27"
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0",
+    "connect": "^3.6.6",
+    "serve-static": "^1.13.2",
+    "puppeteer": "^1.6.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "start": "grunt",
-    "test": "grunt qunit",
-    "concat": "grunt concat",
-    "uglify": "grunt uglify",
-    "uglifycss": "uglifycss ./dist/css/jquery.ajax-combobox.css > ./dist/css/jquery.ajax-combobox.min.css",
-    "pjv": "pjv"
+    "test": "node ./test/js/test.js",
+    "watch": "webpack --watch",
+    "map": "webpack --devtool source-map",
+    "build": "webpack"
   }
 }

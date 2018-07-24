@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc HTML要素を修正、生成する
@@ -20,9 +23,6 @@
       elem.img = (this.option.button_img.match(/^</)) ?
                     $(this.option.button_img) :
                     $('<img>').attr('src', this.option.button_img);
-                    console.log(this.option.button_img);
-                    console.log(this.option.button_img.match(/^</));
-                    console.log(elem.img);
     } else {
       elem.button = false;
       elem.img    = false;
@@ -128,4 +128,5 @@
       $(this.elem.button).attr('title', this.message.get_all_btn);
       // $(this.elem.img).attr('src', this.option.button_img);
     }
-  },
+  }
+};

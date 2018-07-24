@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc イベントハンドラ: ボタン
@@ -157,4 +160,5 @@
     $(self.option.shorten_btn).click(function() {
       self._getShortURL(self);
     });
-  },
+  }
+};

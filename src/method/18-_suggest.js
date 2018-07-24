@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc データベースもしくは連想配列から検索する
@@ -47,4 +50,5 @@
       self._calcWidthResults(self);
       $(self.elem.container).addClass(self.css_class.container_open);
     }
-  },
+  }
+};

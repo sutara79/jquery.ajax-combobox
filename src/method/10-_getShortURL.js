@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc 外部サービスを利用してURLを短縮する
@@ -63,4 +66,5 @@
     //TODO: アラート表示ではなく、結果リストを流用して表示する。
     //TODO: errorThrownを活用する。
     alert(self.message.ajax_error);
-  },
+  }
+};

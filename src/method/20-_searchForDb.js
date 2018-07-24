@@ -1,3 +1,6 @@
+/*global $*/
+/** @lends external:jQuery.ajaxComboBox.prototype */
+export default {
   /**
    * @private
    * @desc データベースに対して検索する
@@ -29,7 +32,7 @@
           return;
         }
         json.cnt_page = json.result.length;
-        for (i = 0; i < json.cnt_page; i++) {
+        for (var i = 0; i < json.cnt_page; i++) {
           json.subinfo[i] = [];
           for (var key in json.result[i]) {
             if (key == self.option.primary_key) {
@@ -61,4 +64,5 @@
       },
       complete: function() { self.prop.xhr = null; }
     });
-  },
+  }
+};
