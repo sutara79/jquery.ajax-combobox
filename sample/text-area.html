@@ -43,45 +43,45 @@
   </div>
 </header>
 <div class="container">
-  <div id="contents" class="row">
-    <nav id="index" class="col-lg-4 mb-3">
+  <div class="row main">
+    <nav class="col-lg-4 mb-3 toc">
       <div id="js-menu-follow">
-        <div id="language" class="btn-group">
-          <button id="lang_en" class="btn btn-primary">English</button>
-          <button id="lang_ja" class="btn btn-primary">日本語</button>
+        <div class="btn-group">
+          <button id="lang-en" class="btn btn-primary js-btn-lang" type="button" data-lang="en">English</button>
+          <button id="lang-ja" class="btn btn-primary js-btn-lang" type="button" data-lang="ja">日本語</button>
         </div>
         <h5 class="mt-2">
-          <span class="lang_en">Index</span>
-          <span class="lang_ja">目次</span>
+          <span lang="en">Index</span>
+          <span lang="ja">目次</span>
         </h5>
         <div class="list-group">
           <a class="list-group-item list-group-item-action" href="#sample08_01">
-            <span class="lang_en">Basic</span>
-            <span class="lang_ja">テキストエリアの基本</span>
+            <span lang="en">Basic</span>
+            <span lang="ja">テキストエリアの基本</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample08_02">
-            <span class="lang_en">No space</span>
-            <span class="lang_ja">タグ補完後に空白を挿入しない</span>
+            <span lang="en">No space</span>
+            <span lang="ja">タグ補完後に空白を挿入しない</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample08_03">
-            <span class="lang_en">JS object instead of DB</span>
-            <span class="lang_ja">DBの代わりにJSオブジェクトを検索する</span>
+            <span lang="en">JS object instead of DB</span>
+            <span lang="ja">DBの代わりにJSオブジェクトを検索する</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample08_04">
-            <span class="lang_en">Multi tag pattern</span>
-            <span class="lang_ja">複数のタグパターン</span>
+            <span lang="en">Multi tag pattern</span>
+            <span lang="ja">複数のタグパターン</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample08_05">
-            <span class="lang_en">Options</span>
-            <span class="lang_ja">タグごとにオプションを設定する</span>
+            <span lang="en">Options</span>
+            <span lang="ja">タグごとにオプションを設定する</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample08_06">
-            <span class="lang_en">Shorten URL</span>
-            <span class="lang_ja">URLを短縮する</span>
+            <span lang="en">Shorten URL</span>
+            <span lang="ja">URLを短縮する</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample08_07">
-            <span class="lang_en">Complex</span>
-            <span class="lang_ja">両方を使う</span>
+            <span lang="en">Complex</span>
+            <span lang="ja">両方を使う</span>
           </a>
         </div>
       </div>
@@ -89,8 +89,8 @@
     <article class="col-lg-8">
       <section id="sample08_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Basic</span>
-          <span class="lang_ja">テキストエリアの基本</span>
+          <span lang="en">Basic</span>
+          <span lang="ja">テキストエリアの基本</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -99,12 +99,12 @@
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             You can search and complement a tag such as "Twitter hashtag" in textarea.<br>
             Set <code>textarea</code> to <code>plugin_type</code> option.
             Specify "start symbol" and "end symbol" by using array.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             テキストエリアの中にある、Twitterハッシュタグのような文字列を検索・補完することができます。<br>
             <code>plugin_type</code>オプションに<code>textarea</code>を指定し開始記号と終了記号を設定することで、テキストエリア内でのタグ検索が可能です。
           </p>
@@ -127,8 +127,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample08_02" class="card">
         <h5 class="card-header">
-          <span class="lang_en">No space</span>
-          <span class="lang_ja">タグ補完後に空白を挿入しない</span>
+          <span lang="en">No space</span>
+          <span lang="ja">タグ補完後に空白を挿入しない</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -137,11 +137,11 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             In an initial state, a space is inserted after complement.<br>
             You can prevent by using <code>space</code> option.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             デフォルトでは、タグ補完後に両側に空白が挿入されます。<br>
             (すでに空白が存在する場合や、行頭、行末の場合は除きます)<br>
             <code>space</code>オプションでこの挙動を変えることができます。
@@ -166,8 +166,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample08_03" class="card">
         <h5 class="card-header">
-          <span class="lang_en">JS object instead of DB</span>
-          <span class="lang_ja">DBの代わりにJSオブジェクトを検索する</span>
+          <span lang="en">JS object instead of DB</span>
+          <span lang="ja">DBの代わりにJSオブジェクトを検索する</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -201,8 +201,8 @@ var <span class="green">tagData</span> = [
 
       <section id="sample08_04" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Multi tag pattern</span>
-          <span class="lang_ja">複数のタグパターン</span>
+          <span lang="en">Multi tag pattern</span>
+          <span lang="ja">複数のタグパターン</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -240,8 +240,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample08_05" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Options</span>
-          <span class="lang_ja">タグごとにオプションを設定する</span>
+          <span lang="en">Options</span>
+          <span lang="ja">タグごとにオプションを設定する</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -250,8 +250,8 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">You can set following options for every tags.</p>
-          <p class="lang_ja">下記のオプションをタグごとに設定することができます。</p>
+          <p lang="en">You can set following options for every tags.</p>
+          <p lang="ja">下記のオプションをタグごとに設定することができます。</p>
 <pre>
 tags: [
   {
@@ -301,8 +301,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample08_06" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Shorten URL</span>
-          <span class="lang_ja">URLを短縮する</span>
+          <span lang="en">Shorten URL</span>
+          <span lang="ja">URLを短縮する</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -311,11 +311,11 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             The result of having shortened URL using external service can be made to reflect in text area. <br>
             At present, it corresponds only to service of "bit.ly". 
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             外部サービスを利用してURLを短縮した結果を、テキストエリア内に反映させることができます。<br>
             現在のところ、"bit.ly"にしか対応していません。<br>
           </p>
@@ -335,8 +335,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample08_07" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Complex</span>
-          <span class="lang_ja">両方を使う</span>
+          <span lang="en">Complex</span>
+          <span lang="ja">両方を使う</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -345,10 +345,10 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             By combining "Complement a tag" and "Shorten URL", the contribution to external service such as "Twitter" becomes convenient. 
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             タグ補完とURL短縮を組み合わせることで、Twitterなどの外部サービスとの連携が便利になります。
           </p>
 <pre>

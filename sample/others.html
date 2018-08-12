@@ -43,53 +43,53 @@
   </div>
 </header>
 <div class="container">
-  <div id="contents" class="row">
-    <nav id="index" class="col-lg-4 mb-3">
+  <div class="row main">
+    <nav class="col-lg-4 mb-3 toc">
       <div id="js-menu-follow">
-        <div id="language" class="btn-group">
-          <button id="lang_en" class="btn btn-primary">English</button>
-          <button id="lang_ja" class="btn btn-primary">日本語</button>
+        <div class="btn-group">
+          <button id="lang-en" class="btn btn-primary js-btn-lang" type="button" data-lang="en">English</button>
+          <button id="lang-ja" class="btn btn-primary js-btn-lang" type="button" data-lang="ja">日本語</button>
         </div>
         <h5 class="mt-2">
-          <span class="lang_en">Index</span>
-          <span class="lang_ja">目次</span>
+          <span lang="en">Index</span>
+          <span lang="ja">目次</span>
         </h5>
         <div class="list-group">
           <a class="list-group-item list-group-item-action" href="#sample03_01">
-            <span class="lang_en">Select only: Basic</span>
-            <span class="lang_ja">セレクト専用の基本</span>
+            <span lang="en">Select only: Basic</span>
+            <span lang="ja">セレクト専用の基本</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample03_02">
-            <span class="lang_en">Select only: Primary key</span>
-            <span class="lang_ja">送信する値のカラムを変更</span>
+            <span lang="en">Select only: Primary key</span>
+            <span lang="ja">送信する値のカラムを変更</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample06_01">
-            <span class="lang_en">After select: Basic</span>
-            <span class="lang_ja">イベント発火の方法</span>
+            <span lang="en">After select: Basic</span>
+            <span lang="ja">イベント発火の方法</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample06_02">
-            <span class="lang_en">After select: "is_enter_key"</span>
-            <span class="lang_ja">Enterキー押下を検知する方法</span>
+            <span lang="en">After select: "is_enter_key"</span>
+            <span lang="ja">Enterキー押下を検知する方法</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample04_01">
-            <span class="lang_en">Initial value</span>
-            <span class="lang_ja">初期値設定</span>
+            <span lang="en">Initial value</span>
+            <span lang="ja">初期値設定</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample05_01">
-            <span class="lang_en">JS object instead of DB</span>
-            <span class="lang_ja">DBの代わりにJSオブジェクトを検索する</span>
+            <span lang="en">JS object instead of DB</span>
+            <span lang="ja">DBの代わりにJSオブジェクトを検索する</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample07_01">
-            <span class="lang_en">Simple text box</span>
-            <span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+            <span lang="en">Simple text box</span>
+            <span lang="ja">ボタンのないシンプルなテキストボックス</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample07_02">
-            <span class="lang_en">Get instance</span>
-            <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+            <span lang="en">Get instance</span>
+            <span lang="ja">プラグインのオブジェクトを受け取る</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#button-image">
-            <span class="lang_en">Button image</span>
-            <span class="lang_ja">ボタンの画像</span>
+            <span lang="en">Button image</span>
+            <span lang="ja">ボタンの画像</span>
           </a>
         </div>
       </div>
@@ -97,8 +97,8 @@
     <article class="col-lg-8">
       <section id="sample03_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Select only: Basic</span>
-          <span class="lang_ja">セレクト専用の基本</span>
+          <span lang="en">Select only: Basic</span>
+          <span lang="ja">セレクト専用の基本</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -107,10 +107,10 @@
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             You can search by free word, but must set the value only from the list.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             自由な文章で検索できますが、リストの中から選ばなければ警告が表示されます。
           </p>
 <pre>
@@ -121,10 +121,10 @@ $('#foo').ajaxComboBox(
   }
 );
 </pre>
-          <p class="lang_en">
+          <p lang="en">
             If this option is set, the value of <code>primary_key</code> field transmit by the form.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             なお、このオプションを設定すると、フォームで送信されるのは"primary_key"オプションで設定したカラムの値になります。<br>
             この値は、候補リストの&lt;li&gt;要素のpkey属性にもなります。<br>
             テキストボックスと同じname属性を持つ隠しフィールド(hidden)を生成し、リストから選択した場合のみ、"primary_key"の値をhiddenのvalue属性に設定しています。
@@ -148,8 +148,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample03_02" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Select only: Primary key</span>
-          <span class="lang_ja">送信する値のカラムを変更</span>
+          <span lang="en">Select only: Primary key</span>
+          <span lang="ja">送信する値のカラムを変更</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -171,8 +171,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample06_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">After select: Basic</span>
-          <span class="lang_ja">イベント発火の方法</span>
+          <span lang="en">After select: Basic</span>
+          <span lang="ja">イベント発火の方法</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -197,8 +197,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample06_02" class="card">
         <h5 class="card-header">
-          <span class="lang_en">After select: "is_enter_key"</span>
-          <span class="lang_ja">Enterキー押下を検知する方法</span>
+          <span lang="en">After select: "is_enter_key"</span>
+          <span lang="ja">Enterキー押下を検知する方法</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -207,14 +207,14 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             If text box is not enclosed by form tag and event handler is set<br>
             for inputting enter key, when one of the list is selected by enter key<br>
             function is doubly executed.<br>
             To avoid this situation, a argument that become true when selected by<br>
             enter key is set When originality event of plugin is fired.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             テキストボックスをフォームタグで囲まず、Enterキーが押された場合の<br>
             イベントハンドラを独自に用意している場合、候補をEnterキーで選ぶと<br>
             イベントが重複して実行されてしまいます。<br>
@@ -244,8 +244,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample04_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Initial value</span>
-          <span class="lang_ja">初期値設定</span>
+          <span lang="en">Initial value</span>
+          <span lang="ja">初期値設定</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -254,8 +254,8 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">As initial value, set the value of <code>primary_key</code> option.</p>
-          <p class="lang_ja"><code>primary_key</code>オプションの値を初期値として指定できます。</p>
+          <p lang="en">As initial value, set the value of <code>primary_key</code> option.</p>
+          <p lang="ja"><code>primary_key</code>オプションの値を初期値として指定できます。</p>
 <pre>
 $('#foo').ajaxComboBox(
   'jquery.ajax-combobox.php',
@@ -269,8 +269,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample05_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">JS object instead of DB</span>
-          <span class="lang_ja">DBの代わりにJSオブジェクトを検索する</span>
+          <span lang="en">JS object instead of DB</span>
+          <span lang="ja">DBの代わりにJSオブジェクトを検索する</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -279,8 +279,8 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">Set JS object instead of the name of server-side file to 1st argument.</p>
-          <p class="lang_ja">Ajax通信するサーバサイドのファイル名の代わりに、JSオブジェクトを第1引数に指定します。</p>
+          <p lang="en">Set JS object instead of the name of server-side file to 1st argument.</p>
+          <p lang="ja">Ajax通信するサーバサイドのファイル名の代わりに、JSオブジェクトを第1引数に指定します。</p>
 <pre>
 var <span class="green">data</span> = [
   {id:'A001',name:'Adams',    post:'Sales',          position:'The rank and file'},
@@ -296,8 +296,8 @@ $('#foo').ajaxComboBox(<span class="green">data</span>, {});
 
       <section id="sample07_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Simple text box</span>
-          <span class="lang_ja">ボタンのないシンプルなテキストボックス</span>
+          <span lang="en">Simple text box</span>
+          <span lang="ja">ボタンのないシンプルなテキストボックス</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -306,8 +306,8 @@ $('#foo').ajaxComboBox(<span class="green">data</span>, {});
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">Remove pull-down button from text box, but functionality is same as default.</p>
-          <p class="lang_ja">プルダウンボタンが非表示なっている以外は、通常のコンボボックスと何ら変わりありません。</p>
+          <p lang="en">Remove pull-down button from text box, but functionality is same as default.</p>
+          <p lang="ja">プルダウンボタンが非表示なっている以外は、通常のコンボボックスと何ら変わりありません。</p>
 <pre>
 $('#foo').ajaxComboBox(
   'jquery.ajax-combobox.php',
@@ -321,8 +321,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample07_02" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Get instance</span>
-          <span class="lang_ja">プラグインのオブジェクトを受け取る</span>
+          <span lang="en">Get instance</span>
+          <span lang="ja">プラグインのオブジェクトを受け取る</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -331,11 +331,11 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             You can get an instance of this plugin, and control after apply.<br>
             NOTE: Method chaining will be destroyed.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             プラグインのインスタンスを受け取ることで、プラグイン適用後に設定を変更することができます。<br>
             その代わり、メソッドチェーンは無効になります。
           </p>
@@ -357,8 +357,8 @@ $instance.each(function() {
 
       <section id="button-image" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Button image</span>
-          <span class="lang_ja">ボタンの画像</span>
+          <span lang="en">Button image</span>
+          <span lang="ja">ボタンの画像</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -367,12 +367,12 @@ $instance.each(function() {
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             You can set <code>button_img</code> option to change image of button.<br>
             <code>button_img</code> accepts <code>src</code> attribute of <code>&lt;img&gt;</code> or HTML element such as <code>&lt;img&gt;</code>, <code>&lt;svg&gt;</code>.<br>
             Default value is <a href="https://octicons.github.com/icon/chevron-down/">Octicons</a>.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             <code>button_img</code>オプションでボタンの画像を変更できます。<br>
             <code>button_img</code>には<code>&lt;img&gt;</code>の<code>src</code>属性、または<code>&lt;img&gt;</code>や<code>&lt;svg&gt;</code>などのHTML要素を指定できます。
             デフォルトは<a href="https://octicons.github.com/icon/chevron-down/">Octicons</a>のSVG画像です。

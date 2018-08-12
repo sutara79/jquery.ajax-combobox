@@ -43,41 +43,41 @@
   </div>
 </header>
 <div class="container">
-  <div id="contents" class="row">
-    <nav id="index" class="col-lg-4 mb-3">
+  <div class="row main">
+    <nav class="col-lg-4 mb-3 toc">
       <div id="js-menu-follow">
-        <div id="language" class="btn-group">
-          <button id="lang_en" class="btn btn-primary">English</button>
-          <button id="lang_ja" class="btn btn-primary">日本語</button>
+        <div class="btn-group">
+          <button id="lang-en" class="btn btn-primary js-btn-lang" type="button" data-lang="en">English</button>
+          <button id="lang-ja" class="btn btn-primary js-btn-lang" type="button" data-lang="ja">日本語</button>
         </div>
         <h5 class="mt-2">
-          <span class="lang_en">Index</span>
-          <span class="lang_ja">目次</span>
+          <span lang="en">Index</span>
+          <span lang="ja">目次</span>
         </h5>
         <div class="list-group">
           <a class="list-group-item list-group-item-action" href="#sample02_01">
-            <span class="lang_en">Basic</span>
-            <span class="lang_ja">サブ情報の基本</span>
+            <span lang="en">Basic</span>
+            <span lang="ja">サブ情報の基本</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample02_02">
-            <span class="lang_en">Change the title</span>
-            <span class="lang_ja">表の項目名を変更する</span>
+            <span lang="en">Change the title</span>
+            <span lang="ja">表の項目名を変更する</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample02_03">
-            <span class="lang_en">Visible field</span>
-            <span class="lang_ja">サブ情報の表示カラムの設定</span>
+            <span lang="en">Visible field</span>
+            <span lang="ja">サブ情報の表示カラムの設定</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample02_04">
-            <span class="lang_en">Hidden field</span>
-            <span class="lang_ja">サブ情報の非表示カラムの設定</span>
+            <span lang="en">Hidden field</span>
+            <span lang="ja">サブ情報の非表示カラムの設定</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample02_05">
-            <span class="lang_en">Simple</span>
-            <span class="lang_ja">サブ情報の項目名を非表示にする</span>
+            <span lang="en">Simple</span>
+            <span lang="ja">サブ情報の項目名を非表示にする</span>
           </a>
           <a class="list-group-item list-group-item-action" href="#sample02_06">
-            <span class="lang_en">Divert</span>
-            <span class="lang_ja">サブ情報を他で利用する</span>
+            <span lang="en">Divert</span>
+            <span lang="ja">サブ情報を他で利用する</span>
           </a>
         </div>
       </div>
@@ -85,8 +85,8 @@
     <article class="col-lg-8">
       <section id="sample02_01" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Basic</span>
-          <span class="lang_ja">サブ情報の基本</span>
+          <span lang="en">Basic</span>
+          <span lang="ja">サブ情報の基本</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -95,10 +95,10 @@
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             Even though duplicate names exist, you can identify it by sub name.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             名前が重複していてもサブ情報で区別できます。
           </p>
 <pre>
@@ -114,8 +114,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample02_02" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Change the title</span>
-          <span class="lang_ja">表の項目名を変更する</span>
+          <span lang="en">Change the title</span>
+          <span lang="ja">表の項目名を変更する</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -124,10 +124,10 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             <code>sub_as</code> option can change the title.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             何も設定しないと、サブ情報の表の項目名はデータベースのカラム名が表示されてしまいます。<br>
             <code>sub_as</code>オプションで表示名を変更できます。
           </p>
@@ -149,8 +149,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample02_03" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Visible field</span>
-          <span class="lang_ja">サブ情報の表示カラムの設定</span>
+          <span lang="en">Visible field</span>
+          <span lang="ja">サブ情報の表示カラムの設定</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -159,8 +159,8 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">You can specify visible fields by <code>show_field</code> option which accepts comma separated text.</p>
-          <p class="lang_ja">カンマ区切りもできる<code>show_field</code>オプションで表示フィールドを指定できます。</p>
+          <p lang="en">You can specify visible fields by <code>show_field</code> option which accepts comma separated text.</p>
+          <p lang="ja">カンマ区切りもできる<code>show_field</code>オプションで表示フィールドを指定できます。</p>
 <pre>
 $('#foo').ajaxComboBox(
   'jquery.ajax-combobox.php',
@@ -179,8 +179,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample02_04" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Hidden field</span>
-          <span class="lang_ja">サブ情報の非表示カラムの設定</span>
+          <span lang="en">Hidden field</span>
+          <span lang="ja">サブ情報の非表示カラムの設定</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -189,8 +189,8 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">You can specify hidden fields by <code>hide_field</code> option which accepts comma separated text.</p>
-          <p class="lang_ja">カンマ区切りもできる<code>hide_field</code>オプションで非表示フィールドを指定できます。</p>
+          <p lang="en">You can specify hidden fields by <code>hide_field</code> option which accepts comma separated text.</p>
+          <p lang="ja">カンマ区切りもできる<code>hide_field</code>オプションで非表示フィールドを指定できます。</p>
 <pre>
 $('#foo').ajaxComboBox(
   'jquery.ajax-combobox.php',
@@ -209,8 +209,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample02_05" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Simple</span>
-          <span class="lang_ja">サブ情報の項目名を非表示にする</span>
+          <span lang="en">Simple</span>
+          <span lang="ja">サブ情報の項目名を非表示にする</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -219,8 +219,8 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">You can hide field column by setting <code>'simple'</code> to <code>sub_info</code> option instead of <code>true</code>.</p>
-          <p class="lang_ja"><code>sub_info</code>オプションに<code>true</code>の代わりに<code>'simple'</code>と指定することでサブ情報の項目名を非表示にできます。</p>
+          <p lang="en">You can hide field column by setting <code>'simple'</code> to <code>sub_info</code> option instead of <code>true</code>.</p>
+          <p lang="ja"><code>sub_info</code>オプションに<code>true</code>の代わりに<code>'simple'</code>と指定することでサブ情報の項目名を非表示にできます。</p>
 <pre>
 $('#foo').ajaxComboBox(
   'jquery.ajax-combobox.php',
@@ -235,8 +235,8 @@ $('#foo').ajaxComboBox(
 
       <section id="sample02_06" class="card">
         <h5 class="card-header">
-          <span class="lang_en">Divert</span>
-          <span class="lang_ja">サブ情報を他で利用する</span>
+          <span lang="en">Divert</span>
+          <span lang="ja">サブ情報を他で利用する</span>
         </h5>
         <div class="card-body">
           <div class="btn-container">
@@ -245,11 +245,11 @@ $('#foo').ajaxComboBox(
               <svg class="octicon octicon-link-external" viewBox="0 0 12 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M11 10h1v3c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h3v1H1v10h10v-3zM6 2l2.25 2.25L5 7.5 6.5 9l3.25-3.25L12 8V2H6z"></path></svg>
             </a>
           </div>
-          <p class="lang_en">
+          <p lang="en">
             When you select from list, the custom attribute <code>sub_info</code> which contains sub info as JSON is added to the text box <br>
             Then you can use Sub-info for other purpose.
           </p>
-          <p class="lang_ja">
+          <p lang="ja">
             候補を選択した際、テキストボックスの<code>sub_info</code>という独自の属性にJSON形式でサブ情報が格納されるので、他で利用することが可能です。
           </p>
 <pre>

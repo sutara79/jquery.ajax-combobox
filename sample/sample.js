@@ -11,18 +11,18 @@ $(document).on('click', '#contents a[href^="#"]', function(ev) {
 });
 
 // 英語・日本語切り替え
-$('#language button').click(function(ev) {
-  $('*[class*="lang_"]').hide();
-  $('button[id*="lang_"]').removeAttr('disabled');
-  $('.' + $(ev.target).attr('id')).show();
-  $(ev.target).attr('disabled', 'disabled');
+$('.js-btn-lang').click(function(ev) {
+  $('body [lang]').hide();
+  $('.js-btn-lang').removeAttr('disabled');
+  $('body [lang="' + $(ev.currentTarget).data('lang') + '"]').show();
+  $(ev.currentTarget).attr('disabled', 'disabled');
 });
-$('#lang_en').trigger('click');
+$('#lang-en').trigger('click');
 
 // 追尾スクロール (英語・日本語切り替えよりも後にすること)
 $('#js-menu-follow').simpleScrollFollow({
   min_width: 960,
-  limit_elem: $('article'),
+  limit_elem: 'article',
   upper_side: '.navbar'
 });
 

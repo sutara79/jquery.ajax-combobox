@@ -1,5 +1,5 @@
 /**
- * @function external:jQuery.prototype.ajaxComboBox
+ * @function external:"jQuery.fn".ajaxComboBox
  * @param {string|Object} source - サーバ側のプログラム、もしくは連想配列そのもの。
  * @param {Object} option - オプションを収めた連想配列。
  * @param {boolean} [option.instance] - プラグインを呼び出すとき、jQueryオブジェクトではなくインスタンスを返すかどうか

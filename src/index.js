@@ -1,9 +1,5 @@
-/**
- * @file jquery.ajax-combobox
- * @version 7.5.2
- * @author Yuusaku Miyazaki <toumin.m7@gmail.com>
- * @license MIT
- */
+/** @external "jQuery.fn" */
+/*global $*/
 import fn_ajaxComboBox from './fn_ajaxComboBox';
 import ajaxComboBox    from './ajaxComboBox';
 import m03             from './method/03-_setOption';
@@ -26,8 +22,6 @@ import m30             from './method/30-_firstPage.js';
 import m32             from './method/32-_selectCurrentLine.js';
 import m34             from './method/34-_nextLine.js';
 
-/*global $*/
-/** @external jQuery */
 $.fn.ajaxComboBox = fn_ajaxComboBox;
 $.ajaxComboBox    = ajaxComboBox;
 $.extend(
