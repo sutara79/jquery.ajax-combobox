@@ -3,6 +3,7 @@
 export default {
   /**
    * Initialize options
+   *
    * @private
    * @arg {string|object} source - Server side file such as PHP. Or, JS object which contains data.
    * @arg {object} option - Options sent by user.
@@ -15,15 +16,16 @@ export default {
   },
 
   /**
+   * Initialize options (1st step)
+   *
    * @private
-   * @desc オプションの初期化 第1段階
-   * @arg {string|object} source - サーバサイド言語へのパス、またはデータそのものの連想配列
-   * @arg {object} option - 連想配列の形式のオプション
-   * @return {object} - 第1段階が終了したオプション
+   * @arg {string|object} source - Server side file such as PHP. Or, JS object which contains data.
+   * @arg {object} option - Options sent by user.
+   * @return {object} - Options at which the 1st step has ended.
    */
   _setOption1st: function(source, option) {
     return $.extend({
-      // 基本設定
+      // Basic
       source: source,
       lang: 'en',
       plugin_type: 'combobox',
@@ -38,20 +40,20 @@ export default {
       bind_to: false,
       navi_simple: false,
 
-      // サブ情報
+      // Sub-info
       sub_info: false,
       sub_as: {},
       show_field: '',
       hide_field: '',
 
-      // セレクト専用
+      // Select-only
       select_only: false,
 
-      // タグ検索
+      // Tags
       tags: false,
 
-      // URL短縮用
-      shorten_btn: false, // 短縮実行ボタンのセレクタ
+      // Shorten URL
+      shorten_btn: false,
       shorten_src: 'dist/bitly.php',
       shorten_min: 20,
       shorten_reg: false
@@ -59,13 +61,14 @@ export default {
   },
 
   /**
+   * Initialize options (2nd step)
+   *
    * @private
-   * @desc オプションの初期化 第2段階
-   * @arg {object} option - 連想配列の形式のオプション
-   * @return {object} - 第2段階が終了したオプション
+   * @arg {object} option - Options at which the 1st step has ended.
+   * @return {object} - Options at which the 2nd step has ended.
    */
   _setOption2nd: function(option) {
-    // 検索するフィールド(カンマ区切りで複数指定可能)
+    // A field to search (allows comma separated)
     option.search_field = (option.search_field) ? option.search_field : option.field;
 
     // Unify with uppercase
@@ -81,21 +84,21 @@ export default {
       option.show_field[0] = '*'
     }
 
-    // CASE WHEN後のORDER BY指定
+    // "ORDER BY" after "CASE WHEN"
     option.order_by = (option.order_by === undefined) ?
       option.search_field :
       option.order_by;
 
-    // order_by を多層配列に
-    // 例:  [ ['id', 'ASC'], ['name', 'DESC'] ]
+    // Make order_by to multidimensional array
+    // Example:  [ ['id', 'ASC'], ['name', 'DESC'] ]
     option.order_by = this._setOrderbyOption(option.order_by, option.field);
 
-    // テキストエリア
+    // Text area
     if (option.plugin_type == 'textarea') {
       option.shorten_reg = this._setRegExpShort(option.shorten_reg, option.shorten_min);
     }
 
-    // カテゴリタグ
+    // Tags
     if (option.tags) {
       option.tags = this._setTagPattern(option);
     }
@@ -104,6 +107,7 @@ export default {
 
   /**
    * Split string into array by comma.
+   *
    * @private
    * @arg {string} str - Comma separated string
    * @return {array} Array splitted by comma
@@ -113,13 +117,16 @@ export default {
   },
 
   /**
+   * Create regex to search URL.
+   *
    * @private
-   * @desc URL短縮用に、URLらしき文字列を検索するための正規表現を生成する
-   * @arg {object|boolean} shorten_reg - ユーザが指定した正規表現オブジェクト、もしくはfalse
-   * @return {object} - 正規表現オブジェクト
+   * @arg {object|boolean} shorten_reg - Regex object set by user. Or false.
+   * @return {object} - Regex object
    */
   _setRegExpShort: function(shorten_reg, shorten_min) {
-    if (shorten_reg) return shorten_reg; // ユーザが正規表現を設定しているなら、それを使う。
+    // Use regex set by user if it exists
+    if (shorten_reg) return shorten_reg;
+
     var reg = '(?:^|[\\s|　\\[(<「『（【［＜〈《]+)';
     reg += '(';
     reg += 'https:\\/\\/[^\\s|　\\])>」』）】］＞〉》]{' + (shorten_min - 7) + ',}';
@@ -132,10 +139,11 @@ export default {
   },
 
   /**
+   * Initialize options for tags.
+   *
    * @private
-   * @desc テカテゴリタグの定義方法を設定する
-   * @arg {object} option - オプション全体の連想配列
-   * @return {object} - タグ定義を格納した連想配列
+   * @arg {object} option - Options
+   * @return {object} - Options for tags
    */
   _setTagPattern: function(option) {
     for (var i = 0; i < option.tags.length; i++) {
@@ -146,31 +154,32 @@ export default {
   },
 
   /**
+   * Initialize options (except for regex) for a tag.
+   *
    * @private
-   * @desc 各タグの検索方法を設定する
-   * @arg {object} option - オプション全体の連想配列
-   * @arg {number} idx - 選択中のタグを表す添字
-   * @return {object} - タグ1つ分のオプションの連想配列
+   * @arg {object} option - Options
+   * @arg {number} idx - Index of current selected tag
+   * @return {object} - Options (except for regex) of a tag
    */
   _setTagOptions: function(option, idx) {
     option.tags[idx] = $.extend({
-      // スペース挿入
+      // Insert space
       space: [true, true],
       
-      // DB接続
+      // DB
       db_table: option.db_table,
       field: option.field,
       search_field: option.search_field,
       primary_key: option.primary_key,
 
-      // サブ情報
+      // Sub-info
       sub_info: option.sub_info,
       sub_as: option.sub_as,
       show_field: option.show_field,
       hide_field: option.hide_field
     }, option.tags[idx]);
 
-    // カンマ区切りのオプションを配列に変換する。
+    // Convert comma separated options to array.
     var arr = ['hide_field', 'show_field', 'search_field'];
     for (var i = 0; i < arr.length; i++) {
       if (typeof option.tags[idx][arr[i]] != 'object') {
@@ -178,8 +187,7 @@ export default {
       }
     }
 
-
-    // order_byを配列にする
+    // Make order_by to array.
     option.tags[idx].order_by = (option.tags[idx].order_by === undefined) ?
       option.order_by :
       this._setOrderbyOption(option.tags[idx].order_by, option.tags[idx].field);
@@ -188,57 +196,58 @@ export default {
   },
 
   /**
+   * Create regex to search tags.
+   *
    * @private
-   * @desc 各タグを抽出するための一連の正規表現を作成する
-   * @arg {Array} pattern - タグの開始と終了のペアを表す配列
-   * @arg {Array} space - タグとタグの間の空白を表す配列
-   * @return {object} - タグのパターンを表す連想配列
+   * @arg {Array} pattern - Pair of start and end of tag
+   * @arg {Array} space - Pair of start and end of space
+   * @return {object} - Object of regexes
    */
   _setRegExpTag: function(pattern, space) {
-    // ユーザオプションを正規表現エスケープ
+    // Escape for regex
     var esc_left  = pattern[0].replace(/[\s\S]*/, this._escapeForReg);
     var esc_right = pattern[1].replace(/[\s\S]*/, this._escapeForReg);
 
     return {
-      // 素のカッコ文字
+      // Save original parentheses
       left: pattern[0],
       right: pattern[1],
 
-      // キャレットの左側へ、開始カッコまでを抜き出す正規表現
+      // Regex that extracts from the caret to the start of the tag in a string.
       reg_left: new RegExp(esc_left + '((?:(?!' + esc_left + '|' + esc_right + ')[^\\s　])*)$'),
 
-      // キャレットの右側へ、終了カッコまでを抜き出す正規表現
+      // Regex that extracts from the caret to the end of the tag in a string.
       reg_right: new RegExp('^((?:(?!' + esc_left + '|' + esc_right + ')[^\\s　])+)'),
 
-      // 候補選択後、開始カッコ前にスペースを挿入するかを判断するための正規表現
-      // これに当てはまらない場合、スペースを挿入する。
+      // Regex to decide whether to insert space before the start of tag after user select.
       space_left: new RegExp('^' + esc_left + '$|[\\s　]+' + esc_left + '$'),
 
-      // 候補選択後、終了カッコ前にスペースを挿入するかを判断するための正規表現
-      // これに当てはまらない場合、スペースを挿入する。
+      // Regex to decide whether to insert space after the end of tag after user select.
       space_right: new RegExp('^$|^[\\s　]+'),
 
-      // 候補選択後、終了カッコを補完するかを判断するための正規表現
+      // Regex to decide whether to complement parentheses after user select.
       comp_right: new RegExp('^' + esc_right)
     };
   },
 
   /**
+   * Callback function to escape for regex.
+   *
    * @private
-   * @desc 正規表現用エスケープ用の無名関数
-   * @arg {string} text - マッチした部分文字列
-   * @return {string} - 置換する値
+   * @arg {string} text - The matched substring.
+   * @return {string} - Escaped string
    */
   _escapeForReg: function(text) {
     return '\\u' + (0x10000 + text.charCodeAt(0)).toString(16).slice(1);
   },
 
   /**
+   * Adjust an array of "ORDER BY" to use it in the code.
+   *
    * @private
-   * @desc コンボボックスとタグ、両方の order_by を配列にする
-   * @arg {Array} arg_order - ORDER BY の情報を格納した配列
-   * @arg {string} arg_field - 検索対象のフィールド
-   * @return {Array} - order_by の配列
+   * @arg {Array} arg_order - Array of "ORDER BY" (not have processed).
+   * @arg {string} arg_field - Field to search.
+   * @return {Array} - Array of "ORDER BY" (have processed).
    */
   _setOrderbyOption: function(arg_order, arg_field) {
     var arr = [];
