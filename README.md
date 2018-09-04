@@ -70,7 +70,7 @@ new AjaxComboBox($sqlite);
 |[db_table](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_01)|string|'tbl'|Table of database to query|
 |field|string|'name'|Field of table to display on result|
 |[search_field](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_04)|string|=field|Field of table to search. Accept comma separated string. (e.g.: `'id, name, job'`)|
-|[order_by](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_06)|mixed|=search_field|Field for sorting (e.g.: `'name DESC'`, `['name ASC', 'age DESC']`)|
+|[order_by](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_06)|mixed|=search_field|Field for sorting (e.g. `'name DESC'`, `['name ASC', 'age DESC']`).<br>`ASC` or `DESC` should be UPPERCASE.|
 |[and_or](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_05)|string|'AND'|Boolean searching ('AND', 'OR')|
 |[per_page](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_02)|number|10|Amount of items per page|
 |[navi_num](https://sutara79-php.herokuapp.com/demo/jquery.ajax-combobox/sample/basic.html#sample01_02)|number|5|Amount of page-link on navi|

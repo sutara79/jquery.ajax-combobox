@@ -2,7 +2,7 @@
   "name": "jquery.ajax-combobox",
   "description": "jQuery plugin to create a text box which can auto-complete and pull-down-select.",
   "license": "MIT",
-  "version": "7.5.2",
+  "version": "7.5.3",
   "author": "Yuusaku Miyazaki <toumin.m7@gmail.com>",
   "homepage": "https://github.com/sutara79/jquery.ajax-combobox",
   "main": "dist/jquery.ajax-combobox.min.js",

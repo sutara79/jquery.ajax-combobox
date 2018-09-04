@@ -245,26 +245,25 @@ export default {
    * Adjust an array of "ORDER BY" to use it in the code.
    *
    * @private
-   * @arg {Array} arg_order - Array of "ORDER BY" (not have processed).
-   * @arg {string} arg_field - Field to search.
+   * @arg {Array|string} orders - Array of "ORDER BY" (not have processed).
+   * @arg {string} field - Field to search.
    * @return {Array} - Array of "ORDER BY" (have processed).
    */
-  _setOrderbyOption: function(arg_order, arg_field) {
-    var arr = [];
-    var orders = [];
-    if (typeof arg_order == 'object') {
-      for (var i = 0; i < arg_order.length; i++) {
-        orders = $.trim(arg_order[i]).split(' ');
-        arr[i] =  (orders.length == 2) ? orders : [orders[0], 'ASC'];
-      }
-    } else {
-      orders = $.trim(arg_order).split(' ');
-      arr[0] = (orders.length == 2) ?
-        orders :
-        (orders[0].match(/^(ASC|DESC)$/i)) ?
-          [arg_field, orders[0]] :
-          [orders[0], 'ASC'];
+  _setOrderbyOption: function(orders, field) {
+    if (typeof orders == 'string') orders = new Array(orders);
+
+    var result = [];
+    var arrSplit = [];
+
+    for (var i = 0; i < orders.length; i++) {
+      arrSplit = $.trim(orders[i]).split(/ +/);
+      result[i] = (arrSplit.length == 2) ?
+        arrSplit :
+        (arrSplit[0].match(/^(ASC|DESC)$/i)) ? // In the future, lowercase "asc" or "desc" are judged to be field names.
+          [field, arrSplit[0]] :
+          [arrSplit[0], 'ASC'];
     }
-    return arr;
+
+    return result;
   }
 };

@@ -1,5 +1,11 @@
 # CHANGELOG: jquery.ajax-combobox
 
+## v7.5.3
+#### Deprecated
+- Lowercase "asc" or "desc" in `order_by` are **deprecated**.  
+  (e.g. `order_by: ['field1 asc', 'field2 desc']`)  
+  In the future, lowercase "asc" or "desc" are judged to be field names.
+
 ## v7.5.0
 - Extend `button_img` option to accept HTML element such as `<img>` or `<svg>`.  
   See [Document](http://www.usamimi.info/~sutara/ajax-combobox/sample/others.html#button-image).
